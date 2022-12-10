@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using ITProjectPriceCalculationManager.Core.Interfaces;
 using ITProjectPriceCalculationManager.Core.Interfaces.Repositories;
 using ITProjectPriceCalculationManager.Infrastructure.Data;
 using ITProjectPriceCalculationManager.Infrastructure.Data.Repositories;

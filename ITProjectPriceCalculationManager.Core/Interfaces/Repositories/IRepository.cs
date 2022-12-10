@@ -1,9 +1,5 @@
 using Ardalis.Specification;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace ITProjectPriceCalculationManager.Core.Interfaces.Repositories
 {
@@ -11,7 +7,7 @@ namespace ITProjectPriceCalculationManager.Core.Interfaces.Repositories
     {
         Task<TEntity> AddAsync(TEntity entity);
         Task<IEnumerable<TEntity>> GetAllAsync();
-        Task<TEntity> GetByKeyAsync(TKey key);
+        Task<TEntity?> GetByKeyAsync(TKey key);
         Task<TEntity> UpdateAsync(TEntity entity);
         Task<TEntity> DeleteAsync(TEntity entity);
         Task DeleteRangeAsync(IEnumerable<TEntity> entities);
@@ -19,6 +15,6 @@ namespace ITProjectPriceCalculationManager.Core.Interfaces.Repositories
         Task<int> SaveChangesAcync();
         Task AddRangeAsync(List<TEntity> entities);
         Task<IEnumerable<TEntity>> GetListBySpecAsync(ISpecification<TEntity> specification);
-        Task<TEntity> GetFirstBySpecAsync(ISpecification<TEntity> specification);
+        Task<TEntity?> GetFirstBySpecAsync(ISpecification<TEntity> specification);
     }
 }

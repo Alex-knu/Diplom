@@ -1,11 +1,7 @@
 using Ardalis.Specification;
 using Ardalis.Specification.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 using ITProjectPriceCalculationManager.Core.Interfaces;
 using ITProjectPriceCalculationManager.Core.Interfaces.Repositories;
 
@@ -49,7 +45,7 @@ namespace ITProjectPriceCalculationManager.Infrastructure.Data.Repositories
             return await _dbSet.ToListAsync();
         }
 
-        public async Task<TEntity> GetByKeyAsync(TKey key)
+        public async Task<TEntity?> GetByKeyAsync(TKey key)
         {
             return await _dbSet.FindAsync(key);
         }
@@ -78,10 +74,9 @@ namespace ITProjectPriceCalculationManager.Infrastructure.Data.Repositories
             return await ApplySpecification(specification).ToListAsync();
         }
 
-        public async Task<TEntity> GetFirstBySpecAsync(ISpecification<TEntity> specification)
+        public async Task<TEntity?> GetFirstBySpecAsync(ISpecification<TEntity> specification)
         {
-            var res = await ApplySpecification(specification).FirstOrDefaultAsync();
-            return res;
+            return await ApplySpecification(specification).FirstOrDefaultAsync();
         }
 
         private IQueryable<TEntity> ApplySpecification(ISpecification<TEntity> specification)
