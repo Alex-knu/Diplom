@@ -1,0 +1,6 @@
+/Logs.log
+*.sql
+*.ini
+/.idea/other.xml
+/.idea/sqldialects.xml
+/.idea/webResources.xml

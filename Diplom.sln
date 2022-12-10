@@ -1,0 +1,27 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITProjectPriceCalculationManager.Core", "ITProjectPriceCalculationManager.Core\ITProjectPriceCalculationManager.Core.csproj", "{543774DA-46F7-4333-A1D7-A0BE79D1EBFE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITProjectPriceCalculationManager.Infrastructure", "ITProjectPriceCalculationManager.Infrastructure\ITProjectPriceCalculationManager.Infrastructure.csproj", "{96D6AEF8-7AED-4979-A165-6A34573A3A0B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{543774DA-46F7-4333-A1D7-A0BE79D1EBFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{543774DA-46F7-4333-A1D7-A0BE79D1EBFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{543774DA-46F7-4333-A1D7-A0BE79D1EBFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{543774DA-46F7-4333-A1D7-A0BE79D1EBFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96D6AEF8-7AED-4979-A165-6A34573A3A0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96D6AEF8-7AED-4979-A165-6A34573A3A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96D6AEF8-7AED-4979-A165-6A34573A3A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96D6AEF8-7AED-4979-A165-6A34573A3A0B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
