@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITProjectPriceCalculationMa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITProjectPriceCalculationManager.Infrastructure", "ITProjectPriceCalculationManager.Infrastructure\ITProjectPriceCalculationManager.Infrastructure.csproj", "{96D6AEF8-7AED-4979-A165-6A34573A3A0B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITProjectPriceCalculationManager.ITProjects.API", "ITProjectPriceCalculationManager.ITProjects.API\ITProjectPriceCalculationManager.ITProjects.API.csproj", "{2331BFDE-3E2D-4756-A011-65C551279034}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,5 +25,17 @@ Global
 		{96D6AEF8-7AED-4979-A165-6A34573A3A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96D6AEF8-7AED-4979-A165-6A34573A3A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96D6AEF8-7AED-4979-A165-6A34573A3A0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A16B5A2-B6C7-42CA-AA2C-E534EBA8889E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A16B5A2-B6C7-42CA-AA2C-E534EBA8889E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A16B5A2-B6C7-42CA-AA2C-E534EBA8889E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A16B5A2-B6C7-42CA-AA2C-E534EBA8889E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30217D97-A3DF-49F8-B6C5-278374C8324D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30217D97-A3DF-49F8-B6C5-278374C8324D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30217D97-A3DF-49F8-B6C5-278374C8324D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30217D97-A3DF-49F8-B6C5-278374C8324D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2331BFDE-3E2D-4756-A011-65C551279034}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2331BFDE-3E2D-4756-A011-65C551279034}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2331BFDE-3E2D-4756-A011-65C551279034}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2331BFDE-3E2D-4756-A011-65C551279034}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

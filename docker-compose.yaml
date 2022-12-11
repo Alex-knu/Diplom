@@ -1,13 +1,49 @@
 version: '3.7'
 
+networks:
+  docker-dev:
+    driver: bridge 
+
 services:
-  ip_project_price_calculation_manager.web_app:
+  it_project_price_calculation_manager.web_app:
       build: ITProjectPriceCalculationManager.WebApp
+      hostname: web_app
+      restart: always
+      ports:
+        - "5000:80"
+        - "5001:443"
+      networks:
+        docker-dev:
+          aliases:
+            - web_app
 
-  ip_project_price_calculation_manager.price_predictor.api:
+  it_project_price_calculation_manager.price_predictor.api:
       build: ITProjectPriceCalculationManager.PricePredictor.API
+      hostname: price_predictor.api
+      restart: always
+      ports:
+        - "5004:80"
+        - "5005:443"
+      networks:
+        docker-dev:
+          aliases:
+            - price_predictor.api
 
-  postgres:
+  it_project_price_calculation_manager.it_projects.api:
+      build: ITProjectPriceCalculationManager.ITProjects.API
+      hostname: it_projects.api
+      restart: always
+      networks:
+        docker-dev:
+          aliases:
+            - it_projects.api
+      ports:
+        - "5002:80"
+        - "5003:443"
+      depends_on:
+        - it_project_price_calculation_manager.postgres
+
+  it_project_price_calculation_manager.postgres:
       image: postgres
       restart: always
       environment:
@@ -18,7 +54,7 @@ services:
           max-size: 10m
           max-file: "3"
       ports:
-        - '5100:5432'
+        - '5432:5432'
       volumes: 
         - ./postgres-data:/var/lib/postgresql/data
         # copy the sql script to create tables

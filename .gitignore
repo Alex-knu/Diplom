@@ -1,8 +1,10 @@
+.vscode/*
+
 ITProjectPriceCalculationManager.PricePredictor.API/Data/WorkLogic/__pycache__/*
 ITProjectPriceCalculationManager.PricePredictor.API/Graphics/__pycache__/*
 ITProjectPriceCalculationManager.PricePredictor.API/ML/__pycache__/*
 ITProjectPriceCalculationManager.PricePredictor.API/Settings/__pycache__/*
-ITProjectPriceCalculationManager.PricePredictor.API/Graphics/Result/*
+ITProjectPriceCalculationManager.PricePredictor.API/Services/Graphics/Result/*
 
 ITProjectPriceCalculationManager.Core/bin/*
 ITProjectPriceCalculationManager.Core/obj/*
@@ -10,4 +12,8 @@ ITProjectPriceCalculationManager.Core/obj/*
 ITProjectPriceCalculationManager.Infrastructure/bin/*
 ITProjectPriceCalculationManager.Infrastructure/obj/*
 
+ITProjectPriceCalculationManager.ITProjects.API/bin/*
+ITProjectPriceCalculationManager.ITProjects.API/obj/*
+
 compose-dev.yaml
+shutdown.sh
