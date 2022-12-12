@@ -1,6 +1,6 @@
 FROM node:16.18.1-alpine3.15 as node
 WORKDIR /app
-COPY . .
+COPY ITProjectPriceCalculationManager.WebApp/ .
 RUN npm install
 RUN npm run build --prod
 
