@@ -4,9 +4,10 @@ namespace ITProjectPriceCalculationManager.Core.DTO
 {
     public class SubjectAreaElementDTO
     {
-        public ConditionalUnitsOfFunctionality ConditionalUnitsOfFunctionality { get; set; }
-        public SubjectAreaType SubjectAreaType { get; set; }
+        public int Id { get; set; }
+        public double Count { get; set; }
         public int DifficultyLevel { get; set; }
-        public int Count { get; set; }
+        public SubjectAreaType SubjectAreaType { get; set; }
+        public ConditionalUnitsOfFunctionality ConditionalUnitsOfFunctionality { get; set; }
     }
 }
