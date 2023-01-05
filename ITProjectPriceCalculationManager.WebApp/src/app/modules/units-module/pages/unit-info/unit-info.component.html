@@ -1,0 +1,185 @@
+<div class="content-section implementation p-d-flex">
+  <p-toast></p-toast>
+  <p-tabView>
+    <p-tabPanel header="Інформація про бійця">
+      <div class="content-section implementation p-d-flex">
+        <form [formGroup]="personalInfoForm">
+          <div class="card">
+            <p>Інформація про бійця</p>
+            <hr>
+
+            <!--  pib-->
+            <div class="p-mt-5">
+              <span class="p-float-label">
+                <input type="text" pInputText id="lastNameInput" formControlName="LastName" [readonly]="isReadonly">
+                <label for="lastNameInput">Прізвище</label>
+              </span>
+            </div>
+
+            <div class="p-mt-5">
+              <span class="p-float-label">
+                <input type="text" pInputText id="firstNameInput" formControlName="FirstName" [readonly]="isReadonly">
+                <label for="firstNameInput">Ім'я</label>
+              </span>
+            </div>
+
+            <div class="p-mt-5">
+              <span class="p-float-label ">
+                <input type="text" pInputText id="middleNameInput" formControlName="SecondName" [readonly]="isReadonly">
+                <label for="middleNameInput">По батькові</label>
+              </span>
+            </div>
+
+            <!--         division-->
+            <div class="p-mt-5">
+              <span class="p-float-label ">
+                <input type="text" pInputText id="divisionInput" formControlName="Division" readonly>
+                <label for="divisionInput">Підрозділ</label>
+              </span>
+            </div>
+
+            <!--        commander-->
+            <div class="p-mt-5">
+              <span class="p-float-label ">
+                <input type="text" pInputText id="parentInput" formControlName="ParentName" readonly>
+                <label for="parentInput">Командир</label>
+              </span>
+            </div>
+
+            <!--       rank-->
+            <div class="p-mt-5">
+              <span class="p-float-label ">
+                <input type="text" pInputText id="rankInput" formControlName="Rank" readonly>
+                <label for="rankInput">Ранг</label>
+              </span>
+            </div>
+
+            <!--       position-->
+            <div class="p-mt-5">
+              <span class="p-float-label ">
+                <input type="text" pInputText id="positionInput" formControlName="Position" readonly>
+                <label for="positionInput">Позиція</label>
+              </span>
+            </div>
+
+            <div *ngIf="unit.id!" class="p-mt-5">
+              <p-button [routerLink]="['/decree/new', { unitId: unit.id }]" type="button" label="Створити наказ" icon="pi pi-plus"></p-button>
+            </div>
+
+            <div class="p-mt-5">
+              <button pButton type="button" label="Редагувати солдата" *ngIf="isReadonly" class="p-button-outlined" (click)="edit()"></button>
+              <button pButton type="button" label="Зберегти" *ngIf="!isReadonly" class="p-button-raised" icon="pi pi-check" (click)="save()"></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Особова справа">
+      <div class="content-section implementation p-d-flex">
+        <div class="card">
+            <p>Додаткова інформація про бійця</p>
+            <hr>
+
+            <div class="p-float-label p-mt-5" *ngFor="let profile of personalFile">
+              <span class="p-float-label">
+                <input type="text" id="profileName" pInputText [(ngModel)]="profile.value" [readonly]="isReadonly">
+                <label for="profileName">{{profile.name}}</label>
+              </span>
+            </div>
+
+            <div class="p-mt-5">
+              <button pButton type="button" label="Редагувати" *ngIf="isReadonly" class="p-button-outlined" (click)="edit()"></button>
+              <button pButton type="button" label="Зберегти" *ngIf="!isReadonly" class="p-button-raised" icon="pi pi-check" (click)="save()"></button>
+            </div>
+        </div>
+      </div>
+    </p-tabPanel>
+
+    <p-tabPanel header="Обладнання бійця">
+      <div class="content-section implementation p-d-flex">
+        <div class="card">
+          <p>Обладнання бійця</p>
+          <hr>
+
+          <div class="p-d-flex p-flex-row-reverse template-header m-2">
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Номер"/>
+            </span>
+          </div>
+
+          <p-table #dt [value]="equipment" dataKey="regNum" [scrollable]="true" [globalFilterFields]="['regNum']" scrollHeight="50vh">
+            <ng-template pTemplate="header">
+              <tr>
+                <th *ngFor="let col of cols" [ngStyle]="{'width': col.width}">
+                  {{col.header}}
+                </th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-element let-expanded="expanded">
+              <tr>
+                <td [ngStyle]="{'width': '4rem'}">
+                  <button type="button" pButton pRipple
+                    [pRowToggler]="element" class="p-button-text p-button-rounded
+                    p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                </td>
+                <td [ngStyle]="{'width': '25%'}">
+                  {{element.regNum}}
+                </td>
+                <td [ngStyle]="{'width': '25%'}">
+                  {{element.givenByName}}
+                </td>
+                <td [ngStyle]="{'width': '25%'}">
+                  {{element.divisionName}}
+                </td>
+                <td [ngStyle]="{'width': '25%'}">
+                  {{element.givenDate| date : 'dd.MM.yyyy HH:mm'}}
+                </td>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="rowexpansion" let-element>
+              <tr>
+                <td colspan="5">
+                  <div class="p-p-3">
+                    <p-table [value]="element.nameValue" dataKey="id">
+                      <ng-template pTemplate="header">
+                        <tr>
+                          <th [ngStyle]="{'width': '4rem'}">ID</th>
+                          <th>Назва</th>
+                          <th>Значення</th>
+                        </tr>
+                      </ng-template>
+                      <ng-template pTemplate="body" let-nameValue>
+                        <tr>
+                          <td>{{nameValue.id}}</td>
+                          <td>{{nameValue.name}}</td>
+                          <td>{{nameValue.value}}</td>
+                        </tr>
+                      </ng-template>
+                      <ng-template pTemplate="emptymessage">
+                        <tr>
+                          <td colspan="4" id="emptymessage">Дані відсутні</td>
+                        </tr>
+                      </ng-template>
+                    </p-table>
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="5">Амуніції не знайдено.</td>
+              </tr>
+            </ng-template>
+          </p-table>
+
+        </div>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+
+
+</div>
