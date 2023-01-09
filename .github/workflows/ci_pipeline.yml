@@ -11,6 +11,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout angular
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
+            
+      - name: Install NPM Modules
+        run: npm install
+
+      - name: Build Project
+        run: |
+          cd ./ITProjectPriceCalculationManager.WebApp
+          npm run build
+          
       - name: Checkout dotnet
         uses: actions/checkout@v2
       
@@ -40,22 +56,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r ./ITProjectPriceCalculationManager.PricePredictor.API/requirements
-
-      - name: Checkout angular
-        uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14.x
-            
-      - name: Install NPM Modules
-        run: npm install
-
-      - name: Build Project
-        run: |
-          cd ./ITProjectPriceCalculationManager.WebApp
-          npm run build
 
       - name: Checkout docker
         uses: actions/checkout@v2
