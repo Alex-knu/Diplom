@@ -39,7 +39,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements
+          pip install -r ./ITProjectPriceCalculationManager.PricePredictor.API/requirements
 
       - name: Checkout angular
         uses: actions/checkout@v2
