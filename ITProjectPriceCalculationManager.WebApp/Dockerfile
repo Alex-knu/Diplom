@@ -1,8 +1,8 @@
-FROM node:16.18.1-alpine3.15 as node
+FROM node:latest as node
 WORKDIR /app
-COPY . .
+COPY ITProjectPriceCalculationManager.WebApp/ .
 RUN npm install
 RUN npm run build --prod
 
-FROM nginx:alpine
+FROM nginx:latest
 COPY --from=node /app/dist/angular-app /usr/share/nginx/html

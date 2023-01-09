@@ -1,3 +1,4 @@
+using ITProjectPriceCalculationManager.Core.Entities.ProgramLanguage;
 using Microsoft.EntityFrameworkCore;
 
 namespace ITProjectPriceCalculationManager.Infrastructure.Data
@@ -9,5 +10,13 @@ namespace ITProjectPriceCalculationManager.Infrastructure.Data
         {
             //Database.EnsureCreated();
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new ProgramLanguageConfiguration());
+        }
+
+        public DbSet<ProgramLanguage> ProgramLanguages { get; set; }
     }
 }
