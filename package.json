@@ -3,7 +3,9 @@
     "@angular/cli": "^14.2.10"
   },
   "scripts": {
-    "dev": "webpack --config=Scripts/config/webpack.dev.js --watch",
-    "build": "webpack --config=Scripts/config/webpack.prod.js"
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test"
   }
 }
