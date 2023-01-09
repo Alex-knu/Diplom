@@ -53,9 +53,7 @@ jobs:
         run: npm install
 
       - name: Build Project
-        run: |
-          cd ./ITProjectPriceCalculationManager.WebApp
-          npm run build
+        run: npm run build -op ITProjectPriceCalculationManager.WebApp
 
       - name: Checkout docker
         uses: actions/checkout@v2
