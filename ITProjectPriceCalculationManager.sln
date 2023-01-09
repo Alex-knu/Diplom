@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITProjectPriceCalculationMa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITProjectPriceCalculationManager.ITProjects.API", "ITProjectPriceCalculationManager.ITProjects.API\ITProjectPriceCalculationManager.ITProjects.API.csproj", "{2331BFDE-3E2D-4756-A011-65C551279034}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITProjectPriceCalculationManager.DTOModels", "ITProjectPriceCalculationManager.DTOModels\ITProjectPriceCalculationManager.DTOModels.csproj", "{87F37E2A-BDA4-46C5-BDEB-F367866C2AF5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,5 +39,9 @@ Global
 		{2331BFDE-3E2D-4756-A011-65C551279034}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2331BFDE-3E2D-4756-A011-65C551279034}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2331BFDE-3E2D-4756-A011-65C551279034}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87F37E2A-BDA4-46C5-BDEB-F367866C2AF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87F37E2A-BDA4-46C5-BDEB-F367866C2AF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87F37E2A-BDA4-46C5-BDEB-F367866C2AF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87F37E2A-BDA4-46C5-BDEB-F367866C2AF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
