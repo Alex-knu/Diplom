@@ -20,13 +20,15 @@ jobs:
           node-version: 14.x
             
       - name: Install NPM Modules
-        run: npm install
+        run: |
+          cd ./ITProjectPriceCalculationManager.WebApp
+          npm install
 
       - name: Build Project
         run: |
           cd ./ITProjectPriceCalculationManager.WebApp
           npm run build
-          
+
       - name: Checkout dotnet
         uses: actions/checkout@v2
       
