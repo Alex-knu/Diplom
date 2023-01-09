@@ -28,7 +28,6 @@ jobs:
       - name: Test
         run: dotnet test --no-restore
         
-    steps:
       - name: Checkout Python
         uses: actions/checkout@v2
 
@@ -42,7 +41,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-    steps:
       - name: Checkout angular
         uses: actions/checkout@v2
 
@@ -57,7 +55,6 @@ jobs:
       - name: Build Project
         run: npm run build
 
-    steps:
       - name: Checkout docker
         uses: actions/checkout@v2
 
