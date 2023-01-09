@@ -54,7 +54,7 @@ jobs:
 
       - name: Build Project
         run: |
-          cd ./ITProjectPriceCalculationManager.WebProject
+          cd ./ITProjectPriceCalculationManager.WebApp
           npm run build
 
       - name: Checkout docker
