@@ -7,7 +7,28 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  build_dotnet:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout dotnet
+        uses: actions/checkout@v2
+      
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+        with: 
+          dotnet-version: 6.x.x
+      
+      - name: Restore
+        run: dotnet restore
+      
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+      
+      - name: Test
+        run: dotnet test --no-restore
+    
+  build_angular:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,23 +50,10 @@ jobs:
           cd ./ITProjectPriceCalculationManager.WebApp
           npm run build
 
-      - name: Checkout dotnet
-        uses: actions/checkout@v2
-      
-      - name: Setup .NET SDK
-        uses: actions/setup-dotnet@v3
-        with: 
-          dotnet-version: 6.x.x
-      
-      - name: Restore
-        run: dotnet restore
-      
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
-      
-      - name: Test
-        run: dotnet test --no-restore
-        
+  build_python:
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Checkout Python
         uses: actions/checkout@v2
 
@@ -59,6 +67,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r ./ITProjectPriceCalculationManager.PricePredictor.API/requirements
 
+  build_docker:
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Checkout docker
         uses: actions/checkout@v2
 
