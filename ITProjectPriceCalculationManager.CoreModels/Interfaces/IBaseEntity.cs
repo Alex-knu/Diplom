@@ -1,4 +1,4 @@
-namespace ITProjectPriceCalculationManager.Core.Interfaces
+namespace ITProjectPriceCalculationManager.CoreModels.Interfaces
 {
     public interface IBaseEntity<TKey>
     {

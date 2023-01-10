@@ -1,5 +1,3 @@
-using System.Security.AccessControl;
-
 namespace ITProjectPriceCalculationManager.DTOModels.DTO
 {
     public class ApplicationDTO

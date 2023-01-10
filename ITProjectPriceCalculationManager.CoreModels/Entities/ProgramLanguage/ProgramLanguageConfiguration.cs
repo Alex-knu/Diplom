@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ITProjectPriceCalculationManager.Core.Entities.ProgramLanguage
+namespace ITProjectPriceCalculationManager.CoreModels.Entities.ProgramLanguage
 {
     public class ProgramLanguageConfiguration : IEntityTypeConfiguration<ProgramLanguage>
     {

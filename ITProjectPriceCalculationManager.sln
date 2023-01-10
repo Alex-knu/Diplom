@@ -1,4 +1,4 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
+Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -9,6 +9,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITProjectPriceCalculationManager.ITProjects.API", "ITProjectPriceCalculationManager.ITProjects.API\ITProjectPriceCalculationManager.ITProjects.API.csproj", "{2331BFDE-3E2D-4756-A011-65C551279034}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITProjectPriceCalculationManager.DTOModels", "ITProjectPriceCalculationManager.DTOModels\ITProjectPriceCalculationManager.DTOModels.csproj", "{87F37E2A-BDA4-46C5-BDEB-F367866C2AF5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITProjectPriceCalculationManager.CoreModels", "ITProjectPriceCalculationManager.CoreModels\ITProjectPriceCalculationManager.CoreModels.csproj", "{496F6D02-D921-432A-B2B4-8EFD02CC200C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,5 +45,9 @@ Global
 		{87F37E2A-BDA4-46C5-BDEB-F367866C2AF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87F37E2A-BDA4-46C5-BDEB-F367866C2AF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87F37E2A-BDA4-46C5-BDEB-F367866C2AF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{496F6D02-D921-432A-B2B4-8EFD02CC200C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{496F6D02-D921-432A-B2B4-8EFD02CC200C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{496F6D02-D921-432A-B2B4-8EFD02CC200C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{496F6D02-D921-432A-B2B4-8EFD02CC200C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

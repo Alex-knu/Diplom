@@ -1,4 +1,4 @@
-using ITProjectPriceCalculationManager.Core.DTO;
+using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.Core.Helpers.CalculateMethods;
 
 namespace ITProjectPriceCalculationManager.Core.Services

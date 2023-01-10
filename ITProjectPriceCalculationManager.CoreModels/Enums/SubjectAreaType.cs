@@ -1,4 +1,4 @@
-namespace ITProjectPriceCalculationManager.Core.Enums
+namespace ITProjectPriceCalculationManager.CoreModels.Enums
 {
     public enum SubjectAreaType
     {

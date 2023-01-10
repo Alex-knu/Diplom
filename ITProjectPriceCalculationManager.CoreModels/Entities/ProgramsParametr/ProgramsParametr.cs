@@ -1,6 +1,6 @@
-using ITProjectPriceCalculationManager.Core.Interfaces;
+using ITProjectPriceCalculationManager.CoreModels.Interfaces;
 
-namespace ITProjectPriceCalculationManager.Core.Entities.ProgramsParametr
+namespace ITProjectPriceCalculationManager.CoreModels.Entities.ProgramsParametr
 {
     public class ProgramsParametr : IBaseEntity<int>
     {

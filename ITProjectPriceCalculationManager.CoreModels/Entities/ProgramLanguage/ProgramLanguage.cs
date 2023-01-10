@@ -1,6 +1,6 @@
-using ITProjectPriceCalculationManager.Core.Interfaces;
+using ITProjectPriceCalculationManager.CoreModels.Interfaces;
 
-namespace ITProjectPriceCalculationManager.Core.Entities.ProgramLanguage
+namespace ITProjectPriceCalculationManager.CoreModels.Entities.ProgramLanguage
 {
     public class ProgramLanguage : IBaseEntity<int>
     {

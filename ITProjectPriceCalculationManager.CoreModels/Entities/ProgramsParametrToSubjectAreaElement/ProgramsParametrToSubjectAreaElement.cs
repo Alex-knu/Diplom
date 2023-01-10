@@ -1,4 +1,4 @@
-namespace ITProjectPriceCalculationManager.Core.Entities.ProgramsParametrToSubjectAreaElement
+namespace ITProjectPriceCalculationManager.CoreModels.Entities.ProgramsParametrToSubjectAreaElement
 {
     public class ProgramsParametrToSubjectAreaElement
     {
