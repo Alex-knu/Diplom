@@ -60,8 +60,8 @@ services:
       context: .
       dockerfile: ITProjectPriceCalculationManager.ITProjectsManager.API/Dockerfile
     ports:
-      - "5004:80"
-      - "5005:443"
+      - "5006:80"
+      - "5007:443"
     networks:
       docker-dev:
         aliases:
