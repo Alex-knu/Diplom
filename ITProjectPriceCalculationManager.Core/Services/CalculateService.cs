@@ -5,24 +5,21 @@ namespace ITProjectPriceCalculationManager.Core.Services
 {
     public class CalculateService
     {
-        public async void Calculate()
-        {
-
-        }
-
         public void AlbrehtMethodCalculate(ApplicationDTO application)
         {
             
             double ksloc = 0;
-            double developmentAverageComplexity;
 
             foreach(var programsParametr in application.ProgramsParametrs)
             {
                 ksloc += programsParametr.SLOC * AlbrehtMethod.CountUOF(programsParametr.SubjectAreaElements);
             }
-
-            developmentAverageComplexity = AlbrehtMethod.CountDevelopmentAverageComplexity(application.InfluenceFactors, application.ScaleFactors, ksloc);
             
+            application.Price = AlbrehtMethod.CountAverageCostWageFund(application.AverageCostLabor, 
+                                                                                AlbrehtMethod.CountDevelopmentAverageComplexity(application.InfluenceFactors, application.ScaleFactors, ksloc), 
+                                                                                application.AverageMonthlyRateWorkingHours);
+
+            application.Price = application.Price * application.Overhead + application.Price * application.Profit + application.Price * application.SocialInsurance;
         }
     }
 }
