@@ -23,5 +23,8 @@ ITProjectPriceCalculationManager.Infrastructure/obj/*
 ITProjectPriceCalculationManager.ITProjects.API/bin/*
 ITProjectPriceCalculationManager.ITProjects.API/obj/*
 
+ITProjectPriceCalculationManager.ITProjectsManager.API/obj/*
+ITProjectPriceCalculationManager.ITProjectsManager.API/bin/*
+
 compose-dev.yaml
 shutdown.sh
