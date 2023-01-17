@@ -1,11 +1,12 @@
 using AutoMapper;
 using ITProjectPriceCalculationManager.Core.Interfaces.Repositories;
+using ITProjectPriceCalculationManager.Core.Interfaces.Services;
 using ITProjectPriceCalculationManager.CoreModels.Entities.Application;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 
 namespace ITProjectPriceCalculationManager.Core.Services
 {
-    public class ApplicationService
+    public class ApplicationService : IApplicationService
     {
         protected readonly IRepository<Application, int> _applicationRepository;
         protected readonly IMapper _mapper;
@@ -38,8 +39,8 @@ namespace ITProjectPriceCalculationManager.Core.Services
         }
         public async Task<ApplicationDTO> CreateApplicationAsync(ApplicationDTO dto)
         {
-            var Application = _mapper.Map<Application>(dto);
-            var newApplication = await _applicationRepository.AddAsync(Application);
+            var application = _mapper.Map<Application>(dto);
+            var newApplication = await _applicationRepository.AddAsync(application);
             await _applicationRepository.SaveChangesAcync();
 
             return _mapper.Map<ApplicationDTO>(newApplication);
@@ -47,14 +48,16 @@ namespace ITProjectPriceCalculationManager.Core.Services
 
         public async Task<ApplicationDTO> UpdateApplicationAsync(ApplicationDTO query)
         {
-            var Application = _mapper.Map<Application>(query);
+            var application = _mapper.Map<Application>(query);
+
             // foreach(var value in query.Profiles)
             // {
             //     var profile = _mapper.Map<Entities.ProfileEntity.Profile>(value);
             //     await _profileRepository.UpdateAsync(profile);
             //     await _applicationRepository.SaveChangesAcync();
             // }
-            var updateApplication = await _applicationRepository.UpdateAsync(Application);
+
+            var updateApplication = await _applicationRepository.UpdateAsync(application);
             await _applicationRepository.SaveChangesAcync();
 
             return _mapper.Map<ApplicationDTO>(updateApplication);
@@ -62,12 +65,14 @@ namespace ITProjectPriceCalculationManager.Core.Services
 
         public async Task<ApplicationDTO> DeleteApplicationAsync(int id)
         {
-            var Application = await _applicationRepository.GetByKeyAsync(id);
-            if (Application == null)
+            var application = await _applicationRepository.GetByKeyAsync(id);
+
+            if (application == null)
             {
                 throw new ArgumentException("Application not found");
             }
-            var deleteApplication = await _applicationRepository.DeleteAsync(Application);
+
+            var deleteApplication = await _applicationRepository.DeleteAsync(application);
             await _applicationRepository.SaveChangesAcync();
 
             return _mapper.Map<ApplicationDTO>(deleteApplication);

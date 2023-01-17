@@ -1,11 +1,12 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.Core.Helpers.CalculateMethods;
+using ITProjectPriceCalculationManager.Core.Interfaces.Services;
 
 namespace ITProjectPriceCalculationManager.Core.Services
 {
-    public class CalculateService
+    public class CalculateService : ICalculateService
     {
-        public void AlbrehtMethodCalculate(ApplicationDTO application)
+        public ApplicationDTO AlbrehtMethodCalculate(ApplicationDTO application)
         {
             
             double ksloc = 0;
@@ -20,6 +21,8 @@ namespace ITProjectPriceCalculationManager.Core.Services
                                                                                 application.AverageMonthlyRateWorkingHours);
 
             application.Price = application.Price * application.Overhead + application.Price * application.Profit + application.Price * application.SocialInsurance;
+            
+            return application;
         }
     }
 }

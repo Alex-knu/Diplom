@@ -7,6 +7,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddHttpClient("ITProjects", client =>
+	{
+		client.BaseAddress = new Uri("https://localhost:5002");
+	});
+builder.Services.AddHttpClient("ITProjectsManager", client =>
+	{
+		client.BaseAddress = new Uri("https://localhost:5006");
+	});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
