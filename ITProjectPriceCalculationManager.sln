@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITProjectPriceCalculationMa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITProjectPriceCalculationManager.ITProjectsManager.API", "ITProjectPriceCalculationManager.ITProjectsManager.API\ITProjectPriceCalculationManager.ITProjectsManager.API.csproj", "{B3A50590-040F-4322-9156-057A79A22525}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITProjectPriceCalculationManager.Router.API", "ITProjectPriceCalculationManager.Router.API\ITProjectPriceCalculationManager.Router.API.csproj", "{BBC28BA0-96C3-4916-A3CA-D88126EC20EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,5 +57,9 @@ Global
 		{B3A50590-040F-4322-9156-057A79A22525}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3A50590-040F-4322-9156-057A79A22525}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3A50590-040F-4322-9156-057A79A22525}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBC28BA0-96C3-4916-A3CA-D88126EC20EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBC28BA0-96C3-4916-A3CA-D88126EC20EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBC28BA0-96C3-4916-A3CA-D88126EC20EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBC28BA0-96C3-4916-A3CA-D88126EC20EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
