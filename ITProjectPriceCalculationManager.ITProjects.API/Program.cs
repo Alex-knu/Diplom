@@ -1,5 +1,3 @@
-using ITProjectPriceCalculationManager.Infrastructure;
-
 internal class Program
 {
     private static void Main(string[] args)
@@ -7,8 +5,6 @@ internal class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-
-        builder.Services.AddDbContext(builder.Configuration.GetConnectionString("DefaultConnection"));
 
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

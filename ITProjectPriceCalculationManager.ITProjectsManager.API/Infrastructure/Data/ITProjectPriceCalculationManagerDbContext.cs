@@ -1,12 +1,11 @@
-using ITProjectPriceCalculationManager.CoreModels.Entities.ProgramLanguage;
 using Microsoft.EntityFrameworkCore;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramLanguage;
 
-namespace ITProjectPriceCalculationManager.Infrastructure.Data
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data
 {
     public class ITProjectPriceCalculationManagerDbContext : DbContext
     {
-        public ITProjectPriceCalculationManagerDbContext(DbContextOptions<ITProjectPriceCalculationManagerDbContext> options) 
-        : base(options)
+        public ITProjectPriceCalculationManagerDbContext(DbContextOptions<ITProjectPriceCalculationManagerDbContext> options) : base(options)
         {
             //Database.EnsureCreated();
         }

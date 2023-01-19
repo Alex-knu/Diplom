@@ -1,7 +1,7 @@
-using ITProjectPriceCalculationManager.CoreModels.Interfaces;
 using ITProjectPriceCalculationManager.CoreModels.Enums;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces;
 
-namespace ITProjectPriceCalculationManager.CoreModels.Entities.SubjectAreaElement
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.SubjectAreaElement
 {
     public class SubjectAreaElement : IBaseEntity<int>
     {

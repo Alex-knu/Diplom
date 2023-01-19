@@ -1,6 +1,6 @@
-using ITProjectPriceCalculationManager.CoreModels.Interfaces;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces;
 
-namespace ITProjectPriceCalculationManager.CoreModels.Entities.Application
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application
 {
     public class Application : IBaseEntity<int>
     {

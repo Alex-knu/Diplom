@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ITProjectPriceCalculationManager.CoreModels.Entities.ProgramsParametrToSubjectAreaElement
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramsParametrToSubjectAreaElement
 {
     public class ProgramsParametrToSubjectAreaElementConfiguration : IEntityTypeConfiguration<ProgramsParametrToSubjectAreaElement>
     {

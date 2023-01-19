@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ITProjectPriceCalculationManager.CoreModels.Entities.Application
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application
 {
     public class ApplicationConfiguration: IEntityTypeConfiguration<Application>
     {

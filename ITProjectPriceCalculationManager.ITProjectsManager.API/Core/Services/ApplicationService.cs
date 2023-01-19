@@ -1,10 +1,10 @@
 using AutoMapper;
-using ITProjectPriceCalculationManager.Core.Interfaces.Repositories;
-using ITProjectPriceCalculationManager.Core.Interfaces.Services;
-using ITProjectPriceCalculationManager.CoreModels.Entities.Application;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 
-namespace ITProjectPriceCalculationManager.Core.Services
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 {
     public class ApplicationService : IApplicationService
     {

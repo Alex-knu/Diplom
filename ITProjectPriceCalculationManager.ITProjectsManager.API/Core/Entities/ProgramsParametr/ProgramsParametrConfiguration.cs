@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ITProjectPriceCalculationManager.CoreModels.Entities.ProgramsParametr
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramsParametr
 {
     public class ProgramsParametrConfiguration : IEntityTypeConfiguration<ProgramsParametr>
     {

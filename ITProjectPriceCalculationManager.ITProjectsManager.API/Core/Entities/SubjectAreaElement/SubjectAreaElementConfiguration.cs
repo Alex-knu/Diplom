@@ -1,11 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ITProjectPriceCalculationManager.CoreModels.Entities.SubjectAreaElement
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.SubjectAreaElement
 {
     public class SubjectAreaElementConfiguration  : IEntityTypeConfiguration<SubjectAreaElement>
     {
