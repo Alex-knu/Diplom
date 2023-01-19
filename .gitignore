@@ -8,6 +8,12 @@ ITProjectPriceCalculationManager.PricePredictor.API/ML/__pycache__/*
 ITProjectPriceCalculationManager.PricePredictor.API/Settings/__pycache__/*
 ITProjectPriceCalculationManager.PricePredictor.API/Services/Graphics/Result/*
 
+ITProjectPriceCalculationManager.DTOModels/bin/*
+ITProjectPriceCalculationManager.DTOModels/obj/*
+
+ITProjectPriceCalculationManager.CoreModels/bin/*
+ITProjectPriceCalculationManager.CoreModels/obj/*
+
 ITProjectPriceCalculationManager.Core/bin/*
 ITProjectPriceCalculationManager.Core/obj/*
 
@@ -17,8 +23,11 @@ ITProjectPriceCalculationManager.Infrastructure/obj/*
 ITProjectPriceCalculationManager.ITProjects.API/bin/*
 ITProjectPriceCalculationManager.ITProjects.API/obj/*
 
-ITProjectPriceCalculationManager.DTOModels/bin/*
-ITProjectPriceCalculationManager.DTOModels/obj/*
+ITProjectPriceCalculationManager.ITProjectsManager.API/obj/*
+ITProjectPriceCalculationManager.ITProjectsManager.API/bin/*
+
+ITProjectPriceCalculationManager.Router.API/obj/*
+ITProjectPriceCalculationManager.Router.API/bin/*
 
 compose-dev.yaml
 shutdown.sh

@@ -13,10 +13,5 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\ITProjectPriceCalculationManager.CoreModels\ITProjectPriceCalculationManager.CoreModels.csproj" />
-    <ProjectReference Include="..\ITProjectPriceCalculationManager.DTOModels\ITProjectPriceCalculationManager.DTOModels.csproj" />
-  </ItemGroup>
   
 </Project>

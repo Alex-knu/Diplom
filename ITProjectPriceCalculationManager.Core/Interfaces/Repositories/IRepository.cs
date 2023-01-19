@@ -1,5 +1,6 @@
 using Ardalis.Specification;
 using System.Linq.Expressions;
+using ITProjectPriceCalculationManager.CoreModels.Interfaces;
 
 namespace ITProjectPriceCalculationManager.Core.Interfaces.Repositories
 {

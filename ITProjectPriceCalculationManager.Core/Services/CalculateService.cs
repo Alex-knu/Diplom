@@ -1,28 +1,28 @@
-using ITProjectPriceCalculationManager.Core.DTO;
+using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.Core.Helpers.CalculateMethods;
+using ITProjectPriceCalculationManager.Core.Interfaces.Services;
 
 namespace ITProjectPriceCalculationManager.Core.Services
 {
-    public class CalculateService
+    public class CalculateService : ICalculateService
     {
-        public async void Calculate()
-        {
-
-        }
-
-        public void AlbrehtMethodCalculate(ApplicationDTO application)
+        public ApplicationDTO AlbrehtMethodCalculate(ApplicationDTO application)
         {
             
             double ksloc = 0;
-            double developmentAverageComplexity;
 
             foreach(var programsParametr in application.ProgramsParametrs)
             {
                 ksloc += programsParametr.SLOC * AlbrehtMethod.CountUOF(programsParametr.SubjectAreaElements);
             }
-
-            developmentAverageComplexity = AlbrehtMethod.CountDevelopmentAverageComplexity(application.InfluenceFactors, application.ScaleFactors, ksloc);
             
+            application.Price = AlbrehtMethod.CountAverageCostWageFund(application.AverageCostLabor, 
+                                                                                AlbrehtMethod.CountDevelopmentAverageComplexity(application.InfluenceFactors, application.ScaleFactors, ksloc), 
+                                                                                application.AverageMonthlyRateWorkingHours);
+
+            application.Price = application.Price * application.Overhead + application.Price * application.Profit + application.Price * application.SocialInsurance;
+            
+            return application;
         }
     }
 }

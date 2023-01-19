@@ -1,4 +1,4 @@
-using ITProjectPriceCalculationManager.Core.Entities.ProgramLanguage;
+using ITProjectPriceCalculationManager.CoreModels.Entities.ProgramLanguage;
 using Microsoft.EntityFrameworkCore;
 
 namespace ITProjectPriceCalculationManager.Infrastructure.Data

@@ -1,4 +1,4 @@
-using ITProjectPriceCalculationManager.Core.Enums;
+using ITProjectPriceCalculationManager.CoreModels.Enums;
 
 namespace ITProjectPriceCalculationManager.DTOModels.DTO
 {

@@ -1,10 +1,15 @@
-using ITProjectPriceCalculationManager.Core.DTO;
-using ITProjectPriceCalculationManager.Core.Enums;
+using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.CoreModels.Enums;
 
 namespace ITProjectPriceCalculationManager.Core.Helpers.CalculateMethods
 {
     internal static class AlbrehtMethod
     {
+        public static double CountAverageCostWageFund(double averageCostLabor, double developmentAverageComplexity, double averageMonthlyRateWorkingHours)
+        {
+            return (152 * averageCostLabor * developmentAverageComplexity) / averageMonthlyRateWorkingHours;
+        }
+
         private static double CountB(List<ScaleFactorDTO> scaleFactors)
         {
             double sumScaleFactors = 0;

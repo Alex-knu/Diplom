@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ITProjectPriceCalculationManager.Core\ITProjectPriceCalculationManager.Core.csproj" />
+    <ProjectReference Include="..\ITProjectPriceCalculationManager.CoreModels\ITProjectPriceCalculationManager.CoreModels.csproj" />
   </ItemGroup>
 
 </Project>
