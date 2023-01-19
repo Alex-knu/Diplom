@@ -2,7 +2,7 @@ using Ardalis.Specification;
 using Ardalis.Specification.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using ITProjectPriceCalculationManager.CoreModels.Interfaces;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data.Repositories
