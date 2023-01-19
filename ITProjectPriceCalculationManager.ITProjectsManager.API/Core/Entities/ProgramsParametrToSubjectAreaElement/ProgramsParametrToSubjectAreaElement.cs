@@ -1,6 +1,6 @@
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramsParametrToSubjectAreaElement
 {
-    public class ProgramsParametrToSubjectAreaElement
+    internal class ProgramsParametrToSubjectAreaElement
     {
         public int Id { get; set; }
         public int ProgramsParametrId { get; set; }

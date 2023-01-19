@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramsParametr
 {
-    public class ProgramsParametrConfiguration : IEntityTypeConfiguration<ProgramsParametr>
+    internal class ProgramsParametrConfiguration : IEntityTypeConfiguration<ProgramsParametr>
     {
         public void Configure(EntityTypeBuilder<ProgramsParametr> builder)
         {

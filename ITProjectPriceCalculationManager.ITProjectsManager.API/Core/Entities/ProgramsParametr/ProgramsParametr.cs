@@ -2,7 +2,7 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramsParametr
 {
-    public class ProgramsParametr : IBaseEntity<int>
+    internal class ProgramsParametr : IBaseEntity<int>
     {
         public int Id { get; set; }
         public int SLOC { get; set; }

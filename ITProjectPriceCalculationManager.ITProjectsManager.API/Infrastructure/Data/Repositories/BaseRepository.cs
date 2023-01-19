@@ -7,7 +7,7 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Rep
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data.Repositories
 {
-    public class BaseRepository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, IBaseEntity<TKey>
+    internal class BaseRepository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, IBaseEntity<TKey>
     {
         protected readonly ITProjectPriceCalculationManagerDbContext _dbContext;
         protected readonly DbSet<TEntity> _dbSet;

@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories
 {
-    public interface IRepository<TEntity, TKey> where TEntity : class, IBaseEntity<TKey>
+    internal interface IRepository<TEntity, TKey> where TEntity : class, IBaseEntity<TKey>
     {
         Task<TEntity> AddAsync(TEntity entity);
         Task<IEnumerable<TEntity>> GetAllAsync();

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramLanguage
 {
-    public class ProgramLanguageConfiguration : IEntityTypeConfiguration<ProgramLanguage>
+    internal class ProgramLanguageConfiguration : IEntityTypeConfiguration<ProgramLanguage>
     {
         public void Configure(EntityTypeBuilder<ProgramLanguage> builder)
         {

@@ -6,7 +6,7 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Ser
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 {
-    public class ApplicationService : IApplicationService
+    internal class ApplicationService : IApplicationService
     {
         protected readonly IRepository<Application, int> _applicationRepository;
         protected readonly IMapper _mapper;

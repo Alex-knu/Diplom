@@ -2,7 +2,7 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application
 {
-    public class Application : IBaseEntity<int>
+    internal class Application : IBaseEntity<int>
     {
         public int Id { get; set; }
         public double Price { get; set; }

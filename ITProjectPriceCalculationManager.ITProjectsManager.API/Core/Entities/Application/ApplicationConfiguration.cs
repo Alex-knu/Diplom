@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application
 {
-    public class ApplicationConfiguration: IEntityTypeConfiguration<Application>
+    internal class ApplicationConfiguration: IEntityTypeConfiguration<Application>
     {
        public void Configure(EntityTypeBuilder<Application> builder)
        {

@@ -3,7 +3,7 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Progr
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data
 {
-    public class ITProjectPriceCalculationManagerDbContext : DbContext
+    internal class ITProjectPriceCalculationManagerDbContext : DbContext
     {
         public ITProjectPriceCalculationManagerDbContext(DbContextOptions<ITProjectPriceCalculationManagerDbContext> options) : base(options)
         {

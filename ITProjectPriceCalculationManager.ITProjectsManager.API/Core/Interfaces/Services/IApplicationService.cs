@@ -2,7 +2,7 @@ using ITProjectPriceCalculationManager.DTOModels.DTO;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services
 {
-    public interface IApplicationService
+    internal interface IApplicationService
     {
         Task<IEnumerable<ApplicationDTO>> GetApplicationsAsync();
         Task<ApplicationDTO> GetApplicationAsync(int id);
