@@ -8,7 +8,6 @@ WORKDIR /src
 COPY ["ITProjectPriceCalculationManager.Router.API/ITProjectPriceCalculationManager.Router.API.csproj", "ITProjectPriceCalculationManager.Router.API/"]
 COPY ["ITProjectPriceCalculationManager.CoreModels/ITProjectPriceCalculationManager.CoreModels.csproj", "ITProjectPriceCalculationManager.CoreModels/"]
 COPY ["ITProjectPriceCalculationManager.DTOModels/ITProjectPriceCalculationManager.DTOModels.csproj", "ITProjectPriceCalculationManager.DTOModels/"]
-COPY ["ITProjectPriceCalculationManager.Core/ITProjectPriceCalculationManager.Core.csproj", "ITProjectPriceCalculationManager.Core/"]
 RUN dotnet restore "ITProjectPriceCalculationManager.Router.API/ITProjectPriceCalculationManager.Router.API.csproj"
 COPY . .
 WORKDIR "/src/ITProjectPriceCalculationManager.Router.API"

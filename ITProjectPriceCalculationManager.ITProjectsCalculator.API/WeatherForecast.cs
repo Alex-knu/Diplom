@@ -1,4 +1,4 @@
-namespace ITProjectPriceCalculationManager.ITProject.API;
+namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API;
 
 public class WeatherForecast
 {

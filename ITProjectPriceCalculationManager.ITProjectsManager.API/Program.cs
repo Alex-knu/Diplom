@@ -11,7 +11,10 @@ internal class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
+        builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
         builder.Services.AddDbContext<ITProjectPriceCalculationManagerDbContext>(x => x.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
         builder.Services.AddScoped(typeof(IRepository<,>), typeof(BaseRepository<,>));
 
         builder.Services.AddControllers();

@@ -1,7 +1,7 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.CoreModels.Enums;
 
-namespace ITProjectPriceCalculationManager.Core.Helpers.CalculateMethods
+namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers.CalculateMethods
 {
     internal static class AlbrehtMethod
     {

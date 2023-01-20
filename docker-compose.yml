@@ -35,20 +35,20 @@ services:
         aliases:
           - price_predictor.api
 
-  it_project_price_calculation_manager.it_projects.api:
-    hostname: it_projects.api
-    image: ${DOCKER_REGISTRY-}it_project_price_calculation_manager.it_projects.api
+  it_project_price_calculation_manager.it_projects_calculator.api:
+    hostname: it_projects_calculator.api
+    image: ${DOCKER_REGISTRY-}it_project_price_calculation_manager.it_projects_calculator.api
     restart: always
     build: 
       context: .
-      dockerfile: ITProjectPriceCalculationManager.ITProjects.API/Dockerfile
+      dockerfile: ITProjectPriceCalculationManager.ITProjectsCalculator.API/Dockerfile
     ports:
       - "5002:80"
       - "5003:443"
     networks:
       docker-dev:
         aliases:
-          - it_projects.api
+          - it_projects_calculator.api
     depends_on:
       - it_project_price_calculation_manager.postgres
 

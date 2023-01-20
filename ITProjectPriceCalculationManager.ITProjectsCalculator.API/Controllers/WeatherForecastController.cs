@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace ITProjectPriceCalculationManager.ITProject.API.Controllers;
+namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Controllers;
 
 [ApiController]
 [Route("[controller]")]

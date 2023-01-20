@@ -1,10 +1,10 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
-using ITProjectPriceCalculationManager.Core.Helpers.CalculateMethods;
-using ITProjectPriceCalculationManager.Core.Interfaces.Services;
+using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfaces.Services;
+using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers.CalculateMethods;
 
-namespace ITProjectPriceCalculationManager.Core.Services
+namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Services
 {
-    public class CalculateService : ICalculateService
+    internal class CalculateService : ICalculateService
     {
         public ApplicationDTO AlbrehtMethodCalculate(ApplicationDTO application)
         {

@@ -1,6 +1,6 @@
 using AutoMapper;
 
-namespace ITProjectPriceCalculationManager.Core.Helpers
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Helpers
 {
     public class ApplicationProfile: Profile
     {

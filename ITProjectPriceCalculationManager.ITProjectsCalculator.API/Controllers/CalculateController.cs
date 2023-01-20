@@ -1,8 +1,8 @@
-using ITProjectPriceCalculationManager.Core.Interfaces.Services;
-using ITProjectPriceCalculationManager.DTOModels.DTO;
 using Microsoft.AspNetCore.Mvc;
+using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfaces.Services;
 
-namespace ITProjectPriceCalculationManager.ITProjects.API.Controllers
+namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Controllers
 {
     [Route("api/[controller]")]
     public class CalculateController : Controller

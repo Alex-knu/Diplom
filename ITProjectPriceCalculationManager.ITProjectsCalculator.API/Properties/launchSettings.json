@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "ITProjectPriceCalculationManager.ITProject.API": {
+    "ITProjectPriceCalculationManager.ITProjectsCalculator.API": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

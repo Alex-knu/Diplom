@@ -1,6 +1,6 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 
-namespace ITProjectPriceCalculationManager.Core.Interfaces.Services
+namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfaces.Services
 {
     public interface ICalculateService
     {
