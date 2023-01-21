@@ -1,5 +1,5 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
-using ITProjectPriceCalculationManager.CoreModels.Enums;
+using ITProjectPriceCalculationManager.DTOModels.Enums;
 
 namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers.CalculateMethods
 {
