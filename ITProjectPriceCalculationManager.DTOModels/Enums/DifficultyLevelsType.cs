@@ -1,4 +1,4 @@
-namespace ITProjectPriceCalculationManager.CoreModels.Enums
+namespace ITProjectPriceCalculationManager.DTOModels.Enums
 {
     public enum DifficultyLevelsType
     {

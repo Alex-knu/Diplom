@@ -11,9 +11,6 @@ ITProjectPriceCalculationManager.PricePredictor.API/Services/Graphics/Result/*
 ITProjectPriceCalculationManager.DTOModels/bin/*
 ITProjectPriceCalculationManager.DTOModels/obj/*
 
-ITProjectPriceCalculationManager.CoreModels/bin/*
-ITProjectPriceCalculationManager.CoreModels/obj/*
-
 ITProjectPriceCalculationManager.ITProjectsCalculator.API/bin/*
 ITProjectPriceCalculationManager.ITProjectsCalculator.API/obj/*
 

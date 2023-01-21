@@ -1,4 +1,4 @@
-using ITProjectPriceCalculationManager.CoreModels.Enums;
+using ITProjectPriceCalculationManager.DTOModels.Enums;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.SubjectAreaElement

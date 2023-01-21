@@ -6,7 +6,6 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["ITProjectPriceCalculationManager.ITProjectsCalculator.API/ITProjectPriceCalculationManager.ITProjectsCalculator.API.csproj", "ITProjectPriceCalculationManager.ITProjectsCalculator.API/"]
-COPY ["ITProjectPriceCalculationManager.CoreModels/ITProjectPriceCalculationManager.CoreModels.csproj", "ITProjectPriceCalculationManager.CoreModels/"]
 COPY ["ITProjectPriceCalculationManager.DTOModels/ITProjectPriceCalculationManager.DTOModels.csproj", "ITProjectPriceCalculationManager.DTOModels/"]
 RUN dotnet restore "ITProjectPriceCalculationManager.ITProjectsCalculator.API/ITProjectPriceCalculationManager.ITProjectsCalculator.API.csproj"
 COPY . .
