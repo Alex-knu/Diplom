@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ITProjectPriceCalculationManager.Core\ITProjectPriceCalculationManager.Core.csproj" />
     <ProjectReference Include="..\ITProjectPriceCalculationManager.DTOModels\ITProjectPriceCalculationManager.DTOModels.csproj" />
   </ItemGroup>
 
