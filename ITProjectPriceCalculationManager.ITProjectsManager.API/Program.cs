@@ -13,7 +13,7 @@ internal class Program
         // Add services to the container.
         builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-        builder.Services.AddDbContext<ITProjectPriceCalculationManagerDbContext>(x => x.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+        builder.Services.AddDbContext<ITProjectPriceCalculationManagerDbContext>(x => x.UseNpgsql(builder.Configuration.GetConnectionString("ITProjectPriceCalculationManagerDbContext")));
 
         builder.Services.AddScoped(typeof(IRepository<,>), typeof(BaseRepository<,>));
 
@@ -23,6 +23,17 @@ internal class Program
         builder.Services.AddSwaggerGen();
 
         var app = builder.Build();
+
+        using (var scope = app.Services.CreateScope())
+        {
+            var services = scope.ServiceProvider;
+
+            var context = services.GetRequiredService<ITProjectPriceCalculationManagerDbContext>();
+            if (context.Database.GetPendingMigrations().Any())
+            {
+                context.Database.Migrate();
+            } 
+        }
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
