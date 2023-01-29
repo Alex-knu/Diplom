@@ -21,6 +21,7 @@ import { LogComponent } from "./components/log/log.component";
 import { TableModule } from 'primeng/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabViewModule } from 'primeng/tabview';
+import { ApplicationComponent } from './components/application/application.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { TabViewModule } from 'primeng/tabview';
     AddCommanderComponent,
     ProfileComponent,
     FinishRegistrationComponent,
-    UpdateProfileComponent
+    UpdateProfileComponent,
+    ApplicationComponent
   ],
   imports: [
     BrowserModule,

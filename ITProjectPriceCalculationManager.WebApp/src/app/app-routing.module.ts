@@ -15,6 +15,7 @@ import { FinishRegistrationComponent } from './components/finish-registration/fi
 import {UpdateProfileComponent} from "./components/profile/update-profile/update-profile.component";
 import {LogComponent} from "./components/log/log.component";
 import { CommandersGuard } from './guards/CommandersGuard';
+import { ApplicationComponent } from './components/application/application.component';
 
 const routes: Routes = [
     {path:'', component:AppLayoutComponent,
@@ -23,6 +24,7 @@ const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'test1', component: Test1Component },
     { path: 'test2', component: Test2Component },
+    { path: 'application', component: ApplicationComponent },
     { path: 'addCommander', component: AddCommanderComponent, canActivate: [AdminGuard] },
     { path: 'decree', loadChildren: () => import("./modules/attachments-module/attachments.module").then(m => m.AttachmentsModule), canActivate: [CommandersGuard] },
     { path: 'finishRegistration', component: FinishRegistrationComponent},
