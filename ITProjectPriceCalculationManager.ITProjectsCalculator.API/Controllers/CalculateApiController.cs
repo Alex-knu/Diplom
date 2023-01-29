@@ -4,22 +4,23 @@ using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfaces.
 
 namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
-    public class CalculateController : Controller
+    public class CalculateApiController : ControllerBase
     {
-        private readonly ILogger<CalculateController> _logger;
+        private readonly ILogger<CalculateApiController> _logger;
         private readonly ICalculateService _calculateService;
 
-        public CalculateController(ILogger<CalculateController> logger, ICalculateService calculatorService)
+        public CalculateApiController(ILogger<CalculateApiController> logger, ICalculateService calculatorService)
         {
             _logger = logger;
             _calculateService = calculatorService;
         }
 
         [HttpPost]
-        public ApplicationDTO CalulateAsync(ApplicationDTO applicationDTO)
+        public async Task<IActionResult> CalulateAsync(ApplicationDTO applicationDTO)
         {
-            return _calculateService.AlbrehtMethodCalculate(applicationDTO);
+            return Ok(await _calculateService.AlbrehtMethodCalculate(applicationDTO));
         }
     }
 }

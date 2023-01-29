@@ -51,6 +51,8 @@ services:
           - it_projects_calculator.api
     depends_on:
       - it_project_price_calculation_manager.postgres
+    volumes:
+      - $HOME/.microsoft/usersecrets/:/root/.microsoft/usersecrets/:ro
 
   it_project_price_calculation_manager.it_projects_manager.api:
     hostname: it_projects_manager.api
@@ -68,6 +70,8 @@ services:
           - it_projects_manager.api
     depends_on:
       - it_project_price_calculation_manager.postgres
+    volumes:
+      - $HOME/.microsoft/usersecrets/:/root/.microsoft/usersecrets/:ro
 
   it_project_price_calculation_manager.router.api:
     hostname: router.api
@@ -85,6 +89,8 @@ services:
           - router.api
     depends_on:
       - it_project_price_calculation_manager.postgres
+    volumes:
+      - $HOME/.microsoft/usersecrets/:/root/.microsoft/usersecrets/:ro
 
   it_project_price_calculation_manager.postgres:
     image: postgres
