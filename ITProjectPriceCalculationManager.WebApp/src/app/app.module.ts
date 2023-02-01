@@ -13,7 +13,7 @@ import { SignoutRedirectCallbackComponent } from './components/signout-redirect-
 import { HomeComponent } from './components/home/home.component';
 import { AppLayoutModule } from './layout/app.layout.module';
 import { AddCommanderComponent } from './components/add-commander/add-commander.component';
-import {ProfileComponent} from "./components/profile/profile/profile.component";
+import { ProfileComponent } from "./components/profile/profile/profile.component";
 import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UpdateProfileComponent } from './components/profile/update-profile/update-profile.component';
@@ -22,6 +22,7 @@ import { TableModule } from 'primeng/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabViewModule } from 'primeng/tabview';
 import { ApplicationComponent } from './components/application/application.component';
+import { ApplicationTableComponent } from './application-table/application-table.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ApplicationComponent } from './components/application/application.compo
     ProfileComponent,
     FinishRegistrationComponent,
     UpdateProfileComponent,
-    ApplicationComponent
+    ApplicationComponent,
+    ApplicationTableComponent
   ],
   imports: [
     BrowserModule,
