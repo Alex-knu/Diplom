@@ -16,6 +16,7 @@ import {UpdateProfileComponent} from "./components/profile/update-profile/update
 import {LogComponent} from "./components/log/log.component";
 import { CommandersGuard } from './guards/CommandersGuard';
 import { ApplicationComponent } from './components/application/application.component';
+import { ApplicationTableComponent } from './components/application-table/application-table.component';
 
 const routes: Routes = [
     {path:'', component:AppLayoutComponent,
@@ -25,6 +26,7 @@ const routes: Routes = [
     { path: 'test1', component: Test1Component },
     { path: 'test2', component: Test2Component },
     { path: 'application', component: ApplicationComponent },
+    { path: 'applicationTable', component: ApplicationTableComponent },
     { path: 'addCommander', component: AddCommanderComponent, canActivate: [AdminGuard] },
     { path: 'decree', loadChildren: () => import("./modules/attachments-module/attachments.module").then(m => m.AttachmentsModule), canActivate: [CommandersGuard] },
     { path: 'finishRegistration', component: FinishRegistrationComponent},

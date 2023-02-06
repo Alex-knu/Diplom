@@ -22,7 +22,7 @@ import { TableModule } from 'primeng/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabViewModule } from 'primeng/tabview';
 import { ApplicationComponent } from './components/application/application.component';
-import { ApplicationTableComponent } from './application-table/application-table.component';
+import { ApplicationTableComponent } from './components/application-table/application-table.component';
 
 
 @NgModule({

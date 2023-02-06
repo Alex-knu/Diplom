@@ -4,16 +4,7 @@ import { Application } from 'src/app/shared/models/application.model';
 @Component({
   selector: 'app-application-table',
   templateUrl: './application-table.component.html',
-  styleUrls: ['./application-table.component.scss'],
-  styles: [
-    `
-        :host ::ng-deep .p-dialog .product-image {
-            width: 150px;
-            margin: 0 auto 2rem auto;
-            display: block;
-        }
-    `
-  ],
+  styleUrls: ['./application-table.component.scss']
 })
 export class ApplicationTableComponent implements OnInit {
   applicationDialog: boolean;
