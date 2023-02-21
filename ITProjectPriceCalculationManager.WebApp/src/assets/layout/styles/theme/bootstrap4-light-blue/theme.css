@@ -2714,13 +2714,13 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   font-weight: 600;
 }
 .p-datatable .p-datatable-thead > tr > th {
-  text-align: left;
+  text-align: -webkit-center;
   padding: 1rem 1rem;
   border: 1px solid #dee2e6;
   border-width: 1px 0 2px 0;
   font-weight: 600;
-  color: #ffffff;
-  background: #007bff;
+  color: #000000;
+  background: #6cb3ffc9;
   transition: box-shadow 0.15s;
 }
 .p-datatable .p-datatable-tfoot > tr > td {
@@ -2753,8 +2753,8 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   color: #6c757d;
 }
 .p-datatable .p-sortable-column.p-highlight {
-  background: #ffffff;
-  color: #007bff;
+  background: #6cb3ff54;
+  color: #304d6c;
 }
 .p-datatable .p-sortable-column.p-highlight .p-sortable-column-icon {
   color: #007bff;

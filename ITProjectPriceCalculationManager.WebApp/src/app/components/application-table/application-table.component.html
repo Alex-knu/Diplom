@@ -1,123 +1,111 @@
-<div class="content-section implementation">
-    <p-toast></p-toast>
+<p-toast></p-toast>
 
-    <div class="card">
-        <p-toolbar styleClass="mb-4 gap-2">
-            <ng-template pTemplate="left">
-                <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success mr-2" (click)="openNew()"></button>
-            </ng-template>
-        </p-toolbar>
+<div class="card">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"></button>
+        </ng-template>
+    </p-toolbar>
 
-        <p-table #dt [value]="applications" [rows]="10" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']" [tableStyle]="{'min-width': '75rem'}"
-            [(selection)]="selectedApplications" [rowHover]="true" dataKey="id"
-            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
-            <ng-template pTemplate="caption">
-                <div class="flex align-items-center justify-content-between">
-                    <h5 class="m-0">Manage Products</h5>
-                    <span class="p-input-icon-left">
-                        <i class="pi pi-search"></i>
-                        <!-- <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search..." /> -->
-                    </span>
-                </div>
-            </ng-template>
-            <ng-template pTemplate="header">
-                <tr>
-                    <th pSortableColumn="name" style="min-width:15rem">Application number<p-sortIcon field="name"></p-sortIcon></th>
-                    <th pSortableColumn="price">Estimation object<p-sortIcon field="price"></p-sortIcon></th>
-                    <th pSortableColumn="category" style="min-width:10rem">Author<p-sortIcon field="category"></p-sortIcon></th>
-                    <th pSortableColumn="rating">Registration date<p-sortIcon field="rating"></p-sortIcon></th>
-                    <th pSortableColumn="inventoryStatus" style="min-width:10rem">Status<p-sortIcon field="inventoryStatus"></p-sortIcon></th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-product>
-                <tr>
-                    <td>
-                        <p-tableCheckbox [value]="product"></p-tableCheckbox>
-                    </td>
-                    <td>{{product.name}}</td>
-                    <td><img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.name" width="100" class="shadow-4" /></td>
-                    <td>{{product.price | currency:'USD'}}</td>
-                    <td>{{product.category}}</td>
-                    <!-- <td><p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating></td> -->
-                    <td><span [class]="'product-badge status-' + (product.inventoryStatus ? product.inventoryStatus.toLowerCase() : '')">{{product.inventoryStatus}}</span></td>
-                    <td>
-                        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editProduct(product)"></button>
-                        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteProduct(product)"></button>
-                    </td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="summary">
-                <div class="flex align-items-center justify-content-between">
-                    In total there are {{applications ? applications.length : 0 }} applications.
-                </div>
-            </ng-template>
-        </p-table>
-    </div>
-
-    <p-dialog [(visible)]="applicationDialog" [style]="{width: '450px'}" header="Product Details" [modal]="true" styleClass="p-fluid">
-        <ng-template pTemplate="content">
-            <!-- <img [src]="'assets/showcase/images/demo/product/' + product.image" [alt]="product.image" class="product-image" *ngIf="product.image"> -->
-            <div class="field">
-                <label for="name">Name</label>
-                <input type="text" pInputText id="name" [(ngModel)]="application.id" required autofocus />
-                <small class="p-error" *ngIf="submitted && !application.id">Name is required.</small>
-            </div>
-            <div class="field">
-                <label for="description">Description</label>
-                <textarea id="description" pInputTextarea [(ngModel)]="application.overhead" required rows="3" cols="20"></textarea>
-            </div>
-
-            <div class="field">
-                <label for="inventoryStatus">Inventory Status</label>
-                <p-dropdown [(ngModel)]="application.id" inputId="inventoryStatus" optionValue="label" [options]="statuses" placeholder="Select">
-                    <ng-template pTemplate="selectedItem">
-                        <span *ngIf="application && application.id" [class]="'product-badge status-' + application.id">{{application.id}}</span>
-                    </ng-template>
-                    <ng-template let-option pTemplate="item">
-                        <span [class]="'product-badge status-' + option.value">{{option.label}}</span>
-                    </ng-template>
-                </p-dropdown>
-            </div>
-
-            <div class="field">
-                <label class="mb-3">Category</label>
-                <div class="formgrid grid">
-                    <div class="field-radiobutton col-6">
-                        <p-radioButton id="category1" name="category" value="Accessories" [(ngModel)]="application.id"></p-radioButton>
-                        <label for="category1">Accessories</label>
-                    </div>
-                    <div class="field-radiobutton col-6">
-                        <p-radioButton id="category2" name="category" value="Clothing" [(ngModel)]="application.id"></p-radioButton>
-                        <label for="category2">Clothing</label>
-                    </div>
-                    <div class="field-radiobutton col-6">
-                        <p-radioButton id="category3" name="category" value="Electronics" [(ngModel)]="application.id"></p-radioButton>
-                        <label for="category3">Electronics</label>
-                    </div>
-                    <div class="field-radiobutton col-6">
-                        <p-radioButton id="category4" name="category" value="Fitness" [(ngModel)]="application.id"></p-radioButton>
-                        <label for="category4">Fitness</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="formgrid grid">
-                <div class="field col">
-                    <label for="price">Price</label>
-                    <p-inputNumber id="price" [(ngModel)]="application.price" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
-                </div>
-                <div class="field col">
-                    <label for="quantity">Quantity</label>
-                    <p-inputNumber id="quantity" [(ngModel)]="application.price"></p-inputNumber>
-                </div>
+    <p-table #dt [value]="applications" [rows]="10" [paginator]="true" [globalFilterFields]="['name','country.name','representative.name','status']"
+        [(selection)]="selectedApplications" [rowHover]="true" dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                <h5 class="p-m-0">Manage Applications</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event, 'contains')" placeholder="Search..." />
+                </span>
             </div>
         </ng-template>
-
-        <ng-template pTemplate="footer">
-            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveProduct()"></button>
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="price">Price<p-sortIcon field="price"></p-sortIcon></th>
+                <th pSortableColumn="category">Category<p-sortIcon field="category"></p-sortIcon></th>
+                <th pSortableColumn="rating">Reviews<p-sortIcon field="rating"></p-sortIcon></th>
+                <th pSortableColumn="inventoryStatus">Status<p-sortIcon field="inventoryStatus"></p-sortIcon></th>
+                <th></th>
+            </tr>
         </ng-template>
-    </p-dialog>
-
-    <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog> 
+        <ng-template pTemplate="body" let-application>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="application"></p-tableCheckbox>
+                </td>
+                <td>{{application.name}}</td>
+                <td>{{application.price | currency:'USD'}}</td>
+                <td>{{application.category}}</td>
+                <td><p-rating [ngModel]="application.rating" readonly="true" cancel="false"></p-rating></td>
+                <td><span [class]="'application-badge status-' + application.inventoryStatus.toLowerCase()">{{application.inventoryStatus}}</span></td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editApplication(application)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteApplication(application)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="p-d-flex p-ai-center p-jc-between">
+                In total there are {{applications ? applications.length : 0 }} applications.
+            </div>
+        </ng-template>
+    </p-table>
 </div>
+
+<p-dialog [(visible)]="applicationDialog" [style]="{width: '450px'}" header="Application Details" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-field">
+            <label for="name">Name</label>
+            <input type="text" pInputText id="name" [(ngModel)]="application.id" required autofocus />
+            <small class="p-invalid" *ngIf="submitted && !application.id">Name is required.</small>
+        </div>
+        <div class="p-field">
+            <label for="description">Description</label>
+            <textarea id="description" pInputTextarea [(ngModel)]="application.id" required rows="3" cols="20"></textarea>
+        </div>
+
+        <div class="p-field">
+            <label class="p-mb-3">Category</label>
+            <div class="p-formgrid p-grid">
+                <div class="p-field-radiobutton p-col-6">
+                    <p-radioButton id="category1" name="category" value="Accessories" [(ngModel)]="application.id"></p-radioButton>
+                    <label for="category1">Accessories</label>
+                </div>
+                <div class="p-field-radiobutton p-col-6">
+                    <p-radioButton id="category2" name="category" value="Clothing" [(ngModel)]="application.id"></p-radioButton>
+                    <label for="category2">Clothing</label>
+                </div>
+                <div class="p-field-radiobutton p-col-6">
+                    <p-radioButton id="category3" name="category" value="Electronics" [(ngModel)]="application.id"></p-radioButton>
+                    <label for="category3">Electronics</label>
+                </div>
+                <div class="p-field-radiobutton p-col-6">
+                    <p-radioButton id="category4" name="category" value="Fitness" [(ngModel)]="application.id"></p-radioButton>
+                    <label for="category4">Fitness</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-formgrid p-grid">
+            <div class="p-field p-col">
+                <label for="price">Price</label>
+                <p-inputNumber id="price" [(ngModel)]="application.price" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
+            </div>
+            <div class="p-field p-col">
+                <label for="quantity">Quantity</label>
+                <p-inputNumber id="quantity" [(ngModel)]="application.id"></p-inputNumber>
+            </div>
+        </div>
+    </ng-template>
+    
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveApplication()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

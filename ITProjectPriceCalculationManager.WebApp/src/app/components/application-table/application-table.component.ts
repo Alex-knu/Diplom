@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { Application } from 'src/app/shared/models/application.model';
 
 @Component({
@@ -7,6 +8,7 @@ import { Application } from 'src/app/shared/models/application.model';
   styleUrls: ['./application-table.component.scss']
 })
 export class ApplicationTableComponent implements OnInit {
+
   applicationDialog: boolean;
 
   applications: Application[];
@@ -17,83 +19,81 @@ export class ApplicationTableComponent implements OnInit {
 
   submitted: boolean;
 
-  statuses: any[];
+  constructor(private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
-  constructor() { }
-
-  ngOnInit(): void {
+  ngOnInit() {
+    // this.applicationService.getApplications().then(data => this.applications = data);
   }
 
   openNew() {
-    //this.application = new Application();
+    this.application = new Application();
     this.submitted = false;
     this.applicationDialog = true;
   }
 
-  deleteSelectedProducts() {
-    // this.confirmationService.confirm({
-    //     message: 'Are you sure you want to delete the selected products?',
-    //     header: 'Confirm',
-    //     icon: 'pi pi-exclamation-triangle',
-    //     accept: () => {
-    //         this.products = this.products.filter(val => !this.selectedProducts.includes(val));
-    //         this.selectedProducts = null;
-    //         this.messageService.add({severity:'success', summary: 'Successful', detail: 'Products Deleted', life: 3000});
-    //     }
-    // });
+  deleteSelectedApplications() {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete the selected applications?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.applications = this.applications.filter(val => !this.selectedApplications.includes(val));
+        this.selectedApplications = null;
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Applications Deleted', life: 3000 });
+      }
+    });
   }
 
-  editProduct(application: Application) {
-    //this.application = {...application};
+  editApplication(application: Application) {
+    // this.application = { ...application };
     this.applicationDialog = true;
   }
 
-  deleteProduct(application: Application) {
-    // this.confirmationService.confirm({
-    //     message: 'Are you sure you want to delete ' + product.name + '?',
-    //     header: 'Confirm',
-    //     icon: 'pi pi-exclamation-triangle',
-    //     accept: () => {
-    //         this.products = this.products.filter(val => val.id !== product.id);
-    //         this.product = {};
-    //         this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Deleted', life: 3000});
-    //     }
-    // });
+  deleteApplication(application: Application) {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete ' + application.id + '?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.applications = this.applications.filter(val => val.id !== application.id);
+        this.application = new Application();
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Application Deleted', life: 3000 });
+      }
+    });
   }
 
   hideDialog() {
-    //this.productDialog = false;
+    this.applicationDialog = false;
     this.submitted = false;
   }
 
-  saveProduct() {
+  saveApplication() {
     this.submitted = true;
 
-    // if (this.product.name.trim()) {
-    //     if (this.product.id) {
-    //         this.products[this.findIndexById(this.product.id)] = this.product;
-    //         this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Updated', life: 3000});
-    //     }
-    //     else {
-    //         this.product.id = this.createId();
-    //         this.product.image = 'product-placeholder.svg';
-    //         this.products.push(this.product);
-    //         this.messageService.add({severity:'success', summary: 'Successful', detail: 'Product Created', life: 3000});
-    //     }
+    if (this.application.id) {
+      if (this.application.id) {
+        this.applications[this.findIndexById(this.application.id)] = this.application;
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Application Updated', life: 3000 });
+      }
+      else {
+        this.application.id = 0;
+        this.applications.push(this.application);
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Application Created', life: 3000 });
+      }
 
-    //     this.products = [...this.products];
-    //     this.productDialog = false;
-    //     this.product = {};
-    // }
+      this.applications = [...this.applications];
+      this.applicationDialog = false;
+      this.application = new Application();
+    }
   }
 
-  findIndexById(id: string): number {
+  findIndexById(id: number): number {
     let index = -1;
     for (let i = 0; i < this.applications.length; i++) {
-        // if (this.applications[i].id === id) {
-        //     index = i;
-        //     break;
-        // }
+      if (this.applications[i].id === id) {
+        index = i;
+        break;
+      }
     }
 
     return index;
@@ -102,8 +102,8 @@ export class ApplicationTableComponent implements OnInit {
   createId(): string {
     let id = '';
     var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for ( var i = 0; i < 5; i++ ) {
-        id += chars.charAt(Math.floor(Math.random() * chars.length));
+    for (var i = 0; i < 5; i++) {
+      id += chars.charAt(Math.floor(Math.random() * chars.length));
     }
     return id;
   }
