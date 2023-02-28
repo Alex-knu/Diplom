@@ -24,6 +24,7 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'application', component: ApplicationComponent },
       { path: 'applicationTable', component: ApplicationTableComponent },
+      { path: 'applications', loadChildren: () => import("./modules/application/application.module").then(m => m.ApplicationModule) },
       { path: 'addCommander', component: AddCommanderComponent, canActivate: [AdminGuard] },
       { path: 'decree', loadChildren: () => import("./modules/attachments-module/attachments.module").then(m => m.AttachmentsModule), canActivate: [CommandersGuard] },
       { path: 'finishRegistration', component: FinishRegistrationComponent },

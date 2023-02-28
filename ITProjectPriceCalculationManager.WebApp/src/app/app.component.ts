@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
     constructor(
         private configService: ConfigService,
         private clientConfigService: ClientConfigurationService,
-        private apiService: ApiService,
         private _authService: AuthService) {
         this._authService.loginChanged.subscribe(userAuthenticated => {
             this.userAuthenticated = userAuthenticated;
