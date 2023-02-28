@@ -10,13 +10,9 @@ import { Application } from 'src/app/shared/models/application.model';
 export class ApplicationTableComponent implements OnInit {
 
   applicationDialog: boolean;
-
   applications: Application[];
-
   application: Application;
-
   selectedApplications: Application[];
-
   submitted: boolean;
 
   constructor(private messageService: MessageService, private confirmationService: ConfirmationService) { }

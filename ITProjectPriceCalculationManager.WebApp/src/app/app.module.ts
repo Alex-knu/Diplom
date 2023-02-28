@@ -6,8 +6,6 @@ import { PrimeNgComponentsModule } from './modules/primeng-components-module/pri
 import { services } from './shared/services';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './shared/services/auth-interceptor.service';
-import { Test1Component } from './components/test1/test1.component';
-import { Test2Component } from './components/test2/test2.component';
 import { SigninRedirectCallbackComponent } from './components/signin-redirect-callback/signin-redirect-callback.component';
 import { SignoutRedirectCallbackComponent } from './components/signout-redirect-callback/signout-redirect-callback.component';
 import { HomeComponent } from './components/home/home.component';
@@ -28,8 +26,6 @@ import { ApplicationTableComponent } from './components/application-table/applic
 @NgModule({
   declarations: [
     AppComponent,
-    Test1Component,
-    Test2Component,
     SigninRedirectCallbackComponent,
     SignoutRedirectCallbackComponent,
     LogComponent,
