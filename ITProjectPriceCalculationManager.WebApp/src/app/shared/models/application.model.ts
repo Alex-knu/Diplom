@@ -4,6 +4,11 @@ import { ProgramsParametr } from "./programsParametr.model";
 import { ScaleFactor } from "./scaleFactor.model";
 
 export class Application extends BaseModel {
+
+    constructor(id: number|null=null){
+        super(id);
+    }
+
     price: number;
     profit: number;
     overhead: number;
