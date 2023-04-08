@@ -17,14 +17,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
             _mapper = mapper;
         }
 
-        public async Task<ApplicationDTO> GetApplicationAsync(int id)
-        {
-
-            var application = await _applicationRepository.GetByKeyAsync(id);
-
-            return _mapper.Map<ApplicationDTO>(application);
-        }
-
         public async Task<IEnumerable<ApplicationDTO>> GetApplicationsAsync()
         {
             var applications = await _applicationRepository.GetAllAsync();
