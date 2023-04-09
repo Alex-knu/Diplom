@@ -1,7 +1,7 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 
-namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Stub
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Stub
 {
     public class StubApplicationService : IApplicationService
     {

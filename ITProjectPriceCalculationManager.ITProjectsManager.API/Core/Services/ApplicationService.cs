@@ -23,12 +23,14 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 
             return _mapper.Map<IEnumerable<ApplicationDTO>>(applications);
         }
+        
         public async Task<ApplicationDTO> GetApplicationsByIdAsync(int id)
         {
             var applications = await _applicationRepository.GetByKeyAsync(id);
 
             return _mapper.Map<ApplicationDTO>(applications);
         }
+
         public async Task<ApplicationDTO> CreateApplicationAsync(ApplicationDTO dto)
         {
             var application = _mapper.Map<Application>(dto);
