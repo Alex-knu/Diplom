@@ -1,10 +1,16 @@
+using System.Reflection;
+using ITProjectPriceCalculationManager.DTOModels.Settings;
+
 internal class Program
 {
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        builder.Configuration.AddEnvironmentVariables().AddUserSecrets(Assembly.GetExecutingAssembly(), true);
         // Add services to the container.
+
+        var configuration = builder.Configuration.GetSection("RouteAPI").Get<RouteSetting>();
 
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -13,11 +19,11 @@ internal class Program
 
         builder.Services.AddHttpClient("ITProjectsCalculator", client =>
             {
-                client.BaseAddress = new Uri(builder.Configuration["RouteAPI:ITProjectsCalculatorAPIRoute"]);
+                client.BaseAddress = new Uri(configuration.ITProjectsCalculatorAPIRoute);
             });
         builder.Services.AddHttpClient("ITProjectsManager", client =>
             {
-                client.BaseAddress = new Uri(builder.Configuration["RouteAPI:ITProjectsManagerAPIRoute"]);
+                client.BaseAddress = new Uri(configuration.ITProjectsManagerAPIRoute);
             });
 
         var app = builder.Build();
@@ -29,7 +35,7 @@ internal class Program
         app.UseSwaggerUI();
         // }
 
-        app.UseHttpsRedirection();
+        //app.UseHttpsRedirection();
 
         app.UseAuthorization();
 

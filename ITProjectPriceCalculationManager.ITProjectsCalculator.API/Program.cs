@@ -1,9 +1,16 @@
+using System.Reflection;
+using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfaces.Services;
+using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Stub;
+
 internal class Program
 {
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        builder.Configuration.AddEnvironmentVariables().AddUserSecrets(Assembly.GetExecutingAssembly(), true);
+
+        builder.Services.AddScoped(typeof(ICalculateService), typeof(StubCalculateService));
         // Add services to the container.
 
         builder.Services.AddControllers();
@@ -20,7 +27,7 @@ internal class Program
         app.UseSwaggerUI();
         // }
 
-        app.UseHttpsRedirection();
+        //app.UseHttpsRedirection();
 
         app.UseAuthorization();
 

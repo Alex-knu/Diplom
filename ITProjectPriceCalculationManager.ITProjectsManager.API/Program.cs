@@ -3,7 +3,9 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Rep
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data.Repositories;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Stub;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Stub;
+using System.Reflection;
+using ITProjectPriceCalculationManager.DTOModels.Settings;
 
 internal class Program
 {
@@ -11,10 +13,14 @@ internal class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
+        builder.Configuration.AddEnvironmentVariables().AddUserSecrets(Assembly.GetExecutingAssembly(), true);
+
+        var configuration = builder.Configuration.GetSection("ITProjectsManager").Get<ITProjectsManagerSetting>();
+
         // Add services to the container.
         builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-        builder.Services.AddDbContext<ITProjectPriceCalculationManagerDbContext>(x => x.UseNpgsql(builder.Configuration.GetConnectionString("ITProjectsManagerAPI:ConnectionString")));
+        builder.Services.AddDbContext<ITProjectPriceCalculationManagerDbContext>(x => x.UseNpgsql(configuration.ConnectionString));
 
         builder.Services.AddScoped(typeof(IRepository<,>), typeof(BaseRepository<,>));
         builder.Services.AddScoped(typeof(IApplicationService), typeof(StubApplicationService));
