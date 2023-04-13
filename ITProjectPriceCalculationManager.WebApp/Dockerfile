@@ -5,4 +5,5 @@ RUN npm install
 RUN npm run build --prod
 
 FROM nginx:latest
+COPY ITProjectPriceCalculationManager.WebApp/nginx.conf /etc/nginx/nginx.conf
 COPY --from=node /app/dist/angular-app /usr/share/nginx/html

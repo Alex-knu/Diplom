@@ -6,7 +6,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Service
 {
     internal class CalculateService : ICalculateService
     {
-        public ApplicationDTO AlbrehtMethodCalculate(ApplicationDTO application)
+        public Task<ApplicationDTO> AlbrehtMethodCalculate(ApplicationDTO application)
         {
             
             double ksloc = 0;
@@ -22,7 +22,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Service
 
             application.Price = application.Price * application.Overhead + application.Price * application.Profit + application.Price * application.SocialInsurance;
             
-            return application;
+            return Task.FromResult(application);
         }
     }
 }
