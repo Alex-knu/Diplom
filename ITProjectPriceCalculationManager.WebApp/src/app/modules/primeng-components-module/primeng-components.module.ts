@@ -1,38 +1,38 @@
 import { NgModule } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
-import { TabMenuModule } from 'primeng/tabmenu';
-import { TableModule } from 'primeng/table';
-import { InputMaskModule } from 'primeng/inputmask';
-import { CheckboxModule } from 'primeng/checkbox';
-import { InputSwitchModule } from 'primeng/inputswitch';
-import { DropdownModule } from 'primeng/dropdown';
-import { HttpClientModule } from '@angular/common/http';
-import { MessageService } from 'primeng/api';
-import { TooltipModule } from 'primeng/tooltip';
-import { ConfirmationService } from 'primeng/api';
-import { SelectButtonModule } from 'primeng/selectbutton';
-import { ListboxModule } from 'primeng/listbox';
-import { SliderModule } from 'primeng/slider';
 import { CardModule } from 'primeng/card';
+import { TabMenuModule } from 'primeng/tabmenu';
 import { PanelModule } from 'primeng/panel';
+import { TableModule } from 'primeng/table';
 import { FieldsetModule } from 'primeng/fieldset';
 import { ToolbarModule } from 'primeng/toolbar';
+import { InputMaskModule } from 'primeng/inputmask';
 import { PasswordModule } from 'primeng/password';
+import { CheckboxModule } from 'primeng/checkbox';
+import { InputSwitchModule } from 'primeng/inputswitch';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { TreeTableModule } from 'primeng/treetable';
+import { DropdownModule } from 'primeng/dropdown';
+import { HttpClientModule } from '@angular/common/http';
 import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmPopupModule } from "primeng/confirmpopup";
 import { ColorPickerModule } from 'primeng/colorpicker';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { MessageService } from 'primeng/api';
 import { MenuModule } from 'primeng/menu';
 import { SidebarModule } from 'primeng/sidebar';
 import { PanelMenuModule } from 'primeng/panelmenu';
+import { TooltipModule } from 'primeng/tooltip';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 import { StepsModule } from 'primeng/steps';
 import { SpinnerModule } from 'primeng/spinner';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { ListboxModule } from 'primeng/listbox';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { SliderModule } from 'primeng/slider';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
@@ -48,25 +48,11 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TerminalModule } from 'primeng/terminal';
 import { TabViewModule } from 'primeng/tabview';
 import { MenubarModule } from 'primeng/menubar';
-import { SlideMenuModule } from 'primeng/slidemenu';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AppRoutingModule } from 'src/app/app-routing.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BadgeModule } from 'primeng/badge';
-import { AutoCompleteModule } from 'primeng/autocomplete';
-import { RadioButtonModule } from 'primeng/radiobutton';
-import { ProgressBarModule } from 'primeng/progressbar';
-import { InputNumberModule } from 'primeng/inputnumber';
-import { ChipModule } from 'primeng/chip';
+import {SlideMenuModule} from 'primeng/slidemenu';
+import { FormsModule } from '@angular/forms';
 
 
 const primeNgModules = [
-  FormsModule,
-  ReactiveFormsModule,
-  AppRoutingModule,
-  HttpClientModule,
-  BrowserAnimationsModule,
-  AutoCompleteModule,
   ButtonModule,
   CardModule,
   TabMenuModule,
@@ -77,12 +63,11 @@ const primeNgModules = [
   InputMaskModule,
   PasswordModule,
   CheckboxModule,
-  BadgeModule,
-  RadioButtonModule,
   InputSwitchModule,
   ScrollPanelModule,
   TreeTableModule,
   DropdownModule,
+  HttpClientModule,
   DialogModule,
   ToastModule,
   ConfirmPopupModule,
@@ -100,17 +85,14 @@ const primeNgModules = [
   ListboxModule,
   MultiSelectModule,
   SliderModule,
-  CalendarModule,
-  TreeModule,
   MessagesModule,
   MessageModule,
   ProgressSpinnerModule,
-  ProgressBarModule,
-  InputNumberModule,
-  ChipModule,
+  CalendarModule,
   InputTextareaModule,
   AccordionModule,
   ContextMenuModule,
+  TreeModule,
   InputTextModule,
   TagModule,
   AvatarModule,
@@ -119,6 +101,7 @@ const primeNgModules = [
   TabViewModule,
   MenubarModule,
   SlideMenuModule,
+  FormsModule
 ];
 @NgModule({
   imports: [

@@ -1,57 +1,31 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
-import { PrimeNgComponentsModule } from './modules/primeng-components-module/primeng-components.module';
-import { services } from './shared/services';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptorService } from './shared/services/auth-interceptor.service';
-import { SigninRedirectCallbackComponent } from './components/signin-redirect-callback/signin-redirect-callback.component';
-import { SignoutRedirectCallbackComponent } from './components/signout-redirect-callback/signout-redirect-callback.component';
-import { HomeComponent } from './components/home/home.component';
+import { AppRoutingModule } from './app-routing.module';
 import { AppLayoutModule } from './layout/app.layout.module';
-import { AddCommanderComponent } from './components/add-commander/add-commander.component';
-import { ProfileComponent } from "./components/profile/profile/profile.component";
-import { FinishRegistrationComponent } from './components/finish-registration/finish-registration.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { UpdateProfileComponent } from './components/profile/update-profile/update-profile.component';
-import { LogComponent } from "./components/log/log.component";
-import { TableModule } from 'primeng/table';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TabViewModule } from 'primeng/tabview';
-import { ApplicationComponent } from './components/application/application.component';
-import { ApplicationTableComponent } from './components/application-table/application-table.component';
-
+import { NotfoundComponent } from './components/notfound/notfound.component';
+import { ApplicationInfoComponent } from './components/application/application-info/application-info.component';
+import { ApplicationTableComponent } from './components/application/application-table/application-table.component';
+import { PrimeNgComponentsModule } from './modules/primeng-components-module/primeng-components.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SigninRedirectCallbackComponent,
-    SignoutRedirectCallbackComponent,
-    LogComponent,
-    HomeComponent,
-    AddCommanderComponent,
-    ProfileComponent,
-    FinishRegistrationComponent,
-    UpdateProfileComponent,
-    ApplicationComponent,
-    ApplicationTableComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    PrimeNgComponentsModule,
-    AppLayoutModule,
-    ReactiveFormsModule,
-    AppLayoutModule,
-    TableModule,
-    TabViewModule,
-    BrowserAnimationsModule,
-  ],
-  providers: [
-    services,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        NotfoundComponent,
+        ApplicationInfoComponent,
+        ApplicationTableComponent
+    ],
+    imports: [
+        AppRoutingModule,
+        AppLayoutModule,
+        PrimeNgComponentsModule
+    ],
+    providers: [
+        {
+            provide: LocationStrategy,
+            useClass: HashLocationStrategy
+        }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
