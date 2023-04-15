@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { LayoutService } from "../service/app.layout.service";
 import { MenuService } from "../app.menu.service";
 
@@ -6,15 +6,13 @@ import { MenuService } from "../app.menu.service";
     selector: 'app-config',
     templateUrl: './app.config.component.html'
 })
-export class AppConfigComponent implements OnInit{
+export class AppConfigComponent {
 
     @Input() minimal: boolean = false;
 
-    ngOnInit() {
-        this.incrementScale(14)
-    }
+    scales: number[] = [12, 13, 14, 15, 16];
 
-    constructor(public layoutService: LayoutService, public menuService: MenuService) {}
+    constructor(public layoutService: LayoutService, public menuService: MenuService) { }
 
     get visible(): boolean {
         return this.layoutService.state.configSidebarVisible;
@@ -56,6 +54,10 @@ export class AppConfigComponent implements OnInit{
         this.layoutService.config.ripple = _val;
     }
 
+    onConfigButtonClick() {
+        this.layoutService.showConfigSidebar();
+    }
+
     changeTheme(theme: string, colorScheme: string) {
         const themeLink = <HTMLLinkElement>document.getElementById('theme-css');
         const newHref = themeLink.getAttribute('href')!.replace(this.layoutService.config.theme, theme);
@@ -89,8 +91,8 @@ export class AppConfigComponent implements OnInit{
         this.applyScale();
     }
 
-    incrementScale(scale_num: number) {
-        this.scale = scale_num;
+    incrementScale() {
+        this.scale++;
         this.applyScale();
     }
 

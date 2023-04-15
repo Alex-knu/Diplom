@@ -15,51 +15,31 @@ export class AppMenuComponent implements OnInit {
     ngOnInit() {
         this.model = [
             {
-                label: 'Головна',
+                label: 'Home',
                 items: [
-                    { label: 'Головна', icon: 'pi pi-fw pi-home', routerLink: ['/home'] }
+                    { label: 'Головна', icon: 'pi pi-fw pi-home', routerLink: ['/'] }
                 ]
             },
             {
-              label: 'Заявка',
+                label: 'Заявка',
+                items: [
+                    { label: 'Заявка', icon: 'pi pi-fw pi-home', routerLink: ['/application/application-info'] },
+                    { label: 'Заявки', icon: 'pi pi-fw pi-users', routerLink: ['/application/application-table'] }
+                ]
+            },
+            {
+                label: 'Експерти',
+                items: [
+                    { label: 'Експерти', icon: 'pi pi-fw pi-users', routerLink: ['/units/list'] },
+                    { label: 'Додати експерта', icon: 'pi pi-fw pi-user-plus', routerLink: ['/units/add'] }
+                ]
+            },
+            {
+              label: 'Експертні групи',
               items: [
-                { label: 'Заявки', icon: 'pi pi-fw pi-users', routerLink: ['/application'] }
+                { label: 'Експертні групи', icon: 'pi pi-fw pi-users', routerLink: ['/divisions/list'] },
+                { label: 'Додати експертну групу', icon: 'pi pi-fw pi-user-plus', routerLink: ['/divisions/new'] }
               ]
-            },
-            {
-                label: 'Бійці',
-                items: [
-                    { label: 'Бійці', icon: 'pi pi-fw pi-users', routerLink: ['/units/list'] },
-                    { label: 'Додати бійця', icon: 'pi pi-fw pi-user-plus', routerLink: ['/units/add'] }
-                ]
-            },
-            {
-              label: 'Підрозділи',
-              items: [
-                { label: 'Підрозділи', icon: 'pi pi-fw pi-users', routerLink: ['/divisions/list'] },
-                { label: 'Додати підрозділ', icon: 'pi pi-fw pi-user-plus', routerLink: ['/divisions/new'] }
-              ]
-            },
-            {
-                label: 'Накази',
-                items: [
-                    { label: 'Накази', icon: 'pi pi-fw pi-book', routerLink: ['/decree/list']},
-                    { label: 'Створити наказ', icon: 'pi pi-fw pi-plus', routerLink: ['/decree/new']},
-                ]
-            },
-            {
-                label: 'Спорядження',
-                items: [
-                    { label: 'Спорядження', icon: 'pi pi-fw pi-shield', routerLink: ['/equipment/list'] },
-                    { label: 'Додати спорядження', icon: 'pi pi-fw pi-plus', routerLink: ['/equipment/new'] },
-                ]
-            },
-            {
-                label: 'Адміністратор',
-                items: [
-                    { label: 'Додати командира', icon: 'pi pi-user-plus', routerLink: ['/addCommander'] },
-                    { label: 'Історія змін', icon: 'pi pi-fw pi-users', routerLink: ['/logs'] }
-                ]
             }
         ];
     }

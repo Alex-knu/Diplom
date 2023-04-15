@@ -1,7 +1,7 @@
 <div class="layout-topbar">
     <a class="layout-topbar-logo" routerLink="">
-        <!-- <img src="" alt="logo">  --for logo -->
-        <span>Military Manager</span>
+        <img src="assets/layout/images/{{layoutService.config.colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg" alt="logo">
+        <span>SAKAI</span>
     </a>
 
     <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">
@@ -13,19 +13,15 @@
     </button>
 
     <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
-        <button *ngIf="!isUserAuthenticated" class="p-link layout-topbar-button" (click)="login()">
-            <i class="pi pi-sign-in"></i>
-            <span>Sign in</span>
+        <button class="p-link layout-topbar-button">
+            <i class="pi pi-calendar"></i>
+            <span>Calendar</span>
         </button>
-        <button *ngIf="isUserAuthenticated" class="p-link layout-topbar-button" routerLink="/profile" (click)="navigateToProfile()">
+        <button class="p-link layout-topbar-button">
             <i class="pi pi-user"></i>
             <span>Profile</span>
         </button>
-        <button *ngIf="isUserAuthenticated" class="p-link layout-topbar-button" (click)="logout()">
-            <i class="pi pi-sign-out"></i>
-            <span>Sign out</span>
-        </button>
-        <button class="p-link layout-topbar-button" (click)="onConfigButtonClick()">
+        <button class="p-link layout-topbar-button" [routerLink]="'/documentation'">
             <i class="pi pi-cog"></i>
             <span>Settings</span>
         </button>
