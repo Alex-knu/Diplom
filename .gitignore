@@ -8,6 +8,9 @@ ITProjectPriceCalculationManager.PricePredictor.API/ML/__pycache__/*
 ITProjectPriceCalculationManager.PricePredictor.API/Settings/__pycache__/*
 ITProjectPriceCalculationManager.PricePredictor.API/Services/Graphics/Result/*
 
+ITProjectPriceCalculationManager.AuthServer/bin/*
+ITProjectPriceCalculationManager.AuthServer/obj/*
+
 ITProjectPriceCalculationManager.DTOModels/bin/*
 ITProjectPriceCalculationManager.DTOModels/obj/*
 
