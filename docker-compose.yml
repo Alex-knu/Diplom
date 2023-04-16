@@ -129,7 +129,7 @@ services:
       # - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
 
   it_project_price_calculation_manager.auth_server.postgres:
-    image: auth_server.postgres
+    image: postgres
     restart: always
     environment:
       - POSTGRES_USER=postgres
