@@ -6,7 +6,6 @@ networks:
 
 services:
   it_project_price_calculation_manager.web_app:
-    hostname: web_app
     image: ${DOCKER_REGISTRY-}it_project_price_calculation_manager.web_app
     restart: always
     build: 
@@ -21,7 +20,6 @@ services:
           - web_app
 
   it_project_price_calculation_manager.price_predictor.api:
-    hostname: price_predictor.api
     image: ${DOCKER_REGISTRY-}it_project_price_calculation_manager.price_predictor.api
     restart: always
     build: 
@@ -36,7 +34,6 @@ services:
           - price_predictor.api
 
   it_project_price_calculation_manager.it_projects_calculator.api:
-    hostname: it_projects_calculator.api
     image: ${DOCKER_REGISTRY-}it_project_price_calculation_manager.it_projects_calculator.api
     restart: always
     build: 
@@ -55,7 +52,6 @@ services:
       - $HOME/.microsoft/usersecrets/:/root/.microsoft/usersecrets/:ro
 
   it_project_price_calculation_manager.it_projects_manager.api:
-    hostname: it_projects_manager.api
     image: ${DOCKER_REGISTRY-}it_project_price_calculation_manager.it_projects_manager.api
     restart: always
     build: 
@@ -74,7 +70,6 @@ services:
       - $HOME/.microsoft/usersecrets/:/root/.microsoft/usersecrets/:ro
 
   it_project_price_calculation_manager.router.api:
-    hostname: router.api
     image: ${DOCKER_REGISTRY-}it_project_price_calculation_manager.router.api
     restart: always
     build: 
@@ -93,7 +88,6 @@ services:
       - $HOME/.microsoft/usersecrets/:/root/.microsoft/usersecrets/:ro
 
   it_project_price_calculation_manager.auth_server:
-    hostname: auth_server
     image: ${DOCKER_REGISTRY-}it_project_price_calculation_manager.auth_server
     restart: always
     build: 
@@ -107,7 +101,7 @@ services:
         aliases:
           - auth_server
     depends_on:
-      - it_project_price_calculation_manager.postgres
+      - it_project_price_calculation_manager.auth_server.postgres
     volumes:
       - $HOME/.microsoft/usersecrets/:/root/.microsoft/usersecrets/:ro
 
@@ -122,7 +116,11 @@ services:
         max-size: 10m
         max-file: "3"
     ports:
-      - "5100:5432"
+      - 5100:5432
+    networks:
+      docker-dev:
+        aliases:
+          - it_project_price_calculation_manager.postgres
     #volumes: 
       # - ./postgres-data:/var/lib/postgresql/data
       # copy the sql script to create tables
@@ -139,7 +137,11 @@ services:
         max-size: 10m
         max-file: "3"
     ports:
-      - "5101:5432"
+      - 5101:5432
+    networks:
+      docker-dev:
+        aliases:
+          - it_project_price_calculation_manager.auth_server.postgres
     #volumes: 
       # - ./postgres-data:/var/lib/postgresql/data
       # copy the sql script to create tables
