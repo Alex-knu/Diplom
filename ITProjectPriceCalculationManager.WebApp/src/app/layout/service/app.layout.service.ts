@@ -1,4 +1,3 @@
-import { compileDeclareDirectiveFromMetadata } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
@@ -30,7 +29,7 @@ export class LayoutService {
         inputStyle: 'outlined',
         menuMode: 'static',
         colorScheme: 'light',
-        theme: 'bootstrap4-light-blue',
+        theme: 'lara-light-indigo',
         scale: 14,
     };
 
@@ -69,10 +68,6 @@ export class LayoutService {
                 this.overlayOpen.next(null);
             }
         }
-    }
-
-    onOverlaySubmenuOpen() {
-        this.overlayOpen.next(null);
     }
 
     showProfileSidebar() {

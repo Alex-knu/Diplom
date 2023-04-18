@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Host, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Subscription } from 'rxjs';
@@ -7,9 +7,8 @@ import { MenuService } from './app.menu.service';
 import { LayoutService } from './service/app.layout.service';
 
 @Component({
-    /* tslint:disable:component-selector */
+    // eslint-disable-next-line @angular-eslint/component-selector
     selector: '[app-menuitem]',
-    /* tslint:enable:component-selector */
     template: `
 		<ng-container>
             <div *ngIf="root && item.visible !== false" class="layout-menuitem-root-text">{{item.label}}</div>
@@ -20,7 +19,7 @@ import { LayoutService } from './service/app.layout.service';
 				<i class="pi pi-fw pi-angle-down layout-submenu-toggler" *ngIf="item.items"></i>
 			</a>
 			<a *ngIf="(item.routerLink && !item.items) && item.visible !== false" (click)="itemClick($event)" [ngClass]="item.class" 
-			   [routerLink]="item.routerLink" routerLinkActive="active-route" [routerLinkActiveOptions]="item.routerLinkOptions||{exact: true}"
+			   [routerLink]="item.routerLink" routerLinkActive="active-route" [routerLinkActiveOptions]="item.routerLinkActiveOptions||{ paths: 'exact', queryParams: 'ignored', matrixParams: 'ignored', fragment: 'ignored' }"
                [fragment]="item.fragment" [queryParamsHandling]="item.queryParamsHandling" [preserveFragment]="item.preserveFragment" 
                [skipLocationChange]="item.skipLocationChange" [replaceUrl]="item.replaceUrl" [state]="item.state" [queryParams]="item.queryParams"
                [attr.target]="item.target" tabindex="0" pRipple>
@@ -36,10 +35,6 @@ import { LayoutService } from './service/app.layout.service';
 			</ul>
 		</ng-container>
     `,
-    host: {
-        '[class.layout-root-menuitem]': 'root',
-        '[class.active-menuitem]': 'active'
-    },
     animations: [
         trigger('children', [
             state('collapsed', style({
@@ -58,7 +53,7 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
 
     @Input() index!: number;
 
-    @Input() root!: boolean;
+    @Input() @HostBinding('class.layout-root-menuitem') root!: boolean;
 
     @Input() parentKey!: string;
 
@@ -134,6 +129,11 @@ export class AppMenuitemComponent implements OnInit, OnDestroy {
 
     get submenuAnimation() {
         return this.root ? 'expanded' : (this.active ? 'expanded' : 'collapsed');
+    }
+
+    @HostBinding('class.active-menuitem') 
+    get activeClass() {
+        return this.active && !this.root;
     }
 
     ngOnDestroy() {
