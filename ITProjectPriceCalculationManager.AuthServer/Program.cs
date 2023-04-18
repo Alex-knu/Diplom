@@ -10,8 +10,6 @@ var configuration = builder.Configuration.AddUserSecrets<Program>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseNpgsql(builder.Configuration["AuthServer:ConnectionString"]));
 
-Console.WriteLine(builder.Configuration["AuthServer:ConnectionString"]);
-
 // For Identity
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
