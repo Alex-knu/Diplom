@@ -6,9 +6,9 @@ networks:
 
 volumes:
   it-projects-manager-data:
-    external: true
+    external: false
   auth-server-data:
-    external: true
+    external: false
 
 services:
   it_project_price_calculation_manager.web_app:
