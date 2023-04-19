@@ -4,6 +4,12 @@ networks:
   docker-dev:
     driver: bridge 
 
+volumes:
+  it-projects-manager-data:
+    external: true
+  auth-server-data:
+    external: true
+
 services:
   it_project_price_calculation_manager.web_app:
     image: ${DOCKER_REGISTRY-}it_project_price_calculation_manager.web_app
@@ -123,8 +129,8 @@ services:
       docker-dev:
         aliases:
           - it_project_price_calculation_manager.postgres
-    #volumes: 
-      # - ./postgres-data:/var/lib/postgresql/data
+    volumes: 
+      - it-projects-manager-data:/var/lib/postgresql/data
       # copy the sql script to create tables
       # - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
 
@@ -144,7 +150,7 @@ services:
       docker-dev:
         aliases:
           - it_project_price_calculation_manager.auth_server.postgres
-    #volumes: 
-      # - ./postgres-data:/var/lib/postgresql/data
+    volumes: 
+      - auth-server-data:/var/lib/postgresql/data
       # copy the sql script to create tables
       # - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
