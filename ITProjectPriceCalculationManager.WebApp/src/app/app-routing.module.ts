@@ -9,8 +9,7 @@ const routes: Routes = [
     path: '', component: AppLayoutComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'application', loadChildren: () => import('./components/application/application-routing.module').then(m => m.ApplicationRoutingModule) },
-      { path: 'auth', loadChildren: () => import('./components/auth/auth-routing.module').then(m => m.AuthRoutingModule) }
+      { path: 'application', loadChildren: () => import('./components/application/application-routing.module').then(m => m.ApplicationRoutingModule) }
     ]
   },
   { path: 'auth', loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule) },
