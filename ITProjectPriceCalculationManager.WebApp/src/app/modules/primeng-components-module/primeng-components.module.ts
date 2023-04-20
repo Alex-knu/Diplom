@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { TabMenuModule } from 'primeng/tabmenu';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { PanelModule } from 'primeng/panel';
 import { TableModule } from 'primeng/table';
 import { FieldsetModule } from 'primeng/fieldset';
@@ -73,6 +74,7 @@ const primeNgModules = [
   ConfirmPopupModule,
   ColorPickerModule,
   BreadcrumbModule,
+  NgxSpinnerModule,
   MenuModule,
   SidebarModule,
   PanelMenuModule,

@@ -1,12 +1,19 @@
 import { Injectable } from '@angular/core';
 import { UserManager, User, UserManagerSettings, WebStorageStateStore } from 'oidc-client';
-import { Subject } from 'rxjs';
+import { Observable, Subject, catchError, throwError } from 'rxjs';
 import { CookieStorage } from 'cookie-storage';
+import { HttpClient } from '@angular/common/http';
+import { ConfigService } from './api/config.service';
+import { BaseService } from './core/base.service';
+import { ServiceType } from './core/serviceType';
+import { UserModel } from '../models/user.model';
+import { ClientConfigurationService } from './core/client-configuration.service';
+import { HttpService } from './core/http.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService extends BaseService<any>  {
   private _userManager: UserManager;
   // @ts-ignore
   private _user: User;
@@ -25,12 +32,17 @@ export class AuthService {
       userStore: new WebStorageStateStore({ store: new CookieStorage() })
     }
   }
-  constructor() {
+  constructor(httpService: HttpService, configService: ClientConfigurationService) {
+    super(httpService, 'commander', configService, UserModel, ServiceType.identity)
     this._userManager = new UserManager(this.idpSettings);
   }
 
   public login = () => {
     return this._userManager.signinRedirect();
+  }
+
+  register(userRegistration: any) {
+    return new Observable<Object>; //this.httpService.post(ServiceType.units + '/account', userRegistration).pipe(catchError(this.handleError));
   }
 
   public finishLogin = (): Promise<User> => {
@@ -88,5 +100,25 @@ export class AuthService {
 
   private checkUser = (user : User): boolean => {
     return !!user && !user.expired;
+  }
+
+  protected handleError(error: any) {
+
+    var applicationError = error.headers.get('Application-Error');
+
+    // either application-error in header or model error in body
+    if (applicationError) {
+      return throwError(applicationError);
+    }
+
+    var modelStateErrors: string = '';
+
+      // for now just concatenate the error descriptions, alternative we could simply pass the entire error response upstream
+      for (var key in error.error) {
+        if (error.error[key]) modelStateErrors += error.error[key].description + '\n';
+      }
+
+    // modelStateErrors = modelStateErrors = '' ? null : modelStateErrors;
+    return throwError(modelStateErrors || 'Server error');
   }
 }
