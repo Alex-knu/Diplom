@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  serveces: {
+    AuthServerUrl: 'http://localhost:5010/',
+    RouteApiUrl: 'http://localhost:5008/'
+  }
 };
 
 /*
