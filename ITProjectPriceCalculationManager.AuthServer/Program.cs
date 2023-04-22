@@ -38,6 +38,8 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+builder.Services.AddCors();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -55,6 +57,19 @@ using (var scope = app.Services.CreateScope())
         context.Database.Migrate();
     }
 }
+
+app.UseStaticFiles();
+app.UseCors(
+    builder => builder
+        .WithOrigins(
+            "http://localhost:4200",
+            "https://localhost:5001",
+            "http://localhost:5000")
+        .SetIsOriginAllowedToAllowWildcardSubdomains()
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+);
+
 // Configure the HTTP request pipeline.
 // if (app.Environment.IsDevelopment())
 // {
@@ -62,7 +77,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 //}
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 // Authentication & Authorization
 app.UseAuthentication();

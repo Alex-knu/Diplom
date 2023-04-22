@@ -46,7 +46,7 @@ namespace ITProjectPriceCalculationManager.AuthServer.Controllers
                     authClaims.Add(new Claim(ClaimTypes.Role, userRole));
                 }
 
-               var token = GetToken(authClaims);
+                var token = GetToken(authClaims);
 
                 return Ok(new
                 {
