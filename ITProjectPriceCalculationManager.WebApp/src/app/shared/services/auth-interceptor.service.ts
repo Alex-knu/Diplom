@@ -6,21 +6,19 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthInterceptorService implements HttpInterceptor {
+export class AuthInterceptor implements HttpInterceptor {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    const token = localStorage.getItem('authToken');
 
-  constructor(private _authService: AuthService) { }
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    //@ts-ignore
-    return from(
-      this._authService.getAccessToken()
-      .then(token => {
-        req = req.clone({
-          setHeaders: {
-            Authorization: `Bearer ${token}`,
-          }
-        });
-        return next.handle(req).toPromise();
-      })
-    )
+    if (token) {
+      req = req.clone({
+        setHeaders: { Authorization: `Bearer ${token}` },
+      });
+    }
+
+    return next.handle(req);
   }
 }

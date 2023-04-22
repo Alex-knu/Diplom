@@ -13,10 +13,10 @@ export class RegisterComponent implements OnInit {
 
   success: boolean;
   error: string;
-  userRegistration: UserRegistration = { name: '', email: '', password: ''};
+  userRegistration: UserRegistration = { username: '', email: '', password: ''};
   submitted: boolean = false;
 
-  constructor(/*private authService: AuthService,*/ private spinner: NgxSpinnerService) {
+  constructor(private authService: AuthService, private spinner: NgxSpinnerService) {
 
   }
 
@@ -24,21 +24,8 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-
-    // this.spinner.show();
-
-    // this.authService.register(this.userRegistration)
-    //   .pipe(finalize(() => {
-    //     this.spinner.hide();
-    //   }))
-    //   .subscribe(
-    //   result => {
-    //      if(result) {
-    //        this.success = true;
-    //      }
-    //   },
-    //   error => {
-    //     this.error = error;
-    //   });
+    this.authService.register(this.userRegistration).subscribe(() => {
+      this.userRegistration.username = "new UserRegistration()";
+    });
   }
 }
