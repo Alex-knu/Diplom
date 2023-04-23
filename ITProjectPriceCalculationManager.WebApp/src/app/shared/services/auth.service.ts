@@ -1,92 +1,41 @@
 import { Injectable } from '@angular/core';
-import { UserManager, User, UserManagerSettings, WebStorageStateStore } from 'oidc-client';
-import { Subject } from 'rxjs';
-import { CookieStorage } from 'cookie-storage';
+import { Observable, catchError, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { UserModel } from '../models/user.model';
+import { environment } from 'src/environments/environment';
+import { UserRegistration } from '../models/user.registration';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private _userManager: UserManager;
-  // @ts-ignore
-  private _user: User;
-  private _loginChangedSubject = new Subject<boolean>();
-  public loginChanged = this._loginChangedSubject.asObservable();
-
-  private get idpSettings() : UserManagerSettings {
-    return {
-      authority: "https://localhost:5007",
-      client_id: "angular",
-      redirect_uri: `${location.origin}/SignInCallback`,
-      scope: "openid profile unitsAPI IdentityServerApi attachmentsAPI",
-      response_type: "code",
-      post_logout_redirect_uri: `${location.origin}/SignOutCallback`,
-      stateStore: new WebStorageStateStore({ store: new CookieStorage() }),
-      userStore: new WebStorageStateStore({ store: new CookieStorage() })
-    }
-  }
-  constructor() {
-    this._userManager = new UserManager(this.idpSettings);
+  private setHeaders(): HttpHeaders {
+    const headersConfig = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    };
+    return new HttpHeaders(headersConfig);
   }
 
-  public login = () => {
-    return this._userManager.signinRedirect();
+  constructor(private http: HttpClient) { }
+
+  public register(userRegistration: UserRegistration): Observable<any> {
+    return this.http.post<any>(`${environment.serveces.AuthServerUrl}api/authenticate/register`, userRegistration, { headers: this.setHeaders() })
+      .pipe(catchError((error: HttpErrorResponse) => this.formatErrors(error)));
   }
 
-  public finishLogin = (): Promise<User> => {
-    return this._userManager.signinRedirectCallback()
-    .then(user => {
-      this._user = user;
-      this._loginChangedSubject.next(this.checkUser(user));
-      return user;
-    })
+  public login(user: UserModel): Observable<any> {
+    return this.http.post<any>(`${environment.serveces.AuthServerUrl}api/authenticate/login`, JSON.stringify(user), { headers: this.setHeaders() })
+      .pipe(catchError((error: HttpErrorResponse) => this.formatErrors(error)));
   }
 
-  public logout = () => {
-    return this._userManager.signoutRedirect({ 'id_token_hint': this._user.id_token });
+  public getMe(): Observable<string> {
+    return this.http.get(`${environment.serveces.AuthServerUrl}api/Auth`, { responseType: 'text' })
+      .pipe(catchError((error: HttpErrorResponse) => this.formatErrors(error)));
   }
 
-  public finishLogout = () => {
-    // @ts-ignore
-    this._user = null;
-    return this._userManager.signoutRedirectCallback();
-  }
-
-  public getAccessToken = (): Promise<string> => {
-    // @ts-ignore
-    return this._userManager.getUser()
-      .then(user => {
-         return !!user && !user.expired ? user.access_token : null;
-    })
-  }
-  public getUserId = (): Promise<string> => {
-    // @ts-ignore
-    return this._userManager.getUser()
-      .then(user => {
-        return user?.profile.sub;
-      })
-  }
-
-  public isAuthenticated = (): Promise<boolean> => {
-    return this._userManager.getUser()
-    .then(user => {
-      if(user)
-      {
-        if(this._user !== user){
-          this._loginChangedSubject.next(this.checkUser(user));
-        }
-        this._user = user;
-        return this.checkUser(user);
-      }
-      return false;
-    })
-  }
-
-  public getCurrentUser() {
-    return this._user;
-  }
-
-  private checkUser = (user : User): boolean => {
-    return !!user && !user.expired;
+  private formatErrors(error: HttpErrorResponse): Observable<never> {
+    // TODO: handle api service level errors
+    return throwError(() => error);
   }
 }

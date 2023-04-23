@@ -1,4 +1,6 @@
 using System.Text;
+using ITProjectPriceCalculationManager.AuthServer.Core.Interfaces.Services;
+using ITProjectPriceCalculationManager.AuthServer.Core.Services;
 using ITProjectPriceCalculationManager.AuthServer.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -8,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration.AddUserSecrets<Program>();
 
+builder.Services.AddScoped(typeof(IAuthenticateSevice), typeof(AuthenticateSevice));
 builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseNpgsql(builder.Configuration["AuthServer:ConnectionString"]));
 
 // For Identity
@@ -38,6 +41,8 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+builder.Services.AddCors();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -55,6 +60,20 @@ using (var scope = app.Services.CreateScope())
         context.Database.Migrate();
     }
 }
+
+app.UseStaticFiles();
+app.UseCors(
+    builder => builder
+        .WithOrigins(
+            "http://localhost:4200",
+            "https://localhost:5001",
+            "http://localhost:5000",
+            "http://web_app")
+        .SetIsOriginAllowedToAllowWildcardSubdomains()
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+);
+
 // Configure the HTTP request pipeline.
 // if (app.Environment.IsDevelopment())
 // {
@@ -62,7 +81,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 //}
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 // Authentication & Authorization
 app.UseAuthentication();

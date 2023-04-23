@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { User } from 'oidc-client';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { UserModel } from 'src/app/shared/models/user.model';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
     selector: 'app-login',
@@ -15,9 +19,26 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 })
 export class LoginComponent {
 
+    user: UserModel;
+
     valCheck: string[] = ['remember'];
+
+    username: string;
 
     password!: string;
 
-    constructor(public layoutService: LayoutService) { }
+    isUserAuthenticated = false;
+
+    constructor(
+        public layoutService: LayoutService,
+        public authService: AuthService) {
+        }
+
+    ngOnInit(): void { }
+
+    public login(){
+        this.authService.login(new UserModel(this.username, this.password)).subscribe(() => {
+          this.user = new UserModel();
+        });
+    }
 }

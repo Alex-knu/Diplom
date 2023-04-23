@@ -3,7 +3,6 @@ uvicorn
 numpy
 pandas
 matplotlib
-sklearn
 scikit-learn
 configparser
 mysql-connector-python

@@ -7,7 +7,7 @@ export class StateService<T> {
   constructor(initialState: T) {
     this.state$ = new BehaviorSubject<T>(initialState);
   }
-  
+
   protected get state(): T {
     return this.state$.getValue();
   }

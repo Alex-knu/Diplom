@@ -40,6 +40,13 @@ export class AppMenuComponent implements OnInit {
                 { label: 'Експертні групи', icon: 'pi pi-fw pi-users', routerLink: ['/divisions/list'] },
                 { label: 'Додати експертну групу', icon: 'pi pi-fw pi-user-plus', routerLink: ['/divisions/new'] }
               ]
+            },
+            {
+              label: 'Логін',
+              items: [
+                { label: 'Логін', icon: 'pi pi-fw pi-users', routerLink: ['/auth/register'] },
+                { label: 'Додати експертну групу', icon: 'pi pi-fw pi-user-plus', routerLink: ['/auth/access'] }
+              ]
             }
         ];
     }

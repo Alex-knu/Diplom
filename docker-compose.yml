@@ -1,8 +1,16 @@
 version: '3.7'
 
 networks:
-  docker-dev:
-    driver: bridge 
+  security-net:
+    driver: bridge
+  security-database-net:
+    driver: bridge
+  front-net:
+    driver: bridge
+  service-net:
+    driver: bridge
+  it_projects_manager-database-net:
+    driver: bridge
 
 volumes:
   it-projects-manager-data:
@@ -21,7 +29,7 @@ services:
       - "5000:80"
       - "5001:443"
     networks:
-      docker-dev:
+      front-net:
         aliases:
           - web_app
 
@@ -35,7 +43,7 @@ services:
       - "5004:80"
       - "5005:443"
     networks:
-      docker-dev:
+      service-net:
         aliases:
           - price_predictor.api
 
@@ -49,7 +57,7 @@ services:
       - "5002:80"
       - "5003:443"
     networks:
-      docker-dev:
+      service-net:
         aliases:
           - it_projects_calculator.api
     depends_on:
@@ -67,7 +75,8 @@ services:
       - "5006:80"
       - "5007:443"
     networks:
-      docker-dev:
+      it_projects_manager-database-net:
+      service-net:
         aliases:
           - it_projects_manager.api
     environment:
@@ -87,7 +96,8 @@ services:
       - "5008:80"
       - "5009:443"
     networks:
-      docker-dev:
+      front-net:
+      service-net:
         aliases:
           - router.api
     depends_on:
@@ -105,7 +115,8 @@ services:
       - "5010:80"
       - "5011:443"
     networks:
-      docker-dev:
+      security-database-net:
+      front-net:
         aliases:
           - auth_server
     depends_on:
@@ -126,7 +137,7 @@ services:
     ports:
       - 5100:5432
     networks:
-      docker-dev:
+      it_projects_manager-database-net:
         aliases:
           - it_project_price_calculation_manager.postgres
     volumes: 
@@ -147,7 +158,7 @@ services:
     ports:
       - 5101:5432
     networks:
-      docker-dev:
+      security-database-net:
         aliases:
           - it_project_price_calculation_manager.auth_server.postgres
     volumes: 
