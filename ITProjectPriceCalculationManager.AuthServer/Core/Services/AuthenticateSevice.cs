@@ -29,7 +29,7 @@ namespace ITProjectPriceCalculationManager.AuthServer.Core.Services
 
             if (user == null || await _userManager.CheckPasswordAsync(user, model.Password))
             {
-                throw new BadRequestException("Wrong user credentials!");
+                throw new Extentions.Models.Exceptions.UnauthorizedAccessException("Wrong user credentials!");
             }
 
             var userRoles = await _userManager.GetRolesAsync(user);
@@ -60,7 +60,7 @@ namespace ITProjectPriceCalculationManager.AuthServer.Core.Services
 
             if (userExists != null)
             {
-                throw new BadRequestException("User already exists!");
+                throw new Extentions.Models.Exceptions.KeyNotFoundException("User already exists!");
             }
 
             IdentityUser user = new()

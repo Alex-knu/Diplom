@@ -20,7 +20,6 @@ namespace ITProjectPriceCalculationManager.AuthServer.Controllers
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
             return Ok(await _authenticateSevice.Login(model));
-            //return Unauthorized();
         }
 
         [HttpPost]
