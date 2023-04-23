@@ -2,6 +2,7 @@ using System.Text;
 using ITProjectPriceCalculationManager.AuthServer.Core.Interfaces.Services;
 using ITProjectPriceCalculationManager.AuthServer.Core.Services;
 using ITProjectPriceCalculationManager.AuthServer.Infrastructure;
+using ITProjectPriceCalculationManager.Extentions.Extentions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -88,5 +89,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.AddGlobalErrorHandler();
 
 app.Run();

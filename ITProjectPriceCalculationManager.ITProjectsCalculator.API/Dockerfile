@@ -7,6 +7,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["ITProjectPriceCalculationManager.ITProjectsCalculator.API/ITProjectPriceCalculationManager.ITProjectsCalculator.API.csproj", "ITProjectPriceCalculationManager.ITProjectsCalculator.API/"]
 COPY ["ITProjectPriceCalculationManager.DTOModels/ITProjectPriceCalculationManager.DTOModels.csproj", "ITProjectPriceCalculationManager.DTOModels/"]
+COPY ["ITProjectPriceCalculationManager.Extentions/ITProjectPriceCalculationManager.Extentions.csproj", "ITProjectPriceCalculationManager.Extentions/"]
 RUN dotnet restore "ITProjectPriceCalculationManager.ITProjectsCalculator.API/ITProjectPriceCalculationManager.ITProjectsCalculator.API.csproj"
 COPY . .
 WORKDIR "/src/ITProjectPriceCalculationManager.ITProjectsCalculator.API"

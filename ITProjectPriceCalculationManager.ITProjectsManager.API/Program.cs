@@ -4,6 +4,7 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data.Repositories;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Stub;
+using ITProjectPriceCalculationManager.Extentions.Extentions;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration.AddUserSecrets<Program>();
@@ -44,6 +45,8 @@ app.UseSwaggerUI();
 //app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.AddGlobalErrorHandler();
 
 app.MapControllers();
 

@@ -1,6 +1,6 @@
 namespace System.Net.Http
 {
-    public static class CustomHttpClientExtention
+    public static class HttpMethodsExtention
     {
         public static async Task<TResult> GetAsync<TResult>(this HttpClient client, string route)
         {
