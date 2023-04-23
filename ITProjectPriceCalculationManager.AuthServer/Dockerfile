@@ -7,6 +7,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["ITProjectPriceCalculationManager.AuthServer/ITProjectPriceCalculationManager.AuthServer.csproj", "ITProjectPriceCalculationManager.AuthServer/"]
 COPY ["ITProjectPriceCalculationManager.DTOModels/ITProjectPriceCalculationManager.DTOModels.csproj", "ITProjectPriceCalculationManager.DTOModels/"]
+COPY ["ITProjectPriceCalculationManager.Extentions/ITProjectPriceCalculationManager.Extentions.csproj", "ITProjectPriceCalculationManager.Extentions/"]
 RUN dotnet restore "ITProjectPriceCalculationManager.AuthServer/ITProjectPriceCalculationManager.AuthServer.csproj"
 COPY . .
 WORKDIR "/src/ITProjectPriceCalculationManager.AuthServer"

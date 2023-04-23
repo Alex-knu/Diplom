@@ -1,6 +1,7 @@
 using ITProjectPriceCalculationManager.AuthServer.Core.DTO;
 using ITProjectPriceCalculationManager.AuthServer.Core.Interfaces.Services;
 using ITProjectPriceCalculationManager.AuthServer.Core.Models;
+using ITProjectPriceCalculationManager.Extentions.Models.Exceptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -28,7 +29,7 @@ namespace ITProjectPriceCalculationManager.AuthServer.Core.Services
 
             if (user == null || await _userManager.CheckPasswordAsync(user, model.Password))
             {
-                throw new Exception("Wrong user credentials!");
+                throw new BadRequestException("Wrong user credentials!");
             }
 
             var userRoles = await _userManager.GetRolesAsync(user);
@@ -59,7 +60,7 @@ namespace ITProjectPriceCalculationManager.AuthServer.Core.Services
 
             if (userExists != null)
             {
-                throw new Exception("User already exists!");
+                throw new BadRequestException("User already exists!");
             }
 
             IdentityUser user = new()
@@ -73,7 +74,7 @@ namespace ITProjectPriceCalculationManager.AuthServer.Core.Services
 
             if (!result.Succeeded)
             {
-                throw new Exception("User creation failed! Please check user details and try again.");
+                throw new BadRequestException("User creation failed! Please check user details and try again.");
             }
         }
 
@@ -83,7 +84,7 @@ namespace ITProjectPriceCalculationManager.AuthServer.Core.Services
 
             if (userExists != null)
             {
-                throw new Exception("User already exists!");
+                throw new BadRequestException("User already exists!");
             }
 
             IdentityUser user = new()
@@ -97,7 +98,7 @@ namespace ITProjectPriceCalculationManager.AuthServer.Core.Services
 
             if (!result.Succeeded)
             {
-                throw new Exception("User creation failed! Please check user details and try again.");
+                throw new BadRequestException("User creation failed! Please check user details and try again.");
             }
 
             if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))

@@ -1,5 +1,6 @@
 using System.Reflection;
 using ITProjectPriceCalculationManager.DTOModels.Settings;
+using ITProjectPriceCalculationManager.Extentions.Extentions;
 
 internal class Program
 {
@@ -40,6 +41,8 @@ internal class Program
         app.UseAuthorization();
 
         app.MapControllers();
+
+        app.AddGlobalErrorHandler();
 
         app.Run();
     }
