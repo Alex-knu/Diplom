@@ -1,4 +1,6 @@
 using System.Text;
+using ITProjectPriceCalculationManager.AuthServer.Core.Interfaces.Services;
+using ITProjectPriceCalculationManager.AuthServer.Core.Services;
 using ITProjectPriceCalculationManager.AuthServer.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -8,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration.AddUserSecrets<Program>();
 
+builder.Services.AddScoped(typeof(IAuthenticateSevice), typeof(AuthenticateSevice));
 builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseNpgsql(builder.Configuration["AuthServer:ConnectionString"]));
 
 // For Identity
