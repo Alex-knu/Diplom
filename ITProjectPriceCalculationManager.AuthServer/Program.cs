@@ -67,7 +67,8 @@ app.UseCors(
         .WithOrigins(
             "http://localhost:4200",
             "https://localhost:5001",
-            "http://localhost:5000")
+            "http://localhost:5000",
+            "http://web_app")
         .SetIsOriginAllowedToAllowWildcardSubdomains()
         .AllowAnyMethod()
         .AllowAnyHeader()
