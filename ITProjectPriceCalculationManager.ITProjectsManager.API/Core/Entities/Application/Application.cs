@@ -5,7 +5,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
     internal class Application : IBaseEntity<int>
     {
         public int Id { get; set; }
-        public int  CreatorId { get; set; }
+        public int CreatorId { get; set; }
         public double Price { get; set; }
         public double Profit { get; set; }
         public double Overhead { get; set; }

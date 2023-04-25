@@ -5,8 +5,8 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
     internal class ApplicationToEstimators : IBaseEntity<int>
     {
         public int Id { get; set; }
-        public int  ApplicationId { get; set; }
-        public int  EstimatorId { get; set; }
+        public int ApplicationId { get; set; }
+        public int EstimatorId { get; set; }
         public double Coeficient { get; set; }
 
         public Application.Application Application { get; set; }
