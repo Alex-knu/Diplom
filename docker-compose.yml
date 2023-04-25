@@ -1,34 +1,25 @@
 version: '3.7'
 
 networks:
-  docker-dev:
-    driver: bridge 
+  security-net:
+    driver: bridge
+  security-database-net:
+    driver: bridge
+  front-net:
+    driver: bridge
+  service-net:
+    driver: bridge
+  it_projects_manager-database-net:
+    driver: bridge
+
+volumes:
+  it-projects-manager-data:
+    external: false
+  auth-server-data:
+    external: false
 
 services:
-  it_project_price_calculation_manager.postgres:
-    image: postgres
-    hostname: it_project_price_calculation_manager.postgres
-    restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    logging:
-      options:
-        max-size: 10m
-        max-file: "3"
-    ports:
-      - "5100:5432"
-    networks:
-      docker-dev:
-        aliases:
-          - it_project_price_calculation_manager.postgres
-    #volumes: 
-      # - ./postgres-data:/var/lib/postgresql/data
-      # copy the sql script to create tables
-      # - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
-
   it_project_price_calculation_manager.web_app:
-    hostname: web_app
     image: ${DOCKER_REGISTRY-}it_project_price_calculation_manager.web_app
     restart: always
     build: 
@@ -38,12 +29,11 @@ services:
       - "5000:80"
       - "5001:443"
     networks:
-      docker-dev:
+      front-net:
         aliases:
           - web_app
 
   it_project_price_calculation_manager.price_predictor.api:
-    hostname: price_predictor.api
     image: ${DOCKER_REGISTRY-}it_project_price_calculation_manager.price_predictor.api
     restart: always
     build: 
@@ -53,12 +43,11 @@ services:
       - "5004:80"
       - "5005:443"
     networks:
-      docker-dev:
+      service-net:
         aliases:
           - price_predictor.api
 
   it_project_price_calculation_manager.it_projects_calculator.api:
-    hostname: it_projects_calculator.api
     image: ${DOCKER_REGISTRY-}it_project_price_calculation_manager.it_projects_calculator.api
     restart: always
     build: 
@@ -68,7 +57,7 @@ services:
       - "5002:80"
       - "5003:443"
     networks:
-      docker-dev:
+      service-net:
         aliases:
           - it_projects_calculator.api
     depends_on:
@@ -77,7 +66,6 @@ services:
       - $HOME/.microsoft/usersecrets/:/root/.microsoft/usersecrets/:ro
 
   it_project_price_calculation_manager.it_projects_manager.api:
-    hostname: it_projects_manager.api
     image: ${DOCKER_REGISTRY-}it_project_price_calculation_manager.it_projects_manager.api
     restart: always
     build: 
@@ -87,7 +75,8 @@ services:
       - "5006:80"
       - "5007:443"
     networks:
-      docker-dev:
+      it_projects_manager-database-net:
+      service-net:
         aliases:
           - it_projects_manager.api
     environment:
@@ -98,7 +87,6 @@ services:
       - $HOME/.microsoft/usersecrets/:/root/.microsoft/usersecrets/:ro
 
   it_project_price_calculation_manager.router.api:
-    hostname: router.api
     image: ${DOCKER_REGISTRY-}it_project_price_calculation_manager.router.api
     restart: always
     build: 
@@ -108,11 +96,31 @@ services:
       - "5008:80"
       - "5009:443"
     networks:
-      docker-dev:
+      front-net:
+      service-net:
         aliases:
           - router.api
     depends_on:
       - it_project_price_calculation_manager.postgres
+    volumes:
+      - $HOME/.microsoft/usersecrets/:/root/.microsoft/usersecrets/:ro
+
+  it_project_price_calculation_manager.auth_server:
+    image: ${DOCKER_REGISTRY-}it_project_price_calculation_manager.auth_server
+    restart: always
+    build: 
+      context: .
+      dockerfile: ITProjectPriceCalculationManager.AuthServer/Dockerfile
+    ports:
+      - "5010:80"
+      - "5011:443"
+    networks:
+      security-database-net:
+      front-net:
+        aliases:
+          - auth_server
+    depends_on:
+      - it_project_price_calculation_manager.auth_server.postgres
     volumes:
       - $HOME/.microsoft/usersecrets/:/root/.microsoft/usersecrets/:ro
 
@@ -127,8 +135,33 @@ services:
         max-size: 10m
         max-file: "3"
     ports:
-      - "5100:5432"
-    #volumes: 
-      # - ./postgres-data:/var/lib/postgresql/data
+      - 5100:5432
+    networks:
+      it_projects_manager-database-net:
+        aliases:
+          - it_project_price_calculation_manager.postgres
+    volumes: 
+      - it-projects-manager-data:/var/lib/postgresql/data
+      # copy the sql script to create tables
+      # - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+  it_project_price_calculation_manager.auth_server.postgres:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    ports:
+      - 5101:5432
+    networks:
+      security-database-net:
+        aliases:
+          - it_project_price_calculation_manager.auth_server.postgres
+    volumes: 
+      - auth-server-data:/var/lib/postgresql/data
       # copy the sql script to create tables
       # - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
