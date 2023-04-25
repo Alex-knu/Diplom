@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application
 {
-    internal class ApplicationConfiguration: IEntityTypeConfiguration<Application>
+    internal class ApplicationConfiguration : IEntityTypeConfiguration<Application>
     {
        public void Configure(EntityTypeBuilder<Application> builder)
        {
@@ -31,7 +31,12 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
               builder
                      .HasMany(application => application.ProgramsParametrs)
                      .WithOne(programParametr => programParametr.Application)
-                     .HasForeignKey(programsParametr => programsParametr.ApplicationId);           
+                     .HasForeignKey(programsParametr => programsParametr.ApplicationId);        
+
+              builder
+                     .HasOne(application => application.Creator)
+                     .WithMany(estimator => estimator.Applications)
+                     .HasForeignKey(programsParametr => programsParametr.CreatorId);     
        }
     }
 }

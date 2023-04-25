@@ -3,6 +3,7 @@ using System;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
 {
     [DbContext(typeof(ITProjectPriceCalculationManagerDbContext))]
-    partial class ITProjectPriceCalculationManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230425192201_AddNewModelsWithGuid")]
+    partial class AddNewModelsWithGuid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -6,7 +6,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.S
     internal class SubjectAreaElement : IBaseEntity<int>
     {
         public int Id { get; set; }
-        public int Count { get; set; }
+        public int  Count { get; set; }
         public SubjectAreaType SubjectAreaType { get; set; }
         public DifficultyLevelsType DifficultyLevelsType { get; set; }
 
