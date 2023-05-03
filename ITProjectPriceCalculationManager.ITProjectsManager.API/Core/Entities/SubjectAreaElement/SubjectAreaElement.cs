@@ -10,6 +10,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.S
         public SubjectAreaType SubjectAreaType { get; set; }
         public DifficultyLevelsType DifficultyLevelsType { get; set; }
 
-        public ICollection<ProgramsParametrToSubjectAreaElement.ProgramsParametrToSubjectAreaElement> ProgramsParametrToSubjectAreaElements{ get; set; }
+        public ICollection<ProgramsParametrToSubjectAreaElement.ProgramsParametrToSubjectAreaElement> ProgramsParametrToSubjectAreaElements { get; set; }
     }
 }

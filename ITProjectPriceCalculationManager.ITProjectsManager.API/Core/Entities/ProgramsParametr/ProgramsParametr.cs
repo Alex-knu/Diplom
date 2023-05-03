@@ -10,6 +10,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.P
         public int ApplicationId { get; set; }
         public ProgramLanguage.ProgramLanguage ProgramLanguage { get; set; }
         public Application.Application Application { get; set; }
-        public ICollection<ProgramsParametrToSubjectAreaElement.ProgramsParametrToSubjectAreaElement> ProgramsParametrToSubjectAreaElements{ get; set; }
+        public ICollection<ProgramsParametrToSubjectAreaElement.ProgramsParametrToSubjectAreaElement> ProgramsParametrToSubjectAreaElements { get; set; }
     }
 }

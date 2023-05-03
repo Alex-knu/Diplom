@@ -3,6 +3,7 @@ using System;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
 {
     [DbContext(typeof(ITProjectPriceCalculationManagerDbContext))]
-    partial class ITProjectPriceCalculationManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230425185423_AddNewModels")]
+    partial class AddNewModels
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,7 +101,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Attribute");
+                    b.ToTable("Attributes");
                 });
 
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Department.Department", b =>
@@ -114,13 +117,14 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         .HasColumnType("text");
 
                     b.Property<int?>("ParentId")
+                        .IsRequired()
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("Department");
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Estimator.Estimator", b =>
@@ -132,6 +136,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("DepartmentId")
+                        .IsRequired()
                         .HasColumnType("integer");
 
                     b.Property<string>("Email")
@@ -150,15 +155,14 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Estimator");
+                    b.ToTable("Estimators");
                 });
 
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Profile.Profile", b =>
@@ -185,7 +189,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
 
                     b.HasIndex("EstimatorId");
 
-                    b.ToTable("Profile");
+                    b.ToTable("Profiles");
                 });
 
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramLanguage.ProgramLanguage", b =>
@@ -316,7 +320,9 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                 {
                     b.HasOne("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Department.Department", "Parent")
                         .WithMany("SubDepartment")
-                        .HasForeignKey("ParentId");
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Parent");
                 });
@@ -325,7 +331,9 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                 {
                     b.HasOne("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Department.Department", "Department")
                         .WithMany("Estimators")
-                        .HasForeignKey("DepartmentId");
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Department");
                 });

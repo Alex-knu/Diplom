@@ -6,7 +6,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.P
         public int ProgramsParametrId { get; set; }
         public int SubjectAreaElementId { get; set; }
 
-        public ProgramsParametr.ProgramsParametr ProgramsParametr{ get; set; }
-        public SubjectAreaElement.SubjectAreaElement SubjectAreaElement{ get; set; }
+        public ProgramsParametr.ProgramsParametr ProgramsParametr { get; set; }
+        public SubjectAreaElement.SubjectAreaElement SubjectAreaElement { get; set; }
     }
 }
