@@ -58,14 +58,14 @@
 
         <div class="p-field">
             <label for="name">Name</label>
-            <input type="text" pInputText id="name" [(ngModel)]="application.id"
+            <input type="text" pInputText id="name" [(ngModel)]="application.name"
                 required autofocus />
-            <small class="p-invalid" *ngIf="submitted && !application.id">Name is required.</small>
+            <small class="p-invalid" *ngIf="submitted && !application.name">Name is required.</small>
         </div>
 
         <div class="p-field">
             <label for="description">Description</label>
-            <textarea id="description" pInputTextarea [(ngModel)]="application.id" required rows="3" cols="20"></textarea>
+            <textarea id="description" pInputTextarea [(ngModel)]="application.description" required rows="3" cols="20"></textarea>
         </div>
 
     </ng-template>
