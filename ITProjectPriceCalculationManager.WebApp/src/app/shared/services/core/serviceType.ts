@@ -2,5 +2,6 @@ export enum ServiceType {
     web = "webUrl",
     attachments = "attachmentsApiUrl",
     units = "unitsApiUrl",
-    identity = "identityUrl"
+    identity = "identityUrl",
+    route = "RouteApiUrl"
 }

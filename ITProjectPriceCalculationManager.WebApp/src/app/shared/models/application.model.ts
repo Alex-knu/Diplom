@@ -9,6 +9,8 @@ export class Application extends BaseModel {
         super(id);
     }
 
+    name: string;
+    description: string;
     price: number;
     profit: number;
     overhead: number;
