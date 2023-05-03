@@ -25,6 +25,18 @@ builder.Services.AddHttpClient("ITProjectsManager", client =>
 
 var app = builder.Build();
 
+app.UseCors(
+    builder => builder
+        .WithOrigins(
+            "http://localhost:4200",
+            "https://localhost:5001",
+            "http://localhost:5000",
+            "http://web_app")
+        .SetIsOriginAllowedToAllowWildcardSubdomains()
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+);
+
 // Configure the HTTP request pipeline.
 // if (app.Environment.IsDevelopment())
 // {
