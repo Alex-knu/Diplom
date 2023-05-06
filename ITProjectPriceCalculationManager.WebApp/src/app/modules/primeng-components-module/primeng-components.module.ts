@@ -51,6 +51,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { MenubarModule } from 'primeng/menubar';
 import {SlideMenuModule} from 'primeng/slidemenu';
 import { FormsModule } from '@angular/forms';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 
 const primeNgModules = [
@@ -62,6 +63,7 @@ const primeNgModules = [
   FieldsetModule,
   ToolbarModule,
   InputMaskModule,
+  InputNumberModule,
   PasswordModule,
   CheckboxModule,
   InputSwitchModule,

@@ -2,7 +2,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { Application } from 'src/app/shared/models/application.model';
-import { ApplicationService } from 'src/app/shared/services/api/application.service';
+import { BaseApplication } from 'src/app/shared/models/baseApplication.model';
+import { BaseApplicationService } from 'src/app/shared/services/api/baseApplication.service';
 
 @Component({
   selector: 'app-application-table',
@@ -11,19 +12,28 @@ import { ApplicationService } from 'src/app/shared/services/api/application.serv
 })
 export class ApplicationTableComponent {
 
+  loading: boolean = false;
   applicationDialog: boolean;
-  applications: Application[];
-  application: Application;
-  selectedApplications: Application[];
+  applications: BaseApplication[];
+  application: BaseApplication;
+  selectedApplications: BaseApplication[];
   submitted: boolean;
 
   constructor(
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private applicationService: ApplicationService) { }
+    private baseApplicationService: BaseApplicationService) { }
 
   ngOnInit() {
-    // this.applicationService.getApplications().then(data => this.applications = data);
+    this.loading = true;
+    setTimeout(() => {
+      this.baseApplicationService.collection.getAll()
+        .subscribe(
+          (applications) => {
+            this.applications = applications;
+          });
+      this.loading = false;
+    });
   }
 
   openNew() {
@@ -73,22 +83,28 @@ export class ApplicationTableComponent {
 
     if (this.application.id) {
       this.applications[this.findIndexById(this.application.id)] = this.application;
-      this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Application Updated', life: 3000 });
+      this.baseApplicationService.single.update(this.application).subscribe(
+        () => {
+          this.messageService.add({ severity: 'success', summary: 'Командира створено', detail: 'user created' })
+          this.applicationDialog = false;
+        },
+        error => {
+          this.messageService.add({ severity: 'error', summary: 'Командира не створено!', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
+        })
     }
     else {
       this.application.id = 0;
-      //this.applications.push(this.application);
-      this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Application Created', life: 3000 });
+      this.application.price = 0;
+      this.application.status = "New";
+      this.baseApplicationService.single.create(this.application).subscribe(
+        () => {
+          this.messageService.add({ severity: 'success', summary: 'Командира створено', detail: 'user created' })
+          this.applicationDialog = false;
+        },
+        error => {
+          this.messageService.add({ severity: 'error', summary: 'Командира не створено!', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
+        })
     }
-
-    this.applicationService.single.create(this.application).subscribe(
-      data => this.messageService.add({ severity: 'success', summary: 'Командира створено', detail: 'user created' }),
-      error => {
-        this.messageService.add({ severity: 'error', summary: 'Командира не створено!', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
-      })
-    //this.applications = [...this.applications];
-    this.applicationDialog = false;
-    this.application = new Application();
   }
 
   findIndexById(id: number): number {

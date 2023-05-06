@@ -11,6 +11,7 @@ import { PdfService } from "./api/pdf.service";
 import { UnitsInfoService } from "./api/unitInfo.service";
 import { DivisionsService } from "./api/division.service";
 import { ApplicationService } from "./api/application.service";
+import { BaseApplicationService } from "./api/baseApplication.service";
 
 export const services = [
     HttpService,
@@ -25,5 +26,6 @@ export const services = [
     UnitUserService,
     UnitsInfoService,
     DivisionsService,
-    ApplicationService
+    ApplicationService,
+    BaseApplicationService
 ]

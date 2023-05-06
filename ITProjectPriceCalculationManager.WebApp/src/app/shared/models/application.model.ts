@@ -1,18 +1,9 @@
-import { BaseModel } from "./base.model";
+import { BaseApplication } from "./baseApplication.model";
 import { InfluenceFactor } from "./influenceFactor.model";
 import { ProgramsParametr } from "./programsParametr.model";
 import { ScaleFactor } from "./scaleFactor.model";
 
-export class Application extends BaseModel {
-
-    constructor(id: number|null=null){
-        super(id);
-    }
-
-    name: string;
-    description: string;
-    price: number;
-    profit: number;
+export class Application extends BaseApplication {
     overhead: number;
     socialInsurance: number;
     averageCostLabor: number;
