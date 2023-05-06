@@ -27,7 +27,7 @@ namespace ITProjectPriceCalculationManager.AuthServer.Core.Services
         {
             var user = await _userManager.FindByNameAsync(model.Username);
 
-            if (user == null || await _userManager.CheckPasswordAsync(user, model.Password))
+            if (user == null || !(await _userManager.CheckPasswordAsync(user, model.Password)))
             {
                 throw new Extentions.Models.Exceptions.UnauthorizedAccessException("Wrong user credentials!");
             }
