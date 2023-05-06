@@ -1,6 +1,6 @@
 .vscode/*
 
-ITProjectPriceCalculationManager.WebApp/.vscode/*
+ITProjectPriceCalculationManager.WebApp/.vscode
 
 ITProjectPriceCalculationManager.PricePredictor.API/Data/WorkLogic/__pycache__/*
 ITProjectPriceCalculationManager.PricePredictor.API/Graphics/__pycache__/*
