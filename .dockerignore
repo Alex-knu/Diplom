@@ -1,3 +1,4 @@
+**/.angular
 **/.classpath
 **/.dockerignore
 **/.env
@@ -17,6 +18,7 @@
 **/docker-compose*
 **/Dockerfile*
 **/node_modules
+**/dist
 **/npm-debug.log
 **/obj
 **/secrets.dev.yaml

@@ -11,6 +11,8 @@ import {PositionService} from "./position.service";
 import {AuthService} from "../auth.service";
 import {AttributeService} from "./attribute.service";
 import { UnitsInfoService } from "./unitInfo.service";
+import { ApplicationService } from "./application.service";
+import { BaseApplicationService } from "./baseApplication.service";
 
 @Injectable()
 export class ApiService {
@@ -27,6 +29,8 @@ export class ApiService {
         public attributes: AttributeService,
         public unitsInfoService: UnitsInfoService,
         public divisionService: DivisionsService,
+        public applicationService: ApplicationService,
+        public baseApplicationService: BaseApplicationService
     ) {
     }
 }

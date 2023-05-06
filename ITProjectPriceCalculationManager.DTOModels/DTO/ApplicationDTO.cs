@@ -1,10 +1,7 @@
 namespace ITProjectPriceCalculationManager.DTOModels.DTO
 {
-    public class ApplicationDTO
+    public class ApplicationDTO : BaseApplicationDTO
     {
-        public int Id { get; set; }
-        public double Price { get; set; }
-        public double Profit { get; set; }
         public double Overhead { get; set; }
         public double SocialInsurance { get; set; }
         public double AverageCostLabor { get; set; }
