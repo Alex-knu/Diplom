@@ -1,5 +1,5 @@
 <div class="card">
-
+  <p-toast></p-toast>
   <p-table #dt [value]="applications" [rows]="10" [paginator]="true"
     [globalFilterFields]="['name','country.name','representative.name','status']" [(selection)]="selectedApplications"
     [rowHover]="true" dataKey="id" currentPageReportTemplate="Showing {first} to {last} of {totalRecords}
@@ -22,8 +22,6 @@
         </th>
         <th pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon></th>
         <th pSortableColumn="price">Price<p-sortIcon field="price"></p-sortIcon></th>
-        <th pSortableColumn="category">Category<p-sortIcon field="category"></p-sortIcon></th>
-        <th pSortableColumn="rating">Reviews<p-sortIcon field="rating"></p-sortIcon></th>
         <th pSortableColumn="inventoryStatus">Status<p-sortIcon field="inventoryStatus"></p-sortIcon></th>
         <th></th>
       </tr>
@@ -36,13 +34,8 @@
         </td>
         <td>{{application.name}}</td>
         <td>{{application.price}}</td>
-        <td>{{application.category}}</td>
         <td>
-          <p-rating [ngModel]="application.rating" readonly="true" cancel="false"></p-rating>
-        </td>
-        <td>
-          <span
-            [class]="'application-badge status-' + application.inventoryStatus.toLowerCase()">{{application.inventoryStatus}}</span>
+          <span [class]="'application-badge status-' + application.status.toLowerCase()">{{application.status}}</span>
         </td>
         <td>
           <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
