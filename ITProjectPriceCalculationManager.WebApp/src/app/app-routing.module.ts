@@ -2,7 +2,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { AppLayoutComponent } from "./layout/app.layout.component";
-import { ApplicationTableComponent } from './components/application/application-table/application-table.component';
 
 const routes: Routes = [
   {

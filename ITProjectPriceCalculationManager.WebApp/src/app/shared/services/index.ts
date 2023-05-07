@@ -5,9 +5,9 @@ import { ApplicationService } from "./api/application.service";
 import { BaseApplicationService } from "./api/baseApplication.service";
 
 export const services = [
-    HttpService,
-    ClientConfigurationService,
-    ApiService,
-    ApplicationService,
-    BaseApplicationService
+  HttpService,
+  ClientConfigurationService,
+  ApiService,
+  ApplicationService,
+  BaseApplicationService
 ]
