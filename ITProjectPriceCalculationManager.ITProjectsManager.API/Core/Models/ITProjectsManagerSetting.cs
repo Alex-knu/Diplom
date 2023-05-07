@@ -1,4 +1,4 @@
-namespace ITProjectPriceCalculationManager.DTOModels.Settings
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Models
 {
     public class ITProjectsManagerSetting
     {
