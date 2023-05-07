@@ -97,6 +97,8 @@ services:
       - "5009:443"
     networks:
       front-net:
+        aliases:
+          - router.api
       service-net:
         aliases:
           - router.api
