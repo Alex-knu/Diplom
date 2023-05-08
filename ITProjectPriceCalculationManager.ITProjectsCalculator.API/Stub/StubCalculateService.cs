@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfaces.Services;
 
@@ -20,8 +16,8 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Stub
                 SocialInsurance = 20,
                 AverageCostLabor = 10,
                 AverageMonthlyRateWorkingHours = 5,
-                ScaleFactors = new List<ScaleFactorDTO>(),
-                InfluenceFactors = new List<InfluenceFactorDTO>(),
+                ScaleFactors = new List<FactorDTO>(),
+                InfluenceFactors = new List<FactorDTO>(),
                 ProgramsParametrs = new List<ProgramsParametrDTO>()
             });
         }

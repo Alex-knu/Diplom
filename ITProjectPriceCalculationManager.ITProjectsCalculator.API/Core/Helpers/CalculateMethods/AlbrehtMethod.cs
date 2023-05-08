@@ -10,25 +10,25 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers
             return (152 * averageCostLabor * developmentAverageComplexity) / averageMonthlyRateWorkingHours;
         }
 
-        private static double CountB(List<ScaleFactorDTO> scaleFactors)
+        private static double CountB(List<FactorDTO> scaleFactors)
         {
             double sumScaleFactors = 0;
 
             foreach(var scaleFactor in scaleFactors)
             {
-                sumScaleFactors = sumScaleFactors + scaleFactor.Count;
+                sumScaleFactors = sumScaleFactors + scaleFactor.Value;
             }
 
             return 0.91 + sumScaleFactors * 0.01;
         }
 
-        public static double CountDevelopmentAverageComplexity(List<InfluenceFactorDTO> influenceFactors, List<ScaleFactorDTO> scaleFactors, double ksloc)
+        public static double CountDevelopmentAverageComplexity(List<FactorDTO> influenceFactors, List<FactorDTO> scaleFactors, double ksloc)
         {
             double sumInfluenceFactors = 1;
 
             foreach(var influenceFactor in influenceFactors)
             {
-                sumInfluenceFactors = sumInfluenceFactors * influenceFactor.Count;
+                sumInfluenceFactors = sumInfluenceFactors * influenceFactor.Value;
             }
 
             return 2.94 * sumInfluenceFactors * Math.Pow(ksloc, CountB(scaleFactors));
