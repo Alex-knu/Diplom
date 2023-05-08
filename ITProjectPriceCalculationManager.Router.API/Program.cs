@@ -1,6 +1,9 @@
 using System.Reflection;
-using ITProjectPriceCalculationManager.DTOModels.Settings;
+using System.Text;
 using ITProjectPriceCalculationManager.Extentions.Extentions;
+using ITProjectPriceCalculationManager.Router.API.Core.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,15 +26,33 @@ builder.Services.AddHttpClient("ITProjectsManager", client =>
         client.BaseAddress = new Uri(configuration.ITProjectsManagerAPIRoute);
     });
 
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+
+// Adding Jwt Bearer
+.AddJwtBearer(options =>
+{
+    options.SaveToken = true;
+    options.RequireHttpsMetadata = false;
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidAudience = builder.Configuration["JWT:ValidAudience"],
+        ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
+    };
+});
+
 var app = builder.Build();
 
 app.UseCors(
     builder => builder
-        .WithOrigins(
-            "http://localhost:4200",
-            "https://localhost:5001",
-            "http://localhost:5000",
-            "http://web_app")
+        .WithOrigins(configuration.OriginUrls)
         .SetIsOriginAllowedToAllowWildcardSubdomains()
         .AllowAnyMethod()
         .AllowAnyHeader()
@@ -46,6 +67,7 @@ app.UseSwaggerUI();
 
 //app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

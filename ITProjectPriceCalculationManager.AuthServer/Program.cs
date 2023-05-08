@@ -1,5 +1,7 @@
+using System.Reflection;
 using System.Text;
 using ITProjectPriceCalculationManager.AuthServer.Core.Interfaces.Services;
+using ITProjectPriceCalculationManager.AuthServer.Core.Models;
 using ITProjectPriceCalculationManager.AuthServer.Core.Services;
 using ITProjectPriceCalculationManager.AuthServer.Infrastructure;
 using ITProjectPriceCalculationManager.Extentions.Extentions;
@@ -9,10 +11,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
-var configuration = builder.Configuration.AddUserSecrets<Program>();
+builder.Configuration.AddEnvironmentVariables().AddUserSecrets(Assembly.GetExecutingAssembly(), true);
+// Add services to the container.
+
+var configuration = builder.Configuration.GetSection("AuthServer").Get<AuthServerSetting>();
 
 builder.Services.AddScoped(typeof(IAuthenticateSevice), typeof(AuthenticateSevice));
-builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseNpgsql(builder.Configuration["AuthServer:ConnectionString"]));
+builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseNpgsql(configuration.ConnectionString));
 
 // For Identity
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
@@ -65,11 +70,7 @@ using (var scope = app.Services.CreateScope())
 app.UseStaticFiles();
 app.UseCors(
     builder => builder
-        .WithOrigins(
-            "http://localhost:4200",
-            "https://localhost:5001",
-            "http://localhost:5000",
-            "http://web_app")
+        .WithOrigins(configuration.OriginUrls)
         .SetIsOriginAllowedToAllowWildcardSubdomains()
         .AllowAnyMethod()
         .AllowAnyHeader()

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
-import { ConfigModel } from './shared/models/config.model';
 import { ClientConfigurationService } from './shared/services/core/client-configuration.service';
-import { ConfigService } from './shared/services/api/config.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
