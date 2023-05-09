@@ -20,7 +20,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CalulateAsync(ApplicationDTO applicationDTO)
         {
-            return Ok(await _calculateService.AlbrehtMethodCalculate(applicationDTO));
+            return Ok(await _calculateService.Calculate(applicationDTO));
         }
     }
 }

@@ -5,7 +5,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Stub
 {
     public class StubCalculateService : ICalculateService
     {
-        public Task<ApplicationDTO> AlbrehtMethodCalculate(ApplicationDTO application)
+        public Task<ApplicationDTO> Calculate(ApplicationDTO application)
         {
             return Task.FromResult(new ApplicationDTO()
             {
@@ -16,8 +16,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Stub
                 SocialInsurance = 20,
                 AverageCostLabor = 10,
                 AverageMonthlyRateWorkingHours = 5,
-                ScaleFactors = new List<FactorDTO>(),
-                InfluenceFactors = new List<FactorDTO>(),
+                EvaluationFactors = new List<EvaluationFactorDTO>(),
                 ProgramsParametrs = new List<ProgramsParametrDTO>()
             });
         }

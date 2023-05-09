@@ -4,6 +4,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfa
 {
     public interface ICalculateService
     {
-        Task<ApplicationDTO> AlbrehtMethodCalculate(ApplicationDTO application);
+        Task<ApplicationDTO> Calculate(ApplicationDTO application);
     }
 }
