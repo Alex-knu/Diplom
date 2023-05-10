@@ -5,6 +5,7 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Stub;
 using ITProjectPriceCalculationManager.Extentions.Extentions;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,9 @@ builder.Services.AddDbContext<ITProjectPriceCalculationManagerDbContext>(x => x.
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped(typeof(IRepository<,>), typeof(BaseRepository<,>));
-builder.Services.AddScoped(typeof(IApplicationService), typeof(StubApplicationService));
+builder.Services.AddScoped(typeof(IApplicationService), typeof(ApplicationService));
+builder.Services.AddScoped(typeof(IEvaluatorService), typeof(EvaluatorService));
+//builder.Services.AddScoped(typeof(IApplicationService), typeof(StubApplicationService));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
