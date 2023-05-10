@@ -8,7 +8,6 @@ using ITProjectPriceCalculationManager.Extentions.Extentions;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-
 var configuration = builder.Configuration.AddUserSecrets<Program>();
 
 builder.Services.AddDbContext<ITProjectPriceCalculationManagerDbContext>(x => x.UseNpgsql(builder.Configuration["ITProjectsManagerAPI:ConnectionString"]));
@@ -19,7 +18,6 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped(typeof(IRepository<,>), typeof(BaseRepository<,>));
 builder.Services.AddScoped(typeof(IApplicationService), typeof(ApplicationService));
 builder.Services.AddScoped(typeof(IEvaluatorService), typeof(EvaluatorService));
-builder.Services.AddScoped(typeof(IDepartmentService), typeof(DepartmentService));
 //builder.Services.AddScoped(typeof(IApplicationService), typeof(StubApplicationService));
 
 builder.Services.AddControllers();

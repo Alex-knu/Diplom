@@ -19,19 +19,12 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 
         public async Task<EvaluatorDTO> CreateEvaluatorAsync(EvaluatorDTO evaluator)
         {
-            try
-            {
-                var domainEvaluator = _mapper.Map<Estimator>(evaluator);
+            var domainEvaluator = _mapper.Map<Estimator>(evaluator);
 
-                var newEvaluator = await _estimatorRepository.AddAsync(domainEvaluator);
-                await _estimatorRepository.SaveChangesAcync();
+            var newEvaluator = await _estimatorRepository.AddAsync(domainEvaluator);
+            await _estimatorRepository.SaveChangesAcync();
 
-                return _mapper.Map<EvaluatorDTO>(newEvaluator);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return _mapper.Map<EvaluatorDTO>(newEvaluator);
         }
 
         public async Task<EvaluatorDTO> DeleteEvaluatorAsync(int id)
@@ -40,7 +33,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 
             if (domainEvaluator == null)
             {
-                throw new BadHttpRequestException("Application not found");
+                throw new ArgumentException("Application not found");
             }
 
             var deleteEvaluator = await _estimatorRepository.DeleteAsync(domainEvaluator);
@@ -65,19 +58,12 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 
         public async Task<EvaluatorDTO> UpdateEvaluatorAsync(EvaluatorDTO evaluator)
         {
-            try
-            {
-                var domainEvaluator = _mapper.Map<Estimator>(evaluator);
+            var domainEvaluator = _mapper.Map<Estimator>(evaluator);
 
-                var updateEvaluator = await _estimatorRepository.UpdateAsync(domainEvaluator);
-                await _estimatorRepository.SaveChangesAcync();
+            var updateEvaluator = await _estimatorRepository.UpdateAsync(domainEvaluator);
+            await _estimatorRepository.SaveChangesAcync();
 
-                return _mapper.Map<EvaluatorDTO>(updateEvaluator);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return _mapper.Map<EvaluatorDTO>(updateEvaluator);
         }
     }
 }
