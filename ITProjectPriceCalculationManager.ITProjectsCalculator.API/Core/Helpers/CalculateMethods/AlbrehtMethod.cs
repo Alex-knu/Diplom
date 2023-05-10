@@ -1,41 +1,43 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.DTOModels.Enums;
 using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers.ExpertMethods;
-using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfaces.CalculateMethods;
 
 namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers.CalculateMethods
 {
-    internal class AlbrehtMethod : ICalculateMethod
+    internal class AlbrehtMethod : CalculateMethod
     {
-        public Task<ApplicationDTO> Calculate(ApplicationDTO application)
+        public override async Task<EvaluationResultDTO> Calculate(EvaluationDTO evaluation, double? price)
         {
-
             double ksloc = 0;
+            EvaluationResultDTO result = new EvaluationResultDTO();
+            BaseDelphiTechnique tehnique = SetStrategi(evaluation);
 
-            foreach (var programsParametr in application.ProgramsParametrEvaluationFactorDTO)
+            try
             {
-                ksloc += programsParametr.SLOC * CountUOF(GetFactors(programsParametr.SubjectAreaElements), application.ConfidenceArea);
+                foreach (var programsParametr in evaluation.ProgramsParametrEvaluationFactorDTO)
+                {
+                    ksloc += programsParametr.SLOC * CountUOF(GetFactors(programsParametr.SubjectAreaElements), evaluation.ConfidenceArea, tehnique);
+                }
+
+                price = CountAverageCostWageFund(evaluation, ksloc, tehnique);
+
+                result = await base.Calculate(evaluation, price);
+            }
+            catch (Exception ex)
+            {
+                result.Error = ex.Message;
             }
 
-            application.Price = CountAverageCostWageFund(application, ksloc);
-
-            application.Price = application.Price * application.Overhead + application.Price * application.Profit + application.Price * application.SocialInsurance;
-
-            return Task.FromResult(application);
+            return result;
         }
 
-        private double CountUOF(IEnumerable<IGrouping<string, EvaluationFactorDTO>> subjectAreaElements, double? confidenceArea)
+        private double CountUOF(IEnumerable<IGrouping<string, EvaluationFactorDTO>> subjectAreaElements, double? confidenceArea, BaseDelphiTechnique tehnique)
         {
             double sum = 0;
 
             foreach (var subjectAreaElement in subjectAreaElements)
             {
-                var result = (new DelphiTechnique()).CheckFactors(subjectAreaElement.ToList(), confidenceArea.Value);
-
-                if(!string.IsNullOrEmpty(result.Error))
-                {
-                    return 0;
-                }
+                var result = tehnique.CheckFactors(subjectAreaElement.ToList(), confidenceArea.Value);
 
                 sum = sum + result.FactorValue * result.Count.Value;
             }
@@ -43,20 +45,20 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers
             return sum;
         }
 
-        private double CountAverageCostWageFund(ApplicationDTO application, double ksloc)
+        private double CountAverageCostWageFund(EvaluationDTO evaluation, double ksloc, BaseDelphiTechnique tehnique)
         {
-            return (152 * application.AverageCostLabor * CountDevelopmentAverageComplexity(application.EvaluationFactors, ksloc, application.ConfidenceArea)) / application.AverageMonthlyRateWorkingHours;
+            return (152 * evaluation.AverageCostLabor * CountDevelopmentAverageComplexity(evaluation.EvaluationFactors, ksloc, evaluation.ConfidenceArea, tehnique)) / evaluation.AverageMonthlyRateWorkingHours;
         }
 
-        private double CountDevelopmentAverageComplexity(List<EvaluationFactorDTO> evaluations, double ksloc, double? confidenceArea)
+        private double CountDevelopmentAverageComplexity(List<EvaluationFactorDTO> evaluations, double ksloc, double? confidenceArea, BaseDelphiTechnique tehnique)
         {
             double productInfluenceFactors = 1;
 
-            foreach(var influenceFactors in GetFactors(evaluations.Where(e => e.FactorType == FactorType.InfluenceFactors)))
+            foreach (var influenceFactors in GetFactors(evaluations.Where(e => e.FactorType == FactorType.InfluenceFactors)))
             {
-                var result = (new DelphiTechnique()).CheckFactors(influenceFactors.ToList(), confidenceArea.Value);
+                var result = tehnique.CheckFactors(influenceFactors.ToList(), confidenceArea.Value);
 
-                if(!string.IsNullOrEmpty(result.Error))
+                if (!string.IsNullOrEmpty(result.Error))
                 {
                     return 0;
                 }
@@ -64,18 +66,18 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers
                 productInfluenceFactors = productInfluenceFactors * result.FactorValue;
             }
 
-            return 2.94 * productInfluenceFactors * Math.Pow(ksloc, CountB(GetFactors(evaluations.Where(e => e.FactorType == FactorType.ScaleFactors)), confidenceArea));
+            return 2.94 * productInfluenceFactors * Math.Pow(ksloc, CountB(GetFactors(evaluations.Where(e => e.FactorType == FactorType.ScaleFactors)), confidenceArea, tehnique));
         }
 
-        private double CountB(IEnumerable<IGrouping<string, EvaluationFactorDTO>> evaluations, double? confidenceArea)
+        private double CountB(IEnumerable<IGrouping<string, EvaluationFactorDTO>> evaluations, double? confidenceArea, BaseDelphiTechnique tehnique)
         {
             double sumScaleFactors = 0;
 
             foreach (var scaleFactor in evaluations)
             {
-                var result = (new DelphiTechnique()).CheckFactors(scaleFactor.ToList(), confidenceArea.Value);
+                var result = tehnique.CheckFactors(scaleFactor.ToList(), confidenceArea.Value);
 
-                if(!string.IsNullOrEmpty(result.Error))
+                if (!string.IsNullOrEmpty(result.Error))
                 {
                     return 0;
                 }
@@ -89,6 +91,18 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers
         private IEnumerable<IGrouping<string, EvaluationFactorDTO>> GetFactors(IEnumerable<EvaluationFactorDTO> evaluations)
         {
             return from evaluation in evaluations group evaluation by evaluation.Name;
+        }
+
+        private BaseDelphiTechnique SetStrategi(EvaluationDTO evaluation)
+        {
+            if (evaluation.ConfidenceArea.HasValue)
+            {
+                return new DelphiTechniqueWithConfidenceArea();
+            }
+            else
+            {
+                return new DelphiTechniqueWithCoefficientVariations();
+            }
         }
     }
 }

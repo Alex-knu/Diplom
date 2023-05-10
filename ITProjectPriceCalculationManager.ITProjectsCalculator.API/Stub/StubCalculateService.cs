@@ -5,19 +5,11 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Stub
 {
     public class StubCalculateService : ICalculateService
     {
-        public Task<ApplicationDTO> Calculate(ApplicationDTO application)
+        public Task<EvaluationResultDTO> Calculate(EvaluationDTO evaluation, double? price = null)
         {
-            return Task.FromResult(new ApplicationDTO()
+            return Task.FromResult(new EvaluationResultDTO()
             {
-                Id = 1,
-                Price = 200,
-                Profit = 100,
-                Overhead = 50,
-                SocialInsurance = 20,
-                AverageCostLabor = 10,
-                AverageMonthlyRateWorkingHours = 5,
-                EvaluationFactors = new List<EvaluationFactorDTO>(),
-                ProgramsParametrs = new List<ProgramsParametrDTO>()
+                Result = 200000
             });
         }
     }

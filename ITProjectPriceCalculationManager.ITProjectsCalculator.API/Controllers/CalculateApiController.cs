@@ -18,9 +18,9 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CalulateAsync(ApplicationDTO applicationDTO)
+        public async Task<IActionResult> CalulateAsync(EvaluationDTO evaluation)
         {
-            return Ok(await _calculateService.Calculate(applicationDTO));
+            return Ok(await _calculateService.Calculate(evaluation));
         }
     }
 }

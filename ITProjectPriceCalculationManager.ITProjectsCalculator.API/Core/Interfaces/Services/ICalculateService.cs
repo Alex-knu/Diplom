@@ -4,6 +4,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfa
 {
     public interface ICalculateService
     {
-        Task<ApplicationDTO> Calculate(ApplicationDTO application);
+        Task<EvaluationResultDTO> Calculate(EvaluationDTO evaluation, double? price = null);
     }
 }
