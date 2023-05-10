@@ -8,7 +8,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers
     [Route("api/[controller]")]
     public class BaseApplicationApiController : ControllerBase
     {
-        
         private readonly IApplicationService _ApplicationService;
 
         public BaseApplicationApiController(IApplicationService applicationService)
@@ -32,15 +31,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateApplication(BaseApplicationDTO query)
         {
-            return Ok(await _ApplicationService.CreateApplicationAsync(new ApplicationDTO
-            {
-                Id = query.Id,
-                Name = query.Name,
-                Description = query.Description,
-                Status = query.Status,
-                Price = query.Price,
-                Profit = query.Profit
-            }));
+            return Ok(await _ApplicationService.CreateBaseApplicationAsync(query));
         }
 
         [HttpPut]

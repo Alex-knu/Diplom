@@ -71,5 +71,14 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 
             return _mapper.Map<ApplicationDTO>(deleteApplication);
         }
+
+        public async Task<ApplicationDTO> CreateBaseApplicationAsync(BaseApplicationDTO baseApplication)
+        {
+            var application = _mapper.Map<Application>(baseApplication);
+            var newApplication = await _applicationRepository.AddAsync(application);
+            await _applicationRepository.SaveChangesAcync();
+
+            return _mapper.Map<ApplicationDTO>(newApplication);
+        }
     }
 }

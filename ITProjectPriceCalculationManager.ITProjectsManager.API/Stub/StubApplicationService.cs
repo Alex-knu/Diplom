@@ -24,6 +24,11 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Stub
                 });
         }
 
+        public Task<ApplicationDTO> CreateBaseApplicationAsync(BaseApplicationDTO baseApplication)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<ApplicationDTO> DeleteApplicationAsync(int id)
         {
             throw new NotImplementedException();
