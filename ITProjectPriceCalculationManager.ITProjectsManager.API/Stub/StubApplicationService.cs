@@ -19,8 +19,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Stub
                     SocialInsurance = 20,
                     AverageCostLabor = 10,
                     AverageMonthlyRateWorkingHours = 5,
-                    ScaleFactors = new List<ScaleFactorDTO>(),
-                    InfluenceFactors = new List<InfluenceFactorDTO>(),
+                    EvaluationFactors = new List<EvaluationFactorDTO>(),
                     ProgramsParametrs = new List<ProgramsParametrDTO>()
                 });
         }
@@ -50,8 +49,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Stub
                     SocialInsurance = 20,
                     AverageCostLabor = 10,
                     AverageMonthlyRateWorkingHours = 5,
-                    ScaleFactors = new List<ScaleFactorDTO>(),
-                    InfluenceFactors = new List<InfluenceFactorDTO>(),
+                    EvaluationFactors = new List<EvaluationFactorDTO>(),
                     ProgramsParametrs = new List<ProgramsParametrDTO>()
                 }
             });
@@ -71,8 +69,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Stub
                     SocialInsurance = 20,
                     AverageCostLabor = 10,
                     AverageMonthlyRateWorkingHours = 5,
-                    ScaleFactors = new List<ScaleFactorDTO>(),
-                    InfluenceFactors = new List<InfluenceFactorDTO>(),
+                    EvaluationFactors = new List<EvaluationFactorDTO>(),
                     ProgramsParametrs = new List<ProgramsParametrDTO>()
                 });
         }

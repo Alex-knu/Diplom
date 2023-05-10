@@ -6,23 +6,14 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Service
 {
     internal class CalculateService : ICalculateService
     {
-        public Task<ApplicationDTO> AlbrehtMethodCalculate(ApplicationDTO application)
+        public Task<EvaluationResultDTO> Calculate(EvaluationDTO evaluation, double? price = null)
         {
-            
-            double ksloc = 0;
+            return SetStrategy().Calculate(evaluation, price);
+        }
 
-            foreach(var programsParametr in application.ProgramsParametrs)
-            {
-                ksloc += programsParametr.SLOC * AlbrehtMethod.CountUOF(programsParametr.SubjectAreaElements);
-            }
-            
-            application.Price = AlbrehtMethod.CountAverageCostWageFund(application.AverageCostLabor, 
-                                                                                AlbrehtMethod.CountDevelopmentAverageComplexity(application.InfluenceFactors, application.ScaleFactors, ksloc), 
-                                                                                application.AverageMonthlyRateWorkingHours);
-
-            application.Price = application.Price * application.Overhead + application.Price * application.Profit + application.Price * application.SocialInsurance;
-            
-            return Task.FromResult(application);
+        private CalculateMethod SetStrategy()
+        {
+            return new AlbrehtMethod();
         }
     }
 }

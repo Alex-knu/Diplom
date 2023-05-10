@@ -1,57 +1,108 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.DTOModels.Enums;
+using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers.ExpertMethods;
 
 namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers.CalculateMethods
 {
-    internal static class AlbrehtMethod
+    internal class AlbrehtMethod : CalculateMethod
     {
-        public static double CountAverageCostWageFund(double averageCostLabor, double developmentAverageComplexity, double averageMonthlyRateWorkingHours)
+        public override async Task<EvaluationResultDTO> Calculate(EvaluationDTO evaluation, double? price)
         {
-            return (152 * averageCostLabor * developmentAverageComplexity) / averageMonthlyRateWorkingHours;
+            double ksloc = 0;
+            EvaluationResultDTO result = new EvaluationResultDTO();
+            BaseDelphiTechnique tehnique = SetStrategi(evaluation);
+
+            try
+            {
+                foreach (var programsParametr in evaluation.ProgramsParametrEvaluationFactorDTO)
+                {
+                    ksloc += programsParametr.SLOC * CountUOF(GetFactors(programsParametr.SubjectAreaElements), evaluation.ConfidenceArea, tehnique);
+                }
+
+                price = CountAverageCostWageFund(evaluation, ksloc, tehnique);
+
+                result = await base.Calculate(evaluation, price);
+            }
+            catch (Exception ex)
+            {
+                result.Error = ex.Message;
+            }
+
+            return result;
         }
 
-        private static double CountB(List<ScaleFactorDTO> scaleFactors)
+        private double CountUOF(IEnumerable<IGrouping<string, EvaluationFactorDTO>> subjectAreaElements, double? confidenceArea, BaseDelphiTechnique tehnique)
+        {
+            double sum = 0;
+
+            foreach (var subjectAreaElement in subjectAreaElements)
+            {
+                var result = tehnique.CheckFactors(subjectAreaElement.ToList(), confidenceArea.Value);
+
+                sum = sum + result.FactorValue * result.Count.Value;
+            }
+
+            return sum;
+        }
+
+        private double CountAverageCostWageFund(EvaluationDTO evaluation, double ksloc, BaseDelphiTechnique tehnique)
+        {
+            return (152 * evaluation.AverageCostLabor * CountDevelopmentAverageComplexity(evaluation.EvaluationFactors, ksloc, evaluation.ConfidenceArea, tehnique)) / evaluation.AverageMonthlyRateWorkingHours;
+        }
+
+        private double CountDevelopmentAverageComplexity(List<EvaluationFactorDTO> evaluations, double ksloc, double? confidenceArea, BaseDelphiTechnique tehnique)
+        {
+            double productInfluenceFactors = 1;
+
+            foreach (var influenceFactors in GetFactors(evaluations.Where(e => e.FactorType == FactorType.InfluenceFactors)))
+            {
+                var result = tehnique.CheckFactors(influenceFactors.ToList(), confidenceArea.Value);
+
+                if (!string.IsNullOrEmpty(result.Error))
+                {
+                    return 0;
+                }
+
+                productInfluenceFactors = productInfluenceFactors * result.FactorValue;
+            }
+
+            return 2.94 * productInfluenceFactors * Math.Pow(ksloc, CountB(GetFactors(evaluations.Where(e => e.FactorType == FactorType.ScaleFactors)), confidenceArea, tehnique));
+        }
+
+        private double CountB(IEnumerable<IGrouping<string, EvaluationFactorDTO>> evaluations, double? confidenceArea, BaseDelphiTechnique tehnique)
         {
             double sumScaleFactors = 0;
 
-            foreach(var scaleFactor in scaleFactors)
+            foreach (var scaleFactor in evaluations)
             {
-                sumScaleFactors = sumScaleFactors + scaleFactor.Count;
+                var result = tehnique.CheckFactors(scaleFactor.ToList(), confidenceArea.Value);
+
+                if (!string.IsNullOrEmpty(result.Error))
+                {
+                    return 0;
+                }
+
+                sumScaleFactors = sumScaleFactors + result.FactorValue;
             }
 
             return 0.91 + sumScaleFactors * 0.01;
         }
 
-        public static double CountDevelopmentAverageComplexity(List<InfluenceFactorDTO> influenceFactors, List<ScaleFactorDTO> scaleFactors, double ksloc)
+        private IEnumerable<IGrouping<string, EvaluationFactorDTO>> GetFactors(IEnumerable<EvaluationFactorDTO> evaluations)
         {
-            double sumInfluenceFactors = 1;
-
-            foreach(var influenceFactor in influenceFactors)
-            {
-                sumInfluenceFactors = sumInfluenceFactors * influenceFactor.Count;
-            }
-
-            return 2.94 * sumInfluenceFactors * Math.Pow(ksloc, CountB(scaleFactors));
+            return from evaluation in evaluations group evaluation by evaluation.Name;
         }
 
-        public static double CountUOF(List<SubjectAreaElementDTO> subjectAreaElements)
+        private BaseDelphiTechnique SetStrategi(EvaluationDTO evaluation)
         {
-            double sum = 0;
-
-            foreach(var subjectAreaElement in subjectAreaElements)
+            if (evaluation.ConfidenceArea.HasValue)
             {
-                switch (subjectAreaElement.ConditionalUnitsOfFunctionality)
-                {
-                    case ConditionalUnitsOfFunctionality.InformationObjects:
-                        sum = sum + subjectAreaElement.Count * subjectAreaElement.DifficultyLevel;
-                        break;
-                    case ConditionalUnitsOfFunctionality.Functions:
-                        sum = sum + subjectAreaElement.DifficultyLevel;
-                        break;
-                }
+                return new DelphiTechniqueWithConfidenceArea();
             }
-
-            return sum;
+            else
+            {
+                return new DelphiTechniqueWithCoefficientVariations();
+            }
         }
     }
 }
