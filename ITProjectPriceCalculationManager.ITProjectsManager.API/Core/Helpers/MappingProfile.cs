@@ -1,6 +1,7 @@
 using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Department;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Estimator;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Helpers
@@ -12,6 +13,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Helpers
             CreateMap<BaseApplicationDTO, Application>().ReverseMap();
             CreateMap<ApplicationDTO, Application>().ReverseMap();
             CreateMap<EvaluatorDTO, Estimator>().ReverseMap();
+            CreateMap<DepartmentDTO, Department>().ReverseMap();
         }
     }
 }
