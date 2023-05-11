@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout dotnet
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v3
@@ -33,7 +33,7 @@ jobs:
 
     steps:
       - name: Checkout angular
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
         uses: actions/setup-node@v2
@@ -55,7 +55,7 @@ jobs:
 
     steps:
       - name: Checkout Python
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -73,7 +73,7 @@ jobs:
 
     steps:
       - name: Checkout docker
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Start containers
         run: docker-compose -f "docker-compose.yml" up -d --build
