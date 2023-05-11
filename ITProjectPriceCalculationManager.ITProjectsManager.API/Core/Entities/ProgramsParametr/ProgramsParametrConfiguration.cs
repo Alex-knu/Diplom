@@ -10,9 +10,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.P
             builder
                 .HasKey(programsParametr => programsParametr.Id);
 
-            builder.Property(programsParametr => programsParametr.SLOC)
-                   .IsRequired();
-
             builder
                 .HasOne(programsParametr => programsParametr.ProgramLanguage)
                 .WithMany(programLanguage => programLanguage.ProgramsParametrs)

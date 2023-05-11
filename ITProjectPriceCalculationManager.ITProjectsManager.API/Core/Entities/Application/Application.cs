@@ -12,11 +12,14 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
         public double SocialInsurance { get; set; }
         public double AverageCostLabor { get; set; }
         public double AverageMonthlyRateWorkingHours { get; set; }
+        public double? ConfidenceArea { get; set; }
+        public string Name { get; set; } 
+        public string Description { get; set; }
+        public string Status { get; set; } 
 
         public Estimator.Estimator Creator { get; set; }
         public ICollection<ApplicationToEstimators.ApplicationToEstimators> ApplicationToEstimators { get; set; }
-        //public virtual ICollection<ScaleFactor> ScaleFactors{ get; set; }
-        //public virtual ICollection<InfluenceFactor> InfluenceFactors{ get; set; }
+        public virtual ICollection<ApplicationToFactors.ApplicationToFactors> Factors{ get; set; }
         public virtual ICollection<ProgramsParametr.ProgramsParametr> ProgramsParametrs { get; set; }
     }
 }

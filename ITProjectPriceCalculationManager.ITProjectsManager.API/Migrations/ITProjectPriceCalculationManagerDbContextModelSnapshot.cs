@@ -36,8 +36,19 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     b.Property<double>("AverageMonthlyRateWorkingHours")
                         .HasColumnType("double precision");
 
+                    b.Property<double?>("ConfidenceArea")
+                        .HasColumnType("double precision");
+
                     b.Property<int>("CreatorId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<double>("Overhead")
                         .HasColumnType("double precision");
@@ -50,6 +61,10 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
 
                     b.Property<double>("SocialInsurance")
                         .HasColumnType("double precision");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -69,11 +84,11 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     b.Property<int>("ApplicationId")
                         .HasColumnType("integer");
 
-                    b.Property<double>("Coeficient")
-                        .HasColumnType("double precision");
-
                     b.Property<int>("EstimatorId")
                         .HasColumnType("integer");
+
+                    b.Property<double?>("SelfEvaluation")
+                        .HasColumnType("double precision");
 
                     b.HasKey("Id");
 
@@ -82,6 +97,43 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     b.HasIndex("EstimatorId");
 
                     b.ToTable("ApplicationToEstimators");
+                });
+
+            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactors.ApplicationToFactors", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ApplicationId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("DifficultyLevelId")
+                        .IsRequired()
+                        .HasColumnType("integer");
+
+                    b.Property<int>("FactorId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("FactorTypeId")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("Value")
+                        .HasColumnType("double precision");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationId");
+
+                    b.HasIndex("DifficultyLevelId");
+
+                    b.HasIndex("FactorId");
+
+                    b.HasIndex("FactorTypeId");
+
+                    b.ToTable("ApplicationToFactors");
                 });
 
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Attribute.Attribute", b =>
@@ -98,7 +150,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Attribute");
+                    b.ToTable("Attributes");
                 });
 
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Department.Department", b =>
@@ -123,6 +175,49 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     b.ToTable("Department");
                 });
 
+            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevelsType.DifficultyLevelsType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DifficultyLevelsTypes");
+                });
+
+            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevelsTypeToFactorType.DifficultyLevelsTypeToFactorType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DifficultyLevelId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("FactorTypeId")
+                        .HasColumnType("integer");
+
+                    b.Property<double>("Value")
+                        .HasColumnType("double precision");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DifficultyLevelId");
+
+                    b.HasIndex("FactorTypeId");
+
+                    b.ToTable("DifficultyLevelsTypeToFactorTypes");
+                });
+
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Estimator.Estimator", b =>
                 {
                     b.Property<int>("Id")
@@ -132,6 +227,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("DepartmentId")
+                        .IsRequired()
                         .HasColumnType("integer");
 
                     b.Property<string>("Email")
@@ -158,7 +254,47 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Estimator");
+                    b.ToTable("Estimators");
+                });
+
+            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.EvaluatorToEvaluatedFactor.EvaluatorToEvaluatedFactor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("EvaluatedFactorId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EvaluatorId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EvaluatedFactorId");
+
+                    b.HasIndex("EvaluatorId");
+
+                    b.ToTable("EvaluatorToEvaluatedFactors");
+                });
+
+            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.FactorType.FactorType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FactorTypes");
                 });
 
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Profile.Profile", b =>
@@ -223,9 +359,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     b.Property<int>("ProgramLanguageId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("SLOC")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationId");
@@ -258,30 +391,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     b.ToTable("ProgramsParametrToSubjectAreaElements");
                 });
 
-            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.SubjectAreaElement.SubjectAreaElement", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Count")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("DifficultyLevelsType")
-                        .HasMaxLength(256)
-                        .HasColumnType("integer");
-
-                    b.Property<int>("SubjectAreaType")
-                        .HasMaxLength(256)
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SubjectAreaElements");
-                });
-
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application.Application", b =>
                 {
                     b.HasOne("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Estimator.Estimator", "Creator")
@@ -312,6 +421,41 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     b.Navigation("Estimator");
                 });
 
+            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactors.ApplicationToFactors", b =>
+                {
+                    b.HasOne("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application.Application", "Application")
+                        .WithMany("Factors")
+                        .HasForeignKey("ApplicationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevelsType.DifficultyLevelsType", "DifficultyLevel")
+                        .WithMany("ApplicationToFactors")
+                        .HasForeignKey("DifficultyLevelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Attribute.Attribute", "Factor")
+                        .WithMany("ApplicationToFactors")
+                        .HasForeignKey("FactorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.FactorType.FactorType", "FactorType")
+                        .WithMany("ApplicationToFactors")
+                        .HasForeignKey("FactorTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Application");
+
+                    b.Navigation("DifficultyLevel");
+
+                    b.Navigation("Factor");
+
+                    b.Navigation("FactorType");
+                });
+
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Department.Department", b =>
                 {
                     b.HasOne("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Department.Department", "Parent")
@@ -321,13 +465,53 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     b.Navigation("Parent");
                 });
 
+            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevelsTypeToFactorType.DifficultyLevelsTypeToFactorType", b =>
+                {
+                    b.HasOne("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevelsType.DifficultyLevelsType", "DifficultyLevel")
+                        .WithMany("DifficultyLevelsTypeToFactorTypes")
+                        .HasForeignKey("DifficultyLevelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.FactorType.FactorType", "FactorType")
+                        .WithMany("DifficultyLevelsTypeToFactorTypes")
+                        .HasForeignKey("FactorTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("DifficultyLevel");
+
+                    b.Navigation("FactorType");
+                });
+
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Estimator.Estimator", b =>
                 {
                     b.HasOne("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Department.Department", "Department")
                         .WithMany("Estimators")
-                        .HasForeignKey("DepartmentId");
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.EvaluatorToEvaluatedFactor.EvaluatorToEvaluatedFactor", b =>
+                {
+                    b.HasOne("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactors.ApplicationToFactors", "EvaluatedFactor")
+                        .WithMany("EvaluatorToEvaluatedFactor")
+                        .HasForeignKey("EvaluatedFactorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Estimator.Estimator", "Evaluator")
+                        .WithMany("EvaluatorToEvaluatedFactor")
+                        .HasForeignKey("EvaluatorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EvaluatedFactor");
+
+                    b.Navigation("Evaluator");
                 });
 
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Profile.Profile", b =>
@@ -376,7 +560,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.SubjectAreaElement.SubjectAreaElement", "SubjectAreaElement")
+                    b.HasOne("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactors.ApplicationToFactors", "SubjectAreaElement")
                         .WithMany("ProgramsParametrToSubjectAreaElements")
                         .HasForeignKey("SubjectAreaElementId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -391,11 +575,22 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                 {
                     b.Navigation("ApplicationToEstimators");
 
+                    b.Navigation("Factors");
+
                     b.Navigation("ProgramsParametrs");
+                });
+
+            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactors.ApplicationToFactors", b =>
+                {
+                    b.Navigation("EvaluatorToEvaluatedFactor");
+
+                    b.Navigation("ProgramsParametrToSubjectAreaElements");
                 });
 
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Attribute.Attribute", b =>
                 {
+                    b.Navigation("ApplicationToFactors");
+
                     b.Navigation("Profiles");
                 });
 
@@ -406,13 +601,29 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     b.Navigation("SubDepartment");
                 });
 
+            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevelsType.DifficultyLevelsType", b =>
+                {
+                    b.Navigation("ApplicationToFactors");
+
+                    b.Navigation("DifficultyLevelsTypeToFactorTypes");
+                });
+
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Estimator.Estimator", b =>
                 {
                     b.Navigation("ApplicationToEstimators");
 
                     b.Navigation("Applications");
 
+                    b.Navigation("EvaluatorToEvaluatedFactor");
+
                     b.Navigation("Profiles");
+                });
+
+            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.FactorType.FactorType", b =>
+                {
+                    b.Navigation("ApplicationToFactors");
+
+                    b.Navigation("DifficultyLevelsTypeToFactorTypes");
                 });
 
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramLanguage.ProgramLanguage", b =>
@@ -421,11 +632,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                 });
 
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramsParametr.ProgramsParametr", b =>
-                {
-                    b.Navigation("ProgramsParametrToSubjectAreaElements");
-                });
-
-            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.SubjectAreaElement.SubjectAreaElement", b =>
                 {
                     b.Navigation("ProgramsParametrToSubjectAreaElements");
                 });

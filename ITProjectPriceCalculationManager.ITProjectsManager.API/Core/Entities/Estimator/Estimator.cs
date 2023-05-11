@@ -16,5 +16,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.E
         public ICollection<ApplicationToEstimators.ApplicationToEstimators> ApplicationToEstimators { get; set; }
         public ICollection<Profile.Profile> Profiles { get; set; }
         public ICollection<Application.Application> Applications { get; set; }
+        public ICollection<EvaluatorToEvaluatedFactor.EvaluatorToEvaluatedFactor> EvaluatorToEvaluatedFactor { get; set; }
     }
 }
