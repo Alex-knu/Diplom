@@ -8,7 +8,8 @@ namespace ITProjectPriceCalculationManager.Router.API.Controllers
     [ApiController]
     [Route("api/[controller]")]
     public class EvaluatorManagerController : ControllerBase
-    {private readonly ILogger<EvaluatorManagerController> _Logger;
+    {
+        private readonly ILogger<EvaluatorManagerController> _Logger;
         private readonly HttpClient _Client;
 
         public EvaluatorManagerController(ILogger<EvaluatorManagerController> logger, IHttpClientFactory httpClientFactory)
