@@ -6,78 +6,35 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Ser
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 {
-    internal class DepartmentService : IDepartmentService
+    internal class DepartmentService : BaseService<Department, int, DepartmentDTO>, IDepartmentService
     {
-        protected readonly IRepository<Department, int> _departmentRepository;
-        protected readonly IMapper _mapper;
-
-        public DepartmentService(IRepository<Department, int> departmentRepository, IMapper mapper)
+        public DepartmentService(IRepository<Department, int> repository, IMapper mapper) : base(repository, mapper)
         {
-            _departmentRepository = departmentRepository;
-            _mapper = mapper;
         }
 
-        public async Task<DepartmentDTO> CreateDepartmentAsync(DepartmentDTO department)
+        public Task<DepartmentDTO> CreateDepartmentAsync(DepartmentDTO department)
         {
-            try
-            {
-                var domainDepartment = _mapper.Map<Department>(department);
-
-                var newDepartment = await _departmentRepository.AddAsync(domainDepartment);
-                await _departmentRepository.SaveChangesAcync();
-
-                return _mapper.Map<DepartmentDTO>(newDepartment);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return base.CreateEntityAsync(department);
         }
 
-        public async Task<DepartmentDTO> DeleteDepartmentAsync(int id)
+        public Task<DepartmentDTO> DeleteDepartmentAsync(int id)
         {
-            var domainDepartment = await _departmentRepository.GetByKeyAsync(id);
-
-            if (domainDepartment == null)
-            {
-                throw new BadHttpRequestException("Department not found");
-            }
-
-            var deleteDepartment = await _departmentRepository.DeleteAsync(domainDepartment);
-            await _departmentRepository.SaveChangesAcync();
-
-            return _mapper.Map<DepartmentDTO>(deleteDepartment);
+            return base.DeleteEntityAsync(id);
         }
 
-        public async Task<IEnumerable<DepartmentDTO>> GetDepartmentsAsync()
+        public Task<IEnumerable<DepartmentDTO>> GetDepartmentsAsync()
         {
-            var domainDepartments = await _departmentRepository.GetAllAsync();
-
-            return _mapper.Map<IEnumerable<DepartmentDTO>>(domainDepartments);
+            return base.GetEntitysAsync();
         }
 
-        public async Task<DepartmentDTO> GetDepartmentsByIdAsync(int id)
+        public Task<DepartmentDTO> GetDepartmentsByIdAsync(int id)
         {
-            var domainDepartment = await _departmentRepository.GetByKeyAsync(id);
-
-            return _mapper.Map<DepartmentDTO>(domainDepartment);
+            return base.GetEntitysByIdAsync(id);
         }
 
-        public async Task<DepartmentDTO> UpdateDepartmentAsync(DepartmentDTO department)
+        public Task<DepartmentDTO> UpdateDepartmentAsync(DepartmentDTO department)
         {
-            try
-            {
-                var domainDepartment = _mapper.Map<Department>(department);
-
-                var updateDepartment = await _departmentRepository.UpdateAsync(domainDepartment);
-                await _departmentRepository.SaveChangesAcync();
-
-                return _mapper.Map<DepartmentDTO>(updateDepartment);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return base.UpdateEntityAsync(department);
         }
     }
 }

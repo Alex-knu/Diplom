@@ -17,8 +17,10 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped(typeof(IRepository<,>), typeof(BaseRepository<,>));
 builder.Services.AddScoped(typeof(IApplicationService), typeof(ApplicationService));
-builder.Services.AddScoped(typeof(IEvaluatorService), typeof(EvaluatorService));
+builder.Services.AddScoped(typeof(IBaseApplicationService), typeof(BaseApplicationService));
 builder.Services.AddScoped(typeof(IDepartmentService), typeof(DepartmentService));
+builder.Services.AddScoped(typeof(IEvaluationService), typeof(EvaluationService));
+builder.Services.AddScoped(typeof(IEvaluatorService), typeof(EvaluatorService));
 //builder.Services.AddScoped(typeof(IApplicationService), typeof(StubApplicationService));
 
 builder.Services.AddControllers();

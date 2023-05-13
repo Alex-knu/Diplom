@@ -9,7 +9,5 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces
         Task<ApplicationDTO> CreateApplicationAsync(ApplicationDTO dto);
         Task<ApplicationDTO> UpdateApplicationAsync(ApplicationDTO query);
         Task<ApplicationDTO> DeleteApplicationAsync(int id);
-        
-        Task<ApplicationDTO> CreateBaseApplicationAsync(BaseApplicationDTO baseApplication);
     }
 }

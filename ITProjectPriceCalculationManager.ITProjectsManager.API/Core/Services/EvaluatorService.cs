@@ -6,64 +6,35 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Ser
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 {
-    internal class EvaluatorService : IEvaluatorService
+    internal class EvaluatorService : BaseService<Estimator, int, EvaluatorDTO>, IEvaluatorService
     {
-        protected readonly IRepository<Estimator, int> _estimatorRepository;
-        protected readonly IMapper _mapper;
-
-        public EvaluatorService(IRepository<Estimator, int> estimatorRepository, IMapper mapper)
+        public EvaluatorService(IRepository<Estimator, int> repository, IMapper mapper) : base(repository, mapper)
         {
-            _estimatorRepository = estimatorRepository;
-            _mapper = mapper;
         }
 
-        public async Task<EvaluatorDTO> CreateEvaluatorAsync(EvaluatorDTO evaluator)
+        public Task<EvaluatorDTO> CreateEvaluatorAsync(EvaluatorDTO evaluator)
         {
-            var domainEvaluator = _mapper.Map<Estimator>(evaluator);
-
-            var newEvaluator = await _estimatorRepository.AddAsync(domainEvaluator);
-            await _estimatorRepository.SaveChangesAcync();
-
-            return _mapper.Map<EvaluatorDTO>(newEvaluator);
+            return base.CreateEntityAsync(evaluator);
         }
 
-        public async Task<EvaluatorDTO> DeleteEvaluatorAsync(int id)
+        public Task<EvaluatorDTO> DeleteEvaluatorAsync(int id)
         {
-            var domainEvaluator = await _estimatorRepository.GetByKeyAsync(id);
-
-            if (domainEvaluator == null)
-            {
-                throw new ArgumentException("Application not found");
-            }
-
-            var deleteEvaluator = await _estimatorRepository.DeleteAsync(domainEvaluator);
-            await _estimatorRepository.SaveChangesAcync();
-
-            return _mapper.Map<EvaluatorDTO>(deleteEvaluator);
+            return base.DeleteEntityAsync(id);
         }
 
-        public async Task<IEnumerable<EvaluatorDTO>> GetEvaluatorsAsync()
+        public Task<IEnumerable<EvaluatorDTO>> GetEvaluatorsAsync()
         {
-            var domainEvaluators = await _estimatorRepository.GetAllAsync();
-
-            return _mapper.Map<IEnumerable<EvaluatorDTO>>(domainEvaluators);
+            return base.GetEntitysAsync();
         }
 
-        public async Task<EvaluatorDTO> GetEvaluatorsByIdAsync(int id)
+        public Task<EvaluatorDTO> GetEvaluatorsByIdAsync(int id)
         {
-            var domainEvaluator = await _estimatorRepository.GetByKeyAsync(id);
-
-            return _mapper.Map<EvaluatorDTO>(domainEvaluator);
+            return base.GetEntitysByIdAsync(id);
         }
 
-        public async Task<EvaluatorDTO> UpdateEvaluatorAsync(EvaluatorDTO evaluator)
+        public Task<EvaluatorDTO> UpdateEvaluatorAsync(EvaluatorDTO evaluator)
         {
-            var domainEvaluator = _mapper.Map<Estimator>(evaluator);
-
-            var updateEvaluator = await _estimatorRepository.UpdateAsync(domainEvaluator);
-            await _estimatorRepository.SaveChangesAcync();
-
-            return _mapper.Map<EvaluatorDTO>(updateEvaluator);
+            return base.UpdateEntityAsync(evaluator);
         }
     }
 }
