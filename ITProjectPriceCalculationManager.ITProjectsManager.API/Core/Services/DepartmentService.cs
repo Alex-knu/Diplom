@@ -19,12 +19,19 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 
         public async Task<DepartmentDTO> CreateDepartmentAsync(DepartmentDTO department)
         {
-            var domainDepartment = _mapper.Map<Department>(department);
+            try
+            {
+                var domainDepartment = _mapper.Map<Department>(department);
 
-            var newDepartment = await _departmentRepository.AddAsync(domainDepartment);
-            await _departmentRepository.SaveChangesAcync();
+                var newDepartment = await _departmentRepository.AddAsync(domainDepartment);
+                await _departmentRepository.SaveChangesAcync();
 
-            return _mapper.Map<DepartmentDTO>(newDepartment);
+                return _mapper.Map<DepartmentDTO>(newDepartment);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<DepartmentDTO> DeleteDepartmentAsync(int id)
@@ -33,7 +40,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 
             if (domainDepartment == null)
             {
-                throw new ArgumentException("Department not found");
+                throw new BadHttpRequestException("Department not found");
             }
 
             var deleteDepartment = await _departmentRepository.DeleteAsync(domainDepartment);
@@ -58,12 +65,19 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 
         public async Task<DepartmentDTO> UpdateDepartmentAsync(DepartmentDTO department)
         {
-            var domainDepartment = _mapper.Map<Department>(department);
+            try
+            {
+                var domainDepartment = _mapper.Map<Department>(department);
 
-            var updateDepartment = await _departmentRepository.UpdateAsync(domainDepartment);
-            await _departmentRepository.SaveChangesAcync();
+                var updateDepartment = await _departmentRepository.UpdateAsync(domainDepartment);
+                await _departmentRepository.SaveChangesAcync();
 
-            return _mapper.Map<DepartmentDTO>(updateDepartment);
+                return _mapper.Map<DepartmentDTO>(updateDepartment);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

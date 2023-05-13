@@ -23,7 +23,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 
             return _mapper.Map<IEnumerable<ApplicationDTO>>(applications);
         }
-        
+
         public async Task<ApplicationDTO> GetApplicationsByIdAsync(int id)
         {
             var applications = await _applicationRepository.GetByKeyAsync(id);
@@ -33,11 +33,18 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 
         public async Task<ApplicationDTO> CreateApplicationAsync(ApplicationDTO dto)
         {
-            var application = _mapper.Map<Application>(dto);
-            var newApplication = await _applicationRepository.AddAsync(application);
-            await _applicationRepository.SaveChangesAcync();
+            try
+            {
+                var application = _mapper.Map<Application>(dto);
+                var newApplication = await _applicationRepository.AddAsync(application);
+                await _applicationRepository.SaveChangesAcync();
 
-            return _mapper.Map<ApplicationDTO>(newApplication);
+                return _mapper.Map<ApplicationDTO>(newApplication);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<ApplicationDTO> UpdateApplicationAsync(ApplicationDTO query)
@@ -63,7 +70,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 
             if (application == null)
             {
-                throw new ArgumentException("Application not found");
+                throw new BadHttpRequestException("Application not found");
             }
 
             var deleteApplication = await _applicationRepository.DeleteAsync(application);
@@ -74,11 +81,18 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 
         public async Task<ApplicationDTO> CreateBaseApplicationAsync(BaseApplicationDTO baseApplication)
         {
-            var application = _mapper.Map<Application>(baseApplication);
-            var newApplication = await _applicationRepository.AddAsync(application);
-            await _applicationRepository.SaveChangesAcync();
+            try
+            {
+                var application = _mapper.Map<Application>(baseApplication);
+                var newApplication = await _applicationRepository.AddAsync(application);
+                await _applicationRepository.SaveChangesAcync();
 
-            return _mapper.Map<ApplicationDTO>(newApplication);
+                return _mapper.Map<ApplicationDTO>(newApplication);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
