@@ -1,8 +1,10 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITProjectPriceCalculationManager.Router.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class CalculatorManagerController : ControllerBase

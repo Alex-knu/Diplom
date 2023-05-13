@@ -7,52 +7,57 @@ using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddEnvironmentVariables().AddUserSecrets(Assembly.GetExecutingAssembly(), true);
+builder.Configuration
+    .AddEnvironmentVariables()
+    .AddUserSecrets(Assembly.GetExecutingAssembly(), true);
 // Add services to the container.
 
-var configuration = builder.Configuration.GetSection("RouteAPI").Get<RouteSetting>();
+var routeConfiguration = builder.Configuration.GetSection("RouteAPI").Get<RouteSetting>();
+var jwtConfiguration = builder.Configuration.GetSection("JWT").Get<JwtSetting>();
+JwtUtils.SecretKey = jwtConfiguration.Secret;
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddHttpClient("ITProjectsCalculator", client =>
+builder.Services
+    .AddHttpClient("ITProjectsCalculator", client =>
     {
-        client.BaseAddress = new Uri(configuration.ITProjectsCalculatorAPIRoute);
+        client.BaseAddress = new Uri(routeConfiguration.ITProjectsCalculatorAPIRoute);
     });
-builder.Services.AddHttpClient("ITProjectsManager", client =>
+builder.Services
+    .AddHttpClient("ITProjectsManager", client =>
     {
-        client.BaseAddress = new Uri(configuration.ITProjectsManagerAPIRoute);
+        client.BaseAddress = new Uri(routeConfiguration.ITProjectsManagerAPIRoute);
     });
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-
-// Adding Jwt Bearer
-.AddJwtBearer(options =>
-{
-    options.SaveToken = true;
-    options.RequireHttpsMetadata = false;
-    options.TokenValidationParameters = new TokenValidationParameters()
+builder.Services
+    .AddAuthentication(options =>
     {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidAudience = builder.Configuration["JWT:ValidAudience"],
-        ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
-    };
-});
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.SaveToken = true;
+        options.RequireHttpsMetadata = false;
+        options.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidAudience = jwtConfiguration.ValidAudience,
+            ValidIssuer = jwtConfiguration.ValidIssuer,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfiguration.Secret))
+        };
+    });
 
 var app = builder.Build();
 
 app.UseCors(
     builder => builder
-        .WithOrigins(configuration.OriginUrls)
+        .WithOrigins(routeConfiguration.OriginUrls)
         .SetIsOriginAllowedToAllowWildcardSubdomains()
         .AllowAnyMethod()
         .AllowAnyHeader()
