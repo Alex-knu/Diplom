@@ -1,6 +1,8 @@
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces;
+
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactors
 {
-    internal class ApplicationToFactors
+    internal class ApplicationToFactors : IBaseEntity<int>
     {
         public int Id { get; set; }
         public int ApplicationId { get; set; }
