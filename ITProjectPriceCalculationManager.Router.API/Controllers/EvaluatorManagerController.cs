@@ -7,7 +7,7 @@ namespace ITProjectPriceCalculationManager.Router.API.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class EvaluatorManagerController : ControllerBase
     {
         private readonly ILogger<EvaluatorManagerController> _logger;
