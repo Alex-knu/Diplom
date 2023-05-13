@@ -7,6 +7,7 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Stub;
 using ITProjectPriceCalculationManager.Extentions.Extentions;
 
 var builder = WebApplication.CreateBuilder(args);
+
 var configuration = builder.Configuration.AddUserSecrets<Program>();
 
 builder.Services.AddDbContext<ITProjectPriceCalculationManagerDbContext>(x => x.UseNpgsql(builder.Configuration["ITProjectsManagerAPI:ConnectionString"]));

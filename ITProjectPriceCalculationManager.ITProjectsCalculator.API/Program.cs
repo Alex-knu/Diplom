@@ -5,7 +5,9 @@ using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Stub;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.AddEnvironmentVariables().AddUserSecrets(Assembly.GetExecutingAssembly(), true);
+builder.Configuration
+    .AddEnvironmentVariables()
+    .AddUserSecrets(Assembly.GetExecutingAssembly(), true);
 
 builder.Services.AddScoped(typeof(ICalculateService), typeof(StubCalculateService));
 // Add services to the container.
