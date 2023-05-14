@@ -3,9 +3,9 @@ import { RouterModule } from '@angular/router';
 import { ApplicationInfoComponent } from './application-info.component';
 
 @NgModule({
-    imports: [RouterModule.forChild([
-        { path: '', component: ApplicationInfoComponent }
-    ])],
-    exports: [RouterModule]
+  imports: [RouterModule.forChild([
+    { path: '', component: ApplicationInfoComponent }
+  ])],
+  exports: [RouterModule]
 })
 export class ApplicationInfoRoutingModule { }

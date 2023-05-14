@@ -9,15 +9,16 @@ import { RegisterComponent } from './register.component';
 import { RegisterRoutingModule } from './register-routing.module';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        RegisterRoutingModule,
-        ButtonModule,
-        CheckboxModule,
-        InputTextModule,
-        FormsModule,
-        PasswordModule
-    ],
-    declarations: [RegisterComponent]
+  imports: [
+    CommonModule,
+    RegisterRoutingModule,
+    ButtonModule,
+    CheckboxModule,
+    InputTextModule,
+    FormsModule,
+    PasswordModule
+  ],
+  declarations: [RegisterComponent]
 })
+
 export class RegisterModule { }

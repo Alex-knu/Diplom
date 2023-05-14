@@ -14,8 +14,7 @@ export abstract class BaseService<TModel extends BaseModel>  {
     controllerName: string,
     configService: ClientConfigurationService,
     createModel: new (id: number | null) => TModel,
-    serviceType: ServiceType = ServiceType.web,
-  ) {
+    serviceType: ServiceType = ServiceType.web) {
     this.single = new BaseSingleService<TModel>(HttpService, controllerName, configService, createModel, serviceType);
     this.collection = new BaseCollectionService<TModel>(HttpService, `${controllerName}/collection`, configService, createModel, serviceType);
   }

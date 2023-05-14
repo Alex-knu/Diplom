@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './application-info.component.html',
   styleUrls: ['./application-info.component.scss']
 })
+
 export class ApplicationInfoComponent {
 
 }

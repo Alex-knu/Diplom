@@ -2,8 +2,8 @@ import { BaseModel } from "./base.model";
 
 export class BaseApplication extends BaseModel {
 
-  constructor(id: number|null=null){
-      super(id);
+  constructor(id: number | null = null) {
+    super(id);
   }
 
   name: string;

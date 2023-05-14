@@ -1,4 +1,4 @@
 export enum ConditionalUnitsOfFunctionality {
-    InformationObjects,
-    Functions
+  InformationObjects,
+  Functions
 }

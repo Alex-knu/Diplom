@@ -1,4 +1,4 @@
 export enum SubjectAreaType {
-    InternalLogicalObject,
-    ExternalInterfaceObject
+  InternalLogicalObject,
+  ExternalInterfaceObject
 }
