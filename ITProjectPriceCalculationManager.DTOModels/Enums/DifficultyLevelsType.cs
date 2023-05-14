@@ -2,7 +2,7 @@ namespace ITProjectPriceCalculationManager.DTOModels.Enums
 {
     public enum DifficultyLevelsType
     {
-        SuperLow,
+        SuperLow = 1,
         VeryLow,
         Low,
         Normal,
