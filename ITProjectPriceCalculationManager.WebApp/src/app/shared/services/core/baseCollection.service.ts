@@ -11,8 +11,7 @@ export class BaseCollectionService<TModel extends BaseModel> extends CoreHttpSer
     protected override controllerName: string,
     protected override configService: ClientConfigurationService,
     protected createModel: new (id: number | null) => TModel,
-    protected override serviceType: ServiceType = ServiceType.web,
-  ) {
+    protected override serviceType: ServiceType = ServiceType.web) {
     super(httpService, controllerName, configService, serviceType);
   }
 

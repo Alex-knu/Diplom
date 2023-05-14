@@ -4,32 +4,13 @@ import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular
 import { Observable } from 'rxjs';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { AuthService } from '../auth.service';
+import { TokenService } from './token.service';
 
 @Injectable()
 export class HttpService {
   constructor(
     private httpClient: HttpClient,
-    private _authService: AuthService
-  ) {
-  }
-
-  private setHeaders(): HttpHeaders {
-    const headersConfig = {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    };
-    return new HttpHeaders(headersConfig);
-  }
-
-  private formatErrors(error: HttpErrorResponse): Observable<never> {
-    // TODO: handle api service level errors
-    return throwError(() => error);
-  }
-
-  request(func: (httpClient: HttpClient) => Observable<any>): Observable<any> {
-    return func(this.httpClient);
-  }
+    private tokenService: TokenService) { }
 
   get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
     return this.httpClient
@@ -53,5 +34,24 @@ export class HttpService {
     return this.httpClient
       .delete(`${path}`, { headers: this.setHeaders() })
       .pipe(catchError((error: HttpErrorResponse) => this.formatErrors(error)));
+  }
+
+  private setHeaders(): HttpHeaders {
+    const headersConfig = {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${this.tokenService.getToken()}`
+    };
+
+    return new HttpHeaders(headersConfig);
+  }
+
+  private formatErrors(error: HttpErrorResponse): Observable<never> {
+    // TODO: handle api service level errors
+    return throwError(() => error);
+  }
+
+  request(func: (httpClient: HttpClient) => Observable<any>): Observable<any> {
+    return func(this.httpClient);
   }
 }

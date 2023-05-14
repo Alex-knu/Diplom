@@ -9,9 +9,7 @@ export abstract class CoreHttpService {
     protected httpService: HttpService,
     protected controllerName: string,
     protected configService: ClientConfigurationService,
-    protected serviceType: ServiceType = ServiceType.web
-  ) {
-  }
+    protected serviceType: ServiceType = ServiceType.web) { }
 
   public get baseUrl() {
     const baseHost = this.configService.getEnvSetting(this.serviceType);

@@ -49,7 +49,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { TerminalModule } from 'primeng/terminal';
 import { TabViewModule } from 'primeng/tabview';
 import { MenubarModule } from 'primeng/menubar';
-import {SlideMenuModule} from 'primeng/slidemenu';
+import { SlideMenuModule } from 'primeng/slidemenu';
 import { FormsModule } from '@angular/forms';
 import { InputNumberModule } from 'primeng/inputnumber';
 
@@ -119,4 +119,5 @@ const primeNgModules = [
     ConfirmationService
   ]
 })
+
 export class PrimeNgComponentsModule { }

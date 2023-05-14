@@ -1,7 +1,7 @@
 FROM node:latest as node
 WORKDIR /app
 COPY ITProjectPriceCalculationManager.WebApp/ .
-RUN npm install
+RUN npm install --force
 RUN npm run build --prod
 
 FROM nginx:latest
