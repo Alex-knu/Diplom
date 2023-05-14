@@ -9,5 +9,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
 
         public virtual ICollection<Profile.Profile> Profiles { get; set; }
         public virtual ICollection<ApplicationToFactors.ApplicationToFactors> ApplicationToFactors { get; set; }
+        public virtual ICollection<DifficultyLevelsTypeToFactorType.DifficultyLevelsTypeToFactorType> DifficultyLevelsTypeToFactorTypes { get; set; }
     }
 }

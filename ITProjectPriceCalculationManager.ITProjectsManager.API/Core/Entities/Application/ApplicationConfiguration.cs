@@ -7,8 +7,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
     {
        public void Configure(EntityTypeBuilder<Application> builder)
        {
-            builder
-                   .HasKey(application => application.Id);
+            builder.HasKey(application => application.Id);
 
             builder.Property(application => application.Price)
                    .IsRequired();
