@@ -7,8 +7,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
     {
         public void Configure(EntityTypeBuilder<ApplicationToFactors> builder)
         {
-            builder
-                   .HasKey(estimator => estimator.Id);
+            builder.HasKey(estimator => estimator.Id);
 
             builder
                 .HasOne(profile => profile.Application)
@@ -16,19 +15,9 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
                 .HasForeignKey(profile => profile.ApplicationId);
 
             builder
-                .HasOne(profile => profile.Factor)
+                .HasOne(profile => profile.DifficultyLevelsTypeToFactorType)
                 .WithMany(estimator => estimator.ApplicationToFactors)
-                .HasForeignKey(profile => profile.FactorId);
-            
-            builder
-                .HasOne(profile => profile.FactorType)
-                .WithMany(estimator => estimator.ApplicationToFactors)
-                .HasForeignKey(profile => profile.FactorTypeId);
-
-            builder
-                .HasOne(profile => profile.DifficultyLevel)
-                .WithMany(estimator => estimator.ApplicationToFactors)
-                .HasForeignKey(profile => profile.DifficultyLevelId);
+                .HasForeignKey(profile => profile.DifficultyLevelsTypeToFactorTypeId);
 
             builder.Property(estimator => estimator.Value)
                     .IsRequired();

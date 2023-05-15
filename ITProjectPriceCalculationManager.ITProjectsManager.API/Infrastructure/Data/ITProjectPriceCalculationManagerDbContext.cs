@@ -12,6 +12,7 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Estim
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.EvaluatorToEvaluatedFactor;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.FactorType;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevelsTypeToFactorType;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data.SeedData;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data
 {
@@ -38,6 +39,8 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.
             modelBuilder.ApplyConfiguration(new ProgramsParametrConfiguration());
             modelBuilder.ApplyConfiguration(new ProgramLanguageConfiguration());
             modelBuilder.ApplyConfiguration(new ProgramsParametrToSubjectAreaElementConfiguration());
+
+            modelBuilder.Seed();
         }
         
         public DbSet<Application> Applications { get; set; }
