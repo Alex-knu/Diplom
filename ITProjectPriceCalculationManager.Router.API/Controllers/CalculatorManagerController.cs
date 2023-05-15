@@ -22,9 +22,9 @@ namespace ITProjectPriceCalculationManager.Router.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CalculateApplicationPrice(ApplicationDTO query)
+        public async Task<IActionResult> CalculateApplicationPrice(EvaluationDTO query)
         {
-            return Ok(await _routeService.PostAsJsonAsync<ApplicationDTO, ApplicationDTO>(_client, "calculateapi", query));
+            return Ok(await _routeService.PostAsJsonAsync<EvaluationDTO, EvaluationResultDTO>(_client, "calculateapi", query));
         }
     }
 }

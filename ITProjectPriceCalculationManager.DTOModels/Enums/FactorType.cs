@@ -2,7 +2,7 @@ namespace ITProjectPriceCalculationManager.DTOModels.Enums
 {
     public enum FactorType
     {
-        InfluenceFactors,
+        InfluenceFactors = 1,
         ScaleFactors
     }
 }

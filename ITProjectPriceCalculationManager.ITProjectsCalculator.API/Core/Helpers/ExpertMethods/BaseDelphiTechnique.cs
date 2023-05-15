@@ -13,7 +13,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers
             double minValue = factors.Min(f => f.Value);
             double quartile = (maxValue - minValue) / 4;
 
-            if (CheckCondition(factors, confidenceArea.Value))
+            if (CheckCondition(factors, confidenceArea))
             {
                 throw new BadRequestException("The assessment is beyond the limits of confidence");
             }
@@ -28,7 +28,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers
             return result;
         }
         
-        protected abstract bool CheckCondition(IEnumerable<IFactor> factors, double etalon);
+        protected abstract bool CheckCondition(IEnumerable<IFactor> factors, double? etalon);
         protected abstract double GetSumOfValue(IEnumerable<IFactor> factors);
         protected abstract double GetSumOfCount(IEnumerable<IFactor> factors);
     }
