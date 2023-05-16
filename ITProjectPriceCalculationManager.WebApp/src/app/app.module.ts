@@ -10,13 +10,15 @@ import { PrimeNgComponentsModule } from './modules/primeng-components-module/pri
 import { services } from './shared/services';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/services/auth-interceptor.service';
+import { DepartmentTreeComponent } from './components/departmets/department-tree/department-tree.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NotfoundComponent,
     ApplicationInfoComponent,
-    ApplicationTableComponent
+    ApplicationTableComponent,
+    DepartmentTreeComponent
   ],
   imports: [
     AppRoutingModule,

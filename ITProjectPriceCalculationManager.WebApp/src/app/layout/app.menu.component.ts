@@ -43,6 +43,13 @@ export class AppMenuComponent implements OnInit {
         ]
       },
       {
+        label: 'Підрозділи',
+        items: [
+          { label: 'Ієрархія підрозділів', icon: 'pi pi-fw pi-users', routerLink: ['/department/department-tree'] },
+          { label: 'Додати експертну групу', icon: 'pi pi-fw pi-user-plus', routerLink: ['/divisions/new'] }
+        ]
+      },
+      {
         label: 'Логін',
         items: [
           { label: 'Логін', icon: 'pi pi-fw pi-users', routerLink: ['/auth/register'] },

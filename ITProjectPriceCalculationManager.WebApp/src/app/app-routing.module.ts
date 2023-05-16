@@ -8,7 +8,8 @@ const routes: Routes = [
     path: '', component: AppLayoutComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'application', loadChildren: () => import('./components/application/application-routing.module').then(m => m.ApplicationRoutingModule) }
+      { path: 'application', loadChildren: () => import('./components/application/application.module').then(m => m.ApplicationModule) },
+      { path: 'department', loadChildren: () => import('./components/departmets/department.module').then(m => m.DepartmentModule) }
     ]
   },
   { path: 'auth', loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule) },
