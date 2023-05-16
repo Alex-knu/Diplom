@@ -11,4 +11,4 @@ import { PrimeNgComponentsModule } from 'src/app/modules/primeng-components-modu
   ]
 })
 
-export class AuthModule { }
+export class ApplicationModule { }
