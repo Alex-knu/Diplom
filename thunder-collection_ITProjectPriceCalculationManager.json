@@ -1,0 +1,302 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "ITProjectPriceCalculationManager",
+    "dateExported": "2023-05-15T20:55:35.127Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "7b7de74a-100f-4b97-875a-65c1416a11ef",
+            "name": "Router.API",
+            "containerId": "",
+            "created": "2023-05-10T16:55:20.601Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "6e4305c6-5f63-4998-b84e-87548bca34e7",
+            "name": "BaseApplicationManagerController",
+            "containerId": "7b7de74a-100f-4b97-875a-65c1416a11ef",
+            "created": "2023-05-10T16:55:51.223Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "bba9e257-90b3-4680-8f87-097fa251889d",
+            "name": "ITProjectsManager.API",
+            "containerId": "",
+            "created": "2023-05-10T17:04:36.420Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "e2d46315-048f-4431-a655-966286a9ecdb",
+            "name": "BaseApplicationApiController",
+            "containerId": "bba9e257-90b3-4680-8f87-097fa251889d",
+            "created": "2023-05-10T17:04:46.152Z",
+            "sortNum": 40000
+        },
+        {
+            "_id": "b5f44c66-689a-47a7-9e15-91ed65ee82b3",
+            "name": "EvaluatorManagerController",
+            "containerId": "7b7de74a-100f-4b97-875a-65c1416a11ef",
+            "created": "2023-05-10T17:54:29.288Z",
+            "sortNum": 50000
+        },
+        {
+            "_id": "f864a944-d168-4700-868c-4e78ba74c67d",
+            "name": "EvaluatorApiController",
+            "containerId": "bba9e257-90b3-4680-8f87-097fa251889d",
+            "created": "2023-05-10T18:29:35.193Z",
+            "sortNum": 60000
+        },
+        {
+            "_id": "e384f4d0-2e6e-4788-8417-ac62ad60a8b7",
+            "name": "DepartmentManagerController",
+            "containerId": "7b7de74a-100f-4b97-875a-65c1416a11ef",
+            "created": "2023-05-11T20:07:03.798Z",
+            "sortNum": 70000
+        },
+        {
+            "_id": "d2718750-12cb-487b-b767-951d4a2ca1f2",
+            "name": "DepartmentApiController",
+            "containerId": "bba9e257-90b3-4680-8f87-097fa251889d",
+            "created": "2023-05-11T20:11:45.561Z",
+            "sortNum": 80000
+        },
+        {
+            "_id": "2d61cb75-94b5-4d2f-ab3c-9eadd85458cb",
+            "name": "AuthServer",
+            "containerId": "",
+            "created": "2023-05-12T18:47:29.338Z",
+            "sortNum": 90000
+        },
+        {
+            "_id": "88435ae2-f23b-4533-b1cf-32e112b19390",
+            "name": "AuthenticateController",
+            "containerId": "2d61cb75-94b5-4d2f-ab3c-9eadd85458cb",
+            "created": "2023-05-12T18:47:37.019Z",
+            "sortNum": 100000
+        },
+        {
+            "_id": "98cb17eb-82c7-4e81-aa0f-84bed0e34ee5",
+            "name": "CalculatorManagerController",
+            "containerId": "7b7de74a-100f-4b97-875a-65c1416a11ef",
+            "created": "2023-05-15T11:49:28.015Z",
+            "sortNum": 110000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "2389ecfa-431a-42bf-9011-e6f87e534e2b",
+            "colId": "0727d137-8043-4475-acb1-43ce4a87ef44",
+            "containerId": "d2718750-12cb-487b-b767-951d4a2ca1f2",
+            "name": "CreateDepartment",
+            "url": "http://localhost:5006/api/DepartmentApi",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-05-11T20:11:54.638Z",
+            "modified": "2023-05-13T11:58:58.261Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\": 0,\n  \"name\": \"Test\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "f082663d-89ea-47e4-a9cd-4f75e5f61ad1",
+            "colId": "0727d137-8043-4475-acb1-43ce4a87ef44",
+            "containerId": "6e4305c6-5f63-4998-b84e-87548bca34e7",
+            "name": "CreateApplication",
+            "url": "http://localhost:5008/api/BaseApplicationManager",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-05-10T16:56:02.502Z",
+            "modified": "2023-05-13T16:29:17.209Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Id\": 0,\n  \"CreatorId\": 1,\n  \"Name\": \"Tets2222\",\n  \"Description\": \"HAHAHAH\",\n  \"Status\": \"Estimate\",\n  \"Price\": 200000000000000,\n  \"Profit\": 15\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjU5NTI4NDFjLTJiNDItNGY4OS1iYzVhLTc4NDI0YTk3M2QwZCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhbGV4IiwianRpIjoiMGZiZWRkYjctZjcxMy00ODc4LTliMWItZmE2YjM1YjQ5MDgxIiwiZXhwIjoxNjg0MDA2MTI4LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMTAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.mq_HhfUg6L7ROwfbxZQaScp-bZuNtOlE34682LtJK1A"
+            },
+            "tests": []
+        },
+        {
+            "_id": "9f09ae15-7fb8-4a4f-9a77-ecfda7f5cbc9",
+            "colId": "0727d137-8043-4475-acb1-43ce4a87ef44",
+            "containerId": "6e4305c6-5f63-4998-b84e-87548bca34e7",
+            "name": "GetAllApplications",
+            "url": "http://localhost:5008/api/BaseApplicationManager/collection",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-05-10T17:02:23.251Z",
+            "modified": "2023-05-13T16:29:08.204Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjU5NTI4NDFjLTJiNDItNGY4OS1iYzVhLTc4NDI0YTk3M2QwZCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhbGV4IiwianRpIjoiMGZiZWRkYjctZjcxMy00ODc4LTliMWItZmE2YjM1YjQ5MDgxIiwiZXhwIjoxNjg0MDA2MTI4LCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMTAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.mq_HhfUg6L7ROwfbxZQaScp-bZuNtOlE34682LtJK1A"
+            },
+            "tests": []
+        },
+        {
+            "_id": "85cdc30a-c094-433c-96df-30a65f8a909b",
+            "colId": "0727d137-8043-4475-acb1-43ce4a87ef44",
+            "containerId": "e2d46315-048f-4431-a655-966286a9ecdb",
+            "name": "GetAllApplications",
+            "url": "http://localhost:5006/api/BaseApplicationApi/collection",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-05-10T17:04:54.804Z",
+            "modified": "2023-05-10T18:28:50.061Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "065b376a-f50d-4677-bf64-c01815f05130",
+            "colId": "0727d137-8043-4475-acb1-43ce4a87ef44",
+            "containerId": "b5f44c66-689a-47a7-9e15-91ed65ee82b3",
+            "name": "CreateEvaluator",
+            "url": "http://localhost:5008/api/EvaluatorManager",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2023-05-10T17:54:48.849Z",
+            "modified": "2023-05-11T20:15:05.257Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Id\": 0,\n  \"DepartmentId\": 1,\n  \"UserId\": \"dssafdsa\",\n  \"FirstName\": \"Test\",\n  \"LastName\": \"Test\",\n  \"Phone\": \"Test\",\n  \"Email\": \"Test\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "9a06a84e-e3e4-4ae8-81d3-46c046dc86d0",
+            "colId": "0727d137-8043-4475-acb1-43ce4a87ef44",
+            "containerId": "b5f44c66-689a-47a7-9e15-91ed65ee82b3",
+            "name": "GetAllEvaluators",
+            "url": "http://localhost:5008/api/EvaluatorManager/collection",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2023-05-10T18:12:10.181Z",
+            "modified": "2023-05-10T18:12:32.114Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "4b0a7476-8e7f-42e0-b5ea-9f40680c7404",
+            "colId": "0727d137-8043-4475-acb1-43ce4a87ef44",
+            "containerId": "f864a944-d168-4700-868c-4e78ba74c67d",
+            "name": "GetAllEvaluators",
+            "url": "http://localhost:5006/api/EvaluatorApi/collection",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2023-05-10T18:29:46.115Z",
+            "modified": "2023-05-10T18:30:30.130Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "b0b22a1d-ef53-4934-9df5-913e2db400bf",
+            "colId": "0727d137-8043-4475-acb1-43ce4a87ef44",
+            "containerId": "e384f4d0-2e6e-4788-8417-ac62ad60a8b7",
+            "name": "CreateDepartment",
+            "url": "http://localhost:5008/api/DepartmentManager",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2023-05-11T20:07:53.211Z",
+            "modified": "2023-05-11T20:09:42.521Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\": 0,\n  \"name\": \"Test\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "5c939b90-e24e-4c30-8166-09d5fbcb1e63",
+            "colId": "0727d137-8043-4475-acb1-43ce4a87ef44",
+            "containerId": "e384f4d0-2e6e-4788-8417-ac62ad60a8b7",
+            "name": "GetAllDepartments",
+            "url": "http://localhost:5008/api/DepartmentManager/collection",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2023-05-11T20:08:24.550Z",
+            "modified": "2023-05-11T20:08:50.592Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "2d5d80e6-7a76-4cca-89d7-3d729571d163",
+            "colId": "0727d137-8043-4475-acb1-43ce4a87ef44",
+            "containerId": "88435ae2-f23b-4533-b1cf-32e112b19390",
+            "name": "Register",
+            "url": "http://localhost:5010/api/authenticate/register",
+            "method": "POST",
+            "sortNum": 100000,
+            "created": "2023-05-12T18:47:49.368Z",
+            "modified": "2023-05-12T18:49:38.790Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\": \"alex\",\n  \"email\": \"a@gmail.com\",\n  \"password\": \"P@ssw0rd123\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "de7804dd-9055-4410-9396-f911d7d0a465",
+            "colId": "0727d137-8043-4475-acb1-43ce4a87ef44",
+            "containerId": "88435ae2-f23b-4533-b1cf-32e112b19390",
+            "name": "Login",
+            "url": "http://localhost:5010/api/authenticate/login",
+            "method": "POST",
+            "sortNum": 110000,
+            "created": "2023-05-12T18:50:14.449Z",
+            "modified": "2023-05-12T18:51:28.559Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"Username\": \"alex\",\n  \"Password\": \"P@ssw0rd123\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "94fc21bc-a895-41ac-8bd1-0edcf3461b89",
+            "colId": "0727d137-8043-4475-acb1-43ce4a87ef44",
+            "containerId": "98cb17eb-82c7-4e81-aa0f-84bed0e34ee5",
+            "name": "CalculateApplicationPrice",
+            "url": "http://localhost:5008/api/CalculatorManager",
+            "method": "POST",
+            "sortNum": 120000,
+            "created": "2023-05-15T11:49:41.255Z",
+            "modified": "2023-05-15T20:55:22.040Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"ApplicationId\": 1,\n  \"AverageCostLabor\": 25000,\n  \"AverageMonthlyRateWorkingHours\": 2000,\n  \"Overhead\": 0.3,\n  \"Profit\": 0.12,\n  \"SocialInsurance\": 0.05,\n  \"EvaluationFactors\": [\n    {\n      \"Id\": 0,\n      \"EvaluatorId\": 0,\n      \"FactorId\": 1,\n      \"Value\": 1,\n      \"SelfEvaluation\": 1,\n      \"FactorType\": 1,\n      \"DifficultyLevelsType\": 3\n    },\n    {\n      \"Id\": 0,\n      \"EvaluatorId\": 0,\n      \"FactorId\": 2,\n      \"Value\": 1,\n      \"SelfEvaluation\": 1,\n      \"FactorType\": 1,\n      \"DifficultyLevelsType\": 3\n    },\n    {\n      \"Id\": 0,\n      \"EvaluatorId\": 0,\n      \"FactorId\": 3,\n      \"Value\": 1,\n      \"SelfEvaluation\": 1,\n      \"FactorType\": 1,\n      \"DifficultyLevelsType\": 3\n    },\n    {\n      \"Id\": 0,\n      \"EvaluatorId\": 0,\n      \"FactorId\": 4,\n      \"Value\": 1,\n      \"SelfEvaluation\": 1,\n      \"FactorType\": 1,\n      \"DifficultyLevelsType\": 3\n    },\n    {\n      \"Id\": 0,\n      \"EvaluatorId\": 0,\n      \"FactorId\": 5,\n      \"Value\": 1,\n      \"SelfEvaluation\": 1,\n      \"FactorType\": 1,\n      \"DifficultyLevelsType\": 3\n    },\n    {\n      \"Id\": 0,\n      \"EvaluatorId\": 0,\n      \"FactorId\": 6,\n      \"Value\": 1,\n      \"SelfEvaluation\": 1,\n      \"FactorType\": 1,\n      \"DifficultyLevelsType\": 3\n    },\n    {\n      \"Id\": 0,\n      \"EvaluatorId\": 0,\n      \"FactorId\": 7,\n      \"Value\": 1,\n      \"SelfEvaluation\": 1,\n      \"FactorType\": 1,\n      \"DifficultyLevelsType\": 3\n    },\n    {\n      \"Id\": 0,\n      \"EvaluatorId\": 0,\n      \"FactorId\": 8,\n      \"Value\": 4.96,\n      \"SelfEvaluation\": 1,\n      \"FactorType\": 2,\n      \"DifficultyLevelsType\": 3\n    },\n    {\n      \"Id\": 0,\n      \"EvaluatorId\": 0,\n      \"FactorId\": 9,\n      \"Value\": 4.05,\n      \"SelfEvaluation\": 1,\n      \"FactorType\": 2,\n      \"DifficultyLevelsType\": 3\n    },\n    {\n      \"Id\": 0,\n      \"EvaluatorId\": 0,\n      \"FactorId\": 10,\n      \"Value\": 5.65,\n      \"SelfEvaluation\": 1,\n      \"FactorType\": 2,\n      \"DifficultyLevelsType\": 3\n    },\n    {\n      \"Id\": 0,\n      \"EvaluatorId\": 0,\n      \"FactorId\": 11,\n      \"Value\": 4.38,\n      \"SelfEvaluation\": 1,\n      \"FactorType\": 2,\n      \"DifficultyLevelsType\": 3\n    },\n    {\n      \"Id\": 0,\n      \"EvaluatorId\": 0,\n      \"FactorId\": 12,\n      \"Value\": 6.24,\n      \"SelfEvaluation\": 1,\n      \"FactorType\": 2,\n      \"DifficultyLevelsType\": 3\n    }\n  ],\n  \"ProgramsParametrEvaluationFactorDTO\": [\n    {\n      \"Id\": 24,\n      \"SLOC\": 57,\n      \"ProgramLanguageName\": \".NET\",\n      \"SubjectAreaElements\": [\n        {\n          \"Id\": 0,\n          \"EvaluatorId\": 0,\n          \"FactorId\": 13,\n          \"Count\": 2,\n          \"Value\": 7,\n          \"SelfEvaluation\": 1,\n          \"FactorType\": 3,\n          \"DifficultyLevelsType\": 3\n        },\n        {\n          \"Id\": 0,\n          \"EvaluatorId\": 0,\n          \"FactorId\": 13,\n          \"Count\": 1,\n          \"Value\": 10,\n          \"SelfEvaluation\": 1,\n          \"FactorType\": 3,\n          \"DifficultyLevelsType\": 5\n        },\n        {\n          \"Id\": 0,\n          \"EvaluatorId\": 0,\n          \"FactorId\": 13,\n          \"Count\": 1,\n          \"Value\": 15,\n          \"SelfEvaluation\": 1,\n          \"FactorType\": 3,\n          \"DifficultyLevelsType\": 6\n        },\n        {\n          \"Id\": 0,\n          \"EvaluatorId\": 0,\n          \"FactorId\": 14,\n          \"Count\": 1,\n          \"Value\": 5,\n          \"SelfEvaluation\": 1,\n          \"FactorType\": 3,\n          \"DifficultyLevelsType\": 3\n        },\n        {\n          \"Id\": 0,\n          \"EvaluatorId\": 0,\n          \"FactorId\": 14,\n          \"Count\": 1,\n          \"Value\": 7,\n          \"SelfEvaluation\": 1,\n          \"FactorType\": 3,\n          \"DifficultyLevelsType\": 5\n        },\n        {\n          \"Id\": 0,\n          \"EvaluatorId\": 0,\n          \"FactorId\": 14,\n          \"Count\": 1,\n          \"Value\": 10,\n          \"SelfEvaluation\": 1,\n          \"FactorType\": 3,\n          \"DifficultyLevelsType\": 6\n        },\n        {\n          \"Id\": 0,\n          \"EvaluatorId\": 0,\n          \"FactorId\": 15,\n          \"Count\": 1,\n          \"Value\": 4,\n          \"SelfEvaluation\": 1,\n          \"FactorType\": 4,\n          \"DifficultyLevelsType\": 5\n        },\n        {\n          \"Id\": 0,\n          \"EvaluatorId\": 0,\n          \"FactorId\": 16,\n          \"Count\": 1,\n          \"Value\": 5,\n          \"SelfEvaluation\": 1,\n          \"FactorType\": 4,\n          \"DifficultyLevelsType\": 5\n        },\n        {\n          \"Id\": 0,\n          \"EvaluatorId\": 0,\n          \"FactorId\": 17,\n          \"Count\": 1,\n          \"Value\": 4,\n          \"SelfEvaluation\": 1,\n          \"FactorType\": 4,\n          \"DifficultyLevelsType\": 5\n        }\n      ]\n    }\n  ]\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjU5NTI4NDFjLTJiNDItNGY4OS1iYzVhLTc4NDI0YTk3M2QwZCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJhbGV4IiwianRpIjoiN2Y0YjI4MzMtMDU0Ny00YjgyLTkzNDItNmYyYTMzMGFlODFkIiwiZXhwIjoxNjg0MTc5ODkwLCJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjUwMTAiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjQyMDAifQ.X_FxySi6tIypQOacFhlM4liW4yN42ziqS1rcHwj15ek"
+            },
+            "tests": []
+        }
+    ]
+}

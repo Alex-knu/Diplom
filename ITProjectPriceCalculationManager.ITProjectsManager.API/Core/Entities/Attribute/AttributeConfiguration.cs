@@ -7,8 +7,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
     {
         public void Configure(EntityTypeBuilder<Attribute> builder)
         {
-            builder
-                   .HasKey(estimator => estimator.Id);
+            builder.HasKey(estimator => estimator.Id);
 
             builder.Property(estimator => estimator.Name)
                    .IsRequired();

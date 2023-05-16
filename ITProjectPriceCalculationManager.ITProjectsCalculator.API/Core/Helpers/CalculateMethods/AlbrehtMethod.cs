@@ -10,7 +10,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers
         {
             double ksloc = 0;
             EvaluationResultDTO result = new EvaluationResultDTO();
-            BaseDelphiTechnique tehnique = SetStrategi(evaluation);
+            BaseDelphiTechnique tehnique = SetStrategy(evaluation);
 
             try
             {
@@ -31,13 +31,13 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers
             return result;
         }
 
-        private double CountUOF(IEnumerable<IGrouping<string, EvaluationFactorDTO>> subjectAreaElements, double? confidenceArea, BaseDelphiTechnique tehnique)
+        private double CountUOF(IEnumerable<IGrouping<int, EvaluationFactorDTO>> subjectAreaElements, double? confidenceArea, BaseDelphiTechnique tehnique)
         {
             double sum = 0;
 
             foreach (var subjectAreaElement in subjectAreaElements)
             {
-                var result = tehnique.CheckFactors(subjectAreaElement.ToList(), confidenceArea.Value);
+                var result = tehnique.CheckFactors(subjectAreaElement.ToList(), confidenceArea);
 
                 sum = sum + result.FactorValue * result.Count.Value;
             }
@@ -56,7 +56,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers
 
             foreach (var influenceFactors in GetFactors(evaluations.Where(e => e.FactorType == FactorType.InfluenceFactors)))
             {
-                var result = tehnique.CheckFactors(influenceFactors.ToList(), confidenceArea.Value);
+                var result = tehnique.CheckFactors(influenceFactors.ToList(), confidenceArea);
 
                 if (!string.IsNullOrEmpty(result.Error))
                 {
@@ -69,13 +69,13 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers
             return 2.94 * productInfluenceFactors * Math.Pow(ksloc, CountB(GetFactors(evaluations.Where(e => e.FactorType == FactorType.ScaleFactors)), confidenceArea, tehnique));
         }
 
-        private double CountB(IEnumerable<IGrouping<string, EvaluationFactorDTO>> evaluations, double? confidenceArea, BaseDelphiTechnique tehnique)
+        private double CountB(IEnumerable<IGrouping<int, EvaluationFactorDTO>> evaluations, double? confidenceArea, BaseDelphiTechnique tehnique)
         {
             double sumScaleFactors = 0;
 
             foreach (var scaleFactor in evaluations)
             {
-                var result = tehnique.CheckFactors(scaleFactor.ToList(), confidenceArea.Value);
+                var result = tehnique.CheckFactors(scaleFactor.ToList(), confidenceArea);
 
                 if (!string.IsNullOrEmpty(result.Error))
                 {
@@ -88,12 +88,12 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers
             return 0.91 + sumScaleFactors * 0.01;
         }
 
-        private IEnumerable<IGrouping<string, EvaluationFactorDTO>> GetFactors(IEnumerable<EvaluationFactorDTO> evaluations)
+        private IEnumerable<IGrouping<int, EvaluationFactorDTO>> GetFactors(IEnumerable<EvaluationFactorDTO> evaluations)
         {
-            return from evaluation in evaluations group evaluation by evaluation.Name;
+            return from evaluation in evaluations group evaluation by evaluation.FactorId;
         }
 
-        private BaseDelphiTechnique SetStrategi(EvaluationDTO evaluation)
+        private BaseDelphiTechnique SetStrategy(EvaluationDTO evaluation)
         {
             if (evaluation.ConfidenceArea.HasValue)
             {

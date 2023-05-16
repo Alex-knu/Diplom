@@ -4,12 +4,12 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers
 {
     internal class DelphiTechniqueWithCoefficientVariations : BaseDelphiTechnique
     {
-        protected override bool CheckCondition(IEnumerable<IFactor> factors, double etalon = 33)
+        protected override bool CheckCondition(IEnumerable<IFactor> factors, double? etalon)
         {
             double midleValue = GetSumOfValue(factors) / factors.Count();
             double standardDeviation = Math.Sqrt(factors.Sum(f => f.Value - midleValue) / factors.Count());
 
-            return standardDeviation * 100 / midleValue > etalon;
+            return standardDeviation * 100 / midleValue > 33;
         }
 
         protected override double GetSumOfValue(IEnumerable<IFactor> factors)

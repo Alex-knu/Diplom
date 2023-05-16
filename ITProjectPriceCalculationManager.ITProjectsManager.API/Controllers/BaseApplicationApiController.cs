@@ -8,51 +8,42 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers
     [Route("api/[controller]")]
     public class BaseApplicationApiController : ControllerBase
     {
-        
-        private readonly IApplicationService _ApplicationService;
+        private readonly IBaseApplicationService _baseApplicationService;
 
-        public BaseApplicationApiController(IApplicationService applicationService)
+        public BaseApplicationApiController(IBaseApplicationService baseApplicationService)
         {
-            _ApplicationService = applicationService;
+            _baseApplicationService = baseApplicationService;
         }
 
         [HttpGet]
         [Route("collection")]
         public async Task<IActionResult> GetAllApplications()
         {
-            return Ok(await _ApplicationService.GetApplicationsAsync());
+            return Ok(await _baseApplicationService.GetBaseApplicationsAsync());
         }
 
         [HttpGet]
         public async Task<IActionResult> GetApplicationById(int id)
         {
-            return Ok(await _ApplicationService.GetApplicationsByIdAsync(id));
+            return Ok(await _baseApplicationService.GetBaseApplicationsByIdAsync(id));
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateApplication(BaseApplicationDTO query)
         {
-            return Ok(await _ApplicationService.CreateApplicationAsync(new ApplicationDTO
-            {
-                Id = query.Id,
-                Name = query.Name,
-                Description = query.Description,
-                Status = query.Status,
-                Price = query.Price,
-                Profit = query.Profit
-            }));
+            return Ok(await _baseApplicationService.CreateBaseApplicationAsync(query));
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateApplication(BaseApplicationDTO query)
         {
-            return Ok(await _ApplicationService.UpdateApplicationAsync((ApplicationDTO)query));
+            return Ok(await _baseApplicationService.UpdateBaseApplicationAsync((ApplicationDTO)query));
         }
 
         [HttpDelete]
         public async Task<IActionResult> DeleteApplication(int id)
         {
-            return Ok(await _ApplicationService.DeleteApplicationAsync(id));
+            return Ok(await _baseApplicationService.DeleteBaseApplicationAsync(id));
         }
     }
 }

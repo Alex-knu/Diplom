@@ -7,6 +7,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public ICollection<Profile.Profile> Profiles { get; set; }
+        public virtual ICollection<Profile.Profile> Profiles { get; set; }
+        public virtual ICollection<DifficultyLevelsTypeToFactorType.DifficultyLevelsTypeToFactorType> DifficultyLevelsTypeToFactorTypes { get; set; }
     }
 }

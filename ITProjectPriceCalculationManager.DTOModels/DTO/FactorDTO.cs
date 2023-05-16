@@ -1,6 +1,3 @@
-using ITProjectPriceCalculationManager.DTOModels.Enums;
-using ITProjectPriceCalculationManager.DTOModels.Interfaces;
-
 namespace ITProjectPriceCalculationManager.DTOModels.DTO
 {
     public class FactorDTO

@@ -1,4 +1,5 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.Router.API.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,19 +10,21 @@ namespace ITProjectPriceCalculationManager.Router.API.Controllers
     [Route("api/[controller]")]
     public class CalculatorManagerController : ControllerBase
     {
-        private readonly ILogger<CalculatorManagerController> _Logger;
-        private readonly HttpClient _Client;
+        private readonly ILogger<CalculatorManagerController> _logger;
+        private readonly HttpClient _client;
+        private readonly IRouteService _routeService;
 
-        public CalculatorManagerController(ILogger<CalculatorManagerController> logger, IHttpClientFactory httpClientFactory)
+        public CalculatorManagerController(ILogger<CalculatorManagerController> logger, IHttpClientFactory httpClientFactory, IRouteService routeService)
         {
-            _Logger = logger;
-            _Client = httpClientFactory.CreateClient("ITProjectsCalculator");
+            _logger = logger;
+            _client = httpClientFactory.CreateClient("ITProjectsCalculator");
+            _routeService = routeService;
         }
 
         [HttpPost]
-        public async Task<IActionResult> CalculateApplicationPrice(ApplicationDTO query)
+        public async Task<IActionResult> CalculateApplicationPrice(EvaluationDTO query)
         {
-            return Ok(await _Client.PostAsJsonAsync<ApplicationDTO, ApplicationDTO>("api/calculateapi", query));
+            return Ok(await _routeService.PostAsJsonAsync<EvaluationDTO, EvaluationResultDTO>(_client, "calculateapi", query));
         }
     }
 }

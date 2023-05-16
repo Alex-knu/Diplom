@@ -6,70 +6,35 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Ser
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 {
-    internal class ApplicationService : IApplicationService
+    internal class ApplicationService : BaseService<Application, int, ApplicationDTO>, IApplicationService
     {
-        protected readonly IRepository<Application, int> _applicationRepository;
-        protected readonly IMapper _mapper;
-
-        public ApplicationService(IRepository<Application, int> applicationRepository, IMapper mapper)
+        public ApplicationService(IRepository<Application, int> repository, IMapper mapper) : base(repository, mapper)
         {
-            _applicationRepository = applicationRepository;
-            _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ApplicationDTO>> GetApplicationsAsync()
+        public Task<ApplicationDTO> CreateApplicationAsync(ApplicationDTO application)
         {
-            var applications = await _applicationRepository.GetAllAsync();
-
-            return _mapper.Map<IEnumerable<ApplicationDTO>>(applications);
-        }
-        
-        public async Task<ApplicationDTO> GetApplicationsByIdAsync(int id)
-        {
-            var applications = await _applicationRepository.GetByKeyAsync(id);
-
-            return _mapper.Map<ApplicationDTO>(applications);
+            return base.CreateEntityAsync(application);
         }
 
-        public async Task<ApplicationDTO> CreateApplicationAsync(ApplicationDTO dto)
+        public Task<ApplicationDTO> DeleteApplicationAsync(int id)
         {
-            var application = _mapper.Map<Application>(dto);
-            var newApplication = await _applicationRepository.AddAsync(application);
-            await _applicationRepository.SaveChangesAcync();
-
-            return _mapper.Map<ApplicationDTO>(newApplication);
+            return base.DeleteEntityAsync(id);
         }
 
-        public async Task<ApplicationDTO> UpdateApplicationAsync(ApplicationDTO query)
+        public Task<IEnumerable<ApplicationDTO>> GetApplicationsAsync()
         {
-            var application = _mapper.Map<Application>(query);
-
-            // foreach(var value in query.Profiles)
-            // {
-            //     var profile = _mapper.Map<Entities.ProfileEntity.Profile>(value);
-            //     await _profileRepository.UpdateAsync(profile);
-            //     await _applicationRepository.SaveChangesAcync();
-            // }
-
-            var updateApplication = await _applicationRepository.UpdateAsync(application);
-            await _applicationRepository.SaveChangesAcync();
-
-            return _mapper.Map<ApplicationDTO>(updateApplication);
+            return base.GetEntitysAsync();
         }
 
-        public async Task<ApplicationDTO> DeleteApplicationAsync(int id)
+        public Task<ApplicationDTO> GetApplicationsByIdAsync(int id)
         {
-            var application = await _applicationRepository.GetByKeyAsync(id);
+            return base.GetEntitysByIdAsync(id);
+        }
 
-            if (application == null)
-            {
-                throw new ArgumentException("Application not found");
-            }
-
-            var deleteApplication = await _applicationRepository.DeleteAsync(application);
-            await _applicationRepository.SaveChangesAcync();
-
-            return _mapper.Map<ApplicationDTO>(deleteApplication);
+        public Task<ApplicationDTO> UpdateApplicationAsync(ApplicationDTO application)
+        {
+            return base.UpdateEntityAsync(application);
         }
     }
 }

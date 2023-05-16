@@ -34,37 +34,29 @@ namespace ITProjectPriceCalculationManager.Extentions.Handlers
             HttpStatusCode status;
             string message;
 
-            var exceptionType = exception.GetType();
-
-            if (exceptionType == typeof(BadRequestException))
+            switch (exception)
             {
-                message = exception.Message;
-                status = HttpStatusCode.BadRequest;
-            }
-            else if (exceptionType == typeof(NotFoundException))
-            {
-                message = exception.Message;
-                status = HttpStatusCode.NotFound;
-            }
-            else if (exceptionType == typeof(NotImplementedException))
-            {
-                status = HttpStatusCode.NotImplemented;
-                message = exception.Message;
-            }
-            else if (exceptionType == typeof(UnauthorizedAccessException))
-            {
-                status = HttpStatusCode.Unauthorized;
-                message = exception.Message;
-            }
-            else if (exceptionType == typeof(KeyNotFoundException))
-            {
-                status = HttpStatusCode.Unauthorized;
-                message = exception.Message;
-            }
-            else
-            {
-                status = HttpStatusCode.InternalServerError;
-                message = exception.Message;
+                case BadRequestException:
+                    message = exception.Message;
+                    status = HttpStatusCode.BadRequest;
+                    break;
+                case NotFoundException:
+                    message = exception.Message;
+                    status = HttpStatusCode.NotFound;
+                    break;
+                case NotImplementedException:
+                    message = exception.Message;
+                    status = HttpStatusCode.NotImplemented;
+                    break;
+                case UnauthorizedAccessException:
+                case KeyNotFoundException:
+                    status = HttpStatusCode.Unauthorized;
+                    message = exception.Message;
+                    break;
+                default:
+                    status = HttpStatusCode.InternalServerError;
+                    message = exception.Message;
+                    break;
             }
 
             var exceptionResult = JsonSerializer.Serialize(new { error = message });

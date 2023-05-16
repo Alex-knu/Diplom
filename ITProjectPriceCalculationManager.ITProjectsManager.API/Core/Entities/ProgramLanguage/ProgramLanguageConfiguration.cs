@@ -7,8 +7,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.P
     {
         public void Configure(EntityTypeBuilder<ProgramLanguage> builder)
         {
-            builder
-                .HasKey(programLanguage => programLanguage.Id);
+            builder.HasKey(programLanguage => programLanguage.Id);
 
             builder.Property(programLanguage => programLanguage.Name)
                    .HasMaxLength(256)

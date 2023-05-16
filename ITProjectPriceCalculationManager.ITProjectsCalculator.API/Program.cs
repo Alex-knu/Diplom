@@ -1,6 +1,7 @@
 using System.Reflection;
 using ITProjectPriceCalculationManager.Extentions.Extentions;
 using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfaces.Services;
+using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Services;
 using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Stub;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +10,7 @@ builder.Configuration
     .AddEnvironmentVariables()
     .AddUserSecrets(Assembly.GetExecutingAssembly(), true);
 
-builder.Services.AddScoped(typeof(ICalculateService), typeof(StubCalculateService));
+builder.Services.AddScoped(typeof(ICalculateService), typeof(CalculateService));
 // Add services to the container.
 
 builder.Services.AddControllers();

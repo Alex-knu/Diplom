@@ -4,7 +4,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers
 {
     internal class DelphiTechniqueWithConfidenceArea : BaseDelphiTechnique
     {
-        protected override bool CheckCondition(IEnumerable<IFactor> factors, double etalon)
+        protected override bool CheckCondition(IEnumerable<IFactor> factors, double? etalon)
         {
             double maxValue = factors.Max(f => f.Value);
             double minValue = factors.Min(f => f.Value);

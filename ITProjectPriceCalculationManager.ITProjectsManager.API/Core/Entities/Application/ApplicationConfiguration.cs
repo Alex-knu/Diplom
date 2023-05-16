@@ -5,10 +5,9 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
 {
     internal class ApplicationConfiguration : IEntityTypeConfiguration<Application>
     {
-        public void Configure(EntityTypeBuilder<Application> builder)
-        {
-            builder
-                   .HasKey(application => application.Id);
+       public void Configure(EntityTypeBuilder<Application> builder)
+       {
+            builder.HasKey(application => application.Id);
 
             builder.Property(application => application.Price)
                    .IsRequired();
@@ -28,6 +27,17 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
             builder.Property(application => application.AverageMonthlyRateWorkingHours)
                    .IsRequired();
 
+            builder.Property(application => application.Name)
+                 .IsRequired();
+
+            builder.Property(application => application.Description)
+               .IsRequired();
+
+            builder.Property(application => application.Status)
+                 .IsRequired();
+
+            builder.Property(application => application.ConfidenceArea);
+
             builder
                    .HasMany(application => application.ProgramsParametrs)
                    .WithOne(programParametr => programParametr.Application)
@@ -37,6 +47,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
                    .HasOne(application => application.Creator)
                    .WithMany(estimator => estimator.Applications)
                    .HasForeignKey(programsParametr => programsParametr.CreatorId);
-        }
+       }
     }
 }

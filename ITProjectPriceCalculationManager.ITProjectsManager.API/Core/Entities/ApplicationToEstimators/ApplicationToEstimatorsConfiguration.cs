@@ -10,8 +10,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
             builder
                    .HasKey(applicationToEstimators => applicationToEstimators.Id);
 
-            builder.Property(applicationToEstimators => applicationToEstimators.Coeficient)
-                   .IsRequired();
+            builder.Property(applicationToEstimators => applicationToEstimators.SelfEvaluation);
 
             builder
                 .HasOne(applicationToEstimators => applicationToEstimators.Application)

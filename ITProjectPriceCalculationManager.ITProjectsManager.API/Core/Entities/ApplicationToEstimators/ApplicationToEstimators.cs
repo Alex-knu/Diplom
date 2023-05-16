@@ -7,7 +7,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
         public int Id { get; set; }
         public int ApplicationId { get; set; }
         public int EstimatorId { get; set; }
-        public double Coeficient { get; set; }
+        public double? SelfEvaluation { get; set; }
 
         public Application.Application Application { get; set; }
         public Estimator.Estimator Estimator { get; set; }
