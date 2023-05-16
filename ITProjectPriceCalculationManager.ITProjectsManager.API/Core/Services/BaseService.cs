@@ -1,3 +1,4 @@
+using Ardalis.Specification;
 using AutoMapper;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
@@ -49,6 +50,13 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
         protected virtual async Task<IEnumerable<TResult>> GetEntitysAsync()
         {
             var domainEntity = await _repository.GetAllAsync();
+
+            return _mapper.Map<IEnumerable<TResult>>(domainEntity);
+        }
+
+        protected virtual async Task<IEnumerable<TResult>> GetEntityListBySpecAsync(Specification<TEntity> specification)
+        {
+            var domainEntity = await _repository.GetListBySpecAsync(specification);
 
             return _mapper.Map<IEnumerable<TResult>>(domainEntity);
         }

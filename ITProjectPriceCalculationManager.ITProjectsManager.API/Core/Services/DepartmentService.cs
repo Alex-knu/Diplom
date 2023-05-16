@@ -22,6 +22,11 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
             return base.DeleteEntityAsync(id);
         }
 
+        public Task<IEnumerable<DepartmentDTO>> GetDepartmentsTreeAsync()
+        {
+            return base.GetEntityListBySpecAsync(new Departments.DepartmentsTree());
+        }
+
         public Task<IEnumerable<DepartmentDTO>> GetDepartmentsAsync()
         {
             return base.GetEntitysAsync();

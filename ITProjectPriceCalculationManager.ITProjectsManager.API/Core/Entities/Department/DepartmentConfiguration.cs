@@ -14,7 +14,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.D
                    .IsRequired();
 
             builder
-              .HasMany(department => department.SubDepartment)
+              .HasMany(department => department.SubDepartments)
               .WithOne(department => department.Parent)
               .HasForeignKey(department => department.ParentId);
         }
