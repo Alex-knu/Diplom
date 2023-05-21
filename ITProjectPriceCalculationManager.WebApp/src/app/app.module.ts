@@ -11,6 +11,7 @@ import { services } from './shared/services';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/services/auth-interceptor.service';
 import { DepartmentTreeComponent } from './components/departmets/department-tree/department-tree.component';
+import { ApplicationEvaluationComponent } from './components/application/application-evaluation/application-evaluation.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { DepartmentTreeComponent } from './components/departmets/department-tree
     NotfoundComponent,
     ApplicationInfoComponent,
     ApplicationTableComponent,
+    ApplicationEvaluationComponent,
     DepartmentTreeComponent
   ],
   imports: [
