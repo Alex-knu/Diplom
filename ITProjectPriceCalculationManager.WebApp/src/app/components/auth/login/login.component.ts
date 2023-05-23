@@ -1,3 +1,4 @@
+import jwt_decode from 'jwt-decode';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
@@ -5,6 +6,7 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { UserModel } from 'src/app/shared/models/user.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { TokenService } from 'src/app/shared/services/core/token.service';
+import { UserLoginModel } from 'src/app/shared/models/userLogin.model';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +22,6 @@ import { TokenService } from 'src/app/shared/services/core/token.service';
 })
 
 export class LoginComponent {
-
   username: string;
   password!: string;
 
@@ -33,12 +34,21 @@ export class LoginComponent {
   ngOnInit(): void { }
 
   public login() {
-    this.authService.login(new UserModel(this.username, this.password)).subscribe(
+    this.authService.login(new UserLoginModel(this.username, this.password)).subscribe(
       loginInfo => {
+        this.decodeToken(loginInfo.token);
         this.tokenService.setToken(loginInfo.token);
       },
       error => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
       });
+  }
+
+  decodeToken(token: string) {
+    try {
+      this.tokenService.setUserInfo(jwt_decode(token));
+    } catch (error) {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
+    }
   }
 }
