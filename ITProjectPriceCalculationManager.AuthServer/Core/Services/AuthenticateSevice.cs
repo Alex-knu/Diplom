@@ -36,14 +36,14 @@ namespace ITProjectPriceCalculationManager.AuthServer.Core.Services
 
             var authClaims = new List<Claim>
                  {
-                     new Claim(ClaimTypes.NameIdentifier, user.Id),
-                     new Claim(ClaimTypes.Name, user.UserName),
-                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                     new Claim("UserIdentifier", user.Id),
+                     new Claim("UserName", user.UserName),
+                     new Claim("Jti", Guid.NewGuid().ToString()),
                  };
 
             foreach (var userRole in userRoles)
             {
-                authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+                authClaims.Add(new Claim("Role", userRole));
             }
 
             var token = GetToken(authClaims);
