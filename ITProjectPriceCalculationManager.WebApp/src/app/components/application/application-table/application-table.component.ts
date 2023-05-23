@@ -4,6 +4,7 @@ import { MessageService, ConfirmationService } from 'primeng/api';
 import { Application } from 'src/app/shared/models/application.model';
 import { BaseApplication } from 'src/app/shared/models/baseApplication.model';
 import { BaseApplicationService } from 'src/app/shared/services/api/baseApplication.service';
+import { TokenService } from 'src/app/shared/services/core/token.service';
 
 @Component({
   selector: 'app-application-table',
@@ -22,7 +23,8 @@ export class ApplicationTableComponent {
   constructor(
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private baseApplicationService: BaseApplicationService) { }
+    private baseApplicationService: BaseApplicationService,
+    private tokenService: TokenService) { }
 
   ngOnInit() {
     this.loading = true;
@@ -54,6 +56,7 @@ export class ApplicationTableComponent {
       this.application.id = 0;
       this.application.price = 0;
       this.application.status = "New";
+      this.application.userCreatorId = this.tokenService.getUserIdentifier();
       this.baseApplicationService.single.create(this.application).subscribe(
         application => {
           this.applications.push(application);

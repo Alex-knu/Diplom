@@ -6,6 +6,7 @@ export class BaseApplication extends BaseModel {
     super(id);
   }
 
+  userCreatorId: string;
   name: string;
   description: string;
   status: string;
