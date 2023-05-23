@@ -12,29 +12,29 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
         {
         }
 
-        public Task<ApplicationDTO> CreateApplicationAsync(ApplicationDTO application)
+        public async Task<ApplicationDTO> CreateApplicationAsync(ApplicationDTO application)
         {
-            return base.CreateEntityAsync(application);
+            return await base.CreateEntityAsync(application);
         }
 
-        public Task<ApplicationDTO> DeleteApplicationAsync(int id)
+        public async Task<ApplicationDTO> DeleteApplicationAsync(int id)
         {
-            return base.DeleteEntityAsync(id);
+            return await base.DeleteEntityAsync(id);
         }
 
-        public Task<IEnumerable<ApplicationDTO>> GetApplicationsAsync()
+        public async Task<IEnumerable<ApplicationDTO>> GetApplicationsAsync()
         {
-            return base.GetEntitysAsync();
+            return await base.GetEntitysAsync();
         }
 
-        public Task<ApplicationDTO> GetApplicationsByIdAsync(int id)
+        public async Task<ApplicationDTO> GetApplicationsByIdAsync(int id)
         {
-            return base.GetEntitysByIdAsync(id);
+            return await base.GetEntitysByIdAsync(id);
         }
 
-        public Task<ApplicationDTO> UpdateApplicationAsync(ApplicationDTO application)
+        public async Task<ApplicationDTO> UpdateApplicationAsync(ApplicationDTO application)
         {
-            return base.UpdateEntityAsync(application);
+            return await base.UpdateEntityAsync(application);
         }
     }
 }
