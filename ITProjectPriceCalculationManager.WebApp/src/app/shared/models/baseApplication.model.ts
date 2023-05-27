@@ -12,4 +12,9 @@ export class BaseApplication extends BaseModel {
   status: string;
   price: number | null;
   profit: number;
+  confidenceArea: number | null;
+  overhead: number;
+  socialInsurance: number;
+  averageCostLabor: number;
+  averageMonthlyRateWorkingHours: number;
 }
