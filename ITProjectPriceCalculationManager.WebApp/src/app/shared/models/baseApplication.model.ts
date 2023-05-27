@@ -1,4 +1,5 @@
 import { BaseModel } from "./base.model";
+import { ProgramLanguage } from "./programLanguage.model";
 
 export class BaseApplication extends BaseModel {
 
@@ -17,4 +18,5 @@ export class BaseApplication extends BaseModel {
   socialInsurance: number;
   averageCostLabor: number;
   averageMonthlyRateWorkingHours: number;
+  programLanguages: ProgramLanguage[];
 }

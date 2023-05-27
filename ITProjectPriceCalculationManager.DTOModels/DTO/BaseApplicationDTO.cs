@@ -10,5 +10,11 @@ namespace ITProjectPriceCalculationManager.DTOModels.DTO
         public string Status { get; set; } 
         public double? Price { get; set; }
         public double Profit { get; set; }
+        public double? ConfidenceArea { get; set; }
+        public double Overhead { get; set; }
+        public double SocialInsurance { get; set; }
+        public double AverageCostLabor { get; set; }
+        public double AverageMonthlyRateWorkingHours { get; set; }
+        public List<ProgramLanguageDTO> ProgramLanguages{ get; set; }
     }
 }
