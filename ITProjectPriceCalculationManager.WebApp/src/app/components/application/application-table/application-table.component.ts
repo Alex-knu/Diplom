@@ -2,9 +2,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { Application } from 'src/app/shared/models/application.model';
+import { ApplicationToEstimators } from 'src/app/shared/models/applicationToEstimators.model';
 import { BaseApplication } from 'src/app/shared/models/baseApplication.model';
+import { Evaluator } from 'src/app/shared/models/evaluator.model';
 import { ProgramLanguage } from 'src/app/shared/models/programLanguage.model';
+import { ApplicationToEstimatorsService } from 'src/app/shared/services/api/applicationToEstimators.service';
 import { BaseApplicationService } from 'src/app/shared/services/api/baseApplication.service';
+import { EstimatorService } from 'src/app/shared/services/api/estimator.service';
 import { ProgramLanguageService } from 'src/app/shared/services/api/programLanguage.service';
 import { TokenService } from 'src/app/shared/services/core/token.service';
 
@@ -19,15 +23,21 @@ export class ApplicationTableComponent {
   applicationDialog: boolean;
   applications: BaseApplication[];
   application: BaseApplication;
+  applicationToEstimators: ApplicationToEstimators;
+  evaluators: Evaluator[];
+  applicationToEstimatorsDialog: boolean;
   selectedApplications: BaseApplication[];
   submitted: boolean;
   programLanguages: ProgramLanguage[];
   selectedProgramLanguages: ProgramLanguage[];
+  selectedEvaluators: Evaluator[];
 
   constructor(
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
+    private applicationToEstimatorsService: ApplicationToEstimatorsService,
     private baseApplicationService: BaseApplicationService,
+    private estimatorService: EstimatorService,
     private programLanguageService: ProgramLanguageService,
     private tokenService: TokenService) { }
 
@@ -111,6 +121,43 @@ export class ApplicationTableComponent {
     this.application = new BaseApplication();
     this.submitted = false;
     this.applicationDialog = true;
+  }
+
+  addEstimatorGroup(applicationId: number) {
+    this.estimatorService.collection.getAll()
+      .subscribe(
+        (evaluators) => {
+          evaluators.forEach((evaluator) => {
+            evaluator.name = evaluator.firstName + ' ' + evaluator.lastName;
+          });
+
+          this.evaluators = evaluators;
+        });
+
+    this.applicationToEstimators = new ApplicationToEstimators();
+    this.submitted = false;
+    this.applicationToEstimatorsDialog = true;
+
+    this.applicationToEstimators.applicationId = applicationId;
+  }
+
+  saveEstimatorGroup() {
+    this.submitted = true;
+    this.applicationToEstimators.evaluators = this.selectedEvaluators;
+
+    this.applicationToEstimatorsService.single.create(this.applicationToEstimators).subscribe(
+      () => {
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Application created' })
+        this.applicationToEstimatorsDialog = false;
+      },
+      error => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
+      })
+  }
+
+  hideEstimatorGroupDialog() {
+    this.applicationToEstimatorsDialog = false;
+    this.submitted = false;
   }
 
   hideDialog() {

@@ -5,13 +5,17 @@ import { ApplicationService } from "./api/application.service";
 import { BaseApplicationService } from "./api/baseApplication.service";
 import { DepartmentService } from "./api/department.service";
 import { ProgramLanguageService } from "./api/programLanguage.service";
+import { ApplicationToEstimatorsService } from "./api/applicationToEstimators.service";
+import { EstimatorService } from "./api/estimator.service";
 
 export const services = [
   HttpService,
   ClientConfigurationService,
   ApiService,
   ApplicationService,
+  ApplicationToEstimatorsService,
   BaseApplicationService,
   DepartmentService,
+  EstimatorService,
   ProgramLanguageService
 ]

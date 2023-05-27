@@ -22,6 +22,7 @@ builder.Services.AddScoped(typeof(IDepartmentService), typeof(DepartmentService)
 builder.Services.AddScoped(typeof(IEvaluationService), typeof(EvaluationService));
 builder.Services.AddScoped(typeof(IEvaluatorService), typeof(EvaluatorService));
 builder.Services.AddScoped(typeof(IProgramLanguageService), typeof(ProgramLanguageService));
+builder.Services.AddScoped(typeof(IApplicationToEstimatorsService), typeof(ApplicationToEstimatorsService));
 //builder.Services.AddScoped(typeof(IApplicationService), typeof(StubApplicationService));
 
 builder.Services.AddControllers();
