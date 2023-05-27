@@ -3,7 +3,9 @@ import { Component } from '@angular/core';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { Application } from 'src/app/shared/models/application.model';
 import { BaseApplication } from 'src/app/shared/models/baseApplication.model';
+import { ProgramLanguage } from 'src/app/shared/models/programLanguage.model';
 import { BaseApplicationService } from 'src/app/shared/services/api/baseApplication.service';
+import { ProgramLanguageService } from 'src/app/shared/services/api/programLanguage.service';
 import { TokenService } from 'src/app/shared/services/core/token.service';
 
 @Component({
@@ -19,11 +21,14 @@ export class ApplicationTableComponent {
   application: BaseApplication;
   selectedApplications: BaseApplication[];
   submitted: boolean;
+  programLanguages: ProgramLanguage[];
+  selectedProgramLanguages: ProgramLanguage[];
 
   constructor(
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private baseApplicationService: BaseApplicationService,
+    private programLanguageService: ProgramLanguageService,
     private tokenService: TokenService) { }
 
   ngOnInit() {
@@ -34,6 +39,13 @@ export class ApplicationTableComponent {
           (applications) => {
             this.applications = applications;
           });
+
+      this.programLanguageService.collection.getAll()
+        .subscribe(
+          (programLanguages) => {
+            this.programLanguages = programLanguages;
+          });
+
       this.loading = false;
     });
   }
@@ -57,6 +69,7 @@ export class ApplicationTableComponent {
       this.application.price = 0;
       this.application.status = "New";
       this.application.userCreatorId = this.tokenService.getUserIdentifier();
+      this.application.programLanguages = this.selectedProgramLanguages;
       this.baseApplicationService.single.create(this.application).subscribe(
         application => {
           this.applications.push(application);

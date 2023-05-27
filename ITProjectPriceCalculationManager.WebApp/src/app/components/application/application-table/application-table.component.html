@@ -71,6 +71,12 @@
     </div>
 
     <div class="p-field">
+      <label for="description">Мови програмування</label>
+      <p-multiSelect [options]="programLanguages" [(ngModel)]="selectedProgramLanguages"
+        optionLabel="name"></p-multiSelect>
+    </div>
+
+    <div class="p-field">
       <label for="description">Зона довіри</label>
       <p-inputNumber inputId="profit" [(ngModel)]="application.confidenceArea"> </p-inputNumber>
     </div>
@@ -99,7 +105,8 @@
 
   <ng-template pTemplate="footer">
     <button pButton pRipple label="Закрити" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-    <button pButton pRipple label="Зберегти" icon="pi pi-check" class="p-button-text" (click)="saveApplication()"></button>
+    <button pButton pRipple label="Зберегти" icon="pi pi-check" class="p-button-text"
+      (click)="saveApplication()"></button>
   </ng-template>
 
 </p-dialog>
