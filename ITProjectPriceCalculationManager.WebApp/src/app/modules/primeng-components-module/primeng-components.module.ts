@@ -52,6 +52,7 @@ import { MenubarModule } from 'primeng/menubar';
 import { SlideMenuModule } from 'primeng/slidemenu';
 import { FormsModule } from '@angular/forms';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { DialogService } from 'primeng/dynamicdialog';
 
 
 const primeNgModules = [
@@ -116,7 +117,8 @@ const primeNgModules = [
   ],
   providers: [
     MessageService,
-    ConfirmationService
+    ConfirmationService,
+    DialogService
   ]
 })
 

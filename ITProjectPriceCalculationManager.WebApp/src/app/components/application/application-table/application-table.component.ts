@@ -7,11 +7,11 @@ import { ApplicationToEstimators } from 'src/app/shared/models/applicationToEsti
 import { BaseApplication } from 'src/app/shared/models/baseApplication.model';
 import { Evaluator } from 'src/app/shared/models/evaluator.model';
 import { ProgramLanguage } from 'src/app/shared/models/programLanguage.model';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ApplicationToEstimatorsService } from 'src/app/shared/services/api/applicationToEstimators.service';
 import { BaseApplicationService } from 'src/app/shared/services/api/baseApplication.service';
 import { EstimatorService } from 'src/app/shared/services/api/estimator.service';
-import { ProgramLanguageService } from 'src/app/shared/services/api/programLanguage.service';
-import { TokenService } from 'src/app/shared/services/core/token.service';
+import { ApplicationInfoComponent } from '../application-info/application-info.component';
 
 @Component({
   selector: 'app-application-table',
@@ -32,6 +32,7 @@ export class ApplicationTableComponent {
   programLanguages: ProgramLanguage[];
   selectedProgramLanguages: ProgramLanguage[];
   selectedEvaluators: Evaluator[];
+  ref: DynamicDialogRef;
 
   constructor(
     private router: Router,
@@ -40,8 +41,7 @@ export class ApplicationTableComponent {
     private applicationToEstimatorsService: ApplicationToEstimatorsService,
     private baseApplicationService: BaseApplicationService,
     private estimatorService: EstimatorService,
-    private programLanguageService: ProgramLanguageService,
-    private tokenService: TokenService) { }
+    public dialogService: DialogService) { }
 
   ngOnInit() {
     this.loading = true;
@@ -52,51 +52,33 @@ export class ApplicationTableComponent {
             this.applications = applications;
           });
 
-      this.programLanguageService.collection.getAll()
-        .subscribe(
-          (programLanguages) => {
-            this.programLanguages = programLanguages;
-          });
-
       this.loading = false;
     });
   }
 
-  saveApplication() {
-    this.submitted = true;
-
-    if (this.application.id) {
-      this.baseApplicationService.single.update(this.application).subscribe(
-        application => {
-          this.applications[this.findIndexById(application.id)] = application;
-          this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Application updated' });
-          this.applicationDialog = false;
-        },
-        error => {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
-        })
-    }
-    else {
-      this.application.id = 0;
-      this.application.price = 0;
-      this.application.status = "New";
-      this.application.userCreatorId = this.tokenService.getUserIdentifier();
-      this.application.programLanguages = this.selectedProgramLanguages;
-      this.baseApplicationService.single.create(this.application).subscribe(
-        application => {
-          this.applications.push(application);
-          this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Application created' })
-          this.applicationDialog = false;
-        },
-        error => {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
-        })
+  ngOnDestroy() {
+    if (this.ref) {
+      this.ref.close();
     }
   }
 
   editApplication(application: BaseApplication) {
     this.application = application;
-    this.applicationDialog = true;
+
+    this.ref = this.dialogService.open(ApplicationInfoComponent, {
+      header: 'Деталі заявки',
+      data: application,
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000,
+      maximizable: true
+    });
+
+    this.ref.onClose.subscribe((application: BaseApplication) => {
+      if (application && application.id) {
+        this.applications[this.findIndexById(application.id)] = application;
+        this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: application.name });
+      }
+    });
   }
 
   deleteApplication(application: Application) {
@@ -120,9 +102,19 @@ export class ApplicationTableComponent {
   }
 
   openNew() {
-    this.application = new BaseApplication();
-    this.submitted = false;
-    this.applicationDialog = true;
+    this.ref = this.dialogService.open(ApplicationInfoComponent, {
+      header: 'Деталі заявки',
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000,
+      maximizable: true
+    });
+
+    this.ref.onClose.subscribe((application: BaseApplication) => {
+      if (application) {
+        this.applications.push(application);
+        this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: application.name });
+      }
+    });
   }
 
   addEstimatorGroup(applicationId: number) {
@@ -167,7 +159,7 @@ export class ApplicationTableComponent {
     this.submitted = false;
   }
 
-  redirectToEvaluationForm(applicationId: number){
+  redirectToEvaluationForm(applicationId: number) {
     this.router.navigate(['/application/application-evaluation'], { queryParams: { applicationId } });
   }
 
