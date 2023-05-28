@@ -8,10 +8,9 @@ import { BaseApplication } from 'src/app/shared/models/baseApplication.model';
 import { Evaluator } from 'src/app/shared/models/evaluator.model';
 import { ProgramLanguage } from 'src/app/shared/models/programLanguage.model';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { ApplicationToEstimatorsService } from 'src/app/shared/services/api/applicationToEstimators.service';
 import { BaseApplicationService } from 'src/app/shared/services/api/baseApplication.service';
-import { EstimatorService } from 'src/app/shared/services/api/estimator.service';
 import { ApplicationInfoComponent } from '../application-info/application-info.component';
+import { ApplicationEvaluationGroupComponent } from '../application-evaluation-group/application-evaluation-group.component';
 
 @Component({
   selector: 'app-application-table',
@@ -38,9 +37,7 @@ export class ApplicationTableComponent {
     private router: Router,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private applicationToEstimatorsService: ApplicationToEstimatorsService,
     private baseApplicationService: BaseApplicationService,
-    private estimatorService: EstimatorService,
     public dialogService: DialogService) { }
 
   ngOnInit() {
@@ -76,7 +73,7 @@ export class ApplicationTableComponent {
     this.ref.onClose.subscribe((application: BaseApplication) => {
       if (application && application.id) {
         this.applications[this.findIndexById(application.id)] = application;
-        this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: application.name });
+        this.messageService.add({ severity: 'info', summary: 'Список оновлено', detail: application.name });
       }
     });
   }
@@ -91,7 +88,7 @@ export class ApplicationTableComponent {
           this.baseApplicationService.single.deleteById(application.id).subscribe(
             application => {
               this.applications = this.applications.filter(val => val.id !== application.id);
-              this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Application Deleted' });
+              this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Заявку видалено' });
             },
             error => {
               this.messageService.add({ severity: 'error', summary: 'Error', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
@@ -112,51 +109,21 @@ export class ApplicationTableComponent {
     this.ref.onClose.subscribe((application: BaseApplication) => {
       if (application) {
         this.applications.push(application);
-        this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: application.name });
+        this.messageService.add({ severity: 'info', summary: 'Список оновлено', detail: application.name });
       }
     });
   }
 
   addEstimatorGroup(applicationId: number) {
-    this.estimatorService.collection.getAll()
-      .subscribe(
-        (evaluators) => {
-          evaluators.forEach((evaluator) => {
-            evaluator.name = evaluator.firstName + ' ' + evaluator.lastName;
-          });
-
-          this.evaluators = evaluators;
-        });
-
-    this.applicationToEstimators = new ApplicationToEstimators();
-    this.submitted = false;
-    this.applicationToEstimatorsDialog = true;
-
-    this.applicationToEstimators.applicationId = applicationId;
-  }
-
-  saveEstimatorGroup() {
-    this.submitted = true;
-    this.applicationToEstimators.evaluators = this.selectedEvaluators;
-
-    this.applicationToEstimatorsService.single.create(this.applicationToEstimators).subscribe(
-      () => {
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Application created' })
-        this.applicationToEstimatorsDialog = false;
-      },
-      error => {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
-      })
-  }
-
-  hideEstimatorGroupDialog() {
-    this.applicationToEstimatorsDialog = false;
-    this.submitted = false;
-  }
-
-  hideDialog() {
-    this.applicationDialog = false;
-    this.submitted = false;
+    this.ref = this.dialogService.open(ApplicationEvaluationGroupComponent, {
+      header: 'Група експертів',
+      data: { id: applicationId },
+      width: '20%',
+      height: '35%',
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000,
+      maximizable: true
+    });
   }
 
   redirectToEvaluationForm(applicationId: number) {

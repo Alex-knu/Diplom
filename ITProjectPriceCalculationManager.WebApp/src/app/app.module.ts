@@ -12,6 +12,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/services/auth-interceptor.service';
 import { DepartmentTreeComponent } from './components/departmets/department-tree/department-tree.component';
 import { ApplicationEvaluationComponent } from './components/application/application-evaluation/application-evaluation.component';
+import { ApplicationEvaluationGroupComponent } from './components/application/application-evaluation-group/application-evaluation-group.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ApplicationEvaluationComponent } from './components/application/applica
     ApplicationInfoComponent,
     ApplicationTableComponent,
     ApplicationEvaluationComponent,
+    ApplicationEvaluationGroupComponent,
     DepartmentTreeComponent
   ],
   imports: [

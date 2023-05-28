@@ -25,7 +25,7 @@
   <div class="p-field">
     <label for="description">Мови програмування</label>
     <div class="p-field">
-      <p-multiSelect [options]="programLanguages" [(ngModel)]="selectedProgramLanguages"
+      <p-multiSelect [options]="programLanguages" [(ngModel)]="selectedProgramLanguages" [virtualScroll]="true"
         optionLabel="name"></p-multiSelect>
     </div>
   </div>
@@ -65,7 +65,6 @@
     </div>
   </div>
 
-  <!-- <button pButton pRipple label="Закрити" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button> -->
   <button pButton pRipple label="Зберегти" icon="pi pi-check" class="p-button-text"
     (click)="saveApplication()"></button>
 </div>
