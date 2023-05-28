@@ -7,6 +7,7 @@ import { UserModel } from 'src/app/shared/models/user.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { TokenService } from 'src/app/shared/services/core/token.service';
 import { UserLoginModel } from 'src/app/shared/models/userLogin.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,8 @@ export class LoginComponent {
     public layoutService: LayoutService,
     private authService: AuthService,
     private messageService: MessageService,
-    private tokenService: TokenService) { }
+    private tokenService: TokenService,
+    private router: Router) { }
 
   ngOnInit(): void { }
 
@@ -38,6 +40,7 @@ export class LoginComponent {
       loginInfo => {
         this.decodeToken(loginInfo.token);
         this.tokenService.setToken(loginInfo.token);
+        this.router.navigate(['/']);
       },
       error => {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
