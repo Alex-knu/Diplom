@@ -17,9 +17,9 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
             _mapper = mapper;
         }
 
-        public IEnumerable<DifficultyLevelsTypeDTO> GetDifficultyLevelTypesForFactorType()
+        public IEnumerable<DifficultyLevelsTypeDTO> GetDifficultyLevelTypesForFactorType(int difficultyLevelId)
         {
-            return _mapper.Map<List<DifficultyLevelsTypeDTO>>(_dbContext.GetDifficultyLevelTypesForFactorType(1));
+            return _mapper.Map<List<DifficultyLevelsTypeDTO>>(_dbContext.GetDifficultyLevelTypesForFactorType(difficultyLevelId));
         }
     }
 }

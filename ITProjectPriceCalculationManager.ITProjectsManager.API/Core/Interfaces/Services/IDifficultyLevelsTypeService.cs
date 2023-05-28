@@ -5,6 +5,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces
 {
     public interface IDifficultyLevelsTypeService
     {
-        IEnumerable<DifficultyLevelsTypeDTO> GetDifficultyLevelTypesForFactorType();
+        IEnumerable<DifficultyLevelsTypeDTO> GetDifficultyLevelTypesForFactorType(int difficultyLevelId);
     }
 }

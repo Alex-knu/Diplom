@@ -19,6 +19,27 @@ namespace System.Net.Http
             return await ReadFromJson<TResult>(response);
         }
 
+        public static async Task<TResult> GetByIdAsync<TResult>(this HttpClient client, string route, int id)
+        {
+            string jsonData = Newtonsoft.Json.JsonConvert.SerializeObject(id);
+            
+            // Encode the JSON data as a query parameter
+            string encodedData = Uri.EscapeDataString(jsonData);
+            
+            // Append the encoded data to the request URL
+            string requestUrl = $"{route}?data={encodedData}";
+
+            var response = await client.GetAsync(requestUrl);
+
+            if(!response.StatusCode.IsSuccessStatusCode())
+            {
+                var exception = await SetError(response);
+                throw exception;
+            }
+
+            return await ReadFromJson<TResult>(response);
+        }
+
         public static async Task<TResult> PostAsJsonAsync<T, TResult>(this HttpClient client, string route, T query)
         {
             var response = await client.PostAsJsonAsync<T>(route, query);
