@@ -42,8 +42,10 @@
             (click)="editApplication(application)"></button>
           <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
             (click)="deleteApplication(application)"></button>
-          <button pButton pRipple icon="pi pi-user-plus" class="p-button-rounded p-button-success p-mr-2"
-              (click)="addEstimatorGroup(application.id)"></button>
+          <button pButton pRipple icon="pi pi-user-plus" class="p-button-rounded p-button-secondary p-mr-2"
+            (click)="addEstimatorGroup(application.id)"></button>
+          <button pButton pRipple icon="pi pi-calculator" class="p-button-rounded p-mr-2"
+            (click)="redirectToEvaluationForm(application.id)"></button>
         </td>
       </tr>
     </ng-template>
@@ -118,13 +120,13 @@
   <ng-template pTemplate="content">
     <div class="p-field">
       <label for="description">Мови програмування</label>
-      <p-multiSelect [options]="evaluators" [(ngModel)]="selectedEvaluators"
-        optionLabel="name"></p-multiSelect>
+      <p-multiSelect [options]="evaluators" [(ngModel)]="selectedEvaluators" optionLabel="name"></p-multiSelect>
     </div>
   </ng-template>
 
   <ng-template pTemplate="footer">
-    <button pButton pRipple label="Закрити" icon="pi pi-times" class="p-button-text" (click)="hideEstimatorGroupDialog()"></button>
+    <button pButton pRipple label="Закрити" icon="pi pi-times" class="p-button-text"
+      (click)="hideEstimatorGroupDialog()"></button>
     <button pButton pRipple label="Зберегти" icon="pi pi-check" class="p-button-text"
       (click)="saveEstimatorGroup()"></button>
   </ng-template>

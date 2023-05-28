@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-application-evaluation',
@@ -29,8 +30,15 @@ export class ApplicationEvaluationComponent {
 
   selectedCity: any;
 
+  constructor(private route: ActivatedRoute){}
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      const name = params['applicationId'];
+      console.log('Name:', name);
+      // Process the received data as needed
+    });
+
     this.cities = [
       { name: 'Наднизький', code: 'RM' },
       { name: 'Дуже низький', code: 'NY' },

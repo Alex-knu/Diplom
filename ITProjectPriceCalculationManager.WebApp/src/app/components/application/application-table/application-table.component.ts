@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { Application } from 'src/app/shared/models/application.model';
 import { ApplicationToEstimators } from 'src/app/shared/models/applicationToEstimators.model';
@@ -33,6 +34,7 @@ export class ApplicationTableComponent {
   selectedEvaluators: Evaluator[];
 
   constructor(
+    private router: Router,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private applicationToEstimatorsService: ApplicationToEstimatorsService,
@@ -163,6 +165,10 @@ export class ApplicationTableComponent {
   hideDialog() {
     this.applicationDialog = false;
     this.submitted = false;
+  }
+
+  redirectToEvaluationForm(applicationId: number){
+    this.router.navigate(['/application/application-evaluation'], { queryParams: { applicationId } });
   }
 
   findIndexById(id: number): number {
