@@ -8,26 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class ApplicationEvaluationComponent {
-  countries: any[] = [];
-
-  filteredCountries: any[] = [];
-
-  selectedCountryAdvanced: any[] = [];
-
-  valSlider = 50;
-
-  valColor = '#424242';
-
-  valRadio: string = '';
-
-  valCheck: string[] = [];
-
-  valCheck2: boolean = false;
-
-  valSwitch: boolean = false;
-
   cities: any[] = [];
-
   selectedCity: any;
 
   constructor(private route: ActivatedRoute){}
@@ -50,16 +31,5 @@ export class ApplicationEvaluationComponent {
     ];
   }
 
-  filterCountry(event: any) {
-    const filtered: any[] = [];
-    const query = event.query;
-    for (let i = 0; i < this.countries.length; i++) {
-      const country = this.countries[i];
-      if (country.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-        filtered.push(country);
-      }
-    }
-
-    this.filteredCountries = filtered;
-  }
+  save(){}
 }

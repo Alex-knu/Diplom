@@ -2,6 +2,7 @@ using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Department;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevelsType;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Estimator;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramLanguage;
 
@@ -16,6 +17,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Helpers
             CreateMap<EvaluatorDTO, Estimator>().ReverseMap();
             CreateMap<DepartmentDTO, Department>().ReverseMap();
             CreateMap<ProgramLanguageDTO, ProgramLanguage>().ReverseMap();
+            CreateMap<DifficultyLevelsTypeDTO, DifficultyLevelsType>().ReverseMap();
         }
     }
 }

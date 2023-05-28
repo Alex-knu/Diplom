@@ -42,7 +42,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.
 
             modelBuilder.Seed();
         }
-        
+
         public DbSet<Application> Applications { get; set; }
         public DbSet<ApplicationToEstimators> ApplicationToEstimators { get; set; }
         public DbSet<ApplicationToFactors> ApplicationToFactors { get; set; }
@@ -55,5 +55,15 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.
         public DbSet<ProgramsParametr> ProgramsParametrs { get; set; }
         public DbSet<ProgramLanguage> ProgramLanguages { get; set; }
         public DbSet<ProgramsParametrToSubjectAreaElement> ProgramsParametrToSubjectAreaElements { get; set; }
+
+        public virtual IEnumerable<DifficultyLevelsType> GetDifficultyLevelTypesForFactorType(int factorTypeId)
+        {
+            return (from dlttft in DifficultyLevelsTypeToFactorTypes.ToList()
+                    join ft in FactorTypes.ToList() on dlttft.FactorTypeId equals ft.Id
+                    join dlt in DifficultyLevelsTypes.ToList() on dlttft.DifficultyLevelId equals dlt.Id
+                    where ft.Id == factorTypeId
+                    orderby dlt.Id
+                    select dlt).Distinct();
+        }
     }
 }
