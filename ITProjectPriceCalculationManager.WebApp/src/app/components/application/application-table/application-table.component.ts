@@ -20,17 +20,9 @@ import { ApplicationEvaluationGroupComponent } from '../application-evaluation-g
 export class ApplicationTableComponent {
 
   loading: boolean = false;
-  applicationDialog: boolean;
   applications: BaseApplication[];
   application: BaseApplication;
-  applicationToEstimators: ApplicationToEstimators;
-  evaluators: Evaluator[];
-  applicationToEstimatorsDialog: boolean;
   selectedApplications: BaseApplication[];
-  submitted: boolean;
-  programLanguages: ProgramLanguage[];
-  selectedProgramLanguages: ProgramLanguage[];
-  selectedEvaluators: Evaluator[];
   ref: DynamicDialogRef;
 
   constructor(
