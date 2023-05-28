@@ -10,7 +10,7 @@ namespace System.Net.Http
         {
             var response = await client.GetAsync(route);
 
-            if(!response.StatusCode.IsSuccessStatusCode())
+            if (!response.StatusCode.IsSuccessStatusCode())
             {
                 var exception = await SetError(response);
                 throw exception;
@@ -21,17 +21,18 @@ namespace System.Net.Http
 
         public static async Task<TResult> GetByIdAsync<TResult>(this HttpClient client, string route, int id)
         {
-            string jsonData = Newtonsoft.Json.JsonConvert.SerializeObject(id);
-            
+            Console.WriteLine(id);
+            string jsonData = Newtonsoft.Json.JsonConvert.SerializeObject(new { Id = id });
+
             // Encode the JSON data as a query parameter
             string encodedData = Uri.EscapeDataString(jsonData);
-            
+
             // Append the encoded data to the request URL
             string requestUrl = $"{route}?data={encodedData}";
 
             var response = await client.GetAsync(requestUrl);
 
-            if(!response.StatusCode.IsSuccessStatusCode())
+            if (!response.StatusCode.IsSuccessStatusCode())
             {
                 var exception = await SetError(response);
                 throw exception;
@@ -44,7 +45,7 @@ namespace System.Net.Http
         {
             var response = await client.PostAsJsonAsync<T>(route, query);
 
-            if(!response.StatusCode.IsSuccessStatusCode())
+            if (!response.StatusCode.IsSuccessStatusCode())
             {
                 var exception = await SetError(response);
                 throw exception;
@@ -57,7 +58,7 @@ namespace System.Net.Http
         {
             var response = await client.PutAsJsonAsync<T>(route, query);
 
-            if(!response.StatusCode.IsSuccessStatusCode())
+            if (!response.StatusCode.IsSuccessStatusCode())
             {
                 var exception = await SetError(response);
                 throw exception;
@@ -70,7 +71,7 @@ namespace System.Net.Http
         {
             var response = await client.DeleteAsJsonAsync<int>(route, id);
 
-            if(!response.StatusCode.IsSuccessStatusCode())
+            if (!response.StatusCode.IsSuccessStatusCode())
             {
                 var exception = await SetError(response);
                 throw exception;
@@ -83,13 +84,13 @@ namespace System.Net.Http
         {
             return await responseMessage.Content.ReadAsAsync<TResult>();
         }
-        
+
         private static async Task<Exception> SetError(HttpResponseMessage responseMessage)
         {
             Exception exception;
             ErrorModel errorMessage = await ReadFromJson<ErrorModel>(responseMessage);
 
-            switch((int)responseMessage.StatusCode)
+            switch ((int)responseMessage.StatusCode)
             {
                 case 400:
                     exception = new BadRequestException(errorMessage.Error);
