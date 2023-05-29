@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DifficultyLevelsType } from 'src/app/shared/models/difficultyLevelsType.model';
-import { DifficultyLevelsType as DifficultyLevelsTypeEnum } from 'src/app/shared/enums/difficultyLevelsType.enum';
-import { DifficultyLevelsTypeService } from 'src/app/shared/services/api/difficultyLevelsType.service';
 import { FactorType } from 'src/app/shared/enums/factorType.enum';
+import { EvaluationParametrsInfoService } from 'src/app/shared/services/api/evaluationParametrsInfo.service';
+import { EvaluationParametrsInfo } from 'src/app/shared/models/evaluationParametrsInfo.model';
 
 @Component({
   selector: 'app-application-evaluation',
@@ -13,15 +12,15 @@ import { FactorType } from 'src/app/shared/enums/factorType.enum';
 
 export class ApplicationEvaluationComponent {
   applicationId: number;
-  selectedCity: any;
-  influenceFactors: DifficultyLevelsType[];
-  scaleFactors: DifficultyLevelsType[];
-  informationObject: DifficultyLevelsType[];
-  function: DifficultyLevelsType[];
+
+  influenceEvaluationParametrsInfo: EvaluationParametrsInfo[];
+  scaleEvaluationParametrsInfo: EvaluationParametrsInfo[];
+  informationObjectEvaluationParametrsInfo: EvaluationParametrsInfo[];
+  functionEvaluationParametrsInfo: EvaluationParametrsInfo[];
 
   constructor(
     private route: ActivatedRoute,
-    private difficultyLevelsTypeService: DifficultyLevelsTypeService) { }
+    private evaluationParametrsInfoService: EvaluationParametrsInfoService) { }
 
   ngOnInit() {
     this.route.queryParams
@@ -29,24 +28,12 @@ export class ApplicationEvaluationComponent {
         this.applicationId = params['applicationId'];
       });
 
-    this.difficultyLevelsTypeService.collection.getListById(FactorType.InfluenceFactors)
-      .subscribe(factors => {
-        this.influenceFactors = factors;
-      });
-
-    this.difficultyLevelsTypeService.collection.getListById(FactorType.ScaleFactors)
-      .subscribe(factors => {
-        this.scaleFactors = factors;
-      });
-
-    this.difficultyLevelsTypeService.collection.getListById(FactorType.InformationObject)
-      .subscribe(factors => {
-        this.informationObject = factors;
-      });
-
-    this.difficultyLevelsTypeService.collection.getListById(FactorType.Function)
-      .subscribe(factors => {
-        this.function = factors;
+    this.evaluationParametrsInfoService.collection.getAll()
+      .subscribe(evaluationParametrsInfo => {
+        this.influenceEvaluationParametrsInfo = evaluationParametrsInfo.filter(info => info.factorTypeId == FactorType.InfluenceFactors);
+        this.scaleEvaluationParametrsInfo = evaluationParametrsInfo.filter(info => info.factorTypeId == FactorType.ScaleFactors);
+        this.informationObjectEvaluationParametrsInfo = evaluationParametrsInfo.filter(info => info.factorTypeId == FactorType.InformationObject);
+        this.functionEvaluationParametrsInfo = evaluationParametrsInfo.filter(info => info.factorTypeId == FactorType.Function);
       });
   }
 
