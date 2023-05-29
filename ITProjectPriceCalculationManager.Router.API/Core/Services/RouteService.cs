@@ -13,14 +13,14 @@ namespace ITProjectPriceCalculationManager.Router.API.Core.Services
 
         public async Task<TResult> GetListByIdAsync<TResult>(HttpClient client, string controller, int id)
         {
-            var response = await client.GetByIdAsync<TResult>($"api/{controller}/collection", id);
+            var response = await client.GetByIdAsync<TResult>($"api/{controller}/collection/{id}");
 
             return response;
         }
 
         public async Task<TResult> GetByIdAsync<TResult>(HttpClient client, string controller, int id)
         {
-            var response = await client.GetByIdAsync<TResult>($"api/{controller}", id);
+            var response = await client.GetByIdAsync<TResult>($"api/{controller}/{id}");
 
             return response;
         }
