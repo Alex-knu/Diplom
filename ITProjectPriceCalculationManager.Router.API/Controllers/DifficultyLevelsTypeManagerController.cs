@@ -22,8 +22,8 @@ namespace ITProjectPriceCalculationManager.Router.API.Controllers
         }
 
         [HttpGet]
-        [Route("collection")]
-        public async Task<IActionResult> GetAllApplications(int id)
+        [Route("collection/{id}")]
+        public async Task<IActionResult> GetAllApplications([FromRoute]int id)
         {
             Console.WriteLine(id);
             return Ok(await _routeService.GetListByIdAsync<List<DifficultyLevelsTypeDTO>>(_client, "difficultylevelstypeapi", id));

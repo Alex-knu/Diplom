@@ -15,10 +15,9 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers
         }
 
         [HttpGet]
-        [Route("collection")]
-        public IActionResult GetDifficultyLevelsById(int id)
+        [Route("collection/{id}")]
+        public IActionResult GetDifficultyLevelsById([FromRoute]int id)
         {
-            Console.WriteLine(id);
             return Ok(_DifficultyLevelsTypeService.GetDifficultyLevelTypesForFactorType(id));
         }
     }
