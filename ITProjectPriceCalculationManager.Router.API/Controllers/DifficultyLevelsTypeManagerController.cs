@@ -10,11 +10,11 @@ namespace ITProjectPriceCalculationManager.Router.API.Controllers
     [Route("api/[controller]")]
     public class DifficultyLevelsTypeManagerController : ControllerBase
     {
-        private readonly ILogger<ApplicationManagerController> _logger;
+        private readonly ILogger<DifficultyLevelsTypeManagerController> _logger;
         private readonly HttpClient _client;
         private readonly IRouteService _routeService;
 
-        public DifficultyLevelsTypeManagerController(ILogger<ApplicationManagerController> logger, IHttpClientFactory httpClientFactory, IRouteService routeService)
+        public DifficultyLevelsTypeManagerController(ILogger<DifficultyLevelsTypeManagerController> logger, IHttpClientFactory httpClientFactory, IRouteService routeService)
         {
             _logger = logger;
             _client = httpClientFactory.CreateClient("ITProjectsManager");
@@ -25,7 +25,6 @@ namespace ITProjectPriceCalculationManager.Router.API.Controllers
         [Route("collection/{id}")]
         public async Task<IActionResult> GetAllApplications([FromRoute]int id)
         {
-            Console.WriteLine(id);
             return Ok(await _routeService.GetListByIdAsync<List<DifficultyLevelsTypeDTO>>(_client, "difficultylevelstypeapi", id));
         }
     }
