@@ -83,13 +83,14 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.
                         FactorTypeId = ft.Id,
                         DifficultyLevels = (from dlttft in DifficultyLevelsTypeToFactorTypes
                                             join dlt in DifficultyLevelsTypes on dlttft.DifficultyLevelId equals dlt.Id
-                                            where ft.Id == dlttft.FactorTypeId
+                                            where dlttft.FactorId == a.Id
                                             orderby dlt.Id
                                             select new DifficultyLevelsTypeDTO()
                                             {
                                                 Id = dlt.Id,
+                                                RelationId = dlttft.Id,
                                                 Name = dlt.Name
-                                            }).Distinct().ToList()
+                                            }).ToList()
                     });
         }
     }

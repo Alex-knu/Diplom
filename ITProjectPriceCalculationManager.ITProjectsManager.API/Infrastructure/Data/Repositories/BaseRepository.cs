@@ -24,9 +24,10 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.
             return entity;
         }
 
-        public async Task AddRangeAsync(List<TEntity> entities)
+        public async Task<List<TEntity>> AddRangeAsync(List<TEntity> entities)
         {
             await _dbSet.AddRangeAsync(entities);
+            return entities;
         }
 
         public async Task<TEntity> DeleteAsync(TEntity entity)

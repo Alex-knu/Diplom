@@ -9,6 +9,7 @@ import { ApplicationToEstimatorsService } from "./api/applicationToEstimators.se
 import { EstimatorService } from "./api/estimator.service";
 import { DifficultyLevelsTypeService } from "./api/difficultyLevelsType.service";
 import { EvaluationParametrsInfoService } from "./api/evaluationParametrsInfo.service";
+import { ApplicationToFactorsService } from "./api/applicationToFactors.service";
 
 export const services = [
   HttpService,
@@ -16,6 +17,7 @@ export const services = [
   ApiService,
   ApplicationService,
   ApplicationToEstimatorsService,
+  ApplicationToFactorsService,
   BaseApplicationService,
   DepartmentService,
   EstimatorService,

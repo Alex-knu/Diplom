@@ -6,5 +6,6 @@ export class DifficultyLevelsType extends BaseModel {
     super(id);
   }
 
+  relationId: number;
   name: string;
 }
