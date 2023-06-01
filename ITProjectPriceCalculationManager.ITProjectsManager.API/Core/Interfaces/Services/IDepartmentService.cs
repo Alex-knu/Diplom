@@ -5,7 +5,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces
     public interface IDepartmentService
     {
         Task<IEnumerable<DepartmentDTO>> GetDepartmentsAsync();
-        Task<IEnumerable<DepartmentDTO>> GetDepartmentsTreeAsync();
         Task<DepartmentDTO> GetDepartmentsByIdAsync(int id);
         Task<DepartmentDTO> CreateDepartmentAsync(DepartmentDTO department);
         Task<DepartmentDTO> UpdateDepartmentAsync(DepartmentDTO department);
