@@ -19,6 +19,7 @@ builder.Services.AddScoped(typeof(IRepository<,>), typeof(BaseRepository<,>));
 builder.Services.AddScoped(typeof(IApplicationService), typeof(ApplicationService));
 builder.Services.AddScoped(typeof(IBaseApplicationService), typeof(BaseApplicationService));
 builder.Services.AddScoped(typeof(IDepartmentService), typeof(DepartmentService));
+builder.Services.AddScoped(typeof(IDepartmentTreeService), typeof(DepartmentTreeService));
 builder.Services.AddScoped(typeof(IEvaluationService), typeof(EvaluationService));
 builder.Services.AddScoped(typeof(IEvaluatorService), typeof(EvaluatorService));
 builder.Services.AddScoped(typeof(IProgramLanguageService), typeof(ProgramLanguageService));
@@ -28,7 +29,9 @@ builder.Services.AddScoped(typeof(IEvaluationParametrsInfoService), typeof(Evalu
 builder.Services.AddScoped(typeof(IApplicationToFactorsService), typeof(ApplicationToFactorsService));
 //builder.Services.AddScoped(typeof(IApplicationService), typeof(StubApplicationService));
 
-builder.Services.AddControllers();
+builder.Services
+    .AddControllers()
+    .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

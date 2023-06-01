@@ -7,6 +7,7 @@ export class Department extends BaseModel {
   }
 
   name: string;
-  departmentId: number | null;
+  parentId: number | null;
+  parent: Department | null;
   subDepartments: Department[] | null = null;
 }

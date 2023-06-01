@@ -13,5 +13,15 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.D
                     .Where(x => x.ParentId == null);
             }
         }
+
+        internal class GetDepartmentById : Specification<Department>
+        {
+            public GetDepartmentById(int id)
+            {
+                Query
+                    .Include(x => x.Parent)
+                    .Where(x => x.Id == id);
+            }
+        }
     }
 }

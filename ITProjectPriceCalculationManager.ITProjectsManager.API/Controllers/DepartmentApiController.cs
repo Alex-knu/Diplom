@@ -10,20 +10,21 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers
     {
         private readonly IDepartmentService _DepartmentService;
 
-        public DepartmentApiController(IDepartmentService evaluatorService)
+        public DepartmentApiController(IDepartmentService departmentService)
         {
-            _DepartmentService = evaluatorService;
+            _DepartmentService = departmentService;
         }
 
         [HttpGet]
         [Route("collection")]
         public async Task<IActionResult> GetAllDepartments()
         {
-            return Ok(await _DepartmentService.GetDepartmentsTreeAsync());
+            return Ok(await _DepartmentService.GetDepartmentsAsync());
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetDepartmentById(int id)
+        [Route("{id}")]
+        public async Task<IActionResult> GetDepartmentById([FromRoute]int id)
         {
             return Ok(await _DepartmentService.GetDepartmentsByIdAsync(id));
         }

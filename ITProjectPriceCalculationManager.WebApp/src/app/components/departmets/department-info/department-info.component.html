@@ -1,0 +1,20 @@
+<div class="card">
+  <div class="p-field">
+    <label for="name">Назва</label>
+    <div class="p-field">
+      <input type="text" pInputText id="name" [(ngModel)]="department.name" required autofocus />
+      <small class="p-invalid" *ngIf="!department.name">Name is required.</small>
+    </div>
+  </div>
+
+  <div class="p-field">
+    <label for="description">Підрозділ верхнього рівня</label>
+    <div>
+      <p-dropdown [(ngModel)]="selectDepartment" [options]="departments" [virtualScroll]="true"
+        [virtualScrollItemSize]="38" optionLabel="name">{{selectDepartment?.name}}
+      </p-dropdown>
+    </div>
+  </div>
+
+  <button pButton pRipple label="Зберегти" icon="pi pi-check" class="p-button-text" (click)="saveDepartment()"></button>
+</div>

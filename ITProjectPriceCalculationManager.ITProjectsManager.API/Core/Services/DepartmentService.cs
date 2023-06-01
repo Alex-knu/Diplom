@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Department;
@@ -22,11 +23,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
             return await base.DeleteEntityAsync(id);
         }
 
-        public async Task<IEnumerable<DepartmentDTO>> GetDepartmentsTreeAsync()
-        {
-            return await base.GetEntityListBySpecAsync(new Departments.DepartmentsTree());
-        }
-
         public async Task<IEnumerable<DepartmentDTO>> GetDepartmentsAsync()
         {
             return await base.GetEntitysAsync();
@@ -34,12 +30,17 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 
         public async Task<DepartmentDTO> GetDepartmentsByIdAsync(int id)
         {
-            return await base.GetEntitysByIdAsync(id);
+            return await GetEntitysByIdAsync(id);
         }
 
         public async Task<DepartmentDTO> UpdateDepartmentAsync(DepartmentDTO department)
         {
             return await base.UpdateEntityAsync(department);
+        }
+
+        protected override async Task<DepartmentDTO> GetEntitysByIdAsync(int id)
+        {
+            return _mapper.Map<DepartmentDTO>(await _repository.GetFirstBySpecAsync(new Departments.GetDepartmentById(id)));
         }
     }
 }

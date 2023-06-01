@@ -10,6 +10,7 @@ import { EstimatorService } from "./api/estimator.service";
 import { DifficultyLevelsTypeService } from "./api/difficultyLevelsType.service";
 import { EvaluationParametrsInfoService } from "./api/evaluationParametrsInfo.service";
 import { ApplicationToFactorsService } from "./api/applicationToFactors.service";
+import { DepartmentTreeService } from "./api/departmentTree.service";
 
 export const services = [
   HttpService,
@@ -20,6 +21,7 @@ export const services = [
   ApplicationToFactorsService,
   BaseApplicationService,
   DepartmentService,
+  DepartmentTreeService,
   EstimatorService,
   ProgramLanguageService,
   DifficultyLevelsTypeService,
