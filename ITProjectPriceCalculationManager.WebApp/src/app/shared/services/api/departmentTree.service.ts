@@ -6,10 +6,10 @@ import { ServiceType } from "../core/serviceType";
 import { Department } from "../../models/department.model";
 
 @Injectable()
-export class DepartmentService extends BaseService<any> {
+export class DepartmentTreeService extends BaseService<any> {
   constructor(
     httpService: HttpService,
     configService: ClientConfigurationService) {
-    super(httpService, 'DepartmentManager', configService, Department, ServiceType.route);
+    super(httpService, 'DepartmentTreeManager', configService, Department, ServiceType.route);
   }
 }

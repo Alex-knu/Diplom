@@ -29,7 +29,8 @@ namespace ITProjectPriceCalculationManager.Router.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetDepartmentById(int id)
+        [Route("{id}")]
+        public async Task<IActionResult> GetDepartmentById([FromRoute]int id)
         {
             return Ok(await _routeService.GetByIdAsync<DepartmentDTO>(_client, "departmentapi", id));
         }

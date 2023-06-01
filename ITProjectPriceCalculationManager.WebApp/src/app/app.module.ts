@@ -13,6 +13,7 @@ import { AuthInterceptor } from './shared/services/auth-interceptor.service';
 import { DepartmentTreeComponent } from './components/departmets/department-tree/department-tree.component';
 import { ApplicationEvaluationComponent } from './components/application/application-evaluation/application-evaluation.component';
 import { ApplicationEvaluationGroupComponent } from './components/application/application-evaluation-group/application-evaluation-group.component';
+import { DepartmentInfoComponent } from './components/departmets/department-info/department-info.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ApplicationEvaluationGroupComponent } from './components/application/ap
     ApplicationTableComponent,
     ApplicationEvaluationComponent,
     ApplicationEvaluationGroupComponent,
-    DepartmentTreeComponent
+    DepartmentTreeComponent,
+    DepartmentInfoComponent
   ],
   imports: [
     AppRoutingModule,
