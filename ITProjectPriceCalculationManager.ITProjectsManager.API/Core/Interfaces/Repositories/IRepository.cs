@@ -13,7 +13,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces
         Task DeleteRangeAsync(IEnumerable<TEntity> entities);
         IQueryable<TEntity> Query(params Expression<Func<TEntity, object>>[] includes);
         Task<int> SaveChangesAcync();
-        Task AddRangeAsync(List<TEntity> entities);
+        Task<List<TEntity>> AddRangeAsync(List<TEntity> entities);
         Task<IEnumerable<TEntity>> GetListBySpecAsync(ISpecification<TEntity> specification);
         Task<TEntity?> GetFirstBySpecAsync(ISpecification<TEntity> specification);
     }

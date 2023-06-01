@@ -10,7 +10,20 @@ namespace System.Net.Http
         {
             var response = await client.GetAsync(route);
 
-            if(!response.StatusCode.IsSuccessStatusCode())
+            if (!response.StatusCode.IsSuccessStatusCode())
+            {
+                var exception = await SetError(response);
+                throw exception;
+            }
+
+            return await ReadFromJson<TResult>(response);
+        }
+
+        public static async Task<TResult> GetByIdAsync<TResult>(this HttpClient client, string route)
+        {
+            var response = await client.GetAsync(route);
+
+            if (!response.StatusCode.IsSuccessStatusCode())
             {
                 var exception = await SetError(response);
                 throw exception;
@@ -23,7 +36,7 @@ namespace System.Net.Http
         {
             var response = await client.PostAsJsonAsync<T>(route, query);
 
-            if(!response.StatusCode.IsSuccessStatusCode())
+            if (!response.StatusCode.IsSuccessStatusCode())
             {
                 var exception = await SetError(response);
                 throw exception;
@@ -36,7 +49,7 @@ namespace System.Net.Http
         {
             var response = await client.PutAsJsonAsync<T>(route, query);
 
-            if(!response.StatusCode.IsSuccessStatusCode())
+            if (!response.StatusCode.IsSuccessStatusCode())
             {
                 var exception = await SetError(response);
                 throw exception;
@@ -49,7 +62,7 @@ namespace System.Net.Http
         {
             var response = await client.DeleteAsJsonAsync<int>(route, id);
 
-            if(!response.StatusCode.IsSuccessStatusCode())
+            if (!response.StatusCode.IsSuccessStatusCode())
             {
                 var exception = await SetError(response);
                 throw exception;
@@ -62,13 +75,13 @@ namespace System.Net.Http
         {
             return await responseMessage.Content.ReadAsAsync<TResult>();
         }
-        
+
         private static async Task<Exception> SetError(HttpResponseMessage responseMessage)
         {
             Exception exception;
             ErrorModel errorMessage = await ReadFromJson<ErrorModel>(responseMessage);
 
-            switch((int)responseMessage.StatusCode)
+            switch ((int)responseMessage.StatusCode)
             {
                 case 400:
                     exception = new BadRequestException(errorMessage.Error);

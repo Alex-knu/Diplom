@@ -1,6 +1,8 @@
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces;
+
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.EvaluatorToEvaluatedFactor
 {
-    internal class EvaluatorToEvaluatedFactor
+    internal class EvaluatorToEvaluatedFactor : IBaseEntity<int>
     {
         public int Id { get; set; }
         public int EvaluatorId { get; set; }

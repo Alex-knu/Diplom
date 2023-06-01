@@ -9,7 +9,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.D
         public int? ParentId { get; set; }
 
         public Department Parent { get; set; }
-        public ICollection<Department> SubDepartment { get; set; }
+        public ICollection<Department> SubDepartments { get; set; }
         public ICollection<Estimator.Estimator> Estimators { get; set; }
     }
 }

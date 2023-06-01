@@ -1,0 +1,125 @@
+<div class="card">
+  <p-toast></p-toast>
+  <div class="text-center mb-5">
+    <div>Інтегральні атрибути умов розроблення</div>
+  </div>
+
+  <div class="flex">
+    <p-table #dt [value]="influenceEvaluationParametrsInfo" [rowHover]="true" dataKey="id"
+      [showCurrentPageReport]="true" [tableStyle]="{'min-width': '90rem'}">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="name">Назва<p-sortIcon field="name"></p-sortIcon></th>
+          <th pSortableColumn="price">Оцінка<p-sortIcon field="price"></p-sortIcon></th>
+          <th></th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-evaluationParametrsInfo>
+        <tr>
+          <td>{{evaluationParametrsInfo.name}}</td>
+          <td class="flex"><p-dropdown [options]="evaluationParametrsInfo.difficultyLevels"
+              [(ngModel)]="evaluationParametrsInfo.selectDifficultyLevel" [virtualScroll]="true"
+              [virtualScrollItemSize]="38" optionLabel="name"></p-dropdown></td>
+        </tr>
+      </ng-template>
+
+    </p-table>
+  </div>
+  <!--
+  <div>
+    <label>Кваліфікація</label>
+    <div>
+      <p-dropdown [options]="influenceFactors" [(ngModel)]="PERS" optionLabel="name"></p-dropdown>
+    </div>
+
+    <label>Досвід</label>
+    <div>
+      <p-dropdown [options]="influenceFactors" [(ngModel)]="PREX" optionLabel="name"></p-dropdown>
+    </div>
+
+    <label>Технічна підтримка</label>
+    <div>
+      <p-dropdown [options]="influenceFactors" [(ngModel)]="FCIL" optionLabel="name"></p-dropdown>
+    </div>
+
+    <label>Обмеження розкладу</label>
+    <div>
+      <p-dropdown [options]="influenceFactors" [(ngModel)]="SCED" optionLabel="name"></p-dropdown>
+    </div>
+
+    <label>Складність апаратного середовища</label>
+    <div>
+      <p-dropdown [options]="influenceFactors" [(ngModel)]="PDIF" optionLabel="name"></p-dropdown>
+    </div>
+
+    <label>Складність та надійність</label>
+    <div>
+      <p-dropdown [options]="influenceFactors" [(ngModel)]="RCPX" optionLabel="name"></p-dropdown>
+    </div>
+
+    <label>Запитане повторне використання</label>
+    <div>
+      <p-dropdown [options]="influenceFactors" [(ngModel)]="RUSE" optionLabel="name"></p-dropdown>
+    </div>
+  </div> -->
+</div>
+
+<div class="card">
+  <div class="text-center mb-5">
+    <div>Інтегральні атрибути маштабу</div>
+  </div>
+
+  <div class="flex">
+    <p-table #dt [value]="scaleEvaluationParametrsInfo" [rowHover]="true" dataKey="id" [showCurrentPageReport]="true"
+      [tableStyle]="{'min-width': '90rem'}">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="name">Назва<p-sortIcon field="name"></p-sortIcon></th>
+          <th pSortableColumn="price">Оцінка<p-sortIcon field="price"></p-sortIcon></th>
+          <th></th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-evaluationParametrsInfo>
+        <tr>
+          <td>{{evaluationParametrsInfo.name}}</td>
+          <td class="flex"><p-dropdown [options]="evaluationParametrsInfo.difficultyLevels"
+              [(ngModel)]="evaluationParametrsInfo.selectDifficultyLevel" [virtualScroll]="true"
+              [virtualScrollItemSize]="38" optionLabel="name"></p-dropdown></td>
+        </tr>
+      </ng-template>
+
+    </p-table>
+  </div>
+  <!-- <div>
+    <label>Новизна продукту для організації розробника</label>
+    <div>
+      <p-dropdown [options]="scaleFactors" [(ngModel)]="PREC" optionLabel="name"></p-dropdown>
+    </div>
+
+    <label>Припустимість коригування вимог до продукту</label>
+    <div>
+      <p-dropdown [options]="scaleFactors" [(ngModel)]="FLEX" optionLabel="name"></p-dropdown>
+    </div>
+
+    <label>Рівень управління ризиком розробки і архітектурою продукту</label>
+    <div>
+      <p-dropdown [options]="scaleFactors" [(ngModel)]="RESL" optionLabel="name"></p-dropdown>
+    </div>
+
+    <label>Згуртованість команди розробки</label>
+    <div>
+      <p-dropdown [options]="scaleFactors" [(ngModel)]="TEAM" optionLabel="name"></p-dropdown>
+    </div>
+
+    <label>Технологічна зрілість процесу організації-розробника</label>
+    <div>
+      <p-dropdown [options]="scaleFactors" [(ngModel)]="PMAT" optionLabel="name"></p-dropdown>
+    </div>
+  </div> -->
+</div>
+
+<div class="card">
+  <button pButton pRipple label="Зберегти" icon="pi pi-check" class="p-button-text" (click)="save()"></button>
+</div>

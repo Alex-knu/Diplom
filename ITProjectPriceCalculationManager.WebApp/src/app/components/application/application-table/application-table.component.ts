@@ -1,9 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { Application } from 'src/app/shared/models/application.model';
 import { BaseApplication } from 'src/app/shared/models/baseApplication.model';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BaseApplicationService } from 'src/app/shared/services/api/baseApplication.service';
+import { ApplicationInfoComponent } from '../application-info/application-info.component';
+import { ApplicationEvaluationGroupComponent } from '../application-evaluation-group/application-evaluation-group.component';
 
 @Component({
   selector: 'app-application-table',
@@ -13,16 +17,17 @@ import { BaseApplicationService } from 'src/app/shared/services/api/baseApplicat
 export class ApplicationTableComponent {
 
   loading: boolean = false;
-  applicationDialog: boolean;
   applications: BaseApplication[];
   application: BaseApplication;
   selectedApplications: BaseApplication[];
-  submitted: boolean;
+  ref: DynamicDialogRef;
 
   constructor(
+    private router: Router,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private baseApplicationService: BaseApplicationService) { }
+    private baseApplicationService: BaseApplicationService,
+    public dialogService: DialogService) { }
 
   ngOnInit() {
     this.loading = true;
@@ -32,43 +37,34 @@ export class ApplicationTableComponent {
           (applications) => {
             this.applications = applications;
           });
+
       this.loading = false;
     });
   }
 
-  saveApplication() {
-    this.submitted = true;
-
-    if (this.application.id) {
-      this.baseApplicationService.single.update(this.application).subscribe(
-        application => {
-          this.applications[this.findIndexById(application.id)] = application;
-          this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Application updated' });
-          this.applicationDialog = false;
-        },
-        error => {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
-        })
-    }
-    else {
-      this.application.id = 0;
-      this.application.price = 0;
-      this.application.status = "New";
-      this.baseApplicationService.single.create(this.application).subscribe(
-        application => {
-          this.applications.push(application);
-          this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Application created' })
-          this.applicationDialog = false;
-        },
-        error => {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
-        })
+  ngOnDestroy() {
+    if (this.ref) {
+      this.ref.close();
     }
   }
 
   editApplication(application: BaseApplication) {
     this.application = application;
-    this.applicationDialog = true;
+
+    this.ref = this.dialogService.open(ApplicationInfoComponent, {
+      header: 'Деталі заявки',
+      data: application,
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000,
+      maximizable: true
+    });
+
+    this.ref.onClose.subscribe((application: BaseApplication) => {
+      if (application && application.id) {
+        this.applications[this.findIndexById(application.id)] = application;
+        this.messageService.add({ severity: 'info', summary: 'Список оновлено', detail: application.name });
+      }
+    });
   }
 
   deleteApplication(application: Application) {
@@ -81,7 +77,7 @@ export class ApplicationTableComponent {
           this.baseApplicationService.single.deleteById(application.id).subscribe(
             application => {
               this.applications = this.applications.filter(val => val.id !== application.id);
-              this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Application Deleted' });
+              this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Заявку видалено' });
             },
             error => {
               this.messageService.add({ severity: 'error', summary: 'Error', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
@@ -92,14 +88,35 @@ export class ApplicationTableComponent {
   }
 
   openNew() {
-    this.application = new BaseApplication();
-    this.submitted = false;
-    this.applicationDialog = true;
+    this.ref = this.dialogService.open(ApplicationInfoComponent, {
+      header: 'Деталі заявки',
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000,
+      maximizable: true
+    });
+
+    this.ref.onClose.subscribe((application: BaseApplication) => {
+      if (application) {
+        this.applications.push(application);
+        this.messageService.add({ severity: 'info', summary: 'Список оновлено', detail: application.name });
+      }
+    });
   }
 
-  hideDialog() {
-    this.applicationDialog = false;
-    this.submitted = false;
+  addEstimatorGroup(applicationId: number) {
+    this.ref = this.dialogService.open(ApplicationEvaluationGroupComponent, {
+      header: 'Група експертів',
+      data: { id: applicationId },
+      width: '20%',
+      height: '35%',
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000,
+      maximizable: true
+    });
+  }
+
+  redirectToEvaluationForm(applicationId: number) {
+    this.router.navigate(['/application/application-evaluation'], { queryParams: { applicationId } });
   }
 
   findIndexById(id: number): number {

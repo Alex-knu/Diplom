@@ -12,29 +12,34 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
         {
         }
 
-        public Task<DepartmentDTO> CreateDepartmentAsync(DepartmentDTO department)
+        public async Task<DepartmentDTO> CreateDepartmentAsync(DepartmentDTO department)
         {
-            return base.CreateEntityAsync(department);
+            return await base.CreateEntityAsync(department);
         }
 
-        public Task<DepartmentDTO> DeleteDepartmentAsync(int id)
+        public async Task<DepartmentDTO> DeleteDepartmentAsync(int id)
         {
-            return base.DeleteEntityAsync(id);
+            return await base.DeleteEntityAsync(id);
         }
 
-        public Task<IEnumerable<DepartmentDTO>> GetDepartmentsAsync()
+        public async Task<IEnumerable<DepartmentDTO>> GetDepartmentsTreeAsync()
         {
-            return base.GetEntitysAsync();
+            return await base.GetEntityListBySpecAsync(new Departments.DepartmentsTree());
         }
 
-        public Task<DepartmentDTO> GetDepartmentsByIdAsync(int id)
+        public async Task<IEnumerable<DepartmentDTO>> GetDepartmentsAsync()
         {
-            return base.GetEntitysByIdAsync(id);
+            return await base.GetEntitysAsync();
         }
 
-        public Task<DepartmentDTO> UpdateDepartmentAsync(DepartmentDTO department)
+        public async Task<DepartmentDTO> GetDepartmentsByIdAsync(int id)
         {
-            return base.UpdateEntityAsync(department);
+            return await base.GetEntitysByIdAsync(id);
+        }
+
+        public async Task<DepartmentDTO> UpdateDepartmentAsync(DepartmentDTO department)
+        {
+            return await base.UpdateEntityAsync(department);
         }
     }
 }

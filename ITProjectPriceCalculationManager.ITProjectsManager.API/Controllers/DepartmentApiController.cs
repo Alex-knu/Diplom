@@ -19,7 +19,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers
         [Route("collection")]
         public async Task<IActionResult> GetAllDepartments()
         {
-            return Ok(await _DepartmentService.GetDepartmentsAsync());
+            return Ok(await _DepartmentService.GetDepartmentsTreeAsync());
         }
 
         [HttpGet]

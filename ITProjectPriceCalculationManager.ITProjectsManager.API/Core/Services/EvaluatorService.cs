@@ -12,29 +12,29 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
         {
         }
 
-        public Task<EvaluatorDTO> CreateEvaluatorAsync(EvaluatorDTO evaluator)
+        public async Task<EvaluatorDTO> CreateEvaluatorAsync(EvaluatorDTO evaluator)
         {
-            return base.CreateEntityAsync(evaluator);
+            return await base.CreateEntityAsync(evaluator);
         }
 
-        public Task<EvaluatorDTO> DeleteEvaluatorAsync(int id)
+        public async Task<EvaluatorDTO> DeleteEvaluatorAsync(int id)
         {
-            return base.DeleteEntityAsync(id);
+            return await base.DeleteEntityAsync(id);
         }
 
-        public Task<IEnumerable<EvaluatorDTO>> GetEvaluatorsAsync()
+        public async Task<IEnumerable<EvaluatorDTO>> GetEvaluatorsAsync()
         {
-            return base.GetEntitysAsync();
+            return await base.GetEntitysAsync();
         }
 
-        public Task<EvaluatorDTO> GetEvaluatorsByIdAsync(int id)
+        public async Task<EvaluatorDTO> GetEvaluatorsByIdAsync(int id)
         {
-            return base.GetEntitysByIdAsync(id);
+            return await base.GetEntitysByIdAsync(id);
         }
 
-        public Task<EvaluatorDTO> UpdateEvaluatorAsync(EvaluatorDTO evaluator)
+        public async Task<EvaluatorDTO> UpdateEvaluatorAsync(EvaluatorDTO evaluator)
         {
-            return base.UpdateEntityAsync(evaluator);
+            return await base.UpdateEntityAsync(evaluator);
         }
     }
 }
