@@ -165,5 +165,49 @@ services:
           - it_project_price_calculation_manager.auth_server.postgres
     volumes: 
       - auth-server-data:/var/lib/postgresql/data
-      # copy the sql script to create tables
-      # - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+  #     # copy the sql script to create tables
+  #     # - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+  # it_project_price_calculation_manager.postgres:
+  #   image: mcr.microsoft.com/mssql/server:2022-latest
+  #   restart: always
+  #   environment:
+  #     ACCEPT_EULA: "Y"
+  #     MSSQL_SA_PASSWORD: "P@ssw0rd007"
+  #     #MSSQL_PID: Exspress
+  #   logging:
+  #     options:
+  #       max-size: 10m
+  #       max-file: "3"
+  #   ports:
+  #     - 5100:1433
+  #   networks:
+  #     it_projects_manager-database-net:
+  #       aliases:
+  #         - it_project_price_calculation_manager.postgres
+  #   # volumes: 
+  #   #   - it-projects-manager-data:/var/lib/postgresql/data
+  #     # copy the sql script to create tables
+  #     # - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+  # it_project_price_calculation_manager.auth_server.postgres:
+  #   image: mcr.microsoft.com/mssql/server:2022-latest
+  #   restart: always
+  #   environment:
+  #     ACCEPT_EULA: "Y"
+  #     MSSQL_SA_PASSWORD: "P@ssw0rd007"
+  #     #MSSQL_PID: Exspress
+  #   logging:
+  #     options:
+  #       max-size: 10m
+  #       max-file: "3"
+  #   ports:
+  #     - 5101:1433
+  #   networks:
+  #     security-database-net:
+  #       aliases:
+  #         - it_project_price_calculation_manager.auth_server.postgres
+  #   # volumes: 
+  #   #   - auth-server-data:/var/lib/postgresql/data
+  #     # copy the sql script to create tables
+  #     # - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
