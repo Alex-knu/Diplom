@@ -9,6 +9,7 @@ import { MessageService } from 'primeng/api';
 import { HttpErrorResponse } from '@angular/common/http';
 import { EvaluationApplication } from 'src/app/shared/models/evaluationApplication.model';
 import { TokenService } from 'src/app/shared/services/core/token.service';
+import { UUID } from 'angular2-uuid';
 
 @Component({
   selector: 'app-application-evaluation',
@@ -17,7 +18,7 @@ import { TokenService } from 'src/app/shared/services/core/token.service';
 })
 
 export class ApplicationEvaluationComponent {
-  applicationId: number;
+  applicationId: string;
   evaluationApplication: EvaluationApplication;
 
   influenceEvaluationParametrsInfo: EvaluationParametrsInfo[];
@@ -54,7 +55,7 @@ export class ApplicationEvaluationComponent {
     var factors: ApplicationToFactors[] = [];
     this.influenceEvaluationParametrsInfo.forEach(factor => {
       var selectFactor = new ApplicationToFactors();
-      selectFactor.id = 0;
+      selectFactor.id = UUID.UUID();
       selectFactor.applicationId = this.applicationId;
       selectFactor.difficultyLevelsTypeToFactorTypeId = factor.selectDifficultyLevel.relationId;
 
@@ -63,7 +64,7 @@ export class ApplicationEvaluationComponent {
 
     this.scaleEvaluationParametrsInfo.forEach(factor => {
       var selectFactor = new ApplicationToFactors();
-      selectFactor.id = 0;
+      selectFactor.id = UUID.UUID();
       selectFactor.applicationId = this.applicationId;
       selectFactor.difficultyLevelsTypeToFactorTypeId = factor.selectDifficultyLevel.relationId;
 

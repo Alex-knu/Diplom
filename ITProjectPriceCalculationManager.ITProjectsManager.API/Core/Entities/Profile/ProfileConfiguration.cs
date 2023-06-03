@@ -14,9 +14,9 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.P
                    .IsRequired();
 
             builder
-                .HasOne(profile => profile.Estimator)
+                .HasOne(profile => profile.Evaluator)
                 .WithMany(estimator => estimator.Profiles)
-                .HasForeignKey(profile => profile.EstimatorId);
+                .HasForeignKey(profile => profile.EvaluatorId);
 
             builder
                 .HasOne(profile => profile.Attribute)

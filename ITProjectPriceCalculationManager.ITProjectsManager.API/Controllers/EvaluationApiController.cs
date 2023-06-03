@@ -23,7 +23,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetEvaluationById(int id)
+        public async Task<IActionResult> GetEvaluationById(Guid id)
         {
             return Ok(await _evaluationService.GetEvaluationsByIdAsync(id));
         }
@@ -41,7 +41,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteEvaluation(int id)
+        public async Task<IActionResult> DeleteEvaluation(Guid id)
         {
             return Ok(await _evaluationService.DeleteEvaluationAsync(id));
         }

@@ -4,7 +4,7 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Appli
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactors;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Department;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevelsType;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Estimator;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evaluator;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramLanguage;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Helpers
@@ -15,7 +15,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Helpers
         {
             CreateMap<BaseApplicationDTO, Application>().ReverseMap();
             CreateMap<ApplicationDTO, Application>().ReverseMap();
-            CreateMap<EvaluatorDTO, Estimator>().ReverseMap();
+            CreateMap<EvaluatorDTO, Evaluator>().ReverseMap();
             CreateMap<DepartmentDTO, Department>().ReverseMap();
             CreateMap<ProgramLanguageDTO, ProgramLanguage>().ReverseMap();
             CreateMap<DifficultyLevelsTypeDTO, DifficultyLevelsType>().ReverseMap();

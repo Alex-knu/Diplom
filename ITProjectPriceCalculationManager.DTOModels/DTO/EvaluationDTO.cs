@@ -2,7 +2,7 @@ namespace ITProjectPriceCalculationManager.DTOModels.DTO
 {
     public class EvaluationDTO
     {
-        public int ApplicationId { get; set; }
+        public Guid ApplicationId { get; set; }
         public double AverageCostLabor { get; set; }
         public double AverageMonthlyRateWorkingHours { get; set; }
         public double? ConfidenceArea { get; set; }

@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Estimator
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evaluator
 {
-    internal class EstimatorConfiguration : IEntityTypeConfiguration<Estimator>
+    internal class EvaluatorConfiguration : IEntityTypeConfiguration<Evaluator>
     {
-        public void Configure(EntityTypeBuilder<Estimator> builder)
+        public void Configure(EntityTypeBuilder<Evaluator> builder)
         {
             builder
                    .HasKey(estimator => estimator.Id);
@@ -24,7 +24,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.E
 
             builder
               .HasOne(estimator => estimator.Department)
-              .WithMany(department => department.Estimators)
+              .WithMany(department => department.Evaluators)
               .HasForeignKey(estimator => estimator.DepartmentId);
         }
     }

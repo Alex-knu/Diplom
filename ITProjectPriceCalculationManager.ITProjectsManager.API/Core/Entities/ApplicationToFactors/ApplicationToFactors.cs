@@ -2,11 +2,11 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactors
 {
-    internal class ApplicationToFactors : IBaseEntity<int>
+    internal class ApplicationToFactors : IBaseEntity<Guid>
     {
-        public int Id { get; set; }
-        public int ApplicationId { get; set; }
-        public int DifficultyLevelsTypeToFactorTypeId { get; set; }
+        public Guid Id { get; set; }
+        public Guid ApplicationId { get; set; }
+        public Guid DifficultyLevelsTypeToFactorTypeId { get; set; }
         public double Value { get; set; }
 
         public Application.Application Application { get; set; }

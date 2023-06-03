@@ -6,9 +6,9 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Ser
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 {
-    internal class ApplicationService : BaseService<Application, int, ApplicationDTO>, IApplicationService
+    internal class ApplicationService : BaseService<Application, Guid, ApplicationDTO>, IApplicationService
     {
-        public ApplicationService(IRepository<Application, int> repository, IMapper mapper) : base(repository, mapper)
+        public ApplicationService(IRepository<Application, Guid> repository, IMapper mapper) : base(repository, mapper)
         {
         }
 
@@ -17,7 +17,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
             return await base.CreateEntityAsync(application);
         }
 
-        public async Task<ApplicationDTO> DeleteApplicationAsync(int id)
+        public async Task<ApplicationDTO> DeleteApplicationAsync(Guid id)
         {
             return await base.DeleteEntityAsync(id);
         }
@@ -27,7 +27,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
             return await base.GetEntitysAsync();
         }
 
-        public async Task<ApplicationDTO> GetApplicationsByIdAsync(int id)
+        public async Task<ApplicationDTO> GetApplicationsByIdAsync(Guid id)
         {
             return await base.GetEntitysByIdAsync(id);
         }

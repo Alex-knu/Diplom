@@ -5,9 +5,9 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Rep
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 {
-    internal class DepartmentTreeService : BaseService<Department, int, DepartmentDTO>, IDepartmentTreeService
+    internal class DepartmentTreeService : BaseService<Department, Guid, DepartmentDTO>, IDepartmentTreeService
     {
-        public DepartmentTreeService(IRepository<Department, int> repository, IMapper mapper) : base(repository, mapper)
+        public DepartmentTreeService(IRepository<Department, Guid> repository, IMapper mapper) : base(repository, mapper)
         {
         }
 

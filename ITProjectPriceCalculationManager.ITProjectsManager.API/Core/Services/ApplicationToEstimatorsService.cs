@@ -1,13 +1,13 @@
 using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToEstimators;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToEvaluator;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 {
-    internal class ApplicationToEstimatorsService : BaseService<ApplicationToEstimators, int, ApplicationToEstimatorsDTO>, IApplicationToEstimatorsService
+    internal class ApplicationToEstimatorsService : BaseService<ApplicationToEvaluator, Guid, ApplicationToEstimatorsDTO>, IApplicationToEstimatorsService
     {
-        public ApplicationToEstimatorsService(IRepository<ApplicationToEstimators, int> repository, IMapper mapper) : base(repository, mapper)
+        public ApplicationToEstimatorsService(IRepository<ApplicationToEvaluator, Guid> repository, IMapper mapper) : base(repository, mapper)
         {
         }
 
@@ -22,11 +22,11 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
             {
                 foreach (var evaluator in applicationToEstimators.Evaluators)
                 {
-                    await _repository.AddAsync(new ApplicationToEstimators()
-                    {
-                        ApplicationId = applicationToEstimators.ApplicationId,
-                        EstimatorId = evaluator.Id
-                    });
+                    // await _repository.AddAsync(new ApplicationToEvaluator()
+                    // {
+                    //     ApplicationId = applicationToEstimators.ApplicationId,
+                    //     EstimatorId = evaluator.Id
+                    // });
                 }
 
                 await _repository.SaveChangesAcync();

@@ -2,9 +2,9 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Attribute
 {
-    internal class Attribute : IBaseEntity<int>
+    internal class Attribute : IBaseEntity<Guid>
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
 
         public virtual ICollection<Profile.Profile> Profiles { get; set; }

@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { UUID } from 'angular2-uuid';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BaseApplication } from 'src/app/shared/models/baseApplication.model';
@@ -55,7 +56,7 @@ export class ApplicationInfoComponent implements OnInit {
         })
     }
     else {
-      this.application.id = 0;
+      this.application.id = UUID.UUID();
       this.application.price = 0;
       this.application.status = "New";
       this.application.userCreatorId = this.tokenService.getUserIdentifier();

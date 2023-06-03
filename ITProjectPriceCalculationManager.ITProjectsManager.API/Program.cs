@@ -10,7 +10,7 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration.AddUserSecrets<Program>();
 
-builder.Services.AddDbContext<ITProjectPriceCalculationManagerDbContext>(x => x.UseNpgsql(builder.Configuration["ITProjectsManagerAPI:ConnectionString"]));
+builder.Services.AddDbContext<ITProjectPriceCalculationManagerDbContext>(x => x.UseSqlServer(builder.Configuration["ITProjectsManagerAPI:ConnectionString"])); //UseSqlServer
 
 // Add services to the container.
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

@@ -24,7 +24,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetDepartmentById([FromRoute]int id)
+        public async Task<IActionResult> GetDepartmentById([FromRoute]Guid id)
         {
             return Ok(await _DepartmentService.GetDepartmentsByIdAsync(id));
         }
@@ -42,7 +42,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteDepartment(int id)
+        public async Task<IActionResult> DeleteDepartment(Guid id)
         {
             return Ok(await _DepartmentService.DeleteDepartmentAsync(id));
         }

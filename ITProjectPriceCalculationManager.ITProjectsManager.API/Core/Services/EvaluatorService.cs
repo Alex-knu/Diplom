@@ -1,14 +1,14 @@
 using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Estimator;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evaluator;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 {
-    internal class EvaluatorService : BaseService<Estimator, int, EvaluatorDTO>, IEvaluatorService
+    internal class EvaluatorService : BaseService<Evaluator, Guid, EvaluatorDTO>, IEvaluatorService
     {
-        public EvaluatorService(IRepository<Estimator, int> repository, IMapper mapper) : base(repository, mapper)
+        public EvaluatorService(IRepository<Evaluator, Guid> repository, IMapper mapper) : base(repository, mapper)
         {
         }
 
@@ -17,7 +17,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
             return await base.CreateEntityAsync(evaluator);
         }
 
-        public async Task<EvaluatorDTO> DeleteEvaluatorAsync(int id)
+        public async Task<EvaluatorDTO> DeleteEvaluatorAsync(Guid id)
         {
             return await base.DeleteEntityAsync(id);
         }
@@ -27,7 +27,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
             return await base.GetEntitysAsync();
         }
 
-        public async Task<EvaluatorDTO> GetEvaluatorsByIdAsync(int id)
+        public async Task<EvaluatorDTO> GetEvaluatorsByIdAsync(Guid id)
         {
             return await base.GetEntitysByIdAsync(id);
         }

@@ -5,9 +5,9 @@ namespace ITProjectPriceCalculationManager.DTOModels.DTO
 {
     public class EvaluationFactorDTO : IFactor
     {
-        public int Id { get; set; }
-        public int EvaluatorId { get; set; }
-        public int FactorId { get; set; }
+        public Guid Id { get; set; }
+        public Guid EvaluatorId { get; set; }
+        public Guid FactorId { get; set; }
         public int? Count { get; set; }
         public double Value { get; set; }
         public double SelfEvaluation { get; set; }

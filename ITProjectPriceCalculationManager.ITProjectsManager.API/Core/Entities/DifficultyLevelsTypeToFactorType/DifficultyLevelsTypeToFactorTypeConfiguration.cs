@@ -7,9 +7,9 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.D
     {
         public void Configure(EntityTypeBuilder<DifficultyLevelsTypeToFactorType> builder)
         {
-            builder.HasKey(applicationToEstimators => applicationToEstimators.Id);
+            builder.HasKey(applicationToEvaluators => applicationToEvaluators.Id);
 
-            builder.Property(applicationToEstimators => applicationToEstimators.Value)
+            builder.Property(applicationToEvaluators => applicationToEvaluators.Value)
                 .IsRequired();
 
             builder

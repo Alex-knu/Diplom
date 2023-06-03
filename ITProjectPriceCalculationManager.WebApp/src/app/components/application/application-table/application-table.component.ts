@@ -61,7 +61,12 @@ export class ApplicationTableComponent {
 
     this.ref.onClose.subscribe((application: BaseApplication) => {
       if (application && application.id) {
-        this.applications[this.findIndexById(application.id)] = application;
+        this.baseApplicationService.collection.getAll()
+          .subscribe(
+            (applications) => {
+              this.applications = applications;
+            });
+
         this.messageService.add({ severity: 'info', summary: 'Список оновлено', detail: application.name });
       }
     });
@@ -103,7 +108,7 @@ export class ApplicationTableComponent {
     });
   }
 
-  addEstimatorGroup(applicationId: number) {
+  addEstimatorGroup(applicationId: string) {
     this.ref = this.dialogService.open(ApplicationEvaluationGroupComponent, {
       header: 'Група експертів',
       data: { id: applicationId },
@@ -115,19 +120,7 @@ export class ApplicationTableComponent {
     });
   }
 
-  redirectToEvaluationForm(applicationId: number) {
+  redirectToEvaluationForm(applicationId: string) {
     this.router.navigate(['/application/application-evaluation'], { queryParams: { applicationId } });
-  }
-
-  findIndexById(id: number): number {
-    let index = -1;
-    for (let i = 0; i < this.applications.length; i++) {
-      if (this.applications[i].id === id) {
-        index = i;
-        break;
-      }
-    }
-
-    return index;
   }
 }

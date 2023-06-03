@@ -2,10 +2,10 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.D
 {
     internal class DifficultyLevelsTypeToFactorType
     {
-        public int Id { get; set; }
-        public int DifficultyLevelId { get; set; }
-        public int FactorId { get; set; }
-        public int FactorTypeId { get; set; }
+        public Guid Id { get; set; }
+        public Guid DifficultyLevelId { get; set; }
+        public Guid FactorId { get; set; }
+        public Guid FactorTypeId { get; set; }
         public double Value { get; set; }
 
         public DifficultyLevelsType.DifficultyLevelsType DifficultyLevel { get; set; }

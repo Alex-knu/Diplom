@@ -2,9 +2,9 @@ namespace ITProjectPriceCalculationManager.DTOModels.DTO
 {
     public class BaseApplicationDTO
     {
-        public int Id { get; set; }
-        public int CreatorId { get; set; }
-        public string UserCreatorId { get; set; }
+        public Guid Id { get; set; }
+        public Guid CreatorId { get; set; }
+        public Guid UserCreatorId { get; set; }
         public string Name { get; set; } 
         public string Description { get; set; }
         public string Status { get; set; } 

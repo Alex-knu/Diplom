@@ -6,9 +6,9 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Ser
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 {
-    internal class ProgramLanguageService : BaseService<ProgramLanguage, int, ProgramLanguageDTO>, IProgramLanguageService
+    internal class ProgramLanguageService : BaseService<ProgramLanguage, Guid, ProgramLanguageDTO>, IProgramLanguageService
     {
-        public ProgramLanguageService(IRepository<ProgramLanguage, int> repository, IMapper mapper) : base(repository, mapper)
+        public ProgramLanguageService(IRepository<ProgramLanguage, Guid> repository, IMapper mapper) : base(repository, mapper)
         {
         }
 
