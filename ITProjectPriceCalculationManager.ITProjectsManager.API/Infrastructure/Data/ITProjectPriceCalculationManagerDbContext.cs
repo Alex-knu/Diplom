@@ -66,6 +66,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.
                     orderby dlt.Id
                     select new DifficultyLevelsTypeDTO()
                     {
+                        Id = dlt.Id,
                         Name = dlt.Name
                     }).Distinct();
         }
@@ -79,6 +80,17 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.
                     select new EvaluationParametrsInfoDTO()
                     {
                         Name = a.Name,
+                        FactorTypeId = ft.Id,
+                        DifficultyLevels = (from dlttft in DifficultyLevelsTypeToFactorTypes
+                                            join dlt in DifficultyLevelsTypes on dlttft.DifficultyLevelId equals dlt.Id
+                                            where dlttft.FactorId == a.Id
+                                            orderby dlt.Id
+                                            select new DifficultyLevelsTypeDTO()
+                                            {
+                                                Id = dlt.Id,
+                                                RelationId = dlttft.Id,
+                                                Name = dlt.Name
+                                            }).ToList()
                     });
         }
     }
