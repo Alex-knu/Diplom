@@ -1117,7 +1117,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Estimators");
+                    b.ToTable("Evaluators");
                 });
 
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.EvaluatorToEvaluatedFactor.EvaluatorToEvaluatedFactor", b =>

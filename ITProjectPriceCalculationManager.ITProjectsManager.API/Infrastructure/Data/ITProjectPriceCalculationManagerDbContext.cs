@@ -50,7 +50,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.
         public DbSet<Attribute> Attributes { get; set; }
         public DbSet<DifficultyLevelsType> DifficultyLevelsTypes { get; set; }
         public DbSet<DifficultyLevelsTypeToFactorType> DifficultyLevelsTypeToFactorTypes { get; set; }
-        public DbSet<Evaluator> Estimators { get; set; }
+        public DbSet<Evaluator> Evaluators { get; set; }
         public DbSet<EvaluatorToEvaluatedFactor> EvaluatorToEvaluatedFactors { get; set; }
         public DbSet<FactorType> FactorTypes { get; set; }
         public DbSet<ProgramsParametr> ProgramsParametrs { get; set; }
