@@ -2,7 +2,7 @@ import { DifficultyLevelsType } from "./difficultyLevelsType.model";
 
 export class EvaluationParametrsInfo {
   name: string;
-  factorTypeId: number;
+  factorTypeId: string
   selectDifficultyLevel: DifficultyLevelsType;
   difficultyLevels: DifficultyLevelsType[];
 }

@@ -3,7 +3,7 @@ import { ProgramLanguage } from "./programLanguage.model";
 
 export class BaseApplication extends BaseModel {
 
-  constructor(id: number | null = null) {
+  constructor(id: string | null = null) {
     super(id);
   }
 

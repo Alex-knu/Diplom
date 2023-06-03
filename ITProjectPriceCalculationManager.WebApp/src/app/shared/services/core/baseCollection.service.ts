@@ -10,7 +10,7 @@ export class BaseCollectionService<TModel extends BaseModel> extends CoreHttpSer
     protected override httpService: HttpService,
     protected override controllerName: string,
     protected override configService: ClientConfigurationService,
-    protected createModel: new (id: number | null) => TModel,
+    protected createModel: new (id: string | null) => TModel,
     protected override serviceType: ServiceType = ServiceType.web) {
     super(httpService, controllerName, configService, serviceType);
   }
@@ -29,7 +29,7 @@ export class BaseCollectionService<TModel extends BaseModel> extends CoreHttpSer
       );
   }
 
-  getListById(id: number): Observable<TModel[]> {
+  getListById(id: string): Observable<TModel[]> {
     return this.httpService.get(`${this.baseUrl}${this.controllerName}/${id}`)
       .pipe(
         map((payloads: any) => payloads.map((payload: any) => this.mapModel(payload))),

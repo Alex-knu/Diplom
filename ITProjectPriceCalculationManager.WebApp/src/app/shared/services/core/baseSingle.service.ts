@@ -10,7 +10,7 @@ export class BaseSingleService<TModel extends BaseModel> extends CoreHttpService
     protected override httpService: HttpService,
     protected override controllerName: string,
     protected override configService: ClientConfigurationService,
-    protected createModel: new (id: number | null) => TModel,
+    protected createModel: new (id: string | null) => TModel,
     protected override serviceType: ServiceType = ServiceType.web) {
     super(httpService, controllerName, configService, serviceType);
   }
@@ -45,7 +45,7 @@ export class BaseSingleService<TModel extends BaseModel> extends CoreHttpService
       );
   }
 
-  getById(id: number): Observable<TModel> {
+  getById(id: string): Observable<TModel> {
     return this.httpService.get(`${this.baseUrl}${this.controllerName}/${id}`)
       .pipe(
         map((payload: any) => this.mapModel(payload)),
@@ -53,7 +53,7 @@ export class BaseSingleService<TModel extends BaseModel> extends CoreHttpService
       );
   }
 
-  deleteById(id: number): Observable<TModel> {
+  deleteById(id: string): Observable<TModel> {
     return this.httpService.delete(`${this.baseUrl}${this.controllerName}/${id}`)
       .pipe(
         map((payload: any) => this.mapModel(payload)),

@@ -1,13 +1,13 @@
 export abstract class BaseModel {
   constructor(
-    public id: number | null) {
+    public id: string | null) {
   }
 
-  public get _id(): number | null {
+  public get _id(): string | null {
     return this.id;
   }
 
-  public set _id(value: number | null) {
+  public set _id(value: string | null) {
     this.id = value;
   }
 }

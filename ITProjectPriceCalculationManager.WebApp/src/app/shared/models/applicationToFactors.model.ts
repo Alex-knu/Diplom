@@ -2,11 +2,11 @@ import { BaseModel } from "./base.model";
 
 export class ApplicationToFactors extends BaseModel {
 
-  constructor(id: number | null = null) {
+  constructor(id: string | null = null) {
     super(id);
   }
 
-  applicationId: number;
-  difficultyLevelsTypeToFactorTypeId: number;
+  applicationId: string
+  difficultyLevelsTypeToFactorTypeId: string
   value: number;
 }

@@ -2,10 +2,10 @@ import { BaseModel } from "./base.model";
 
 export class DifficultyLevelsType extends BaseModel {
 
-  constructor(id: number | null = null) {
+  constructor(id: string | null = null) {
     super(id);
   }
 
-  relationId: number;
+  relationId: string
   name: string;
 }

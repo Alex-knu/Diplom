@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { UUID } from 'angular2-uuid';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { Department } from 'src/app/shared/models/department.model';
@@ -61,7 +62,7 @@ export class DepartmentInfoComponent {
         })
     }
     else {
-      this.department.id = 0;
+      this.department.id = UUID.UUID();
 
       this.departmentService.single.create(this.department).subscribe(
         department => {

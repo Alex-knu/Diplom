@@ -49,7 +49,7 @@ export class ApplicationEvaluationGroupComponent implements OnInit {
     }
   }
 
-  addEstimatorGroup(applicationId: number) {
+  addEstimatorGroup(applicationId: string) {
     this.applicationToEstimators = new ApplicationToEstimators();
 
     this.applicationToEstimators.applicationId = applicationId;
