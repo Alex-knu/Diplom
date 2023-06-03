@@ -81,7 +81,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Estimators",
+                name: "Evaluators",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -90,7 +90,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    DepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -159,7 +159,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     table.ForeignKey(
                         name: "FK_Applications_Estimators_CreatorId",
                         column: x => x.CreatorId,
-                        principalTable: "Estimators",
+                        principalTable: "Evaluators",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -185,7 +185,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     table.ForeignKey(
                         name: "FK_Profile_Estimators_EvaluatorId",
                         column: x => x.EvaluatorId,
-                        principalTable: "Estimators",
+                        principalTable: "Evaluators",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -211,7 +211,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     table.ForeignKey(
                         name: "FK_ApplicationToEvaluators_Estimators_EvaluatorId",
                         column: x => x.EvaluatorId,
-                        principalTable: "Estimators",
+                        principalTable: "Evaluators",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -287,7 +287,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     table.ForeignKey(
                         name: "FK_EvaluatorToEvaluatedFactors_Estimators_EvaluatorId",
                         column: x => x.EvaluatorId,
-                        principalTable: "Estimators",
+                        principalTable: "Evaluators",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -547,7 +547,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_Estimators_DepartmentId",
-                table: "Estimators",
+                table: "Evaluators",
                 column: "DepartmentId");
 
             migrationBuilder.CreateIndex(
@@ -631,7 +631,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                 name: "FactorTypes");
 
             migrationBuilder.DropTable(
-                name: "Estimators");
+                name: "Evaluators");
 
             migrationBuilder.DropTable(
                 name: "Department");

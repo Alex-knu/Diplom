@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { UserRegistration } from '../models/user.registration';
 import { TokenService } from './core/token.service';
 import { LoginInfo } from '../models/loginInfo.model';
-import { UserLoginModel } from '../models/userLogin.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,12 +14,12 @@ export class AuthService {
     private http: HttpClient,
     private tokenService: TokenService) { }
 
-  public register(userRegistration: UserRegistration): Observable<any> {
+  public register(userRegistration: any): Observable<any> {
     return this.http.post<any>(`${environment.serveces.AuthServerUrl}api/authenticate/register`, userRegistration, { headers: this.setHeaders() })
       .pipe(catchError((error: HttpErrorResponse) => this.formatErrors(error)));
   }
 
-  public login(user: UserLoginModel): Observable<LoginInfo> {
+  public login(user: any): Observable<LoginInfo> {
     return this.http.post<any>(`${environment.serveces.AuthServerUrl}api/authenticate/login`, JSON.stringify(user), { headers: this.setHeaders() })
       .pipe(catchError((error: HttpErrorResponse) => this.formatErrors(error)));
   }
