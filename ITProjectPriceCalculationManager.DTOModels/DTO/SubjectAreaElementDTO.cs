@@ -5,7 +5,7 @@ namespace ITProjectPriceCalculationManager.DTOModels.DTO
 {
     public class SubjectAreaElementDTO : IFactor
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public int? Count { get; set; }
         public double Value { get; set; }
         public double SelfEvaluation { get; set; }

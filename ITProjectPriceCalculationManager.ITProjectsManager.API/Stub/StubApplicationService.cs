@@ -10,7 +10,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Stub
             return Task.FromResult(
                 new ApplicationDTO
                 {
-                    Id = 1,
+                    Id = Guid.NewGuid(),
                     Name = "Test",
                     Status = "New",
                     Price = 200,
@@ -45,7 +45,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Stub
             {
                 new ApplicationDTO
                 {
-                    Id = 1,
+                    Id = Guid.NewGuid(),
                     Name = "Test",
                     Status = "New",
                     Price = 200,
@@ -65,7 +65,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Stub
             return Task.FromResult(
                 new ApplicationDTO
                 {
-                    Id = 1,
+                    Id = Guid.NewGuid(),
                     Name = "Test",
                     Status = "New",
                     Price = 200,

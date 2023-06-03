@@ -31,7 +31,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers
             return result;
         }
 
-        private double CountUOF(IEnumerable<IGrouping<int, EvaluationFactorDTO>> subjectAreaElements, double? confidenceArea, BaseDelphiTechnique tehnique)
+        private double CountUOF(IEnumerable<IGrouping<Guid, EvaluationFactorDTO>> subjectAreaElements, double? confidenceArea, BaseDelphiTechnique tehnique)
         {
             double sum = 0;
 
@@ -69,7 +69,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers
             return 2.94 * productInfluenceFactors * Math.Pow(ksloc, CountB(GetFactors(evaluations.Where(e => e.FactorType == FactorType.ScaleFactors)), confidenceArea, tehnique));
         }
 
-        private double CountB(IEnumerable<IGrouping<int, EvaluationFactorDTO>> evaluations, double? confidenceArea, BaseDelphiTechnique tehnique)
+        private double CountB(IEnumerable<IGrouping<Guid, EvaluationFactorDTO>> evaluations, double? confidenceArea, BaseDelphiTechnique tehnique)
         {
             double sumScaleFactors = 0;
 
@@ -88,7 +88,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers
             return 0.91 + sumScaleFactors * 0.01;
         }
 
-        private IEnumerable<IGrouping<int, EvaluationFactorDTO>> GetFactors(IEnumerable<EvaluationFactorDTO> evaluations)
+        private IEnumerable<IGrouping<Guid, EvaluationFactorDTO>> GetFactors(IEnumerable<EvaluationFactorDTO> evaluations)
         {
             return from evaluation in evaluations group evaluation by evaluation.FactorId;
         }
