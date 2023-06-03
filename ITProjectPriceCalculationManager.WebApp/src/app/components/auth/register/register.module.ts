@@ -7,12 +7,14 @@ import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import { RegisterComponent } from './register.component';
 import { RegisterRoutingModule } from './register-routing.module';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   imports: [
     CommonModule,
     RegisterRoutingModule,
     ButtonModule,
+    ToastModule,
     CheckboxModule,
     InputTextModule,
     FormsModule,
