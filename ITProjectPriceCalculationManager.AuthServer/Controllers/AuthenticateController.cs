@@ -26,9 +26,7 @@ namespace ITProjectPriceCalculationManager.AuthServer.Controllers
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
-            await _authenticateSevice.Register(model);
-
-            return Ok(new Response { Status = "Success", Message = "User created successfully!" });
+            return Ok(await _authenticateSevice.Register(model));
         }
 
         [HttpPost]

@@ -55,7 +55,7 @@ namespace ITProjectPriceCalculationManager.AuthServer.Core.Services
             };
         }
 
-        public async Task Register(RegisterModel model)
+        public async Task<string> Register(RegisterModel model)
         {
             var userExists = await _userManager.FindByNameAsync(model.Username);
 
@@ -77,6 +77,8 @@ namespace ITProjectPriceCalculationManager.AuthServer.Core.Services
             {
                 throw new BadRequestException("User creation failed! Please check user details and try again.");
             }
+
+            return (await _userManager.FindByNameAsync(model.Username)).Id;
         }
 
         public async Task RegisterAdmin(RegisterModel model)

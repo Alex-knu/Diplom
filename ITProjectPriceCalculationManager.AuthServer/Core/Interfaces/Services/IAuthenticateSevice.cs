@@ -5,7 +5,7 @@ namespace ITProjectPriceCalculationManager.AuthServer.Core.Interfaces.Services
 {
     public interface IAuthenticateSevice
     {
-        Task Register(RegisterModel model);
+        Task<string> Register(RegisterModel model);
         Task RegisterAdmin(RegisterModel model);
         Task<TokenInfoDTO> Login(LoginModel model);
     }
