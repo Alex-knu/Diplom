@@ -14,6 +14,8 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Facto
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevelsTypeToFactorType;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data.SeedData;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevels;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.EvaluationAttributes;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data
 {
@@ -56,6 +58,8 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.
         public DbSet<ProgramsParametr> ProgramsParametrs { get; set; }
         public DbSet<ProgramLanguage> ProgramLanguages { get; set; }
         public DbSet<ProgramsParametrToSubjectAreaElement> ProgramsParametrToSubjectAreaElements { get; set; }
+        public DbSet<EvaluationAttribute> EvaluationAttributes { get; set; }
+        public DbSet<DifficultyLevel> DifficultyLevels { get; set; }
 
         public virtual IEnumerable<DifficultyLevelsTypeDTO> GetDifficultyLevelTypesForFactorType(int factorTypeId)
         {

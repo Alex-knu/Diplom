@@ -85,5 +85,11 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.
             var evaluator = new SpecificationEvaluator();
             return evaluator.GetQuery(_dbSet, specification);
         }
+
+        public IEnumerable<TEntity> ExecuteFunction(string functionName, object values)
+        {
+            Console.WriteLine($"SELECT * FROM {functionName}({values})");
+            return _dbSet.FromSqlInterpolated($"SELECT * FROM GetEvaluationAttributes()").ToList();
+        }
     }
 }

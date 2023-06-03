@@ -1,6 +1,8 @@
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces;
+
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevelsTypeToFactorType
 {
-    internal class DifficultyLevelsTypeToFactorType
+    internal class DifficultyLevelsTypeToFactorType : IBaseEntity<int>
     {
         public int Id { get; set; }
         public int DifficultyLevelId { get; set; }
