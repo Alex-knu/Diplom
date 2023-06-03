@@ -16,7 +16,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.D
 
         internal class GetDepartmentById : Specification<Department>
         {
-            public GetDepartmentById(int id)
+            public GetDepartmentById(Guid id)
             {
                 Query
                     .Include(x => x.Parent)

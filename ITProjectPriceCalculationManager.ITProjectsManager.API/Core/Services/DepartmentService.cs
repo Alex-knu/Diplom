@@ -7,9 +7,9 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Ser
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 {
-    internal class DepartmentService : BaseService<Department, int, DepartmentDTO>, IDepartmentService
+    internal class DepartmentService : BaseService<Department, Guid, DepartmentDTO>, IDepartmentService
     {
-        public DepartmentService(IRepository<Department, int> repository, IMapper mapper) : base(repository, mapper)
+        public DepartmentService(IRepository<Department, Guid> repository, IMapper mapper) : base(repository, mapper)
         {
         }
 
@@ -18,7 +18,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
             return await base.CreateEntityAsync(department);
         }
 
-        public async Task<DepartmentDTO> DeleteDepartmentAsync(int id)
+        public async Task<DepartmentDTO> DeleteDepartmentAsync(Guid id)
         {
             return await base.DeleteEntityAsync(id);
         }
@@ -28,7 +28,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
             return await base.GetEntitysAsync();
         }
 
-        public async Task<DepartmentDTO> GetDepartmentsByIdAsync(int id)
+        public async Task<DepartmentDTO> GetDepartmentsByIdAsync(Guid id)
         {
             return await GetEntitysByIdAsync(id);
         }
@@ -38,7 +38,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
             return await base.UpdateEntityAsync(department);
         }
 
-        protected override async Task<DepartmentDTO> GetEntitysByIdAsync(int id)
+        protected override async Task<DepartmentDTO> GetEntitysByIdAsync(Guid id)
         {
             return _mapper.Map<DepartmentDTO>(await _repository.GetFirstBySpecAsync(new Departments.GetDepartmentById(id)));
         }

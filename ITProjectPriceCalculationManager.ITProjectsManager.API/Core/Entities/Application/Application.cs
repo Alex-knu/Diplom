@@ -2,10 +2,10 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application
 {
-    internal class Application : IBaseEntity<int>
+    internal class Application : IBaseEntity<Guid>
     {
-        public int Id { get; set; }
-        public int CreatorId { get; set; }
+        public Guid Id { get; set; }
+        public Guid CreatorId { get; set; }
         public double Price { get; set; }
         public double Profit { get; set; }
         public double Overhead { get; set; }
@@ -17,8 +17,8 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
         public string Description { get; set; }
         public string Status { get; set; } 
 
-        public Estimator.Estimator Creator { get; set; }
-        public ICollection<ApplicationToEstimators.ApplicationToEstimators> ApplicationToEstimators { get; set; }
+        public Evaluator.Evaluator Creator { get; set; }
+        public ICollection<ApplicationToEvaluator.ApplicationToEvaluator> ApplicationToEvaluators { get; set; }
         public virtual ICollection<ApplicationToFactors.ApplicationToFactors> Factors{ get; set; }
         public virtual ICollection<ProgramsParametr.ProgramsParametr> ProgramsParametrs { get; set; }
     }

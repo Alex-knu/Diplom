@@ -29,12 +29,12 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Stub
             throw new NotImplementedException();
         }
 
-        public Task<ApplicationDTO> DeleteApplicationAsync(int id)
+        public Task<ApplicationDTO> DeleteApplicationAsync(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ApplicationDTO> GetApplicationAsync(int id)
+        public Task<ApplicationDTO> GetApplicationAsync(Guid id)
         {
             throw new NotImplementedException();
         }
@@ -60,7 +60,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Stub
             });
         }
 
-        public Task<ApplicationDTO> GetApplicationsByIdAsync(int id)
+        public Task<ApplicationDTO> GetApplicationsByIdAsync(Guid id)
         {
             return Task.FromResult(
                 new ApplicationDTO

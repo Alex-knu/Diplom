@@ -5,9 +5,9 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces
     public interface IEvaluatorService
     {
         Task<IEnumerable<EvaluatorDTO>> GetEvaluatorsAsync();
-        Task<EvaluatorDTO> GetEvaluatorsByIdAsync(int id);
+        Task<EvaluatorDTO> GetEvaluatorsByIdAsync(Guid id);
         Task<EvaluatorDTO> CreateEvaluatorAsync(EvaluatorDTO evaluator);
         Task<EvaluatorDTO> UpdateEvaluatorAsync(EvaluatorDTO evaluator);
-        Task<EvaluatorDTO> DeleteEvaluatorAsync(int id);
+        Task<EvaluatorDTO> DeleteEvaluatorAsync(Guid id);
     }
 }

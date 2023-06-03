@@ -23,7 +23,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetApplicationById(int id)
+        public async Task<IActionResult> GetApplicationById(Guid id)
         {
             return Ok(await _baseApplicationService.GetBaseApplicationsByIdAsync(id));
         }
@@ -41,7 +41,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteApplication(int id)
+        public async Task<IActionResult> DeleteApplication(Guid id)
         {
             return Ok(await _baseApplicationService.DeleteBaseApplicationAsync(id));
         }

@@ -3,17 +3,17 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Progr
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramsParametr;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramsParametrToSubjectAreaElement;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToEstimators;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactors;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Attribute;
 using Attribute = ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Attribute.Attribute;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevelsType;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Estimator;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.EvaluatorToEvaluatedFactor;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.FactorType;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevelsTypeToFactorType;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data.SeedData;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evaluator;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToEvaluator;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data
 {
@@ -29,12 +29,12 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new ApplicationConfiguration());
-            modelBuilder.ApplyConfiguration(new ApplicationToEstimatorsConfiguration());
+            modelBuilder.ApplyConfiguration(new ApplicationToEvaluatorConfiguration());
             modelBuilder.ApplyConfiguration(new ApplicationToFactorsConfiguration());
             modelBuilder.ApplyConfiguration(new AttributeConfiguration());
             modelBuilder.ApplyConfiguration(new DifficultyLevelsTypeConfiguration());
             modelBuilder.ApplyConfiguration(new DifficultyLevelsTypeToFactorTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new EstimatorConfiguration());
+            modelBuilder.ApplyConfiguration(new EvaluatorConfiguration());
             modelBuilder.ApplyConfiguration(new EvaluatorToEvaluatedFactorConfiguration());
             modelBuilder.ApplyConfiguration(new FactorTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ProgramsParametrConfiguration());
@@ -45,19 +45,19 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.
         }
 
         public DbSet<Application> Applications { get; set; }
-        public DbSet<ApplicationToEstimators> ApplicationToEstimators { get; set; }
+        public DbSet<ApplicationToEvaluator> ApplicationToEvaluators { get; set; }
         public DbSet<ApplicationToFactors> ApplicationToFactors { get; set; }
         public DbSet<Attribute> Attributes { get; set; }
         public DbSet<DifficultyLevelsType> DifficultyLevelsTypes { get; set; }
         public DbSet<DifficultyLevelsTypeToFactorType> DifficultyLevelsTypeToFactorTypes { get; set; }
-        public DbSet<Estimator> Estimators { get; set; }
+        public DbSet<Evaluator> Estimators { get; set; }
         public DbSet<EvaluatorToEvaluatedFactor> EvaluatorToEvaluatedFactors { get; set; }
         public DbSet<FactorType> FactorTypes { get; set; }
         public DbSet<ProgramsParametr> ProgramsParametrs { get; set; }
         public DbSet<ProgramLanguage> ProgramLanguages { get; set; }
         public DbSet<ProgramsParametrToSubjectAreaElement> ProgramsParametrToSubjectAreaElements { get; set; }
 
-        public virtual IEnumerable<DifficultyLevelsTypeDTO> GetDifficultyLevelTypesForFactorType(int factorTypeId)
+        public virtual IEnumerable<DifficultyLevelsTypeDTO> GetDifficultyLevelTypesForFactorType(Guid factorTypeId)
         {
             return (from dlttft in DifficultyLevelsTypeToFactorTypes
                     join ft in FactorTypes on dlttft.FactorTypeId equals ft.Id
@@ -66,7 +66,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.
                     orderby dlt.Id
                     select new DifficultyLevelsTypeDTO()
                     {
-                        Id = dlt.Id,
                         Name = dlt.Name
                     }).Distinct();
         }
@@ -80,17 +79,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.
                     select new EvaluationParametrsInfoDTO()
                     {
                         Name = a.Name,
-                        FactorTypeId = ft.Id,
-                        DifficultyLevels = (from dlttft in DifficultyLevelsTypeToFactorTypes
-                                            join dlt in DifficultyLevelsTypes on dlttft.DifficultyLevelId equals dlt.Id
-                                            where dlttft.FactorId == a.Id
-                                            orderby dlt.Id
-                                            select new DifficultyLevelsTypeDTO()
-                                            {
-                                                Id = dlt.Id,
-                                                RelationId = dlttft.Id,
-                                                Name = dlt.Name
-                                            }).ToList()
                     });
         }
     }

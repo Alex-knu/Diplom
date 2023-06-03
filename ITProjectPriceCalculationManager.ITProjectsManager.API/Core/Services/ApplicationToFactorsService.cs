@@ -1,17 +1,17 @@
 using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactors;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Estimator;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evaluator;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.EvaluatorToEvaluatedFactor;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 {
-    internal class ApplicationToFactorsService : BaseService<ApplicationToFactors, int, EvaluationApplicationDTO>, IApplicationToFactorsService
+    internal class ApplicationToFactorsService : BaseService<ApplicationToFactors, Guid, EvaluationApplicationDTO>, IApplicationToFactorsService
     {
-        protected readonly IRepository<EvaluatorToEvaluatedFactor, int> _evaluatorToEvaluatedFactorRepository;
-        protected readonly IRepository<Estimator, int> _estimatorRepository;
-        public ApplicationToFactorsService(IRepository<EvaluatorToEvaluatedFactor, int> evaluatorToEvaluatedFactorRepository, IRepository<Estimator, int> estimatorRepository, IRepository<ApplicationToFactors, int> repository, IMapper mapper) : base(repository, mapper)
+        protected readonly IRepository<EvaluatorToEvaluatedFactor, Guid> _evaluatorToEvaluatedFactorRepository;
+        protected readonly IRepository<Evaluator, Guid> _estimatorRepository;
+        public ApplicationToFactorsService(IRepository<EvaluatorToEvaluatedFactor, Guid> evaluatorToEvaluatedFactorRepository, IRepository<Evaluator, Guid> estimatorRepository, IRepository<ApplicationToFactors, Guid> repository, IMapper mapper) : base(repository, mapper)
         {
             _evaluatorToEvaluatedFactorRepository = evaluatorToEvaluatedFactorRepository;
             _estimatorRepository = estimatorRepository;
@@ -26,7 +26,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
         {
             try
             {
-                var domainCreator = await _estimatorRepository.GetFirstBySpecAsync(new Estimators.GetEstimatorByUserId(evaluationApplication.UserCreatorId));
+                var domainCreator = await _estimatorRepository.GetFirstBySpecAsync(new Evaluators.GetEstimatorByUserId(new Guid(evaluationApplication.UserCreatorId)));
 
                 if (domainCreator == null)
                 {

@@ -1,19 +1,19 @@
 using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Estimator;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evaluator;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramsParametr;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 {
-    internal class BaseApplicationService : BaseService<Application, int, BaseApplicationDTO>, IBaseApplicationService
+    internal class BaseApplicationService : BaseService<Application, Guid, BaseApplicationDTO>, IBaseApplicationService
     {
-        protected readonly IRepository<Estimator, int> _estimatorRepository;
-        protected readonly IRepository<ProgramsParametr, int> _programsParametrRepository;
+        protected readonly IRepository<Evaluator, Guid> _estimatorRepository;
+        protected readonly IRepository<ProgramsParametr, Guid> _programsParametrRepository;
 
-        public BaseApplicationService(IRepository<Estimator, int> estimatorRepository, IRepository<ProgramsParametr, int> programsParametrRepository, IRepository<Application, int> repository, IMapper mapper) : base(repository, mapper)
+        public BaseApplicationService(IRepository<Evaluator, Guid> estimatorRepository, IRepository<ProgramsParametr, Guid> programsParametrRepository, IRepository<Application, Guid> repository, IMapper mapper) : base(repository, mapper)
         {
             _estimatorRepository = estimatorRepository;
             _programsParametrRepository = programsParametrRepository;
@@ -24,7 +24,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
             return await CreateEntityAsync(baseApplication);
         }
 
-        public async Task<BaseApplicationDTO> DeleteBaseApplicationAsync(int id)
+        public async Task<BaseApplicationDTO> DeleteBaseApplicationAsync(Guid id)
         {
             return await base.DeleteEntityAsync(id);
         }
@@ -34,7 +34,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
             return await base.GetEntitysAsync();
         }
 
-        public async Task<BaseApplicationDTO> GetBaseApplicationsByIdAsync(int id)
+        public async Task<BaseApplicationDTO> GetBaseApplicationsByIdAsync(Guid id)
         {
             return await base.GetEntitysByIdAsync(id);
         }
@@ -48,14 +48,14 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
         {
             try
             {
-                var domainCreator = await _estimatorRepository.GetFirstBySpecAsync(new Estimators.GetEstimatorByUserId(baseApplication.UserCreatorId));
+                var domainCreator = await _estimatorRepository.GetFirstBySpecAsync(new Evaluators.GetEstimatorByUserId(new Guid(baseApplication.UserCreatorId)));
 
                 if (domainCreator == null)
                 {
                     throw new BadHttpRequestException("Creator not found");
                 }
 
-                baseApplication.CreatorId = domainCreator.Id;
+                //baseApplication.CreatorId = domainCreator.Id;
 
                 return baseApplication;
             }
@@ -69,7 +69,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
         {
             try
             {
-                var domainCreator = await _estimatorRepository.GetFirstBySpecAsync(new Estimators.GetEstimatorByUserId(baseApplication.UserCreatorId));
+                var domainCreator = await _estimatorRepository.GetFirstBySpecAsync(new Evaluators.GetEstimatorByUserId(new Guid(baseApplication.UserCreatorId)));
 
                 if (domainCreator == null)
                 {
@@ -87,7 +87,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
                     await _programsParametrRepository.AddAsync(new ProgramsParametr()
                     {
                         ApplicationId = newDomainApplication.Id,
-                        ProgramLanguageId = programLanguage.Id
+                        //ProgramLanguageId = programLanguage.Id
                     });
                 }
 
