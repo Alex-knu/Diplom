@@ -71,11 +71,21 @@ namespace ITProjectPriceCalculationManager.AuthServer.Core.Services
                 UserName = model.Username
             };
 
+            if (!await _roleManager.RoleExistsAsync(UserRoles.User))
+            {
+                await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+            }
+
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
             {
                 throw new BadRequestException("User creation failed! Please check user details and try again.");
+            }
+
+            if (await _roleManager.RoleExistsAsync(UserRoles.User))
+            {
+                await _userManager.AddToRolesAsync(user, new List<string> { UserRoles.User });
             }
 
             return (await _userManager.FindByNameAsync(model.Username)).Id;
