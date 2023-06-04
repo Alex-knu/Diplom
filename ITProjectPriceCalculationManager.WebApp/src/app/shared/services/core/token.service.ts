@@ -12,7 +12,6 @@ export class TokenService {
 
   setUserInfo(info: UserModel) {
     this.cookieService.set('userName', info.UserName)
-    this.cookieService.set('userIdentifier', info.UserIdentifier)
     this.cookieService.set('role', info.Role)
   }
 
@@ -22,10 +21,6 @@ export class TokenService {
 
   getUserName(): string {
     return this.cookieService.get('userName')
-  }
-
-  getUserIdentifier(): string {
-    return this.cookieService.get('userIdentifier')
   }
 
   getUserRole(): string {

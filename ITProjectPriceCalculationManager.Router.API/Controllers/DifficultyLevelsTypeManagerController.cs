@@ -11,21 +11,19 @@ namespace ITProjectPriceCalculationManager.Router.API.Controllers
     public class DifficultyLevelsTypeManagerController : ControllerBase
     {
         private readonly ILogger<DifficultyLevelsTypeManagerController> _logger;
-        private readonly HttpClient _client;
-        private readonly IRouteService _routeService;
+        private readonly IDifficultyLevelsTypeService _difficultyLevelsTypeService;
 
-        public DifficultyLevelsTypeManagerController(ILogger<DifficultyLevelsTypeManagerController> logger, IHttpClientFactory httpClientFactory, IRouteService routeService)
+        public DifficultyLevelsTypeManagerController(ILogger<DifficultyLevelsTypeManagerController> logger, IDifficultyLevelsTypeService difficultyLevelsTypeService)
         {
             _logger = logger;
-            _client = httpClientFactory.CreateClient("ITProjectsManager");
-            _routeService = routeService;
+            _difficultyLevelsTypeService = difficultyLevelsTypeService;
         }
 
         [HttpGet]
         [Route("collection/{id}")]
-        public async Task<IActionResult> GetAllApplications([FromRoute]int id)
+        public async Task<IActionResult> GetDifficultyLevelTypesForFactorType([FromRoute]Guid id)
         {
-            return Ok(await _routeService.GetListByIdAsync<List<DifficultyLevelsTypeDTO>>(_client, "difficultylevelstypeapi", id));
+            return Ok(await _difficultyLevelsTypeService.GetDifficultyLevelTypesForFactorType(id));
         }
     }
 }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ITProjectPriceCalculationManager.AuthServer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230602172438_InitDB")]
+    [Migration("20230604180537_InitDB")]
     partial class InitDB
     {
         /// <inheritdoc />

@@ -31,13 +31,14 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateApplication(BaseApplicationDTO query)
         {
+            Console.WriteLine("HAHAHAHAHAHAHAH");
             return Ok(await _baseApplicationService.CreateBaseApplicationAsync(query));
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateApplication(BaseApplicationDTO query)
         {
-            return Ok(await _baseApplicationService.UpdateBaseApplicationAsync((ApplicationDTO)query));
+            return Ok(await _baseApplicationService.UpdateBaseApplicationAsync(query));
         }
 
         [HttpDelete]

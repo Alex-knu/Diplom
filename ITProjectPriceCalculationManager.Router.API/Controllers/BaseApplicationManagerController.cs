@@ -1,7 +1,6 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using ITProjectPriceCalculationManager.Extentions.Extentions;
 using ITProjectPriceCalculationManager.Router.API.Core.Interfaces;
 
 namespace ITProjectPriceCalculationManager.Router.API.Controllers
@@ -12,46 +11,45 @@ namespace ITProjectPriceCalculationManager.Router.API.Controllers
     public class BaseApplicationManagerController : ControllerBase
     {
         private readonly ILogger<ApplicationManagerController> _logger;
-        private readonly HttpClient _client;
-        private readonly IRouteService _routeService;
+        private readonly IBaseApplicationService _baseApplicationService;
 
-        public BaseApplicationManagerController(ILogger<ApplicationManagerController> logger, IHttpClientFactory httpClientFactory, IRouteService routeService)
+        public BaseApplicationManagerController(ILogger<ApplicationManagerController> logger, IBaseApplicationService baseApplicationService)
         {
             _logger = logger;
-            _client = httpClientFactory.CreateClient("ITProjectsManager");
-            _routeService = routeService;
+            _baseApplicationService = baseApplicationService;
         }
 
         [HttpGet]
         [Route("collection")]
-        public async Task<IActionResult> GetAllApplications()
+        public async Task<IActionResult> GetBaseApplicationsAsync()
         {
-            return Ok(await _routeService.GetAllAsync<List<ApplicationDTO>>(_client, "baseapplicationapi"));
+            return Ok(await _baseApplicationService.GetBaseApplicationsAsync());
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetApplicationById(int id)
+        [Route("{id}")]
+        public async Task<IActionResult> GetBaseApplicationsByIdAsync([FromRoute]Guid id)
         {
-            return Ok(await _routeService.GetByIdAsync<ApplicationDTO>(_client, "baseapplicationapi", id));
+            return Ok(await _baseApplicationService.GetBaseApplicationsByIdAsync(id));
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateApplication(BaseApplicationDTO query)
+        public async Task<IActionResult> CreateBaseApplicationAsync(BaseApplicationDTO query)
         {
-            var userInfo = JwtUtils.GetUserInfo(HttpContext);
-            return Ok(await _routeService.PostAsJsonAsync<BaseApplicationDTO, ApplicationDTO>(_client, "baseapplicationapi", query));
+            return Ok(await _baseApplicationService.CreateBaseApplicationAsync(HttpContext, query));
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateApplication(BaseApplicationDTO query)
+        public async Task<IActionResult> UpdateBaseApplicationAsync(BaseApplicationDTO query)
         {
-            return Ok(await _routeService.PutAsJsonAsync<BaseApplicationDTO, ApplicationDTO>(_client, "baseapplicationapi", query));
+            return Ok(await _baseApplicationService.UpdateBaseApplicationAsync(query));
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteApplication(int id)
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteBaseApplicationAsync([FromRoute]Guid id)
         {
-            return Ok(await _routeService.DeleteAsJsonAsync<ApplicationDTO>(_client, "baseapplicationapi", id));
+            return Ok(await _baseApplicationService.DeleteBaseApplicationAsync(id));
         }
     }
 }

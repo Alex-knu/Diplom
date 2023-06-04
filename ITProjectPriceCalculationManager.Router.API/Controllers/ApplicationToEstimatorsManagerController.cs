@@ -11,20 +11,18 @@ namespace ITProjectPriceCalculationManager.Router.API.Controllers
     public class ApplicationToEstimatorsManagerController : ControllerBase
     {
         private readonly ILogger<ApplicationManagerController> _logger;
-        private readonly HttpClient _client;
-        private readonly IRouteService _routeService;
+        private readonly IApplicationToEstimatorsService _applicationToEstimatorsService;
 
-        public ApplicationToEstimatorsManagerController(ILogger<ApplicationManagerController> logger, IHttpClientFactory httpClientFactory, IRouteService routeService)
+        public ApplicationToEstimatorsManagerController(ILogger<ApplicationManagerController> logger, IApplicationToEstimatorsService applicationToEstimatorsService)
         {
             _logger = logger;
-            _client = httpClientFactory.CreateClient("ITProjectsManager");
-            _routeService = routeService;
+            _applicationToEstimatorsService = applicationToEstimatorsService;
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateApplication(ApplicationToEstimatorsDTO query)
         {
-            return Ok(await _routeService.PostAsJsonAsync<ApplicationToEstimatorsDTO, ApplicationToEstimatorsDTO>(_client, "applicationtoestimatorsapi", query));
+            return Ok(await _applicationToEstimatorsService.CreateApplicationToEstimatorsAsync(query));
         }
     }
 }
