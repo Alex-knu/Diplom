@@ -71,7 +71,6 @@ export class ApplicationEvaluationComponent {
       factors.push(selectFactor);
     });
 
-    this.evaluationApplication.userCreatorId = this.tokenService.getUserIdentifier();
     this.evaluationApplication.applicationToFactors = factors;
 
     this.applicationToFactorsService.single.create(this.evaluationApplication).subscribe(

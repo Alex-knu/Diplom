@@ -1,4 +1,5 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.Extentions.Extentions;
 using ITProjectPriceCalculationManager.Router.API.Core.Interfaces;
 
 namespace ITProjectPriceCalculationManager.Router.API.Core.Services
@@ -14,8 +15,9 @@ namespace ITProjectPriceCalculationManager.Router.API.Core.Services
             _routeService = routeService;
         }
 
-        public async Task<EvaluationApplicationDTO> CreateApplicationToFactorsAsync(EvaluationApplicationDTO query)
+        public async Task<EvaluationApplicationDTO> CreateApplicationToFactorsAsync(HttpContext httpContext, EvaluationApplicationDTO query)
         {
+            query.UserCreatorId = JwtUtils.GetUserInfo(httpContext).UserId;
             return await _routeService.PostAsJsonAsync<EvaluationApplicationDTO, EvaluationApplicationDTO>(_client, "applicationtofactorsapi", query);
         }
     }

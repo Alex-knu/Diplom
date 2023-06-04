@@ -4,6 +4,6 @@ namespace ITProjectPriceCalculationManager.Router.API.Core.Interfaces
 {
     public interface IApplicationToFactorsService
     {
-        Task<EvaluationApplicationDTO> CreateApplicationToFactorsAsync(EvaluationApplicationDTO query);
+        Task<EvaluationApplicationDTO> CreateApplicationToFactorsAsync(HttpContext httpContext, EvaluationApplicationDTO query);
     }
 }

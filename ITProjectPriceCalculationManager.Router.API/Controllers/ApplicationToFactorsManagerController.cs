@@ -22,7 +22,7 @@ namespace ITProjectPriceCalculationManager.Router.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateApplication(EvaluationApplicationDTO query)
         {
-            return Ok(await _applicationToFactorsService.CreateApplicationToFactorsAsync(query));
+            return Ok(await _applicationToFactorsService.CreateApplicationToFactorsAsync(HttpContext, query));
         }
     }
 }

@@ -21,6 +21,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 
         public async Task<BaseApplicationDTO> CreateBaseApplicationAsync(BaseApplicationDTO baseApplication)
         {
+            Console.WriteLine(baseApplication.Id);
             return await CreateEntityAsync(baseApplication);
         }
 
@@ -48,13 +49,15 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
         {
             try
             {
-                var domainCreator = await _estimatorRepository.GetFirstBySpecAsync(new Evaluators.GetEstimatorByUserId(baseApplication.UserCreatorId));
+                Console.WriteLine($"Creator ID: {baseApplication.UserCreatorId}");
+                var domainCreator = (await _estimatorRepository.GetAllAsync()).Where(e => e.UserId == baseApplication.UserCreatorId).FirstOrDefault(); //.GetFirstBySpecAsync(new Evaluators.GetEstimatorByUserId(baseApplication.UserCreatorId));
 
                 if (domainCreator == null)
                 {
                     throw new BadHttpRequestException("Creator not found");
                 }
 
+                Console.WriteLine($"HAHAHAHAHAHAHAH: {domainCreator.Id}");
                 var domainApplication = _mapper.Map<Application>(baseApplication);
                 Console.WriteLine($"HAHAHAHAHAHAHAH: {domainCreator.Id}");
                 domainApplication.CreatorId = domainCreator.Id;

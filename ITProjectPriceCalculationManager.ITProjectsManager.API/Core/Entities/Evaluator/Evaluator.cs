@@ -12,7 +12,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.E
         public string Email { get; set; }
         public Guid? DepartmentId { get; set; }
 
-        public Department.Department Department { get; set; }
+        public Department.Department? Department { get; set; }
         public ICollection<ApplicationToEvaluator.ApplicationToEvaluator> ApplicationToEvaluators { get; set; }
         public ICollection<Profile.Profile> Profiles { get; set; }
         public ICollection<Application.Application> Applications { get; set; }
