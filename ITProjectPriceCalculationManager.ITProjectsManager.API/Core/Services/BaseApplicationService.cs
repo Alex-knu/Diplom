@@ -5,6 +5,9 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evalu
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramsParametr;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 {
@@ -12,11 +15,15 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
     {
         protected readonly IRepository<Evaluator, Guid> _estimatorRepository;
         protected readonly IRepository<ProgramsParametr, Guid> _programsParametrRepository;
+        protected readonly ITProjectPriceCalculationManagerDbContext _dbContext;
+        protected readonly DbSet<Application> _dbSet;
 
-        public BaseApplicationService(IRepository<Evaluator, Guid> estimatorRepository, IRepository<ProgramsParametr, Guid> programsParametrRepository, IRepository<Application, Guid> repository, IMapper mapper) : base(repository, mapper)
+        public BaseApplicationService(IRepository<Evaluator, Guid> estimatorRepository, IRepository<ProgramsParametr, Guid> programsParametrRepository, IRepository<Application, Guid> repository, IMapper mapper, ITProjectPriceCalculationManagerDbContext dbContext) : base(repository, mapper)
         {
             _estimatorRepository = estimatorRepository;
             _programsParametrRepository = programsParametrRepository;
+            _dbContext = dbContext;
+            _dbSet = _dbContext.Set<Application>();
         }
 
         public async Task<BaseApplicationDTO> CreateBaseApplicationAsync(BaseApplicationDTO baseApplication)
@@ -32,7 +39,15 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 
         public async Task<IEnumerable<BaseApplicationDTO>> GetBaseApplicationsAsync()
         {
-            return await base.GetEntitysAsync();
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@userId", "821aeb96-b3c6-9df3-3239-9f631189caee")
+            };
+
+            await base.GetEntitysAsync();
+
+            _dbSet.FromSqlInterpolated($"EXEC dbo.GetApplicationsByCreator @userId = '25322299-6C3B-4157-B83A-D806DAC59F32'");
+            return _mapper.Map<List<BaseApplicationDTO>>(_dbSet.FromSqlInterpolated($"EXEC dbo.GetApplicationsByCreator @userId = '25322299-6C3B-4157-B83A-D806DAC59F32'"));
         }
 
         public async Task<BaseApplicationDTO> GetBaseApplicationsByIdAsync(Guid id)
@@ -49,17 +64,14 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
         {
             try
             {
-                Console.WriteLine($"Creator ID: {baseApplication.UserCreatorId}");
-                var domainCreator = (await _estimatorRepository.GetAllAsync()).Where(e => e.UserId == baseApplication.UserCreatorId).FirstOrDefault(); //.GetFirstBySpecAsync(new Evaluators.GetEstimatorByUserId(baseApplication.UserCreatorId));
+                var domainCreator = await _estimatorRepository.GetFirstBySpecAsync(new Evaluators.GetEstimatorByUserId(baseApplication.UserCreatorId));
 
                 if (domainCreator == null)
                 {
                     throw new BadHttpRequestException("Creator not found");
                 }
 
-                Console.WriteLine($"HAHAHAHAHAHAHAH: {domainCreator.Id}");
                 var domainApplication = _mapper.Map<Application>(baseApplication);
-                Console.WriteLine($"HAHAHAHAHAHAHAH: {domainCreator.Id}");
                 domainApplication.CreatorId = domainCreator.Id;
                 var newDomainApplication = await _repository.AddAsync(domainApplication);
 

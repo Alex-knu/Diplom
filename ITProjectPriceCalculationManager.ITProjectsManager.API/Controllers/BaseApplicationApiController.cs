@@ -31,7 +31,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateApplication(BaseApplicationDTO query)
         {
-            Console.WriteLine("HAHAHAHAHAHAHAH");
             return Ok(await _baseApplicationService.CreateBaseApplicationAsync(query));
         }
 
