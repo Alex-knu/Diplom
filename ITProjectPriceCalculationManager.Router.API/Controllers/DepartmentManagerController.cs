@@ -11,46 +11,45 @@ namespace ITProjectPriceCalculationManager.Router.API.Controllers
     public class DepartmentManagerController : ControllerBase
     {
         private readonly ILogger<DepartmentManagerController> _logger;
-        private readonly HttpClient _client;
-        private readonly IRouteService _routeService;
+        private readonly IDepartmentService _departmentService;
 
-        public DepartmentManagerController(ILogger<DepartmentManagerController> logger, IHttpClientFactory httpClientFactory, IRouteService routeService)
+        public DepartmentManagerController(ILogger<DepartmentManagerController> logger, IDepartmentService departmentService)
         {
             _logger = logger;
-            _client = httpClientFactory.CreateClient("ITProjectsManager");
-            _routeService = routeService;
+            _departmentService = departmentService;
         }
 
         [HttpGet]
         [Route("collection")]
         public async Task<IActionResult> GetAllDepartments()
         {
-            return Ok(await _routeService.GetAllAsync<List<DepartmentDTO>>(_client, "departmentapi"));
+            return Ok(await _departmentService.GetDepartmentsAsync());
         }
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetDepartmentById([FromRoute]int id)
+        public async Task<IActionResult> GetDepartmentById([FromRoute]Guid id)
         {
-            return Ok(await _routeService.GetByIdAsync<DepartmentDTO>(_client, "departmentapi", id));
+            return Ok(await _departmentService.GetDepartmentsByIdAsync(id));
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateDepartment(DepartmentDTO department)
         {
-            return Ok(await _routeService.PostAsJsonAsync<DepartmentDTO, DepartmentDTO>(_client, "departmentapi", department));
+            return Ok(await _departmentService.CreateDepartmentAsync(department));
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateDepartment(DepartmentDTO department)
         {
-            return Ok(await _routeService.PutAsJsonAsync<DepartmentDTO, DepartmentDTO>(_client, "departmentapi", department));
+            return Ok(await _departmentService.UpdateDepartmentAsync(department));
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteDepartment(int id)
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteDepartment([FromRoute]Guid id)
         {
-            return Ok(await _routeService.DeleteAsJsonAsync<DepartmentDTO>(_client, "departmentapi", id));
+            return Ok(await _departmentService.DeleteDepartmentAsync(id));
         }
     }
 }

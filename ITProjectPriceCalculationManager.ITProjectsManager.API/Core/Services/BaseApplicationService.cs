@@ -44,27 +44,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
             return await base.UpdateEntityAsync(baseApplication);
         }
 
-        private async Task<BaseApplicationDTO> SetCreatorId(BaseApplicationDTO baseApplication)
-        {
-            try
-            {
-                var domainCreator = await _estimatorRepository.GetFirstBySpecAsync(new Evaluators.GetEstimatorByUserId(baseApplication.UserCreatorId));
-
-                if (domainCreator == null)
-                {
-                    throw new BadHttpRequestException("Creator not found");
-                }
-
-                //baseApplication.CreatorId = domainCreator.Id;
-
-                return baseApplication;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-
         protected override async Task<BaseApplicationDTO> CreateEntityAsync(BaseApplicationDTO baseApplication)
         {
             try
@@ -77,6 +56,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
                 }
 
                 var domainApplication = _mapper.Map<Application>(baseApplication);
+                Console.WriteLine($"HAHAHAHAHAHAHAH: {domainCreator.Id}");
                 domainApplication.CreatorId = domainCreator.Id;
                 var newDomainApplication = await _repository.AddAsync(domainApplication);
 
@@ -87,7 +67,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
                     await _programsParametrRepository.AddAsync(new ProgramsParametr()
                     {
                         ApplicationId = newDomainApplication.Id,
-                        //ProgramLanguageId = programLanguage.Id
+                        ProgramLanguageId = programLanguage.Id
                     });
                 }
 

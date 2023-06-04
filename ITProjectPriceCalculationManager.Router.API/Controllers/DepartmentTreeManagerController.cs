@@ -1,4 +1,3 @@
-using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.Router.API.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,21 +10,19 @@ namespace ITProjectPriceCalculationManager.Router.API.Controllers
     public class DepartmentTreeManagerController : ControllerBase
     {
         private readonly ILogger<DepartmentTreeManagerController> _logger;
-        private readonly HttpClient _client;
-        private readonly IRouteService _routeService;
+        private readonly IDepartmentTreeService _departmentTreeService;
 
-        public DepartmentTreeManagerController(ILogger<DepartmentTreeManagerController> logger, IHttpClientFactory httpClientFactory, IRouteService routeService)
+        public DepartmentTreeManagerController(ILogger<DepartmentTreeManagerController> logger, IDepartmentTreeService departmentTreeService)
         {
             _logger = logger;
-            _client = httpClientFactory.CreateClient("ITProjectsManager");
-            _routeService = routeService;
+            _departmentTreeService = departmentTreeService;
         }
 
         [HttpGet]
         [Route("collection")]
-        public async Task<IActionResult> GetAllDepartments()
+        public async Task<IActionResult> GetDepartmentsTreeAsync()
         {
-            return Ok(await _routeService.GetAllAsync<List<DepartmentDTO>>(_client, "departmenttreeapi"));
+            return Ok(await _departmentTreeService.GetDepartmentsTreeAsync());
         }
     }
 }

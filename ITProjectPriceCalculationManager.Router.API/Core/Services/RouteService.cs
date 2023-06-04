@@ -11,14 +11,14 @@ namespace ITProjectPriceCalculationManager.Router.API.Core.Services
             return response;
         }
 
-        public async Task<TResult> GetListByIdAsync<TResult>(HttpClient client, string controller, int id)
+        public async Task<TResult> GetListByIdAsync<TResult, TKey>(HttpClient client, string controller, TKey id)
         {
             var response = await client.GetByIdAsync<TResult>($"api/{controller}/collection/{id}");
 
             return response;
         }
 
-        public async Task<TResult> GetByIdAsync<TResult>(HttpClient client, string controller, int id)
+        public async Task<TResult> GetByIdAsync<TResult, TKey>(HttpClient client, string controller, TKey id)
         {
             var response = await client.GetByIdAsync<TResult>($"api/{controller}/{id}");
 
@@ -39,9 +39,9 @@ namespace ITProjectPriceCalculationManager.Router.API.Core.Services
             return response;
         }
 
-        public async Task<TResult> DeleteAsJsonAsync<TResult>(HttpClient client, string controller, int id)
+        public async Task<TResult> DeleteAsJsonAsync<TResult, TKey>(HttpClient client, string controller, TKey id)
         {
-            var response = await client.DeleteAsJsonAsync<int, TResult>($"api/{controller}", id);
+            var response = await client.DeleteAsJsonAsync<TKey, TResult, TKey>($"api/{controller}", id);
 
             return response;
         }

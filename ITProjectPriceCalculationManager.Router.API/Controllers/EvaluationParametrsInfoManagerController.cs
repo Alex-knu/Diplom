@@ -11,21 +11,19 @@ namespace ITProjectPriceCalculationManager.Router.API.Controllers
     public class EvaluationParametrsInfoManagerController : ControllerBase
     {
         private readonly ILogger<EvaluationParametrsInfoManagerController> _logger;
-        private readonly HttpClient _client;
-        private readonly IRouteService _routeService;
+        private readonly IEvaluationParametrsInfoService _evaluationParametrsInfoService;
 
-        public EvaluationParametrsInfoManagerController(ILogger<EvaluationParametrsInfoManagerController> logger, IHttpClientFactory httpClientFactory, IRouteService routeService)
+        public EvaluationParametrsInfoManagerController(ILogger<EvaluationParametrsInfoManagerController> logger, IEvaluationParametrsInfoService evaluationParametrsInfoService)
         {
             _logger = logger;
-            _client = httpClientFactory.CreateClient("ITProjectsManager");
-            _routeService = routeService;
+            _evaluationParametrsInfoService = evaluationParametrsInfoService;
         }
 
         [HttpGet]
         [Route("collection")]
         public async Task<IActionResult> GetAllEvaluationParametrsInfo()
         {
-            return Ok(await _routeService.GetAllAsync<List<EvaluationParametrsInfoDTO>>(_client, "evaluationparametrsinfoapi"));
+            return Ok(await _evaluationParametrsInfoService.GetEvaluationAttributes());
         }
     }
 }

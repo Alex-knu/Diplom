@@ -11,21 +11,19 @@ namespace ITProjectPriceCalculationManager.Router.API.Controllers
     public class ProgramLanguageManagerController : ControllerBase
     {
         private readonly ILogger<EvaluatorManagerController> _logger;
-        private readonly HttpClient _client;
-        private readonly IRouteService _routeService;
+        private readonly IProgramLanguageService _programLanguageService;
 
-        public ProgramLanguageManagerController(ILogger<EvaluatorManagerController> logger, IHttpClientFactory httpClientFactory, IRouteService routeService)
+        public ProgramLanguageManagerController(ILogger<EvaluatorManagerController> logger, IProgramLanguageService programLanguageService)
         {
             _logger = logger;
-            _client = httpClientFactory.CreateClient("ITProjectsManager");
-            _routeService = routeService;
+            _programLanguageService = programLanguageService;
         }
 
         [HttpGet]
         [Route("collection")]
         public async Task<IActionResult> GetAllProgramLanguages()
         {
-            return Ok(await _routeService.GetAllAsync<List<ProgramLanguageDTO>>(_client, "programlanguageapi"));
+            return Ok(await _programLanguageService.GetProgramLanguagesAsync());
         }
     }
 }

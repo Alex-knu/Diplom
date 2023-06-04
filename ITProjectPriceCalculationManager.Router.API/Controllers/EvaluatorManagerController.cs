@@ -11,45 +11,45 @@ namespace ITProjectPriceCalculationManager.Router.API.Controllers
     public class EvaluatorManagerController : ControllerBase
     {
         private readonly ILogger<EvaluatorManagerController> _logger;
-        private readonly HttpClient _client;
-        private readonly IRouteService _routeService;
+        private readonly IEvaluatorService _evaluatorService;
 
-        public EvaluatorManagerController(ILogger<EvaluatorManagerController> logger, IHttpClientFactory httpClientFactory, IRouteService routeService)
+        public EvaluatorManagerController(ILogger<EvaluatorManagerController> logger, IEvaluatorService evaluatorService)
         {
             _logger = logger;
-            _client = httpClientFactory.CreateClient("ITProjectsManager");
-            _routeService = routeService;
+            _evaluatorService = evaluatorService;
         }
 
         [HttpGet]
         [Route("collection")]
         public async Task<IActionResult> GetAllEvaluators()
         {
-            return Ok(await _routeService.GetAllAsync<List<EvaluatorDTO>>(_client, "evaluatorapi"));
+            return Ok(await _evaluatorService.GetEvaluatorsAsync());
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetEvaluatorById(int id)
+        [Route("{id}")]
+        public async Task<IActionResult> GetEvaluatorById([FromRoute]Guid id)
         {
-            return Ok(await _routeService.GetByIdAsync<EvaluatorDTO>(_client, "evaluatorapi", id));
+            return Ok(await _evaluatorService.GetEvaluatorsByIdAsync(id));
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateEvaluator(EvaluatorDTO evaluator)
         {
-            return Ok(await _routeService.PostAsJsonAsync<EvaluatorDTO, EvaluatorDTO>(_client, "evaluatorapi", evaluator));
+            return Ok(await _evaluatorService.CreateEvaluatorAsync(evaluator));
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateEvaluator(EvaluatorDTO evaluator)
         {
-            return Ok(await _routeService.PutAsJsonAsync<EvaluatorDTO, EvaluatorDTO>(_client, "evaluatorapi", evaluator));
+            return Ok(await _evaluatorService.UpdateEvaluatorAsync(evaluator));
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteEvaluator(int id)
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteEvaluator([FromRoute]Guid id)
         {
-            return Ok(await _routeService.DeleteAsJsonAsync<EvaluatorDTO>(_client, "evaluatorapi", id));
+            return Ok(await _evaluatorService.DeleteEvaluatorAsync(id));
         }
     }
 }

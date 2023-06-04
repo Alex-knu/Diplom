@@ -58,9 +58,9 @@ namespace System.Net.Http
             return await ReadFromJson<TResult>(response);
         }
 
-        public static async Task<TResult> DeleteAsJsonAsync<T, TResult>(this HttpClient client, string route, int id)
+        public static async Task<TResult> DeleteAsJsonAsync<T, TResult, TKey>(this HttpClient client, string route, TKey id)
         {
-            var response = await client.DeleteAsJsonAsync<int>(route, id);
+            var response = await client.DeleteAsJsonAsync<TKey>(route, id);
 
             if (!response.StatusCode.IsSuccessStatusCode())
             {

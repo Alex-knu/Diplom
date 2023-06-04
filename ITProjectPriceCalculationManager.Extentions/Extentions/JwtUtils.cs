@@ -43,8 +43,8 @@ namespace ITProjectPriceCalculationManager.Extentions.Extentions
 
                 return new UserInfo
                 {
-                    UserId = claimsPrincipal.FindFirst(ClaimTypes.NameIdentifier)?.Value,
-                    UserName = claimsPrincipal.FindFirst(ClaimTypes.Name)?.Value,
+                    UserId = new Guid(claimsPrincipal.FindFirst("UserIdentifier")?.Value),
+                    UserName = claimsPrincipal.FindFirst("UserName")?.Value,
                     Email = claimsPrincipal.FindFirst(ClaimTypes.Email)?.Value,
                 };
             }
