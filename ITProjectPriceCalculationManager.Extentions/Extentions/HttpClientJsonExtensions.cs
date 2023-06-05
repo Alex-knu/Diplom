@@ -1,3 +1,4 @@
+using System.Net.Http.Headers;
 using System.Text.Json;
 
 namespace System.Net.Http
@@ -7,10 +8,22 @@ namespace System.Net.Http
         public static async Task<HttpResponseMessage> DeleteAsJsonAsync<TValue>(this HttpClient client, string requestUri, TValue value, JsonSerializerOptions? options = null, CancellationToken cancellationToken = default)
         {
             var json = JsonSerializer.Serialize(value, options);
-            
+
             using var request = new HttpRequestMessage(HttpMethod.Delete, requestUri)
             {
-                Content = new StringContent(json),
+                Content = new StringContent(json)
+            };
+
+            return await client.SendAsync(request, HttpCompletionOption.ResponseContentRead, cancellationToken).ConfigureAwait(false);
+        }
+
+        public static async Task<HttpResponseMessage> GetAsJsonAsync<TValue>(this HttpClient client, string requestUri, TValue value, JsonSerializerOptions? options = null, CancellationToken cancellationToken = default)
+        {
+            var json = JsonSerializer.Serialize(value, options);
+
+            using var request = new HttpRequestMessage(HttpMethod.Get, requestUri)
+            {
+                Content = new StringContent(json)
             };
 
             return await client.SendAsync(request, HttpCompletionOption.ResponseContentRead, cancellationToken).ConfigureAwait(false);

@@ -45,7 +45,7 @@ namespace ITProjectPriceCalculationManager.Extentions.Extentions
                 {
                     UserId = new Guid(claimsPrincipal.FindFirst("UserIdentifier")?.Value),
                     UserName = claimsPrincipal.FindFirst("UserName")?.Value,
-                    Email = claimsPrincipal.FindFirst(ClaimTypes.Email)?.Value,
+                    Roles = claimsPrincipal.FindAll("Role").Select(c => c.Value).ToList()
                 };
             }
             catch (Exception ex)

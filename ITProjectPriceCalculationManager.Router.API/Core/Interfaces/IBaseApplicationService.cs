@@ -6,7 +6,7 @@ namespace ITProjectPriceCalculationManager.Router.API.Core.Interfaces
     {
         Task<BaseApplicationDTO> CreateBaseApplicationAsync(HttpContext httpContext, BaseApplicationDTO query);
         Task<BaseApplicationDTO> DeleteBaseApplicationAsync(Guid id);
-        Task<IEnumerable<BaseApplicationDTO>> GetBaseApplicationsAsync();
+        Task<IEnumerable<BaseApplicationDTO>> GetBaseApplicationsAsync(HttpContext httpContext);
         Task<BaseApplicationDTO> GetBaseApplicationsByIdAsync(Guid id);
         Task<BaseApplicationDTO> UpdateBaseApplicationAsync(BaseApplicationDTO query);
     }

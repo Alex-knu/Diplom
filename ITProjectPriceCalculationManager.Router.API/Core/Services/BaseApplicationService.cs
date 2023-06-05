@@ -26,8 +26,12 @@ namespace ITProjectPriceCalculationManager.Router.API.Core.Services
             return await _routeService.DeleteAsJsonAsync<BaseApplicationDTO, Guid>(_client, "baseapplicationapi", id);
         }
 
-        public async Task<IEnumerable<BaseApplicationDTO>> GetBaseApplicationsAsync()
+        public async Task<IEnumerable<BaseApplicationDTO>> GetBaseApplicationsAsync(HttpContext httpContext)
         {
+            var userInfo = JwtUtils.GetUserInfo(httpContext);
+
+            _client.DefaultRequestHeaders.Add("Authorization", httpContext.Request.Headers["Authorization"].ToString());
+
             return await _routeService.GetAllAsync<List<BaseApplicationDTO>>(_client, "baseapplicationapi");
         }
 

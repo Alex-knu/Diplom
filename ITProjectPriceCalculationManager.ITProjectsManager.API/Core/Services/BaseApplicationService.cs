@@ -1,12 +1,13 @@
 using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.Extentions.Extentions;
+using ITProjectPriceCalculationManager.Extentions.Models;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evaluator;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramsParametr;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
@@ -16,19 +17,16 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
         protected readonly IRepository<Evaluator, Guid> _estimatorRepository;
         protected readonly IRepository<ProgramsParametr, Guid> _programsParametrRepository;
         protected readonly ITProjectPriceCalculationManagerDbContext _dbContext;
-        protected readonly DbSet<Application> _dbSet;
 
         public BaseApplicationService(IRepository<Evaluator, Guid> estimatorRepository, IRepository<ProgramsParametr, Guid> programsParametrRepository, IRepository<Application, Guid> repository, IMapper mapper, ITProjectPriceCalculationManagerDbContext dbContext) : base(repository, mapper)
         {
             _estimatorRepository = estimatorRepository;
             _programsParametrRepository = programsParametrRepository;
             _dbContext = dbContext;
-            _dbSet = _dbContext.Set<Application>();
         }
 
         public async Task<BaseApplicationDTO> CreateBaseApplicationAsync(BaseApplicationDTO baseApplication)
         {
-            Console.WriteLine(baseApplication.Id);
             return await CreateEntityAsync(baseApplication);
         }
 
@@ -37,17 +35,11 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
             return await base.DeleteEntityAsync(id);
         }
 
-        public async Task<IEnumerable<BaseApplicationDTO>> GetBaseApplicationsAsync()
+        public async Task<IEnumerable<BaseApplicationDTO>> GetBaseApplicationsAsync(HttpContext httpContext)
         {
-            SqlParameter[] parameters = new SqlParameter[]
-            {
-                new SqlParameter("@userId", "821aeb96-b3c6-9df3-3239-9f631189caee")
-            };
+            var userInfo = JwtUtils.GetUserInfo(httpContext);
 
-            await base.GetEntitysAsync();
-
-            _dbSet.FromSqlInterpolated($"EXEC dbo.GetApplicationsByCreator @userId = '25322299-6C3B-4157-B83A-D806DAC59F32'");
-            return _mapper.Map<List<BaseApplicationDTO>>(_dbSet.FromSqlInterpolated($"EXEC dbo.GetApplicationsByCreator @userId = '25322299-6C3B-4157-B83A-D806DAC59F32'"));
+            return await ExecuteSqlProcedure(userInfo);
         }
 
         public async Task<BaseApplicationDTO> GetBaseApplicationsByIdAsync(Guid id)
@@ -94,6 +86,28 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        private async Task<IEnumerable<BaseApplicationDTO>> ExecuteSqlProcedure(UserInfo userInfo)
+        {
+            List<Application> result = new List<Application>();
+
+            foreach (var role in userInfo.Roles)
+            {
+                Console.WriteLine($"Role: {role}");
+
+                switch (role)
+                {
+                    case "User":
+                        result.AddRange(await _dbContext.Applications.FromSqlInterpolated($"EXEC dbo.GetApplicationsByCreator @userId = {userInfo.UserId}").ToListAsync());
+                        break;
+                    case "Evaluator":
+                        result.AddRange(await _dbContext.Applications.FromSqlInterpolated($"EXEC dbo.GetApplicationsByEvaluator @userId = {userInfo.UserId}").ToListAsync());
+                        break;
+                }
+            }
+
+            return _mapper.Map<List<BaseApplicationDTO>>(result);
         }
     }
 }

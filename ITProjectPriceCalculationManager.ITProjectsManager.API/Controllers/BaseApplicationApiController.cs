@@ -1,4 +1,5 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.Extentions.Extentions;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +20,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers
         [Route("collection")]
         public async Task<IActionResult> GetAllApplications()
         {
-            return Ok(await _baseApplicationService.GetBaseApplicationsAsync());
+            return Ok(await _baseApplicationService.GetBaseApplicationsAsync(HttpContext));
         }
 
         [HttpGet]

@@ -32,6 +32,19 @@ namespace System.Net.Http
             return await ReadFromJson<TResult>(response);
         }
 
+        public static async Task<TResult> GetAsJsonAsync<T, TResult>(this HttpClient client, string route, T query)
+        {
+            var response = await client.GetAsJsonAsync<T>(route, query);
+
+            if (!response.StatusCode.IsSuccessStatusCode())
+            {
+                var exception = await SetError(response);
+                throw exception;
+            }
+
+            return await ReadFromJson<TResult>(response);
+        }
+
         public static async Task<TResult> PostAsJsonAsync<T, TResult>(this HttpClient client, string route, T query)
         {
             var response = await client.PostAsJsonAsync<T>(route, query);
