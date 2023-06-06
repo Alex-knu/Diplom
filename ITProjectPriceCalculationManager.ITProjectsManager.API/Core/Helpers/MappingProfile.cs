@@ -22,8 +22,29 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Helpers
             CreateMap<ProgramLanguageDTO, ProgramLanguage>().ReverseMap();
             CreateMap<DifficultyLevelsTypeDTO, DifficultyLevelsType>().ReverseMap();
             CreateMap<ApplicationToFactorsDTO, ApplicationToFactors>().ReverseMap();
-            CreateMap<EvaluationParametrsInfoDTO, EvaluationAttribute>().ReverseMap();
             CreateMap<DifficultyLevelsTypeDTO, DifficultyLevel>().ReverseMap();
+            CreateMap<EvaluationAttribute, EvaluationParametrsInfoDTO>()
+            .ForMember(a => a.FactorTypeId, map => map.MapFrom((src, dest, memb) =>
+                {
+                    if (src.FactorTypeId == new Guid("B03771E5-488A-449F-B886-19C581B63CDE"))
+                    {
+                        return (int)DTOModels.Enums.FactorType.InfluenceFactors;
+                    }
+                    else if (src.FactorTypeId == new Guid("CDD64D87-BB9A-4C17-B809-05C4454E6998"))
+                    {
+                        return (int)DTOModels.Enums.FactorType.InformationObject;
+                    }
+                    else if (src.FactorTypeId == new Guid("EB8F98D6-1C46-4721-9AD6-C464B9029905"))
+                    {
+                        return (int)DTOModels.Enums.FactorType.ScaleFactors;
+                    }
+                    else if (src.FactorTypeId == new Guid("63715754-CDFB-4320-9C17-72648673CB4B"))
+                    {
+                        return (int)DTOModels.Enums.FactorType.Function;
+                    }
+
+                    return 0;
+                }));
         }
     }
 }

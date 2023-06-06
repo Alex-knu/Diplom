@@ -60,42 +60,5 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.
         public DbSet<ProgramsParametrToSubjectAreaElement> ProgramsParametrToSubjectAreaElements { get; set; }
         public DbSet<EvaluationAttribute> EvaluationAttributes { get; set; }
         public DbSet<DifficultyLevel> DifficultyLevels { get; set; }
-
-        public virtual IEnumerable<DifficultyLevelsTypeDTO> GetDifficultyLevelTypesForFactorType(Guid factorTypeId)
-        {
-            return (from dlttft in DifficultyLevelsTypeToFactorTypes
-                    join ft in FactorTypes on dlttft.FactorTypeId equals ft.Id
-                    join dlt in DifficultyLevelsTypes on dlttft.DifficultyLevelId equals dlt.Id
-                    where ft.Id == factorTypeId
-                    orderby dlt.Id
-                    select new DifficultyLevelsTypeDTO()
-                    {
-                        Id = dlt.Id,
-                        Name = dlt.Name
-                    }).Distinct();
-        }
-
-        public virtual IEnumerable<EvaluationParametrsInfoDTO> GetEvaluationAttributes()
-        {
-            return (from dlttft in DifficultyLevelsTypeToFactorTypes
-                    join a in Attributes on dlttft.FactorId equals a.Id
-                    join ft in FactorTypes on dlttft.FactorTypeId equals ft.Id
-                    orderby ft.Id
-                    select new EvaluationParametrsInfoDTO()
-                    {
-                        Name = a.Name,
-                        FactorTypeId = ft.Id,
-                        DifficultyLevels = (from dlttft in DifficultyLevelsTypeToFactorTypes
-                                            join dlt in DifficultyLevelsTypes on dlttft.DifficultyLevelId equals dlt.Id
-                                            where dlttft.FactorId == a.Id
-                                            orderby dlt.Id
-                                            select new DifficultyLevelsTypeDTO()
-                                            {
-                                                Id = dlt.Id,
-                                                RelationId = dlttft.Id,
-                                                Name = dlt.Name
-                                            }).ToList()
-                    });
-        }
     }
 }
