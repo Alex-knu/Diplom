@@ -37,9 +37,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 
         public async Task<IEnumerable<BaseApplicationDTO>> GetBaseApplicationsAsync(HttpContext httpContext)
         {
-            var userInfo = JwtUtils.GetUserInfo(httpContext);
-
-            return await ExecuteSqlProcedure(userInfo);
+            return await ExecuteSqlProcedure(JwtUtils.GetUserInfo(httpContext));
         }
 
         public async Task<BaseApplicationDTO> GetBaseApplicationsByIdAsync(Guid id)
@@ -94,8 +92,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 
             foreach (var role in userInfo.Roles)
             {
-                Console.WriteLine($"Role: {role}");
-
                 switch (role)
                 {
                     case "User":
