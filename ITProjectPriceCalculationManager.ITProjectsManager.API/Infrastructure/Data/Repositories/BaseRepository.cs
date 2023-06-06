@@ -86,10 +86,9 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.
             return evaluator.GetQuery(_dbSet, specification);
         }
 
-        public IEnumerable<TEntity> ExecuteFunction(string functionName, object values)
+        public async Task<List<TEntity>> ExecuteStoredProcedure(FormattableString query)
         {
-            Console.WriteLine($"SELECT * FROM {functionName}({values})");
-            return _dbSet.FromSqlInterpolated($"SELECT * FROM GetEvaluationAttributes()").ToList();
+            return await _dbSet.FromSqlInterpolated(query).ToListAsync();
         }
     }
 }

@@ -3,11 +3,11 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.EvaluationAttributes
 {
-    internal class EvaluationAttribute : IBaseEntity<int>
+    internal class EvaluationAttribute : IBaseEntity<Guid>
     {
-        public int Id { get; set; }
-        public int FactorId { get; set; }
-        public int FactorTypeId { get; set; }
+        public Guid Id { get; set; }
+        public Guid FactorId { get; set; }
+        public Guid FactorTypeId { get; set; }
         public string Name { get; set; }
         public List<DifficultyLevel> DifficultyLevels { get; set; }
     }

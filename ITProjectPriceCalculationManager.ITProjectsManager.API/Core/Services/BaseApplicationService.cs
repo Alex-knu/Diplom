@@ -7,8 +7,6 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evalu
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramsParametr;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 {
@@ -16,13 +14,11 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
     {
         protected readonly IRepository<Evaluator, Guid> _estimatorRepository;
         protected readonly IRepository<ProgramsParametr, Guid> _programsParametrRepository;
-        protected readonly ITProjectPriceCalculationManagerDbContext _dbContext;
 
-        public BaseApplicationService(IRepository<Evaluator, Guid> estimatorRepository, IRepository<ProgramsParametr, Guid> programsParametrRepository, IRepository<Application, Guid> repository, IMapper mapper, ITProjectPriceCalculationManagerDbContext dbContext) : base(repository, mapper)
+        public BaseApplicationService(IRepository<Evaluator, Guid> estimatorRepository, IRepository<ProgramsParametr, Guid> programsParametrRepository, IRepository<Application, Guid> repository, IMapper mapper) : base(repository, mapper)
         {
             _estimatorRepository = estimatorRepository;
             _programsParametrRepository = programsParametrRepository;
-            _dbContext = dbContext;
         }
 
         public async Task<BaseApplicationDTO> CreateBaseApplicationAsync(BaseApplicationDTO baseApplication)
@@ -95,10 +91,10 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
                 switch (role)
                 {
                     case "User":
-                        result.AddRange(await _dbContext.Applications.FromSqlInterpolated($"EXEC dbo.GetApplicationsByCreator @userId = {userInfo.UserId}").ToListAsync());
+                        result.AddRange(await _repository.ExecuteStoredProcedure($"EXEC dbo.GetApplicationsByCreator @userId = {userInfo.UserId}"));
                         break;
                     case "Evaluator":
-                        result.AddRange(await _dbContext.Applications.FromSqlInterpolated($"EXEC dbo.GetApplicationsByEvaluator @userId = {userInfo.UserId}").ToListAsync());
+                        result.AddRange(await _repository.ExecuteStoredProcedure($"EXEC dbo.GetApplicationsByEvaluator @userId = {userInfo.UserId}"));
                         break;
                 }
             }

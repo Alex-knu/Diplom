@@ -16,9 +16,9 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers
 
         [HttpGet]
         [Route("collection")]
-        public IActionResult GetAllEvaluators()
+        public async Task<IActionResult> GetAllEvaluators()
         {
-            return Ok(_EvaluationParametrsInfoService.GetEvaluationAttributes());
+            return Ok(await _EvaluationParametrsInfoService.GetEvaluationAttributes());
         }
     }
 }

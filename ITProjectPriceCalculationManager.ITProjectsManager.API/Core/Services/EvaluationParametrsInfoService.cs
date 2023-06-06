@@ -9,12 +9,12 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 {
     internal class EvaluationParametrsInfoService : IEvaluationParametrsInfoService
     {
-        protected readonly IRepository<EvaluationAttribute, int> _evaluationAttributeRepository;
-        protected readonly IRepository<DifficultyLevel, int> _difficultyLevelRepository;
+        protected readonly IRepository<EvaluationAttribute, Guid> _evaluationAttributeRepository;
+        protected readonly IRepository<DifficultyLevel, Guid> _difficultyLevelRepository;
         protected readonly IMapper _mapper;
         private readonly ITProjectPriceCalculationManagerDbContext _dbContext;
 
-        public EvaluationParametrsInfoService(ITProjectPriceCalculationManagerDbContext dbContext, IRepository<EvaluationAttribute, int> evaluationAttributeRepository, IRepository<DifficultyLevel, int> difficultyLevelRepository, IMapper mapper)
+        public EvaluationParametrsInfoService(ITProjectPriceCalculationManagerDbContext dbContext, IRepository<EvaluationAttribute, Guid> evaluationAttributeRepository, IRepository<DifficultyLevel, Guid> difficultyLevelRepository, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
@@ -23,15 +23,13 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 
         }
 
-        public IEnumerable<EvaluationParametrsInfoDTO> GetEvaluationAttributes()
+        public async Task<IEnumerable<EvaluationParametrsInfoDTO>> GetEvaluationAttributes()
         {
-            var evaluationAttributes = _evaluationAttributeRepository.ExecuteFunction("GetEvaluationAttributes", "");
-
-            Console.WriteLine("HAHAHA");
+            var evaluationAttributes = await _evaluationAttributeRepository.ExecuteStoredProcedure($"EXEC dbo.GetEvaluationAttributes");
 
             foreach(var evaluationAttribute in evaluationAttributes)
             {
-                evaluationAttribute.DifficultyLevels = _difficultyLevelRepository.ExecuteFunction("GetDifficultyLevel", evaluationAttribute.FactorId).ToList();
+                evaluationAttribute.DifficultyLevels = await _difficultyLevelRepository.ExecuteStoredProcedure($"EXEC dbo.GetDifficultyLevel {evaluationAttribute.FactorId}");
             }
 
             return _mapper.Map<List<EvaluationParametrsInfoDTO>>(evaluationAttributes);

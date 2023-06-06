@@ -2,10 +2,11 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevels
 {
-    internal class DifficultyLevel : IBaseEntity<int>
+    internal class DifficultyLevel : IBaseEntity<Guid>
     {
-        public int Id { get; set; }
-        public int RelationId { get; set; }
+        public Guid Id { get; set; }
+        public Guid EvaluationAttributeId { get; set; }
+        public Guid RelationId { get; set; }
         public string Name { get; set; }
     }
 }
