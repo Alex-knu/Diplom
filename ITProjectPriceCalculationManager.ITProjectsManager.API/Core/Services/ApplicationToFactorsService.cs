@@ -4,6 +4,7 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Appli
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evaluator;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.EvaluatorToEvaluatedFactor;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 {

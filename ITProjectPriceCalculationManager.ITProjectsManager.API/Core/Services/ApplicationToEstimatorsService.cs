@@ -2,6 +2,7 @@ using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToEvaluator;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 {
@@ -22,11 +23,11 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
             {
                 foreach (var evaluator in applicationToEstimators.Evaluators)
                 {
-                    // await _repository.AddAsync(new ApplicationToEvaluator()
-                    // {
-                    //     ApplicationId = applicationToEstimators.ApplicationId,
-                    //     EstimatorId = evaluator.Id
-                    // });
+                    await _repository.AddAsync(new ApplicationToEvaluator()
+                    {
+                        ApplicationId = applicationToEstimators.ApplicationId,
+                        EvaluatorId = evaluator.Id
+                    });
                 }
 
                 await _repository.SaveChangesAcync();

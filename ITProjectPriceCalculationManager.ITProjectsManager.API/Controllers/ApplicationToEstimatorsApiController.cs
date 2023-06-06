@@ -1,5 +1,5 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers

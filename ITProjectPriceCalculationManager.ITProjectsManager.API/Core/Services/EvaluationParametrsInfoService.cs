@@ -3,6 +3,7 @@ using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevels;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.EvaluationAttributes;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
@@ -27,7 +28,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
         {
             var evaluationAttributes = await _evaluationAttributeRepository.ExecuteStoredProcedure($"EXEC dbo.GetEvaluationAttributes");
 
-            foreach(var evaluationAttribute in evaluationAttributes)
+            foreach (var evaluationAttribute in evaluationAttributes)
             {
                 evaluationAttribute.DifficultyLevels = await _difficultyLevelRepository.ExecuteStoredProcedure($"EXEC dbo.GetDifficultyLevel {evaluationAttribute.FactorId}");
             }
