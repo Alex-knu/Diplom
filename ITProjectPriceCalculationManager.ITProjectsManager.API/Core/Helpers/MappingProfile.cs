@@ -3,8 +3,10 @@ using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactors;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Department;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevels;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevelsType;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evaluator;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.EvaluationAttributes;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramLanguage;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Helpers
@@ -20,6 +22,8 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Helpers
             CreateMap<ProgramLanguageDTO, ProgramLanguage>().ReverseMap();
             CreateMap<DifficultyLevelsTypeDTO, DifficultyLevelsType>().ReverseMap();
             CreateMap<ApplicationToFactorsDTO, ApplicationToFactors>().ReverseMap();
+            CreateMap<EvaluationParametrsInfoDTO, EvaluationAttribute>().ReverseMap();
+            CreateMap<DifficultyLevelsTypeDTO, DifficultyLevel>().ReverseMap();
         }
     }
 }
