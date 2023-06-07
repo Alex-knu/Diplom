@@ -14,6 +14,10 @@ export class AuthService {
     private http: HttpClient,
     private tokenService: TokenService) { }
 
+  public checkRole(role: string): boolean {
+    return this.tokenService.getUserRole() == role;
+  }
+
   public register(userRegistration: any): Observable<any> {
     return this.http.post<any>(`${environment.serveces.AuthServerUrl}api/authenticate/register`, userRegistration, { headers: this.setHeaders() })
       .pipe(catchError((error: HttpErrorResponse) => this.formatErrors(error)));

@@ -7,7 +7,6 @@ import { BaseApplication } from 'src/app/shared/models/baseApplication.model';
 import { ProgramLanguage } from 'src/app/shared/models/programLanguage.model';
 import { BaseApplicationService } from 'src/app/shared/services/api/baseApplication.service';
 import { ProgramLanguageService } from 'src/app/shared/services/api/programLanguage.service';
-import { TokenService } from 'src/app/shared/services/core/token.service';
 
 @Component({
   selector: 'app-application-info',
@@ -16,6 +15,7 @@ import { TokenService } from 'src/app/shared/services/core/token.service';
 })
 
 export class ApplicationInfoComponent implements OnInit {
+  submitted: boolean;
   application: BaseApplication;
   programLanguages: ProgramLanguage[];
   selectedProgramLanguages: ProgramLanguage[];
@@ -24,12 +24,13 @@ export class ApplicationInfoComponent implements OnInit {
     private messageService: MessageService,
     private baseApplicationService: BaseApplicationService,
     private programLanguageService: ProgramLanguageService,
-    private tokenService: TokenService,
     public dialogService: DialogService,
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig) { }
 
   ngOnInit(): void {
+    this.submitted = false;
+
     this.programLanguageService.collection.getAll()
       .subscribe(
         (programLanguages) => {
@@ -45,6 +46,8 @@ export class ApplicationInfoComponent implements OnInit {
   }
 
   saveApplication() {
+    this.submitted = true;
+
     if (this.application.id) {
       this.baseApplicationService.single.update(this.application).subscribe(
         application => {
@@ -66,6 +69,7 @@ export class ApplicationInfoComponent implements OnInit {
           this.ref.close(application);
         },
         error => {
+          this.application.id = null;
           this.messageService.add({ severity: 'error', summary: 'Error', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
         })
     }
