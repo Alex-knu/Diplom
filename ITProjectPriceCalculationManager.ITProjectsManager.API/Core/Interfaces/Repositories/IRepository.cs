@@ -16,5 +16,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces
         Task<List<TEntity>> AddRangeAsync(List<TEntity> entities);
         Task<IEnumerable<TEntity>> GetListBySpecAsync(ISpecification<TEntity> specification);
         Task<TEntity?> GetFirstBySpecAsync(ISpecification<TEntity> specification);
+        Task<List<TEntity>> ExecuteStoredProcedure(FormattableString query);
     }
 }

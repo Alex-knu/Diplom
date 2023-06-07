@@ -85,5 +85,10 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.
             var evaluator = new SpecificationEvaluator();
             return evaluator.GetQuery(_dbSet, specification);
         }
+
+        public async Task<List<TEntity>> ExecuteStoredProcedure(FormattableString query)
+        {
+            return await _dbSet.FromSqlInterpolated(query).ToListAsync();
+        }
     }
 }

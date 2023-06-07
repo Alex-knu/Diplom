@@ -1,5 +1,7 @@
 using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.Extentions.Extentions;
+using ITProjectPriceCalculationManager.Extentions.Models;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evaluator;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramsParametr;
@@ -21,7 +23,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 
         public async Task<BaseApplicationDTO> CreateBaseApplicationAsync(BaseApplicationDTO baseApplication)
         {
-            Console.WriteLine(baseApplication.Id);
             return await CreateEntityAsync(baseApplication);
         }
 
@@ -30,9 +31,9 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
             return await base.DeleteEntityAsync(id);
         }
 
-        public async Task<IEnumerable<BaseApplicationDTO>> GetBaseApplicationsAsync()
+        public async Task<IEnumerable<BaseApplicationDTO>> GetBaseApplicationsAsync(HttpContext httpContext)
         {
-            return await base.GetEntitysAsync();
+            return await ExecuteSqlProcedure(JwtUtils.GetUserInfo(httpContext));
         }
 
         public async Task<BaseApplicationDTO> GetBaseApplicationsByIdAsync(Guid id)
@@ -49,17 +50,14 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
         {
             try
             {
-                Console.WriteLine($"Creator ID: {baseApplication.UserCreatorId}");
-                var domainCreator = (await _estimatorRepository.GetAllAsync()).Where(e => e.UserId == baseApplication.UserCreatorId).FirstOrDefault(); //.GetFirstBySpecAsync(new Evaluators.GetEstimatorByUserId(baseApplication.UserCreatorId));
+                var domainCreator = await _estimatorRepository.GetFirstBySpecAsync(new Evaluators.GetEstimatorByUserId(baseApplication.UserCreatorId));
 
                 if (domainCreator == null)
                 {
                     throw new BadHttpRequestException("Creator not found");
                 }
 
-                Console.WriteLine($"HAHAHAHAHAHAHAH: {domainCreator.Id}");
                 var domainApplication = _mapper.Map<Application>(baseApplication);
-                Console.WriteLine($"HAHAHAHAHAHAHAH: {domainCreator.Id}");
                 domainApplication.CreatorId = domainCreator.Id;
                 var newDomainApplication = await _repository.AddAsync(domainApplication);
 
@@ -82,6 +80,26 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        private async Task<IEnumerable<BaseApplicationDTO>> ExecuteSqlProcedure(UserInfo userInfo)
+        {
+            List<Application> result = new List<Application>();
+
+            foreach (var role in userInfo.Roles)
+            {
+                switch (role)
+                {
+                    case "User":
+                        result.AddRange(await _repository.ExecuteStoredProcedure($"EXEC dbo.GetApplicationsByCreator @userId = {userInfo.UserId}"));
+                        break;
+                    case "Evaluator":
+                        result.AddRange(await _repository.ExecuteStoredProcedure($"EXEC dbo.GetApplicationsByEvaluator @userId = {userInfo.UserId}"));
+                        break;
+                }
+            }
+
+            return _mapper.Map<List<BaseApplicationDTO>>(result);
         }
     }
 }

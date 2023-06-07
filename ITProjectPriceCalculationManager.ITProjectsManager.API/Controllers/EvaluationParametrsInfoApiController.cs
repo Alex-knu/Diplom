@@ -1,4 +1,4 @@
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers
@@ -11,14 +11,14 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers
 
         public EvaluationParametrsInfoApiController(IEvaluationParametrsInfoService evaluationParametrsInfoService)
         {
-            _EvaluationParametrsInfoService= evaluationParametrsInfoService;
+            _EvaluationParametrsInfoService = evaluationParametrsInfoService;
         }
 
         [HttpGet]
         [Route("collection")]
-        public IActionResult GetAllEvaluators()
+        public async Task<IActionResult> GetAllEvaluators()
         {
-            return Ok(_EvaluationParametrsInfoService.GetEvaluationAttributes());
+            return Ok(await _EvaluationParametrsInfoService.GetEvaluationAttributes());
         }
     }
 }

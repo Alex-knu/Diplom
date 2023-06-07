@@ -23,7 +23,7 @@ namespace ITProjectPriceCalculationManager.Router.API.Controllers
         [Route("collection")]
         public async Task<IActionResult> GetBaseApplicationsAsync()
         {
-            return Ok(await _baseApplicationService.GetBaseApplicationsAsync());
+            return Ok(await _baseApplicationService.GetBaseApplicationsAsync(HttpContext));
         }
 
         [HttpGet]

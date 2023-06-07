@@ -19,7 +19,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers
         [Route("collection")]
         public async Task<IActionResult> GetAllApplications()
         {
-            return Ok(await _baseApplicationService.GetBaseApplicationsAsync());
+            return Ok(await _baseApplicationService.GetBaseApplicationsAsync(HttpContext));
         }
 
         [HttpGet]
@@ -31,7 +31,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateApplication(BaseApplicationDTO query)
         {
-            Console.WriteLine("HAHAHAHAHAHAHAH");
             return Ok(await _baseApplicationService.CreateBaseApplicationAsync(query));
         }
 
