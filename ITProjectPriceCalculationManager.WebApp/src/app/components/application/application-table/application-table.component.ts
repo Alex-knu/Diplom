@@ -8,6 +8,8 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BaseApplicationService } from 'src/app/shared/services/api/baseApplication.service';
 import { ApplicationInfoComponent } from '../application-info/application-info.component';
 import { ApplicationEvaluationGroupComponent } from '../application-evaluation-group/application-evaluation-group.component';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { ROLE_ADMIN, ROLE_EVALUATOR, ROLE_USER } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-application-table',
@@ -15,6 +17,9 @@ import { ApplicationEvaluationGroupComponent } from '../application-evaluation-g
   styleUrls: ['./application-table.component.scss']
 })
 export class ApplicationTableComponent {
+  admin = ROLE_ADMIN;
+  evaluator = ROLE_EVALUATOR;
+  user = ROLE_USER;
 
   loading: boolean = false;
   applications: BaseApplication[];
@@ -27,7 +32,8 @@ export class ApplicationTableComponent {
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private baseApplicationService: BaseApplicationService,
-    public dialogService: DialogService) { }
+    private dialogService: DialogService,
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.loading = true;
@@ -122,5 +128,9 @@ export class ApplicationTableComponent {
 
   redirectToEvaluationForm(applicationId: string) {
     this.router.navigate(['/application/application-evaluation'], { queryParams: { applicationId } });
+  }
+
+  isVisible(role: string): boolean {
+    return this.authService.checkRole(role);
   }
 }
