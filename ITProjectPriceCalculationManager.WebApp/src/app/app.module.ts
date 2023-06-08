@@ -18,6 +18,7 @@ import { ErrorComponent } from './components/auth/error/error.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { AccessComponent } from './components/auth/access/access.component';
+import { UserTableComponent } from './components/users/user-table/user-table.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AccessComponent } from './components/auth/access/access.component';
     DepartmentInfoComponent,
     ErrorComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserTableComponent
   ],
   imports: [
     AppRoutingModule,
