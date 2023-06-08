@@ -11,7 +11,7 @@
           <input pInputText type="text" (input)="dt.filterGlobal($event, 'contains')" placeholder="Пошук..." />
         </span>
         <button pButton pRipple label="Нова" icon="pi pi-plus" class="p-button-success p-mr-2"
-          (click)="openNew()"></button>
+          (click)="openNew()" *ngIf="isVisible(user)"></button>
       </div>
     </ng-template>
 
@@ -39,13 +39,13 @@
         </td>
         <td>
           <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
-            (click)="editApplication(application)"></button>
+            (click)="editApplication(application)" *ngIf="isVisible(user)"></button>
           <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
-            (click)="deleteApplication(application)"></button>
+            (click)="deleteApplication(application)" *ngIf="isVisible(user)"></button>
           <button pButton pRipple icon="pi pi-user-plus" class="p-button-rounded p-button-secondary p-mr-2"
-            (click)="addEstimatorGroup(application.id)"></button>
+            (click)="addEstimatorGroup(application.id)" *ngIf="isVisible(admin)"></button>
           <button pButton pRipple icon="pi pi-calculator" class="p-button-rounded p-mr-2"
-            (click)="redirectToEvaluationForm(application.id)"></button>
+            (click)="redirectToEvaluationForm(application.id)" *ngIf="isVisible(evaluator)"></button>
         </td>
       </tr>
     </ng-template>

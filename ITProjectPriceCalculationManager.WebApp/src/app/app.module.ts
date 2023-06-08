@@ -14,17 +14,25 @@ import { DepartmentTreeComponent } from './components/departmets/department-tree
 import { ApplicationEvaluationComponent } from './components/application/application-evaluation/application-evaluation.component';
 import { ApplicationEvaluationGroupComponent } from './components/application/application-evaluation-group/application-evaluation-group.component';
 import { DepartmentInfoComponent } from './components/departmets/department-info/department-info.component';
+import { ErrorComponent } from './components/auth/error/error.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
+import { AccessComponent } from './components/auth/access/access.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AccessComponent,
     NotfoundComponent,
     ApplicationInfoComponent,
     ApplicationTableComponent,
     ApplicationEvaluationComponent,
     ApplicationEvaluationGroupComponent,
     DepartmentTreeComponent,
-    DepartmentInfoComponent
+    DepartmentInfoComponent,
+    ErrorComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     AppRoutingModule,
