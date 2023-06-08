@@ -15,7 +15,7 @@ export class AuthService {
     private tokenService: TokenService) { }
 
   public checkRole(role: string): boolean {
-    return this.tokenService.getUserRole() == role;
+    return (this.tokenService.getUserRoles()).some(roleName => roleName == role);
   }
 
   public register(userRegistration: any): Observable<any> {

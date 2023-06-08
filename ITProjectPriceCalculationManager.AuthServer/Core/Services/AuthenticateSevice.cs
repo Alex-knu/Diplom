@@ -43,7 +43,7 @@ namespace ITProjectPriceCalculationManager.AuthServer.Core.Services
 
             foreach (var userRole in userRoles)
             {
-                authClaims.Add(new Claim("Role", userRole));
+                authClaims.Add(new Claim("Roles", userRole));
             }
 
             var token = GetToken(authClaims);
