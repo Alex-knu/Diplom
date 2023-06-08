@@ -19,8 +19,10 @@ builder.Configuration
 
 var configuration = builder.Configuration.GetSection("AuthServer").Get<AuthServerSetting>();
 
-builder.Services.AddScoped(typeof(IAuthenticateSevice), typeof(AuthenticateSevice));
 builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(configuration.ConnectionString));//UseSqlServer
+
+builder.Services.AddScoped(typeof(IAuthenticateSevice), typeof(AuthenticateSevice));
+builder.Services.AddScoped(typeof(IUserSevice), typeof(UserSevice));
 
 // For Identity
 builder.Services
