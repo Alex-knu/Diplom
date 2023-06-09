@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
 
 namespace ITProjectPriceCalculationManager.AuthServer.Core.Services
 {
@@ -41,9 +42,9 @@ namespace ITProjectPriceCalculationManager.AuthServer.Core.Services
                      new Claim("Jti", Guid.NewGuid().ToString()),
                  };
 
-            foreach (var userRole in userRoles)
+            if (userRoles.Any())
             {
-                authClaims.Add(new Claim("Roles", userRole));
+                authClaims.Add(new Claim("Roles", JsonSerializer.Serialize(userRoles.ToList()), JsonClaimValueTypes.JsonArray));
             }
 
             var token = GetToken(authClaims);
