@@ -7,9 +7,6 @@ import { UserInfoComponent } from './user-info/user-info.component';
   imports: [
     UserRoutingModule,
     PrimeNgComponentsModule
-  ],
-  declarations: [
-    UserInfoComponent
   ]
 })
 
