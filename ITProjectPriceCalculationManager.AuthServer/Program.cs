@@ -23,6 +23,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(configur
 
 builder.Services.AddScoped(typeof(IAuthenticateSevice), typeof(AuthenticateSevice));
 builder.Services.AddScoped(typeof(IUserSevice), typeof(UserSevice));
+builder.Services.AddScoped(typeof(IRoleSevice), typeof(RoleSevice));
 
 // For Identity
 builder.Services

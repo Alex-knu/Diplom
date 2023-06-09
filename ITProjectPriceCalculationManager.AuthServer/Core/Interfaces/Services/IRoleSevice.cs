@@ -2,9 +2,8 @@ using ITProjectPriceCalculationManager.AuthServer.Core.DTO;
 
 namespace ITProjectPriceCalculationManager.AuthServer.Core.Interfaces.Services
 {
-    public interface IUserSevice
+    public interface IRoleSevice
     {
-        IEnumerable<UserDTO> GetAllUsers();
-        Task<UserDTO> UpdateUserRoles(UserDTO query);
+        IEnumerable<RoleDTO> GetAllRoles();
     }
 }

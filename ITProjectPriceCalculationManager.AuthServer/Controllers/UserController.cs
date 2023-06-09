@@ -1,3 +1,4 @@
+using ITProjectPriceCalculationManager.AuthServer.Core.DTO;
 using ITProjectPriceCalculationManager.AuthServer.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,12 @@ namespace ITProjectPriceCalculationManager.AuthServer.Controllers
         public IActionResult GetAllUsers()
         {
             return Ok(_userSevice.GetAllUsers());
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateUserRoles(UserDTO query)
+        {
+            return Ok(await _userSevice.UpdateUserRoles(query));
         }
     }
 }

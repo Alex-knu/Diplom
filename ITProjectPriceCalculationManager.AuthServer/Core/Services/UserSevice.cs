@@ -37,5 +37,34 @@ namespace ITProjectPriceCalculationManager.AuthServer.Core.Services
                                  }).ToList()
                     }).ToList();
         }
+
+        public async Task<UserDTO> UpdateUserRoles(UserDTO query)
+        {
+            var selectedRoleIds = query.Roles.Select(r => r.Id.ToString());
+
+            foreach (var userRole in _dbContext.UserRoles.Where(ur => ur.UserId == query.Id.ToString()))
+            {
+                if (!selectedRoleIds.Contains(userRole.RoleId))
+                {
+                    _dbContext.UserRoles.Remove(userRole);
+                }
+            }
+
+            foreach (var roleId in selectedRoleIds)
+            {
+                if (_dbContext.UserRoles.Where(ur => ur.UserId == query.Id.ToString() && ur.RoleId == roleId).FirstOrDefault() == null)
+                {
+                    _dbContext.UserRoles.Add(new IdentityUserRole<string>()
+                    {
+                        UserId = query.Id.ToString(),
+                        RoleId = roleId
+                    });
+                }
+            }
+
+            await _dbContext.SaveChangesAsync();
+
+            return query;
+        }
     }
 }
