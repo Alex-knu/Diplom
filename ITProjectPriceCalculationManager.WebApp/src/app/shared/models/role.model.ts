@@ -6,5 +6,5 @@ export class RoleModel  extends BaseModel {
     super(id);
   }
 
-  Name: string;
+  name: string;
 }

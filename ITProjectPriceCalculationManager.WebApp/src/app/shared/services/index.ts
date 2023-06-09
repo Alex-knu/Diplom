@@ -12,6 +12,7 @@ import { EvaluationParametrsInfoService } from "./api/evaluationParametrsInfo.se
 import { ApplicationToFactorsService } from "./api/applicationToFactors.service";
 import { DepartmentTreeService } from "./api/departmentTree.service";
 import { UserService } from "./api/user.service";
+import { RoleService } from "./api/role.service";
 
 export const services = [
   HttpService,
@@ -27,5 +28,6 @@ export const services = [
   ProgramLanguageService,
   DifficultyLevelsTypeService,
   EvaluationParametrsInfoService,
-  UserService
+  UserService,
+  RoleService
 ]

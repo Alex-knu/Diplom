@@ -5,6 +5,7 @@ import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
 import { UserInfoModel } from 'src/app/shared/models/userInfo.model';
 import { UserService } from 'src/app/shared/services/api/user.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { UserInfoComponent } from '../user-info/user-info.component';
 
 @Component({
   selector: 'app-user-table',
@@ -48,25 +49,24 @@ export class UserTableComponent {
   editUser(user: UserInfoModel) {
     this.user = user;
 
-    // this.ref = this.dialogService.open(UserInfoComponent, {
-    //   header: 'Деталі заявки',
-    //   data: user,
-    //   contentStyle: { overflow: 'auto' },
-    //   baseZIndex: 10000,
-    //   maximizable: true
-    // });
+    this.ref = this.dialogService.open(UserInfoComponent, {
+      header: 'Деталі заявки',
+      data: user,
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000,
+      maximizable: true
+    });
 
-    // this.ref.onClose.subscribe((user: BaseUser) => {
-    //   if (user && user.id) {
-    //     this.userService.collection.getAll()
-    //       .subscribe(
-    //         (users) => {
-    //           this.users = users;
-    //         });
-
-    //     this.messageService.add({ severity: 'info', summary: 'Список оновлено', detail: user.name });
-    //   }
-    // });
+    this.ref.onClose.subscribe((user: UserInfoModel) => {
+      if (user && user.id) {
+        this.userService.collection.getAll()
+          .subscribe(
+            (users) => {
+              this.users = users;
+            });
+        this.messageService.add({ severity: 'info', summary: 'Список оновлено', detail: user.name });
+      }
+    });
   }
 
   deleteUser(user: UserInfoModel) {
