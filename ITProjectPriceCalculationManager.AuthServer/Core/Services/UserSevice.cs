@@ -2,6 +2,7 @@ using ITProjectPriceCalculationManager.AuthServer.Core.DTO;
 using ITProjectPriceCalculationManager.AuthServer.Core.Interfaces.Services;
 using ITProjectPriceCalculationManager.AuthServer.Infrastructure;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace ITProjectPriceCalculationManager.AuthServer.Core.Services
 {
@@ -41,25 +42,24 @@ namespace ITProjectPriceCalculationManager.AuthServer.Core.Services
         public async Task<UserDTO> UpdateUserRoles(UserDTO query)
         {
             var selectedRoleIds = query.Roles.Select(r => r.Id.ToString());
+            var currentUserRolesIds = _dbContext.UserRoles.AsNoTracking().Where(ur => ur.UserId == query.Id.ToString()).ToList().Select(ur => ur.RoleId.ToString());
 
-            foreach (var userRole in _dbContext.UserRoles.Where(ur => ur.UserId == query.Id.ToString()))
+            foreach (var userRole in currentUserRolesIds.Except(selectedRoleIds))
             {
-                if (!selectedRoleIds.Contains(userRole.RoleId))
+                _dbContext.UserRoles.Remove(new IdentityUserRole<string>()
                 {
-                    _dbContext.UserRoles.Remove(userRole);
-                }
+                    UserId = query.Id.ToString(),
+                    RoleId = userRole
+                });
             }
 
-            foreach (var roleId in selectedRoleIds)
+            foreach (var roleId in selectedRoleIds.Except(currentUserRolesIds))
             {
-                if (_dbContext.UserRoles.Where(ur => ur.UserId == query.Id.ToString() && ur.RoleId == roleId).FirstOrDefault() == null)
+                _dbContext.UserRoles.Add(new IdentityUserRole<string>()
                 {
-                    _dbContext.UserRoles.Add(new IdentityUserRole<string>()
-                    {
-                        UserId = query.Id.ToString(),
-                        RoleId = roleId
-                    });
-                }
+                    UserId = query.Id.ToString(),
+                    RoleId = roleId
+                });
             }
 
             await _dbContext.SaveChangesAsync();
