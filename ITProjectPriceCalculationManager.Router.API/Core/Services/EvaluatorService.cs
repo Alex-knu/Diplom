@@ -5,11 +5,13 @@ namespace ITProjectPriceCalculationManager.Router.API.Core.Services
 {
     internal class EvaluatorService : IEvaluatorService
     {
+        private readonly HttpClient _authClient;
         private readonly HttpClient _client;
         private readonly IRouteService _routeService;
 
         public EvaluatorService(IHttpClientFactory httpClientFactory, IRouteService routeService)
         {
+            _authClient = httpClientFactory.CreateClient("AuthServer");
             _client = httpClientFactory.CreateClient("ITProjectsManager");
             _routeService = routeService;
         }
@@ -24,9 +26,12 @@ namespace ITProjectPriceCalculationManager.Router.API.Core.Services
             return await _routeService.DeleteAsJsonAsync<EvaluatorDTO, Guid>(_client, "evaluatorapi", id);
         }
 
-        public async Task<IEnumerable<EvaluatorDTO>> GetEvaluatorsAsync()
+        public async Task<IEnumerable<EvaluatorDTO>> GetEvaluatorsAsync(HttpContext httpContext)
         {
-            return await _routeService.GetAllAsync<List<EvaluatorDTO>>(_client, "evaluatorapi");
+            _authClient.DefaultRequestHeaders.Add("Authorization", httpContext.Request.Headers["Authorization"].ToString());
+            var evaluatorIds = await _routeService.GetByIdAsync<List<Guid>, string>(_authClient, "user", "Evaluator");
+Console.WriteLine(evaluatorIds.Count());
+            return await _routeService.GetAsJsonAsync<List<Guid>, List<EvaluatorDTO>>(_client, "evaluatorapi", evaluatorIds);
         }
 
         public async Task<EvaluatorDTO> GetEvaluatorsByIdAsync(Guid id)

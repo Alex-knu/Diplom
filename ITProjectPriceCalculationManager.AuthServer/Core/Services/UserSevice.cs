@@ -39,6 +39,15 @@ namespace ITProjectPriceCalculationManager.AuthServer.Core.Services
                     }).ToList();
         }
 
+        public IEnumerable<string> GetAllUserIdsByRole(string roleName)
+        {
+            return (from user in _dbContext.Users
+                    join userRole in _dbContext.UserRoles on user.Id equals userRole.UserId
+                    join role in _dbContext.Roles on userRole.RoleId equals role.Id
+                    where role.Name == roleName
+                    select user.Id).ToList();
+        }
+
         public async Task<UserDTO> UpdateUserRoles(UserDTO query)
         {
             var selectedRoleIds = query.Roles.Select(r => r.Id.ToString());

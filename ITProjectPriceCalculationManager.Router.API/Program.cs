@@ -37,6 +37,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services
+    .AddHttpClient("AuthServer", client =>
+    {
+        client.BaseAddress = new Uri(routeConfiguration.AuthServer);
+    });
+builder.Services
     .AddHttpClient("ITProjectsCalculator", client =>
     {
         client.BaseAddress = new Uri(routeConfiguration.ITProjectsCalculatorAPIRoute);

@@ -23,7 +23,7 @@ namespace ITProjectPriceCalculationManager.Router.API.Controllers
         [Route("collection")]
         public async Task<IActionResult> GetAllEvaluators()
         {
-            return Ok(await _evaluatorService.GetEvaluatorsAsync());
+            return Ok(await _evaluatorService.GetEvaluatorsAsync(HttpContext));
         }
 
         [HttpGet]

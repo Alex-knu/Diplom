@@ -25,6 +25,13 @@ namespace ITProjectPriceCalculationManager.AuthServer.Controllers
             return Ok(_userSevice.GetAllUsers());
         }
 
+        [HttpGet]
+        [Route("{roleName}")]
+        public IActionResult GetAllUsers([FromRoute] string roleName)
+        {
+            return Ok(_userSevice.GetAllUserIdsByRole(roleName));
+        }
+
         [HttpPut]
         public async Task<IActionResult> UpdateUserRoles(UserDTO query)
         {
