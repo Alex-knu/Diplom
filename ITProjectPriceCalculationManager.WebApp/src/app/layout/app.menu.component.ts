@@ -45,28 +45,6 @@ export class AppMenuComponent implements OnInit {
         ]
       },
       {
-        label: 'Експерти',
-        items: [
-          {
-            label: 'Експерти', icon: 'pi pi-fw pi-users',
-            routerLink: ['/units/list'],
-            visible: this.isVisible(this.admin)
-          }
-        ]
-      },
-      {
-        label: 'Експертні групи',
-        visible: this.isVisible(this.admin),
-        items: [
-          {
-            label: 'Експертні групи',
-            icon: 'pi pi-fw pi-users',
-            routerLink: ['/divisions/list'],
-            visible: this.isVisible(this.admin)
-          }
-        ]
-      },
-      {
         label: 'Користувачі',
         visible: this.isVisible(this.admin),
         items: [
@@ -74,6 +52,12 @@ export class AppMenuComponent implements OnInit {
             label: 'Користувачі',
             icon: 'pi pi-fw pi-users',
             routerLink: ['/user/user-table'],
+            visible: this.isVisible(this.admin)
+          },
+          {
+            label: 'Експерти',
+            icon: 'pi pi-fw pi-users',
+            routerLink: ['/evaluator/evaluator-table'],
             visible: this.isVisible(this.admin)
           }
         ]

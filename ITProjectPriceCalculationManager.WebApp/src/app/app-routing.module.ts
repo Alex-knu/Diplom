@@ -10,7 +10,8 @@ const routes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'application', loadChildren: () => import('./components/application/application.module').then(m => m.ApplicationModule) },
       { path: 'department', loadChildren: () => import('./components/departmets/department.module').then(m => m.DepartmentModule) },
-      { path: 'user', loadChildren: () => import('./components/users/user.module').then(m => m.UserModule) }
+      { path: 'user', loadChildren: () => import('./components/users/user.module').then(m => m.UserModule) },
+      { path: 'evaluator', loadChildren: () => import('./components/evaluator/evaluator.module').then(m => m.EvaluatorModule) }
     ]
   },
   { path: 'auth', loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule) },
