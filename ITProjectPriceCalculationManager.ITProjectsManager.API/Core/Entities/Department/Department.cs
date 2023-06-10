@@ -8,7 +8,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.D
         public string Name { get; set; }
         public Guid? ParentId { get; set; }
 
-        public Department Parent { get; set; }
+        public Department? Parent { get; set; }
         public ICollection<Department> SubDepartments { get; set; }
         public ICollection<Evaluator.Evaluator> Evaluators { get; set; }
     }

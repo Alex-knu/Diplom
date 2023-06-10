@@ -15,6 +15,8 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 
         public async Task<DepartmentDTO> CreateDepartmentAsync(DepartmentDTO department)
         {
+            department.Parent = null;
+            
             return await base.CreateEntityAsync(department);
         }
 
