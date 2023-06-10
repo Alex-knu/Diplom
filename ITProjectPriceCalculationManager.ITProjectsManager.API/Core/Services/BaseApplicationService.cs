@@ -96,6 +96,9 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
                     case "Evaluator":
                         result.AddRange(await _repository.ExecuteStoredProcedure($"EXEC dbo.GetApplicationsByEvaluator @userId = {userInfo.UserId}"));
                         break;
+                    case "Admin":
+                        result.AddRange(await _repository.GetAllAsync());
+                        break;
                 }
             }
 
