@@ -16,7 +16,6 @@ export class DepartmentInfoComponent {
   loading: boolean = false;
   department: Department;
   departments: Department[];
-  selectDepartment: Department | null;
 
   constructor(private departmentService: DepartmentService,
     private messageService: MessageService,
@@ -35,7 +34,6 @@ export class DepartmentInfoComponent {
       if (this.config.data != null) {
         this.departmentService.single.getById(this.config.data.id).subscribe((department: Department) => {
           this.department = department;
-          this.selectDepartment = department.parent;
         });
       }
       else {
@@ -47,8 +45,8 @@ export class DepartmentInfoComponent {
   }
 
   saveDepartment() {
-    if (this.selectDepartment) {
-      this.department.parentId = this.selectDepartment.id;
+    if (this.department.parent) {
+      this.department.parentId = this.department.parent.id;
     }
 
     if (this.department.id) {
