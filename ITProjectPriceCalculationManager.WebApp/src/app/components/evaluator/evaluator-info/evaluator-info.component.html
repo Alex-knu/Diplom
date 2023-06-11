@@ -1,1 +1,26 @@
-<p>evaluator-info works!</p>
+<div class="card">
+  <div class="p-field">
+    <label for="name">Назва</label>
+    <div class="p-field">
+      <input type="text" pInputText id="name" [(ngModel)]="evaluator.firstName" readonly />
+    </div>
+  </div>
+
+  <div class="p-field">
+    <label for="name">Назва</label>
+    <div class="p-field">
+      <input type="text" pInputText id="name" [(ngModel)]="evaluator.lastName" readonly />
+    </div>
+  </div>
+
+  <div class="p-field">
+    <label for="description">Ролі</label>
+    <div class="p-field">
+      <p-dropdown [options]="departments" [(ngModel)]="evaluator.department" [virtualScroll]="true"
+        optionLabel="name"></p-dropdown>
+    </div>
+  </div>
+
+  <button pButton pRipple label="Зберегти" icon="pi pi-check" class="p-button-text"
+    (click)="saveEvaluator()"></button>
+</div>

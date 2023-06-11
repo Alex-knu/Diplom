@@ -6,7 +6,7 @@ import { ServiceType } from "../core/serviceType";
 import { Evaluator } from "../../models/evaluator.model";
 
 @Injectable()
-export class EstimatorService extends BaseService<any> {
+export class EvaluatorService extends BaseService<any> {
   constructor(
     httpService: HttpService,
     configService: ClientConfigurationService) {
