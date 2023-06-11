@@ -1,23 +1,23 @@
 <div class="card">
-  <div class="p-field">
-    <label for="name">Назва</label>
+  <div class="p-field" *ngIf="departments && evaluator">
+    <label for="name">Ім'я</label>
     <div class="p-field">
       <input type="text" pInputText id="name" [(ngModel)]="evaluator.firstName" readonly />
     </div>
   </div>
 
   <div class="p-field">
-    <label for="name">Назва</label>
+    <label for="name">Прізвище</label>
     <div class="p-field">
       <input type="text" pInputText id="name" [(ngModel)]="evaluator.lastName" readonly />
     </div>
   </div>
 
   <div class="p-field">
-    <label for="description">Ролі</label>
+    <label for="description">Відділ</label>
     <div class="p-field">
       <p-dropdown [options]="departments" [(ngModel)]="evaluator.department" [virtualScroll]="true"
-        optionLabel="name"></p-dropdown>
+        optionLabel="name" placeholder="Select"></p-dropdown>
     </div>
   </div>
 
