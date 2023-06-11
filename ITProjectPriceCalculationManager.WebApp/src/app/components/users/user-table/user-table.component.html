@@ -16,8 +16,6 @@
     <ng-template pTemplate="header">
       <tr>
         <th pSortableColumn="name">Ім'я<p-sortIcon field="name"></p-sortIcon></th>
-        <!-- <th pSortableColumn="price">Ціна<p-sortIcon field="price"></p-sortIcon></th>
-        <th pSortableColumn="inventoryStatus">Статус<p-sortIcon field="inventoryStatus"></p-sortIcon></th> -->
         <th></th>
       </tr>
     </ng-template>
@@ -25,10 +23,6 @@
     <ng-template pTemplate="body" let-user>
       <tr>
         <td>{{user.name}}</td>
-        <!-- <td>{{user.price}}</td>
-        <td>
-          <span [class]="'application-badge status-' + user.status.toLowerCase()">{{user.status}}</span>
-        </td> -->
         <td>
           <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
             (click)="editUser(user)"></button>

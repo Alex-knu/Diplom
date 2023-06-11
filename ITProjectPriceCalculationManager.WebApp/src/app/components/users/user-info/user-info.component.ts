@@ -42,7 +42,7 @@ export class UserInfoComponent {
   saveRoles(){
     this.userService.single.update(this.user).subscribe(
       user => {
-        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Заявку створено' });
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Користувача оновлено' });
         this.ref.close(user);
       },
       error => {

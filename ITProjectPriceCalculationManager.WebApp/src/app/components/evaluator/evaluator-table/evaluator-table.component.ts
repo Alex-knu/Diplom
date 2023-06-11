@@ -45,7 +45,7 @@ export class EvaluatorTableComponent {
 
   editEvaluator(evaluator: Evaluator){
     this.ref = this.dialogService.open(EvaluatorInfoComponent, {
-    header: 'Деталі заявки',
+    header: 'Деталі експерта',
     data: evaluator,
     contentStyle: { overflow: 'auto' },
     baseZIndex: 10000,

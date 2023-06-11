@@ -50,7 +50,7 @@ export class UserTableComponent {
     this.user = user;
 
     this.ref = this.dialogService.open(UserInfoComponent, {
-      header: 'Деталі заявки',
+      header: 'Деталі про користувача',
       data: user,
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,

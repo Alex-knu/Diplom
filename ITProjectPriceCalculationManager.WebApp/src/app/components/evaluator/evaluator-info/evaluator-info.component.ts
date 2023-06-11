@@ -46,7 +46,7 @@ export class EvaluatorInfoComponent {
     if (this.evaluator.id) {
       this.evaluatorService.single.update(this.evaluator).subscribe(
         evaluator => {
-          this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Підрозділ оновлено' });
+          this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Експерта оновлено' });
           this.ref.close(evaluator);
         },
         error => {
