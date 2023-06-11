@@ -40,12 +40,12 @@ namespace ITProjectPriceCalculationManager.Extentions.Extentions
                 {
                     throw new SecurityTokenException("Invalid token");
                 }
-
+                
                 return new UserInfo
                 {
                     UserId = new Guid(claimsPrincipal.FindFirst("UserIdentifier")?.Value),
                     UserName = claimsPrincipal.FindFirst("UserName")?.Value,
-                    Roles = claimsPrincipal.FindAll("Role").Select(c => c.Value).ToList()
+                    Roles = claimsPrincipal.FindAll("Roles").Select(c => c.Value).ToList()
                 };
             }
             catch (Exception ex)

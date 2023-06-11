@@ -22,9 +22,9 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
             return await base.DeleteEntityAsync(id);
         }
 
-        public async Task<IEnumerable<EvaluatorDTO>> GetEvaluatorsAsync()
+        public async Task<IEnumerable<EvaluatorDTO>> GetEvaluatorsAsync(List<Guid> userIds)
         {
-            return await base.GetEntitysAsync();
+            return (await base.GetEntityListBySpecAsync(new Evaluators.GetEvaluatorsWithDependencies())).Where(evaluator => userIds.Contains(evaluator.UserId));
         }
 
         public async Task<EvaluatorDTO> GetEvaluatorsByIdAsync(Guid id)

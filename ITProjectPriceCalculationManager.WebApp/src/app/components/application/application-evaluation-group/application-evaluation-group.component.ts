@@ -5,7 +5,7 @@ import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dy
 import { ApplicationToEstimators } from 'src/app/shared/models/applicationToEstimators.model';
 import { Evaluator } from 'src/app/shared/models/evaluator.model';
 import { ApplicationToEstimatorsService } from 'src/app/shared/services/api/applicationToEstimators.service';
-import { EstimatorService } from 'src/app/shared/services/api/estimator.service';
+import { EvaluatorService } from 'src/app/shared/services/api/estimator.service';
 
 @Component({
   selector: 'app-application-evaluation-group',
@@ -21,7 +21,7 @@ export class ApplicationEvaluationGroupComponent implements OnInit {
   constructor(
     private messageService: MessageService,
     private applicationToEstimatorsService: ApplicationToEstimatorsService,
-    private estimatorService: EstimatorService,
+    private estimatorService: EvaluatorService,
     public dialogService: DialogService,
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig) { }

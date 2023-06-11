@@ -18,7 +18,6 @@ export class ApplicationInfoComponent implements OnInit {
   submitted: boolean;
   application: BaseApplication;
   programLanguages: ProgramLanguage[];
-  selectedProgramLanguages: ProgramLanguage[];
 
   constructor(
     private messageService: MessageService,
@@ -62,7 +61,6 @@ export class ApplicationInfoComponent implements OnInit {
       this.application.id = UUID.UUID();
       this.application.price = 0;
       this.application.status = "New";
-      this.application.programLanguages = this.selectedProgramLanguages;
       this.baseApplicationService.single.create(this.application).subscribe(
         application => {
           this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Заявку створено' });

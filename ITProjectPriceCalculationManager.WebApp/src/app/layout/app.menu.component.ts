@@ -35,33 +35,29 @@ export class AppMenuComponent implements OnInit {
       },
       {
         label: 'Заявка',
-        visible: this.isVisible(this.user) || this.isVisible(this.evaluator),
+        visible: this.isVisible(this.user) || this.isVisible(this.evaluator) || this.isVisible(this.admin),
         items: [
           {
             label: 'Заявки',
             icon: 'pi pi-fw pi-users',
-            routerLink: ['/application/application-table'], visible: this.isVisible(this.user) || this.isVisible(this.evaluator)
+            routerLink: ['/application/application-table'], visible: this.isVisible(this.user) || this.isVisible(this.evaluator) || this.isVisible(this.admin)
           }
         ]
       },
       {
-        label: 'Експерти',
-        items: [
-          {
-            label: 'Експерти', icon: 'pi pi-fw pi-users',
-            routerLink: ['/units/list'],
-            visible: this.isVisible(this.admin)
-          }
-        ]
-      },
-      {
-        label: 'Експертні групи',
+        label: 'Користувачі',
         visible: this.isVisible(this.admin),
         items: [
           {
-            label: 'Експертні групи',
+            label: 'Користувачі',
             icon: 'pi pi-fw pi-users',
-            routerLink: ['/divisions/list'],
+            routerLink: ['/user/user-table'],
+            visible: this.isVisible(this.admin)
+          },
+          {
+            label: 'Експерти',
+            icon: 'pi pi-fw pi-users',
+            routerLink: ['/evaluator/evaluator-table'],
             visible: this.isVisible(this.admin)
           }
         ]

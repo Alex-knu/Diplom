@@ -1,0 +1,26 @@
+<div class="card">
+  <div class="p-field" *ngIf="departments && evaluator">
+    <label for="name">Ім'я</label>
+    <div class="p-field">
+      <input type="text" pInputText id="name" [(ngModel)]="evaluator.firstName" readonly />
+    </div>
+  </div>
+
+  <div class="p-field">
+    <label for="name">Прізвище</label>
+    <div class="p-field">
+      <input type="text" pInputText id="name" [(ngModel)]="evaluator.lastName" readonly />
+    </div>
+  </div>
+
+  <div class="p-field">
+    <label for="description">Відділ</label>
+    <div class="p-field">
+      <p-dropdown [options]="departments" [(ngModel)]="evaluator.department" [virtualScroll]="true"
+        optionLabel="name" placeholder="Select"></p-dropdown>
+    </div>
+  </div>
+
+  <button pButton pRipple label="Зберегти" icon="pi pi-check" class="p-button-text"
+    (click)="saveEvaluator()"></button>
+</div>

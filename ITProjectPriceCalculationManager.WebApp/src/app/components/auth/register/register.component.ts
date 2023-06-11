@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { UUID } from 'angular2-uuid';
 import { MessageService } from 'primeng/api';
 import { UserRegistration } from 'src/app/shared/models/user.registration';
-import { EstimatorService } from 'src/app/shared/services/api/estimator.service';
+import { EvaluatorService } from 'src/app/shared/services/api/estimator.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private estimatorService: EstimatorService,
+    private estimatorService: EvaluatorService,
     private messageService: MessageService,
     private router: Router) { }
 

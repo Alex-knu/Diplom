@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" *ngIf="department">
   <div class="p-field">
     <label for="name">Назва</label>
     <div class="p-field">
@@ -10,8 +10,8 @@
   <div class="p-field">
     <label for="description">Підрозділ верхнього рівня</label>
     <div>
-      <p-dropdown [(ngModel)]="selectDepartment" [options]="departments" [virtualScroll]="true"
-        [virtualScrollItemSize]="38" optionLabel="name">{{selectDepartment?.name}}
+      <p-dropdown [(ngModel)]="department.parent" [options]="departments" [virtualScroll]="true"
+        [virtualScrollItemSize]="38" placeholder="Select" optionLabel="name">{{department.parent?.name}}
       </p-dropdown>
     </div>
   </div>

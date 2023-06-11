@@ -4,11 +4,19 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.E
 {
     internal class Evaluators
     {
-        internal class GetEstimatorByUserId : Specification<Evaluator>
+        internal class GetEvaluatorByUserId : Specification<Evaluator>
         {
-            public GetEstimatorByUserId(Guid userId)
+            public GetEvaluatorByUserId(Guid userId)
             {
                 Query.Where(x => x.UserId == userId);
+            }
+        }
+
+        internal class GetEvaluatorsWithDependencies : Specification<Evaluator>
+        {
+            public GetEvaluatorsWithDependencies()
+            {
+                Query.Include(x => x.Department);
             }
         }
     }

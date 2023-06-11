@@ -11,8 +11,8 @@ export class TokenService {
   constructor(private cookieService: CookieService) { }
 
   setUserInfo(info: UserModel) {
-    this.cookieService.set('userName', info.UserName)
-    this.cookieService.set('role', info.Role)
+    this.cookieService.set('userName', info.UserName);
+    this.cookieService.set('roles', JSON.stringify(info.Roles));
   }
 
   setToken(token: string) {
@@ -20,11 +20,11 @@ export class TokenService {
   }
 
   getUserName(): string {
-    return this.cookieService.get('userName')
+    return this.cookieService.get('userName');
   }
 
-  getUserRole(): string {
-    return this.cookieService.get('role')
+  getUserRoles(): string[] {
+    return JSON.parse(this.cookieService.get('roles'));
   }
 
   getToken(): string {

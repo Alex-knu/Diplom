@@ -18,6 +18,10 @@ import { ErrorComponent } from './components/auth/error/error.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { AccessComponent } from './components/auth/access/access.component';
+import { UserTableComponent } from './components/users/user-table/user-table.component';
+import { UserInfoComponent } from './components/users/user-info/user-info.component';
+import { EvaluatorTableComponent } from './components/evaluator/evaluator-table/evaluator-table.component';
+import { EvaluatorInfoComponent } from './components/evaluator/evaluator-info/evaluator-info.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,11 @@ import { AccessComponent } from './components/auth/access/access.component';
     DepartmentInfoComponent,
     ErrorComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserTableComponent,
+    UserInfoComponent,
+    EvaluatorTableComponent,
+    EvaluatorInfoComponent
   ],
   imports: [
     AppRoutingModule,

@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" *ngIf="application">
   <div class="p-field">
     <label for="name">Назва</label>
     <div class="p-field">
@@ -25,7 +25,7 @@
   <div class="p-field">
     <label for="description">Мови програмування</label>
     <div class="p-field">
-      <p-multiSelect [options]="programLanguages" [(ngModel)]="selectedProgramLanguages" [virtualScroll]="true"
+      <p-multiSelect [options]="programLanguages" [(ngModel)]="application.programLanguages" [virtualScroll]="true"
         optionLabel="name"></p-multiSelect>
     </div>
   </div>
