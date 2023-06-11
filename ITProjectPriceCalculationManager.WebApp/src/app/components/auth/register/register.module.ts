@@ -4,7 +4,6 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule } from '@angular/forms';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
-import { RegisterComponent } from './register.component';
 import { RegisterRoutingModule } from './register-routing.module';
 import { ToastModule } from 'primeng/toast';
 
@@ -17,8 +16,7 @@ import { ToastModule } from 'primeng/toast';
     InputTextModule,
     FormsModule,
     PasswordModule
-  ],
-  declarations: [RegisterComponent]
+  ]
 })
 
 export class RegisterModule { }
