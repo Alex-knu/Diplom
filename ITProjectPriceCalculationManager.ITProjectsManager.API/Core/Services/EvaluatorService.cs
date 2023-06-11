@@ -24,9 +24,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 
         public async Task<IEnumerable<EvaluatorDTO>> GetEvaluatorsAsync(List<Guid> userIds)
         {
-            return from evaluator in await base.GetEntitysAsync()
-                   where userIds.Contains(evaluator.UserId)
-                   select evaluator;
+            return (await base.GetEntityListBySpecAsync(new Evaluators.GetEvaluatorsWithDependencies())).Where(evaluator => userIds.Contains(evaluator.UserId));
         }
 
         public async Task<EvaluatorDTO> GetEvaluatorsByIdAsync(Guid id)

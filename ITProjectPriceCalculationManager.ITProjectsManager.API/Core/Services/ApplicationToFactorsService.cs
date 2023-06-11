@@ -27,7 +27,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
         {
             try
             {
-                var domainCreator = await _estimatorRepository.GetFirstBySpecAsync(new Evaluators.GetEstimatorByUserId(evaluationApplication.UserCreatorId));
+                var domainCreator = await _estimatorRepository.GetFirstBySpecAsync(new Evaluators.GetEvaluatorByUserId(evaluationApplication.UserCreatorId));
 
                 if (domainCreator == null)
                 {
