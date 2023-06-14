@@ -5,6 +5,6 @@ namespace ITProjectPriceCalculationManager.DTOModels.DTO
         public Guid Id { get; set; }
         public Guid ApplicationId { get; set; }
         public Guid DifficultyLevelsTypeToFactorTypeId { get; set; }
-        public double Value { get; set; }
+        public double? Value { get; set; }
     }
 }

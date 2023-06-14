@@ -1,9 +1,8 @@
 namespace ITProjectPriceCalculationManager.DTOModels.DTO
 {
-    public class EvaluationApplicationDTO
+    public class ProgramInfoDTO
     {
-        public Guid UserCreatorId { get; set; }
+        public Guid Id { get; set; }
         public List<ApplicationToFactorsDTO> ApplicationToFactors { get; set; }
-        public List<ProgramInfoDTO> ProgramInfo { get; set; }
     }
 }
