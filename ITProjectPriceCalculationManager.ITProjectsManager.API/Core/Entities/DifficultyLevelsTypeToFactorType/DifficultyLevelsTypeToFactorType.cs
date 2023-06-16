@@ -13,6 +13,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.D
         public DifficultyLevelsType.DifficultyLevelsType DifficultyLevel { get; set; }
         public Attribute.Attribute Factor { get; set; }
         public FactorType.FactorType FactorType { get; set; }
-        public virtual ICollection<ApplicationToFactors.ApplicationToFactors> ApplicationToFactors { get; set; }
+        public virtual ICollection<ApplicationToFactor.ApplicationToFactor> ApplicationToFactors { get; set; }
     }
 }

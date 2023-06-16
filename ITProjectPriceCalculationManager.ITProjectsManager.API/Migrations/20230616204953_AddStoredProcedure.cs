@@ -2,8 +2,6 @@
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
 {
     /// <inheritdoc />
@@ -66,6 +64,28 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
             ORDER BY dlt.Name
             GO
             ");
+            migrationBuilder.Sql(@"
+            CREATE PROCEDURE dbo.GetApplicationsByIdForEvaluation 
+                @applicationId uniqueidentifier
+            AS
+            BEGIN
+                BEGIN
+                    SELECT Id, Profit, Overhead, SocialInsurance, AverageCostLabor, AverageMonthlyRateWorkingHours, ConfidenceArea
+                    FROM Applications
+                    WHERE Id = @applicationId
+                END
+            END
+            ");
+            migrationBuilder.Sql(@"
+            CREATE PROCEDURE dbo.GetAllProgramLanguagesByApplicationId 
+                @applicationId uniqueidentifier
+            AS
+                SELECT pp.Id, pl.Name, pl.SLOC
+                FROM ProgramLanguages pl
+                INNER JOIN ProgramsParametrs pp ON pl.Id = pp.ProgramLanguageId
+                WHERE pp.ApplicationId = @applicationId
+            GO
+            ");
         }
 
         /// <inheritdoc />
@@ -76,6 +96,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
             migrationBuilder.Sql("DROP PROCEDURE dbo.GetDifficultyLevelTypesForFactorType");
             migrationBuilder.Sql("DROP PROCEDURE dbo.GetEvaluationAttributes");
             migrationBuilder.Sql("DROP PROCEDURE dbo.GetDifficultyLevel");
+            migrationBuilder.Sql("DROP PROCEDURE dbo.GetApplicationsByIdForEvaluation");
         }
     }
 }

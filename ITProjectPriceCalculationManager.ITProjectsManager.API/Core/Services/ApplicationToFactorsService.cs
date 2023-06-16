@@ -1,6 +1,6 @@
 using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactors;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactor;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evaluator;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.EvaluatorToEvaluatedFactor;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramsParametrToSubjectAreaElement;
@@ -9,13 +9,13 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Ser
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 {
-    internal class ApplicationToFactorsService : BaseService<ApplicationToFactors, Guid, EvaluationApplicationDTO>, IApplicationToFactorsService
+    internal class ApplicationToFactorsService : BaseService<ApplicationToFactor, Guid, EvaluationApplicationDTO>, IApplicationToFactorsService
     {
         protected readonly IRepository<EvaluatorToEvaluatedFactor, Guid> _evaluatorToEvaluatedFactorRepository;
         protected readonly IRepository<ProgramsParametrToSubjectAreaElement, Guid> _programsParametrToSubjectAreaElementRepository;
         protected readonly IRepository<Evaluator, Guid> _estimatorRepository;
 
-        public ApplicationToFactorsService(IRepository<EvaluatorToEvaluatedFactor, Guid> evaluatorToEvaluatedFactorRepository, IRepository<ProgramsParametrToSubjectAreaElement, Guid> programsParametrToSubjectAreaElementRepository, IRepository<Evaluator, Guid> estimatorRepository, IRepository<ApplicationToFactors, Guid> repository, IMapper mapper) : base(repository, mapper)
+        public ApplicationToFactorsService(IRepository<EvaluatorToEvaluatedFactor, Guid> evaluatorToEvaluatedFactorRepository, IRepository<ProgramsParametrToSubjectAreaElement, Guid> programsParametrToSubjectAreaElementRepository, IRepository<Evaluator, Guid> estimatorRepository, IRepository<ApplicationToFactor, Guid> repository, IMapper mapper) : base(repository, mapper)
         {
             _evaluatorToEvaluatedFactorRepository = evaluatorToEvaluatedFactorRepository;
             _estimatorRepository = estimatorRepository;
@@ -38,12 +38,12 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
                     throw new BadHttpRequestException("Creator not found");
                 }
 
-                var newDomainApplicationToFactors = await _repository.AddRangeAsync(_mapper.Map<List<ApplicationToFactors>>(evaluationApplication.ApplicationToFactors));
+                var newDomainApplicationToFactors = await _repository.AddRangeAsync(_mapper.Map<List<ApplicationToFactor>>(evaluationApplication.ApplicationToFactors));
                 await _repository.SaveChangesAcync();
 
                 foreach (var program in evaluationApplication.ProgramInfo)
                 {
-                    var newDomainApplicationToFactorsForProgram = await _repository.AddRangeAsync(_mapper.Map<List<ApplicationToFactors>>(program.ApplicationToFactors));
+                    var newDomainApplicationToFactorsForProgram = await _repository.AddRangeAsync(_mapper.Map<List<ApplicationToFactor>>(program.ApplicationToFactors));
                     await _repository.SaveChangesAcync();
 
                     await _evaluatorToEvaluatedFactorRepository.AddRangeAsync((from atf in newDomainApplicationToFactorsForProgram

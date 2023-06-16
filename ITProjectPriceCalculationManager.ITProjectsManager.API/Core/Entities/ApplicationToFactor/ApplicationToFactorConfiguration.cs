@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactors
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactor
 {
-    internal class ApplicationToFactorsConfiguration : IEntityTypeConfiguration<ApplicationToFactors>
+    internal class ApplicationToFactorConfiguration : IEntityTypeConfiguration<ApplicationToFactor>
     {
-        public void Configure(EntityTypeBuilder<ApplicationToFactors> builder)
+        public void Configure(EntityTypeBuilder<ApplicationToFactor> builder)
         {
             builder.HasKey(estimator => estimator.Id);
 

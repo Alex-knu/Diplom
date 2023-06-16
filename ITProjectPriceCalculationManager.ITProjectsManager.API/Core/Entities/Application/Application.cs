@@ -19,7 +19,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
 
         public Evaluator.Evaluator Creator { get; set; }
         public ICollection<ApplicationToEvaluator.ApplicationToEvaluator> ApplicationToEvaluators { get; set; }
-        public virtual ICollection<ApplicationToFactors.ApplicationToFactors> Factors{ get; set; }
+        public virtual ICollection<ApplicationToFactor.ApplicationToFactor> Factors{ get; set; }
         public virtual ICollection<ProgramsParametr.ProgramsParametr> ProgramsParametrs { get; set; }
     }
 }

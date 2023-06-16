@@ -14,7 +14,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers
 
             try
             {
-                foreach (var programsParametr in evaluation.ProgramsParametrEvaluationFactorDTO)
+                foreach (var programsParametr in evaluation.ProgramsParametrEvaluationFactor)
                 {
                     ksloc += programsParametr.SLOC * CountUOF(GetFactors(programsParametr.SubjectAreaElements), evaluation.ConfidenceArea, tehnique);
                 }

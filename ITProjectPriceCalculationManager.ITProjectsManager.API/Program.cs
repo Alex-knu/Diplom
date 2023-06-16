@@ -18,6 +18,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped(typeof(IRepository<,>), typeof(BaseRepository<,>));
 builder.Services.AddScoped(typeof(IApplicationService), typeof(ApplicationService));
+builder.Services.AddScoped(typeof(IApplicationInfoForEvaluationService), typeof(ApplicationInfoForEvaluationService));
 builder.Services.AddScoped(typeof(IBaseApplicationService), typeof(BaseApplicationService));
 builder.Services.AddScoped(typeof(IDepartmentService), typeof(DepartmentService));
 builder.Services.AddScoped(typeof(IDepartmentTreeService), typeof(DepartmentTreeService));

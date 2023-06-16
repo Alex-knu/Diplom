@@ -9,6 +9,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.E
         public Guid EvaluatedFactorId { get; set; }
 
         public Evaluator.Evaluator Evaluator { get; set; }
-        public ApplicationToFactors.ApplicationToFactors EvaluatedFactor { get; set; }
+        public ApplicationToFactor.ApplicationToFactor EvaluatedFactor { get; set; }
     }
 }

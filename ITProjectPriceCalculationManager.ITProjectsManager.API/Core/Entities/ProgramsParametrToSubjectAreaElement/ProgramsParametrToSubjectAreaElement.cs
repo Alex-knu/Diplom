@@ -9,6 +9,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.P
         public Guid SubjectAreaElementId { get; set; }
 
         public ProgramsParametr.ProgramsParametr ProgramsParametr { get; set; }
-        public ApplicationToFactors.ApplicationToFactors SubjectAreaElement { get; set; }
+        public ApplicationToFactor.ApplicationToFactor SubjectAreaElement { get; set; }
     }
 }
