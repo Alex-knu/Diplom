@@ -15,6 +15,6 @@ namespace ITProjectPriceCalculationManager.DTOModels.DTO
         public double SocialInsurance { get; set; }
         public double AverageCostLabor { get; set; }
         public double AverageMonthlyRateWorkingHours { get; set; }
-        public List<ProgramLanguageDTO> ProgramLanguages{ get; set; }
+        public List<ProgramLanguageDTO>? ProgramLanguages{ get; set; }
     }
 }

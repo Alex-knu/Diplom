@@ -23,7 +23,8 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetApplicationById(Guid id)
+        [Route("{id}")]
+        public async Task<IActionResult> GetApplicationById([FromRoute]Guid id)
         {
             return Ok(await _baseApplicationService.GetBaseApplicationsByIdAsync(id));
         }
