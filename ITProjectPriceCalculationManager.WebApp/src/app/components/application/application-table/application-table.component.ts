@@ -109,8 +109,13 @@ export class ApplicationTableComponent {
     });
 
     this.ref.onClose.subscribe((application: BaseApplication) => {
-      if (application) {
-        this.applications.push(application);
+      if (application && application.id) {
+        this.baseApplicationService.collection.getAll()
+          .subscribe(
+            (applications) => {
+              this.applications = applications;
+            });
+
         this.messageService.add({ severity: 'info', summary: 'Список оновлено', detail: application.name });
       }
     });

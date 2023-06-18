@@ -109,9 +109,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
                     case "Admin":
                         result.AddRange(await _procedureApplicationRepository.ExecuteStoredProcedure($"EXEC dbo.GetApplicationsByAdmin"));
                         break;
-                    case "Admin":
-                        result.AddRange(await _repository.GetAllAsync());
-                        break;
                 }
             }
 
