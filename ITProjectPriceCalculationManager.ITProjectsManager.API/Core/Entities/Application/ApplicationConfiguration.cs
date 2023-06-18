@@ -33,9 +33,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
             builder.Property(application => application.Description)
                .IsRequired();
 
-            builder.Property(application => application.Status)
-                 .IsRequired();
-
             builder.Property(application => application.ConfidenceArea);
 
             builder
@@ -47,6 +44,12 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
                    .HasOne(application => application.Creator)
                    .WithMany(estimator => estimator.Applications)
                    .HasForeignKey(programsParametr => programsParametr.CreatorId);
+
+
+            builder
+                   .HasOne(application => application.Status)
+                   .WithMany(statuses => statuses.Applications)
+                   .HasForeignKey(application => application.StatusId);
        }
     }
 }

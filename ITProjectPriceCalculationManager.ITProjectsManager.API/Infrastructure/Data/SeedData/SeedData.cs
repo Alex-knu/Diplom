@@ -1,3 +1,4 @@
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationStatus;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevelsType;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevelsTypeToFactorType;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.FactorType;
@@ -12,6 +13,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.
         public static void Seed(this ModelBuilder builder)
         {
             SeedAttribute(builder);
+            SeedApplicationStatuses(builder);
             SeedDifficultyLevelsType(builder);
             SeedDifficultyLevelsTypeToFactorType(builder);
             SeedFactorType(builder);
@@ -38,6 +40,16 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.
                 new Attribute { Id = new Guid("73A3A716-F447-4057-99CA-1500D438BA58"), Name = "External input" },
                 new Attribute { Id = new Guid("31F2F6D6-A5FA-4DA3-ADCF-0A5CC237EB95"), Name = "External output" },
                 new Attribute { Id = new Guid("7A540A8B-0198-40D8-9185-2E02BA5EB1AB"), Name = "External request" }
+            );
+        }
+
+        private static void SeedApplicationStatuses(ModelBuilder builder)
+        {
+            builder.Entity<ApplicationStatus>().HasData(
+                new ApplicationStatus { Id = new Guid("4706D234-E64D-4AB2-BED0-6086E10C3325"), Name = "Нова" },
+                new ApplicationStatus { Id = new Guid("C4A6971D-A0DE-4D6D-97FE-67DB465E330F"), Name = "На оцінюванні" },
+                new ApplicationStatus { Id = new Guid("9806F24D-89D7-42F5-80B4-D39AC7798949"), Name = "На доопрацюванні" },
+                new ApplicationStatus { Id = new Guid("56533C08-2C5B-4BBA-8DC2-9EFE0FB3DC66"), Name = "Оцінено" }
             );
         }
 

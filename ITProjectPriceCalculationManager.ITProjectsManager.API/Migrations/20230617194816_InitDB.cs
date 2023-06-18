@@ -31,6 +31,18 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ApplicationStatuses",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApplicationStatuses", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Attributes",
                 columns: table => new
                 {
@@ -192,6 +204,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatorId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StatusId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     Profit = table.Column<double>(type: "float", nullable: false),
                     Overhead = table.Column<double>(type: "float", nullable: false),
@@ -200,12 +213,17 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     AverageMonthlyRateWorkingHours = table.Column<double>(type: "float", nullable: false),
                     ConfidenceArea = table.Column<double>(type: "float", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Applications", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Applications_ApplicationStatuses_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "ApplicationStatuses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Applications_Evaluators_CreatorId",
                         column: x => x.CreatorId,
@@ -273,7 +291,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ApplicationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DifficultyLevelsTypeToFactorTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Value = table.Column<double>(type: "float", nullable: true)
+                    Value = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -365,6 +383,17 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         principalTable: "ProgramsParametrs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "ApplicationStatuses",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("4706d234-e64d-4ab2-bed0-6086e10c3325"), "Нова" },
+                    { new Guid("56533c08-2c5b-4bba-8dc2-9efe0fb3dc66"), "Оцінено" },
+                    { new Guid("9806f24d-89d7-42f5-80b4-d39ac7798949"), "На доопрацюванні" },
+                    { new Guid("c4a6971d-a0de-4d6d-97fe-67db465e330f"), "На оцінюванні" }
                 });
 
             migrationBuilder.InsertData(
@@ -556,6 +585,11 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                 column: "CreatorId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Applications_StatusId",
+                table: "Applications",
+                column: "StatusId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ApplicationToEvaluators_ApplicationId",
                 table: "ApplicationToEvaluators",
                 column: "ApplicationId");
@@ -693,6 +727,9 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
 
             migrationBuilder.DropTable(
                 name: "FactorTypes");
+
+            migrationBuilder.DropTable(
+                name: "ApplicationStatuses");
 
             migrationBuilder.DropTable(
                 name: "Evaluators");

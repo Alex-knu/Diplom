@@ -60,7 +60,7 @@ export class ApplicationInfoComponent implements OnInit {
     else {
       this.application.id = UUID.UUID();
       this.application.price = 0;
-      this.application.status = "New";
+      this.application.statusId = "4706D234-E64D-4AB2-BED0-6086E10C3325";
       this.baseApplicationService.single.create(this.application).subscribe(
         application => {
           this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Заявку створено' });

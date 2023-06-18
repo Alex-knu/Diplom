@@ -12,7 +12,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Stub
                 {
                     Id = Guid.NewGuid(),
                     Name = "Test",
-                    Status = "New",
+                    StatusName = "New",
                     Price = 200,
                     Profit = 100,
                     Overhead = 50,
@@ -47,7 +47,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Stub
                 {
                     Id = Guid.NewGuid(),
                     Name = "Test",
-                    Status = "New",
+                    StatusName = "New",
                     Price = 200,
                     Profit = 100,
                     Overhead = 50,
@@ -67,7 +67,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Stub
                 {
                     Id = Guid.NewGuid(),
                     Name = "Test",
-                    Status = "New",
+                    StatusName = "New",
                     Price = 200,
                     Profit = 100,
                     Overhead = 50,

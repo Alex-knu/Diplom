@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
 {
     [DbContext(typeof(ITProjectPriceCalculationManagerDbContext))]
-    [Migration("20230616204741_InitDB")]
+    [Migration("20230617194816_InitDB")]
     partial class InitDB
     {
         /// <inheritdoc />
@@ -63,13 +63,14 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     b.Property<double>("SocialInsurance")
                         .HasColumnType("float");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("StatusId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CreatorId");
+
+                    b.HasIndex("StatusId");
 
                     b.ToTable("Applications");
                 });
@@ -101,6 +102,43 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ApplicationForEvaluations");
+                });
+
+            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationStatus.ApplicationStatus", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApplicationStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("4706d234-e64d-4ab2-bed0-6086e10c3325"),
+                            Name = "Нова"
+                        },
+                        new
+                        {
+                            Id = new Guid("c4a6971d-a0de-4d6d-97fe-67db465e330f"),
+                            Name = "На оцінюванні"
+                        },
+                        new
+                        {
+                            Id = new Guid("9806f24d-89d7-42f5-80b4-d39ac7798949"),
+                            Name = "На доопрацюванні"
+                        },
+                        new
+                        {
+                            Id = new Guid("56533c08-2c5b-4bba-8dc2-9efe0fb3dc66"),
+                            Name = "Оцінено"
+                        });
                 });
 
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToEvaluator.ApplicationToEvaluator", b =>
@@ -1497,7 +1535,15 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationStatus.ApplicationStatus", "Status")
+                        .WithMany("Applications")
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Creator");
+
+                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToEvaluator.ApplicationToEvaluator", b =>
@@ -1675,6 +1721,11 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     b.Navigation("Factors");
 
                     b.Navigation("ProgramsParametrs");
+                });
+
+            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationStatus.ApplicationStatus", b =>
+                {
+                    b.Navigation("Applications");
                 });
 
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactor.ApplicationToFactor", b =>

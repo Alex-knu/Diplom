@@ -35,7 +35,7 @@
         <td>{{application.name}}</td>
         <td>{{application.price}}</td>
         <td>
-          <span [class]="'application-badge status-' + application.status.toLowerCase()">{{application.status}}</span>
+          <span [class]="'application-badge status-' + application.statusName.toLowerCase()">{{application.statusName}}</span>
         </td>
         <td>
           <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"

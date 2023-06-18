@@ -25,11 +25,11 @@ namespace ITProjectPriceCalculationManager.Router.API.Core.Services
             if (string.IsNullOrEmpty(result.Error))
             {
                 application.Price = result.Result;
-                application.Status = "Оцінено";
+                application.StatusId = new Guid("56533C08-2C5B-4BBA-8DC2-9EFE0FB3DC66");
             }
             else
             {
-                application.Status = "На доопрацюванні";
+                application.StatusId = new Guid("9806F24D-89D7-42F5-80B4-D39AC7798949");
             }
 
             return await _routeService.PutAsJsonAsync<BaseApplicationDTO, BaseApplicationDTO>(_itManagerClient, "baseapplicationapi", application);

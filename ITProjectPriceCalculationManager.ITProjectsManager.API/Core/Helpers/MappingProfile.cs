@@ -11,6 +11,7 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Appli
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationForEvaluation;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramsParametr;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.FactorType;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationStatus;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Helpers
 {
@@ -27,6 +28,20 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Helpers
             CreateMap<ApplicationToFactorsDTO, ApplicationToFactor>().ReverseMap();
             CreateMap<DifficultyLevelsTypeDTO, DifficultyLevel>().ReverseMap();
             CreateMap<ApplicationForEvaluation, EvaluationDTO>();
+            CreateMap<Application, BaseApplicationDTO>();
+            CreateMap<BaseApplicationDTO, Application>()
+            .ForMember(a => a.Status, map => map.MapFrom((src, dest, memb) =>
+                {
+                    return new ApplicationStatus()
+                    {
+                        Id = src.StatusId
+                    };
+                }));
+            CreateMap<ProcedureApplication, BaseApplicationDTO>()
+            .ForMember(a => a.StatusName, map => map.MapFrom((src, dest, memb) =>
+                {
+                    return !string.IsNullOrEmpty(src.StatusName) ? src.StatusName : src.Status != null ? src.Status.Name : string.Empty;
+                }));
             CreateMap<ProgramsParametr, ProgramsParametrEvaluationFactorDTO>()
             .ForMember(a => a.Id, map => map.MapFrom((src, dest, memb) =>
                 {

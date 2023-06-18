@@ -16,6 +16,7 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Appli
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevels;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.EvaluationAttributes;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationForEvaluation;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationStatus;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data
 {
@@ -31,6 +32,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new ApplicationConfiguration());
+            modelBuilder.ApplyConfiguration(new ApplicationStatusConfiguration());
             modelBuilder.ApplyConfiguration(new ApplicationToEvaluatorConfiguration());
             modelBuilder.ApplyConfiguration(new ApplicationToFactorConfiguration());
             modelBuilder.ApplyConfiguration(new AttributeConfiguration());
@@ -61,5 +63,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.
         public DbSet<ProgramsParametrToSubjectAreaElement> ProgramsParametrToSubjectAreaElements { get; set; }
         public DbSet<EvaluationAttribute> EvaluationAttributes { get; set; }
         public DbSet<DifficultyLevel> DifficultyLevels { get; set; }
+        public DbSet<ApplicationStatus> ApplicationStatuses { get; set; }
+        public DbSet<ProcedureApplication> ProcedureApplications { get; set; }
     }
 }

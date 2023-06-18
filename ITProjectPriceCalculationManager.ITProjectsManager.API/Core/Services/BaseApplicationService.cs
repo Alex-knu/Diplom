@@ -14,11 +14,18 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
     {
         protected readonly IRepository<Evaluator, Guid> _estimatorRepository;
         protected readonly IRepository<ProgramsParametr, Guid> _programsParametrRepository;
+        protected readonly IRepository<ProcedureApplication, Guid> _procedureApplicationRepository;
 
-        public BaseApplicationService(IRepository<Evaluator, Guid> estimatorRepository, IRepository<ProgramsParametr, Guid> programsParametrRepository, IRepository<Application, Guid> repository, IMapper mapper) : base(repository, mapper)
+        public BaseApplicationService(
+            IRepository<Evaluator, Guid> estimatorRepository, 
+            IRepository<ProgramsParametr, Guid> programsParametrRepository, 
+            IRepository<ProcedureApplication, Guid> procedureApplicationRepository, 
+            IRepository<Application, Guid> repository, 
+            IMapper mapper) : base(repository, mapper)
         {
             _estimatorRepository = estimatorRepository;
             _programsParametrRepository = programsParametrRepository;
+            _procedureApplicationRepository = procedureApplicationRepository;
         }
 
         public async Task<BaseApplicationDTO> CreateBaseApplicationAsync(BaseApplicationDTO baseApplication)
@@ -58,7 +65,10 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
                 }
 
                 var domainApplication = _mapper.Map<Application>(baseApplication);
+                
                 domainApplication.CreatorId = domainCreator.Id;
+                domainApplication.Status = null;
+                
                 var newDomainApplication = await _repository.AddAsync(domainApplication);
 
                 await _repository.SaveChangesAcync();
@@ -84,20 +94,20 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 
         private async Task<IEnumerable<BaseApplicationDTO>> ExecuteSqlProcedure(UserInfo userInfo)
         {
-            List<Application> result = new List<Application>();
+            List<ProcedureApplication> result = new List<ProcedureApplication>();
 
             foreach (var role in userInfo.Roles)
             {
                 switch (role)
                 {
                     case "User":
-                        result.AddRange(await _repository.ExecuteStoredProcedure($"EXEC dbo.GetApplicationsByCreator @userId = {userInfo.UserId}"));
+                        result.AddRange(await _procedureApplicationRepository.ExecuteStoredProcedure($"EXEC dbo.GetApplicationsByCreator @userId = {userInfo.UserId}"));
                         break;
                     case "Evaluator":
-                        result.AddRange(await _repository.ExecuteStoredProcedure($"EXEC dbo.GetApplicationsByEvaluator @userId = {userInfo.UserId}"));
+                        result.AddRange(await _procedureApplicationRepository.ExecuteStoredProcedure($"EXEC dbo.GetApplicationsByEvaluator @userId = {userInfo.UserId}"));
                         break;
                     case "Admin":
-                        result.AddRange(await _repository.GetAllAsync());
+                        result.AddRange(await _procedureApplicationRepository.ExecuteStoredProcedure($"EXEC dbo.GetApplicationsByAdmin"));
                         break;
                 }
             }

@@ -10,7 +10,8 @@ export class BaseApplication extends BaseModel {
   userCreatorId: string;
   name: string;
   description: string;
-  status: string;
+  statusId: string;
+  statusName: string;
   price: number | null;
   profit: number;
   confidenceArea: number | null;
