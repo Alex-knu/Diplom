@@ -13,6 +13,7 @@ import { ApplicationToFactorsService } from "./api/applicationToFactors.service"
 import { DepartmentTreeService } from "./api/departmentTree.service";
 import { UserService } from "./api/user.service";
 import { RoleService } from "./api/role.service";
+import { CalculateApplicationService } from "./api/calculateApplication.service";
 
 export const services = [
   HttpService,
@@ -22,6 +23,7 @@ export const services = [
   ApplicationToEstimatorsService,
   ApplicationToFactorsService,
   BaseApplicationService,
+  CalculateApplicationService,
   DepartmentService,
   DepartmentTreeService,
   EvaluatorService,

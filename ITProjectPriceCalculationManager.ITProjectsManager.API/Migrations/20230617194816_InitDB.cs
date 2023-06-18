@@ -291,7 +291,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ApplicationId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     DifficultyLevelsTypeToFactorTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Value = table.Column<double>(type: "float", nullable: false)
+                    Value = table.Column<double>(type: "float", nullable: true)
                 },
                 constraints: table =>
                 {

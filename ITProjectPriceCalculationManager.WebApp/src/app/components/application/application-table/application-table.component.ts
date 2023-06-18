@@ -10,6 +10,7 @@ import { ApplicationInfoComponent } from '../application-info/application-info.c
 import { ApplicationEvaluationGroupComponent } from '../application-evaluation-group/application-evaluation-group.component';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ROLE_ADMIN, ROLE_EVALUATOR, ROLE_USER } from 'src/app/shared/constants';
+import { CalculateApplicationService } from 'src/app/shared/services/api/calculateApplication.service';
 
 @Component({
   selector: 'app-application-table',
@@ -31,6 +32,7 @@ export class ApplicationTableComponent {
     private router: Router,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
+    private calculateApplicationService: CalculateApplicationService,
     private baseApplicationService: BaseApplicationService,
     private dialogService: DialogService,
     private authService: AuthService) { }
@@ -132,5 +134,22 @@ export class ApplicationTableComponent {
 
   isVisible(role: string): boolean {
     return this.authService.checkRole(role);
+  }
+
+  calculate(applicationId: string) {
+    this.calculateApplicationService.single.create({applicationId: applicationId}).subscribe(
+    application => {
+
+      this.baseApplicationService.collection.getAll()
+          .subscribe(
+            (applications) => {
+              this.applications = applications;
+            });
+
+      this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Заявку обраховано' });
+    },
+    error => {
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
+    })
   }
 }

@@ -2,16 +2,16 @@
   <p-toast></p-toast>
   <p-table #dt [value]="applications" [rows]="10" [paginator]="true"
     [globalFilterFields]="['name','country.name','representative.name','status']" [(selection)]="selectedApplications"
-    [rowHover]="true" dataKey="id" currentPageReportTemplate="показати з {first} по {last} із {totalRecords}
-        entries" [showCurrentPageReport]="true">
+    [rowHover]="true" dataKey="id" currentPageReportTemplate="показати з {first} по {last} із {totalRecords}"
+    [showCurrentPageReport]="true">
     <ng-template pTemplate="caption">
       <div class="p-d-flex p-ai-center p-jc-between">
         <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
           <input pInputText type="text" (input)="dt.filterGlobal($event, 'contains')" placeholder="Пошук..." />
         </span>
-        <button pButton pRipple label="Нова" icon="pi pi-plus" class="p-button-success p-mr-2"
-          (click)="openNew()" *ngIf="isVisible(user)"></button>
+        <button pButton pRipple label="Нова" icon="pi pi-plus" class="p-button-success p-mr-2" (click)="openNew()"
+          *ngIf="isVisible(user)"></button>
       </div>
     </ng-template>
 
@@ -35,7 +35,8 @@
         <td>{{application.name}}</td>
         <td>{{application.price}}</td>
         <td>
-          <span [class]="'application-badge status-' + application.statusName.toLowerCase()">{{application.statusName}}</span>
+          <span
+            [class]="'application-badge status-' + application.statusName.toLowerCase()">{{application.statusName}}</span>
         </td>
         <td>
           <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
@@ -44,8 +45,10 @@
             (click)="deleteApplication(application)" *ngIf="isVisible(user)"></button>
           <button pButton pRipple icon="pi pi-user-plus" class="p-button-rounded p-button-secondary p-mr-2"
             (click)="addEstimatorGroup(application.id)" *ngIf="isVisible(admin)"></button>
-          <button pButton pRipple icon="pi pi-calculator" class="p-button-rounded p-mr-2"
+          <button pButton pRipple icon="pi pi-file-edit" class="p-button-rounded p-mr-2"
             (click)="redirectToEvaluationForm(application.id)" *ngIf="isVisible(evaluator)"></button>
+          <button pButton pRipple icon="pi pi-calculator" class="p-button-rounded p-button-help p-mr-2"
+            (click)="calculate(application.id)" *ngIf="isVisible(admin)"></button>
         </td>
       </tr>
     </ng-template>

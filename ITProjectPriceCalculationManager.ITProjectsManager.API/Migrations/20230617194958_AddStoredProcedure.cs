@@ -26,8 +26,8 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
             AS
             SELECT a.*, '[AS]'.Name AS StatusName
             FROM dbo.Applications a
-                INNER JOIN dbo.Evaluators e ON a.CreatorId = e.Id
                 INNER JOIN dbo.ApplicationToEvaluators ate ON a.Id = ate.ApplicationId
+                INNER JOIN dbo.Evaluators e ON ate.EvaluatorId = e.Id
             INNER JOIN dbo.ApplicationStatuses '[AS]' on '[AS]'.Id = a.StatusId
             WHERE e.UserId = @userId
             GO
