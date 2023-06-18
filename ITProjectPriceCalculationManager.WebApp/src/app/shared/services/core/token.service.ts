@@ -11,11 +11,15 @@ export class TokenService {
   constructor(private cookieService: CookieService) { }
 
   setUserInfo(info: UserModel) {
+    this.cookieService.delete('userName');
+    this.cookieService.delete('roles');
     this.cookieService.set('userName', info.UserName);
     this.cookieService.set('roles', JSON.stringify(info.Roles));
   }
 
   setToken(token: string) {
+    //this.cookieService.deleteAll()
+    this.cookieService.delete('token');
     this.cookieService.set('token', token);
   }
 

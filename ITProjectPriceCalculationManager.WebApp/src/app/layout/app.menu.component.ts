@@ -74,22 +74,22 @@ export class AppMenuComponent implements OnInit {
           }
         ]
       },
-      {
-        label: 'Логін',
-        visible: true,
-        items: [
-          {
-            label: 'Логін',
-            icon: 'pi pi-fw pi-users',
-            routerLink: ['/auth/register']
-          },
-          {
-            label: 'Додати експертну групу',
-            icon: 'pi pi-fw pi-user-plus',
-            routerLink: ['/auth/access']
-          }
-        ]
-      }
+      // {
+      //   label: 'Логін',
+      //   visible: true,
+      //   items: [
+      //     {
+      //       label: 'Логін',
+      //       icon: 'pi pi-fw pi-users',
+      //       routerLink: ['/auth/register']
+      //     },
+      //     {
+      //       label: 'Додати експертну групу',
+      //       icon: 'pi pi-fw pi-user-plus',
+      //       routerLink: ['/auth/access']
+      //     }
+      //   ]
+      // }
     ];
   }
 

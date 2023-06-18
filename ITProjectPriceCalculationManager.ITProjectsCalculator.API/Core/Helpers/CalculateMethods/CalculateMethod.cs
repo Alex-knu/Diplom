@@ -10,7 +10,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers
 
             if (price.HasValue)
             {
-                result.Result = price.Value * evaluation.Overhead + price.Value * evaluation.Profit + price.Value * evaluation.SocialInsurance;
+                result.Result = (float)Math.Round(price.Value * evaluation.Overhead / 100 + price.Value * evaluation.Profit / 100 + price.Value * evaluation.SocialInsurance / 100, 2);
             }
 
             return Task.FromResult(result);

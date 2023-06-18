@@ -20,6 +20,7 @@ JwtUtils.SecretKey = jwtConfiguration.Secret;
 
 builder.Services.AddScoped(typeof(IRouteService), typeof(RouteService));
 builder.Services.AddScoped(typeof(IApplicationService), typeof(ApplicationService));
+builder.Services.AddScoped(typeof(ICalculatorService), typeof(CalculatorService));
 builder.Services.AddScoped(typeof(IBaseApplicationService), typeof(BaseApplicationService));
 builder.Services.AddScoped(typeof(IDepartmentService), typeof(DepartmentService));
 builder.Services.AddScoped(typeof(IDepartmentTreeService), typeof(DepartmentTreeService));

@@ -8,4 +8,5 @@ export class DifficultyLevelsType extends BaseModel {
 
   relationId: string
   name: string;
+  value: number;
 }

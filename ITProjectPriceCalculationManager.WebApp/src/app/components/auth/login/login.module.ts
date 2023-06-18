@@ -15,8 +15,7 @@ import { InputTextModule } from 'primeng/inputtext';
     InputTextModule,
     FormsModule,
     PasswordModule
-  ],
-  declarations: [LoginComponent]
+  ]
 })
 
 export class LoginModule { }

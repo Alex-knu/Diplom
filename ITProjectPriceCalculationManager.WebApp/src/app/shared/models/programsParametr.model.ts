@@ -1,8 +1,12 @@
 import { BaseModel } from "./base.model";
-import { SubjectAreaElement } from "./subjectAreaElement.model";
+import { EvaluationParametrsInfo } from "./evaluationParametrsInfo.model";
 
 export class ProgramsParametr extends BaseModel {
-  sloc: number;
-  programLanguageName: string;
-  subjectAreaElements: SubjectAreaElement[];
+  constructor(id: string | null = null) {
+    super(id);
+  }
+
+  name: string;
+  informationObjectEvaluationParametrsInfo: EvaluationParametrsInfo[];
+  functionEvaluationParametrsInfo: EvaluationParametrsInfo[];
 }

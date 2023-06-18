@@ -25,5 +25,12 @@ namespace ITProjectPriceCalculationManager.Router.API.Controllers
         {
             return Ok(await _programLanguageService.GetProgramLanguagesAsync());
         }
+
+        [HttpGet]
+        [Route("collection/{applicationId}")]
+        public async Task<IActionResult> GetAllProgramLanguagesByApplicationId([FromRoute] Guid applicationId)
+        {
+            return Ok(await _programLanguageService.GetAllProgramLanguagesByApplicationId(applicationId));
+        }
     }
 }

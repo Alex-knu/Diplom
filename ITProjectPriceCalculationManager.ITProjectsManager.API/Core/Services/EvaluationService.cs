@@ -1,14 +1,14 @@
 using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactors;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactor;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
 {
-    internal class EvaluationService : BaseService<ApplicationToFactors, Guid, EvaluationDTO>, IEvaluationService
+    internal class EvaluationService : BaseService<ApplicationToFactor, Guid, EvaluationDTO>, IEvaluationService
     {
-        public EvaluationService(IRepository<ApplicationToFactors, Guid> repository, IMapper mapper) : base(repository, mapper)
+        public EvaluationService(IRepository<ApplicationToFactor, Guid> repository, IMapper mapper) : base(repository, mapper)
         {
         }
 

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
 {
     [DbContext(typeof(ITProjectPriceCalculationManagerDbContext))]
-    [Migration("20230607154552_AddStoredProcedure")]
-    partial class AddStoredProcedure
+    [Migration("20230617194816_InitDB")]
+    partial class InitDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -63,15 +63,82 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     b.Property<double>("SocialInsurance")
                         .HasColumnType("float");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("StatusId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CreatorId");
 
+                    b.HasIndex("StatusId");
+
                     b.ToTable("Applications");
+                });
+
+            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationForEvaluation.ApplicationForEvaluation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("AverageCostLabor")
+                        .HasColumnType("float");
+
+                    b.Property<double>("AverageMonthlyRateWorkingHours")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("ConfidenceArea")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Overhead")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Profit")
+                        .HasColumnType("float");
+
+                    b.Property<double>("SocialInsurance")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApplicationForEvaluations");
+                });
+
+            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationStatus.ApplicationStatus", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApplicationStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("4706d234-e64d-4ab2-bed0-6086e10c3325"),
+                            Name = "Нова"
+                        },
+                        new
+                        {
+                            Id = new Guid("c4a6971d-a0de-4d6d-97fe-67db465e330f"),
+                            Name = "На оцінюванні"
+                        },
+                        new
+                        {
+                            Id = new Guid("9806f24d-89d7-42f5-80b4-d39ac7798949"),
+                            Name = "На доопрацюванні"
+                        },
+                        new
+                        {
+                            Id = new Guid("56533c08-2c5b-4bba-8dc2-9efe0fb3dc66"),
+                            Name = "Оцінено"
+                        });
                 });
 
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToEvaluator.ApplicationToEvaluator", b =>
@@ -98,7 +165,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     b.ToTable("ApplicationToEvaluators");
                 });
 
-            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactors.ApplicationToFactors", b =>
+            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactor.ApplicationToFactor", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -110,7 +177,8 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     b.Property<Guid>("DifficultyLevelsTypeToFactorTypeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<double>("Value")
+                    b.Property<double?>("Value")
+                        .IsRequired()
                         .HasColumnType("float");
 
                     b.HasKey("Id");
@@ -355,7 +423,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("61d50613-bdfb-4ca8-b0a5-1e42b3f86ed7"),
+                            Id = new Guid("4d413d42-df92-483a-a769-3c70e6538bbd"),
                             DifficultyLevelId = new Guid("b3b0177d-baf9-4ad6-b1c1-002e1b776a10"),
                             FactorId = new Guid("7a0822a4-7012-4738-889b-fafb713f72ea"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -363,7 +431,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fcc2cc11-6dfa-4a97-9326-34f91ded8265"),
+                            Id = new Guid("bec1c811-5198-4c74-bd9c-d1dfdfb56432"),
                             DifficultyLevelId = new Guid("0c5fd362-b14d-4186-bef9-979ed21b9575"),
                             FactorId = new Guid("7a0822a4-7012-4738-889b-fafb713f72ea"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -371,7 +439,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a8e8d742-e180-494e-b9d4-8a18a183d73a"),
+                            Id = new Guid("83591b36-ccd6-451f-a908-4a241012e96b"),
                             DifficultyLevelId = new Guid("fc6ea190-24a2-42d0-b2aa-783758efa82d"),
                             FactorId = new Guid("7a0822a4-7012-4738-889b-fafb713f72ea"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -379,7 +447,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("66ba0147-4207-4f58-84e6-527635c91406"),
+                            Id = new Guid("faf586cd-51bc-4a56-a10c-3d748355462c"),
                             DifficultyLevelId = new Guid("b29fa523-bd56-48be-9adc-cbd23f0af646"),
                             FactorId = new Guid("7a0822a4-7012-4738-889b-fafb713f72ea"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -387,7 +455,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("bdce45f4-8ca8-44a1-ac60-7dadee4c172f"),
+                            Id = new Guid("ad158205-ff97-42a2-9abc-0040a8560c7e"),
                             DifficultyLevelId = new Guid("1aa2ef63-41db-4f3d-aacd-e38c7e4639ac"),
                             FactorId = new Guid("7a0822a4-7012-4738-889b-fafb713f72ea"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -395,7 +463,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c50f6132-0a0c-4d00-bcd9-a1ed047519fc"),
+                            Id = new Guid("7b27efd0-fee3-4689-98cd-95c444fb04d5"),
                             DifficultyLevelId = new Guid("f5ad4a31-a240-41bd-bffd-245103b88d0f"),
                             FactorId = new Guid("7a0822a4-7012-4738-889b-fafb713f72ea"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -403,7 +471,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9a08595e-25b1-40c8-abd4-b834d7e55f0c"),
+                            Id = new Guid("4a336b4d-61d9-48a1-970c-a0e69ac48fa7"),
                             DifficultyLevelId = new Guid("c15c008f-f7f4-4dae-95bb-02a32bb2b8b1"),
                             FactorId = new Guid("7a0822a4-7012-4738-889b-fafb713f72ea"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -411,7 +479,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e9a16436-0072-425e-a9b0-730f75bf6ce4"),
+                            Id = new Guid("ee1e1078-41b2-43fc-b2ae-d4121c2b7ca2"),
                             DifficultyLevelId = new Guid("b3b0177d-baf9-4ad6-b1c1-002e1b776a10"),
                             FactorId = new Guid("24fbf4f3-aa84-4b17-9d2e-0ef16238a2ba"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -419,7 +487,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ee43589a-3435-4366-b376-c3b2cc253cc6"),
+                            Id = new Guid("5f200051-a4b6-45b9-b6ce-9ba41351849b"),
                             DifficultyLevelId = new Guid("0c5fd362-b14d-4186-bef9-979ed21b9575"),
                             FactorId = new Guid("24fbf4f3-aa84-4b17-9d2e-0ef16238a2ba"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -427,7 +495,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("626fd42b-5467-4834-a280-09059aeb89f6"),
+                            Id = new Guid("afb9e99d-f300-4ae4-b2d7-c3099a660f4d"),
                             DifficultyLevelId = new Guid("fc6ea190-24a2-42d0-b2aa-783758efa82d"),
                             FactorId = new Guid("24fbf4f3-aa84-4b17-9d2e-0ef16238a2ba"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -435,7 +503,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fa0471e6-10c0-45b0-9d0b-6c2aa9a66ff7"),
+                            Id = new Guid("8c955d7f-dcd0-474a-85d7-d77b2c3f39eb"),
                             DifficultyLevelId = new Guid("b29fa523-bd56-48be-9adc-cbd23f0af646"),
                             FactorId = new Guid("24fbf4f3-aa84-4b17-9d2e-0ef16238a2ba"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -443,7 +511,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("37dd742a-b49f-4cb4-b4e4-0bcc161d01c1"),
+                            Id = new Guid("47464ce2-4daa-4d14-9e2d-285c254d0c27"),
                             DifficultyLevelId = new Guid("1aa2ef63-41db-4f3d-aacd-e38c7e4639ac"),
                             FactorId = new Guid("24fbf4f3-aa84-4b17-9d2e-0ef16238a2ba"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -451,7 +519,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("42a611e3-2164-4a7a-94bd-1d6217ca8a7e"),
+                            Id = new Guid("aa4b9e0c-0f9c-42d7-bca1-db48d90af5fc"),
                             DifficultyLevelId = new Guid("f5ad4a31-a240-41bd-bffd-245103b88d0f"),
                             FactorId = new Guid("24fbf4f3-aa84-4b17-9d2e-0ef16238a2ba"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -459,7 +527,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9507ef0f-b9ef-457c-b24d-820cfc888d38"),
+                            Id = new Guid("aea4daa0-2f03-4ef1-8ef5-787e676924e4"),
                             DifficultyLevelId = new Guid("c15c008f-f7f4-4dae-95bb-02a32bb2b8b1"),
                             FactorId = new Guid("24fbf4f3-aa84-4b17-9d2e-0ef16238a2ba"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -467,7 +535,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b4fcbba5-8f1b-4be3-852a-7ca6dbb02b0c"),
+                            Id = new Guid("502fe0cf-563e-4d8e-b65e-2bd3415f777a"),
                             DifficultyLevelId = new Guid("b3b0177d-baf9-4ad6-b1c1-002e1b776a10"),
                             FactorId = new Guid("33e07ded-1bd4-4e9a-8076-f071ea1a5269"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -475,7 +543,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fd56539f-611e-43d3-bd01-7f45957bc762"),
+                            Id = new Guid("2a9240e9-b392-4a31-8f55-fb1f3e1e7399"),
                             DifficultyLevelId = new Guid("0c5fd362-b14d-4186-bef9-979ed21b9575"),
                             FactorId = new Guid("33e07ded-1bd4-4e9a-8076-f071ea1a5269"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -483,7 +551,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d7274e25-0a61-4284-bf65-7498f5c269d1"),
+                            Id = new Guid("a17667db-caaf-4644-986a-c7909be4295f"),
                             DifficultyLevelId = new Guid("fc6ea190-24a2-42d0-b2aa-783758efa82d"),
                             FactorId = new Guid("33e07ded-1bd4-4e9a-8076-f071ea1a5269"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -491,7 +559,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("15eb8f6e-4424-442f-9d09-c17572e4ce39"),
+                            Id = new Guid("49543d41-1ce2-4d6c-9c7e-af9ffbdfae53"),
                             DifficultyLevelId = new Guid("b29fa523-bd56-48be-9adc-cbd23f0af646"),
                             FactorId = new Guid("33e07ded-1bd4-4e9a-8076-f071ea1a5269"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -499,7 +567,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0664b4ba-40b1-4dde-b911-be4c11768842"),
+                            Id = new Guid("1c1f5991-cba7-4247-b338-5640d3237568"),
                             DifficultyLevelId = new Guid("1aa2ef63-41db-4f3d-aacd-e38c7e4639ac"),
                             FactorId = new Guid("33e07ded-1bd4-4e9a-8076-f071ea1a5269"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -507,7 +575,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("49fd07ac-c843-4c4a-8c15-af2ea046f22f"),
+                            Id = new Guid("7e608ff2-0cbf-41bb-b0a1-f684d07536d8"),
                             DifficultyLevelId = new Guid("f5ad4a31-a240-41bd-bffd-245103b88d0f"),
                             FactorId = new Guid("33e07ded-1bd4-4e9a-8076-f071ea1a5269"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -515,7 +583,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("aabc3740-1937-4514-b2fa-c98bf4df42e8"),
+                            Id = new Guid("31712da9-288f-4a6d-9c08-f446c130986c"),
                             DifficultyLevelId = new Guid("c15c008f-f7f4-4dae-95bb-02a32bb2b8b1"),
                             FactorId = new Guid("33e07ded-1bd4-4e9a-8076-f071ea1a5269"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -523,7 +591,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0e3963a1-8c48-4e89-83c0-8083346205e5"),
+                            Id = new Guid("99555d3a-6b6d-42be-afe2-17ffae0547c4"),
                             DifficultyLevelId = new Guid("b3b0177d-baf9-4ad6-b1c1-002e1b776a10"),
                             FactorId = new Guid("ea5a8d97-0940-4463-b07a-d6a10b6f0d08"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -531,7 +599,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ec168468-b978-4ddf-bcf4-b03485f27d2a"),
+                            Id = new Guid("393ef14d-5612-4b29-979c-29b0e273bd1e"),
                             DifficultyLevelId = new Guid("0c5fd362-b14d-4186-bef9-979ed21b9575"),
                             FactorId = new Guid("ea5a8d97-0940-4463-b07a-d6a10b6f0d08"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -539,7 +607,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d8832943-79a3-4a79-abeb-028ae9ed7d31"),
+                            Id = new Guid("fb482a34-c3cf-40c9-9e34-72eac6668c4f"),
                             DifficultyLevelId = new Guid("fc6ea190-24a2-42d0-b2aa-783758efa82d"),
                             FactorId = new Guid("ea5a8d97-0940-4463-b07a-d6a10b6f0d08"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -547,7 +615,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("52bbf9ea-b961-4261-8a09-49a959e3d953"),
+                            Id = new Guid("fbe342c7-9a7b-48d4-86bf-2cc9b32f3ac7"),
                             DifficultyLevelId = new Guid("b29fa523-bd56-48be-9adc-cbd23f0af646"),
                             FactorId = new Guid("ea5a8d97-0940-4463-b07a-d6a10b6f0d08"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -555,7 +623,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e14a55b5-dc98-4666-9462-c27b1945f555"),
+                            Id = new Guid("4d0492d2-12c3-4adf-b35e-c3ba949092af"),
                             DifficultyLevelId = new Guid("1aa2ef63-41db-4f3d-aacd-e38c7e4639ac"),
                             FactorId = new Guid("ea5a8d97-0940-4463-b07a-d6a10b6f0d08"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -563,7 +631,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("79619875-8c3d-44fa-a5c7-4c8c47c49407"),
+                            Id = new Guid("63181747-3e61-4cdf-bd83-438f44f953c9"),
                             DifficultyLevelId = new Guid("f5ad4a31-a240-41bd-bffd-245103b88d0f"),
                             FactorId = new Guid("ea5a8d97-0940-4463-b07a-d6a10b6f0d08"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -571,7 +639,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("eab78f44-00af-4070-82a5-b2bc52772d97"),
+                            Id = new Guid("43cced97-4cb6-413b-ad18-9241389d63b3"),
                             DifficultyLevelId = new Guid("c15c008f-f7f4-4dae-95bb-02a32bb2b8b1"),
                             FactorId = new Guid("ea5a8d97-0940-4463-b07a-d6a10b6f0d08"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -579,7 +647,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2f4c051b-b360-4c27-bb86-0b220c351453"),
+                            Id = new Guid("5b20f57c-c7f0-4d2e-aa98-e8a250cd1e8f"),
                             DifficultyLevelId = new Guid("b3b0177d-baf9-4ad6-b1c1-002e1b776a10"),
                             FactorId = new Guid("fe85d6ab-ade6-412f-b2a6-7ca97f4f1da4"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -587,7 +655,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7890b077-9e00-4b85-89aa-cee38565cb39"),
+                            Id = new Guid("8e90a730-a896-41d2-96d9-08c1d47e74c0"),
                             DifficultyLevelId = new Guid("0c5fd362-b14d-4186-bef9-979ed21b9575"),
                             FactorId = new Guid("fe85d6ab-ade6-412f-b2a6-7ca97f4f1da4"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -595,7 +663,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b3be8e21-aa07-4773-b65f-1980c0dc3e03"),
+                            Id = new Guid("d86fc321-ee82-4db9-b664-db9730395841"),
                             DifficultyLevelId = new Guid("fc6ea190-24a2-42d0-b2aa-783758efa82d"),
                             FactorId = new Guid("fe85d6ab-ade6-412f-b2a6-7ca97f4f1da4"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -603,7 +671,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("23100109-5b23-4e55-b3b0-451bece79a31"),
+                            Id = new Guid("2474fdf5-1c38-4d46-a2e4-6fef3655d533"),
                             DifficultyLevelId = new Guid("b29fa523-bd56-48be-9adc-cbd23f0af646"),
                             FactorId = new Guid("fe85d6ab-ade6-412f-b2a6-7ca97f4f1da4"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -611,7 +679,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("51be920e-b076-4b08-ab71-8b60476a2169"),
+                            Id = new Guid("9518e8b5-c821-4b75-b7dc-8aee1b39ed76"),
                             DifficultyLevelId = new Guid("1aa2ef63-41db-4f3d-aacd-e38c7e4639ac"),
                             FactorId = new Guid("fe85d6ab-ade6-412f-b2a6-7ca97f4f1da4"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -619,7 +687,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c55ceaf7-31de-49e0-9a17-74d5b3cebb1a"),
+                            Id = new Guid("48ef82ae-e8cc-4eb5-8aaf-8283296e1d00"),
                             DifficultyLevelId = new Guid("f5ad4a31-a240-41bd-bffd-245103b88d0f"),
                             FactorId = new Guid("fe85d6ab-ade6-412f-b2a6-7ca97f4f1da4"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -627,7 +695,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0f57ef6d-7068-4e83-b2c4-ff456224bd67"),
+                            Id = new Guid("bd4f0ee5-be9f-4298-a043-8424dd6d62d3"),
                             DifficultyLevelId = new Guid("c15c008f-f7f4-4dae-95bb-02a32bb2b8b1"),
                             FactorId = new Guid("fe85d6ab-ade6-412f-b2a6-7ca97f4f1da4"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -635,7 +703,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("74a91eda-82c6-4cbc-9941-05d33fe8bd24"),
+                            Id = new Guid("a9596334-4666-4b29-a6bd-4d622ae5397d"),
                             DifficultyLevelId = new Guid("b3b0177d-baf9-4ad6-b1c1-002e1b776a10"),
                             FactorId = new Guid("4feab03a-7415-4c72-8b3f-6901e014c25e"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -643,7 +711,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("dade7ff2-04b8-45bb-91f4-3aba16352918"),
+                            Id = new Guid("7bb09544-59ff-4733-a023-bf5d952e01ee"),
                             DifficultyLevelId = new Guid("0c5fd362-b14d-4186-bef9-979ed21b9575"),
                             FactorId = new Guid("4feab03a-7415-4c72-8b3f-6901e014c25e"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -651,7 +719,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9398626d-741f-4607-8bfa-47822727cf36"),
+                            Id = new Guid("0ae2eaa5-e327-4425-95f1-822ae8ea01a6"),
                             DifficultyLevelId = new Guid("fc6ea190-24a2-42d0-b2aa-783758efa82d"),
                             FactorId = new Guid("4feab03a-7415-4c72-8b3f-6901e014c25e"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -659,7 +727,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2e3cc07d-be0c-4976-a95b-7aaba860bae4"),
+                            Id = new Guid("9107c797-fa19-48e0-ae64-300c78b62b84"),
                             DifficultyLevelId = new Guid("b29fa523-bd56-48be-9adc-cbd23f0af646"),
                             FactorId = new Guid("4feab03a-7415-4c72-8b3f-6901e014c25e"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -667,7 +735,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("59bd520e-d8cd-4cf7-b69e-34cf756c9776"),
+                            Id = new Guid("3013382f-daa7-4333-a4b5-e09a92158212"),
                             DifficultyLevelId = new Guid("1aa2ef63-41db-4f3d-aacd-e38c7e4639ac"),
                             FactorId = new Guid("4feab03a-7415-4c72-8b3f-6901e014c25e"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -675,7 +743,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("69062e8b-3553-4b0e-8f77-f49c32f33a5d"),
+                            Id = new Guid("ae79da70-8847-4539-abb8-5cdf7d94772f"),
                             DifficultyLevelId = new Guid("f5ad4a31-a240-41bd-bffd-245103b88d0f"),
                             FactorId = new Guid("4feab03a-7415-4c72-8b3f-6901e014c25e"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -683,7 +751,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("16aab2a9-9185-49ff-af27-8c07d9973189"),
+                            Id = new Guid("ff9377b2-17ac-4fbd-acbb-68b5aa4ea73a"),
                             DifficultyLevelId = new Guid("c15c008f-f7f4-4dae-95bb-02a32bb2b8b1"),
                             FactorId = new Guid("4feab03a-7415-4c72-8b3f-6901e014c25e"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -691,7 +759,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("cda37352-0b28-4626-8e61-e9722449619a"),
+                            Id = new Guid("7c53bf48-3633-4727-84f3-d16765c20dce"),
                             DifficultyLevelId = new Guid("b3b0177d-baf9-4ad6-b1c1-002e1b776a10"),
                             FactorId = new Guid("9b7d2f14-9ec0-414c-806b-d5e607664031"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -699,7 +767,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("51abbe58-6f21-4486-9f34-7b09ca81acdd"),
+                            Id = new Guid("2f46aca0-6752-4352-9b57-2fbdacb7d576"),
                             DifficultyLevelId = new Guid("0c5fd362-b14d-4186-bef9-979ed21b9575"),
                             FactorId = new Guid("9b7d2f14-9ec0-414c-806b-d5e607664031"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -707,7 +775,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ad41ef58-9411-4f70-b92f-f3445943a505"),
+                            Id = new Guid("58b98824-d6af-4fea-92fe-3292cc18a7b1"),
                             DifficultyLevelId = new Guid("fc6ea190-24a2-42d0-b2aa-783758efa82d"),
                             FactorId = new Guid("9b7d2f14-9ec0-414c-806b-d5e607664031"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -715,7 +783,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3d00689d-c780-487d-872e-aba20588251d"),
+                            Id = new Guid("5d4848bd-c214-4159-b279-cf2eebee3fce"),
                             DifficultyLevelId = new Guid("b29fa523-bd56-48be-9adc-cbd23f0af646"),
                             FactorId = new Guid("9b7d2f14-9ec0-414c-806b-d5e607664031"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -723,7 +791,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9ee2abc1-a2be-4d4d-8fb8-bc8f61e13629"),
+                            Id = new Guid("7908d221-07c3-4716-bbf6-6539503aec71"),
                             DifficultyLevelId = new Guid("1aa2ef63-41db-4f3d-aacd-e38c7e4639ac"),
                             FactorId = new Guid("9b7d2f14-9ec0-414c-806b-d5e607664031"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -731,7 +799,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d7762f21-783d-4730-89ac-24ffcc9c4f77"),
+                            Id = new Guid("4a070749-70e4-4099-867c-0ce887e974b2"),
                             DifficultyLevelId = new Guid("f5ad4a31-a240-41bd-bffd-245103b88d0f"),
                             FactorId = new Guid("9b7d2f14-9ec0-414c-806b-d5e607664031"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -739,7 +807,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1fae9c5d-f8ef-4b46-ada2-1fc907e76b65"),
+                            Id = new Guid("5fda3d4e-6657-4cb8-81bd-22c9b60f5a32"),
                             DifficultyLevelId = new Guid("c15c008f-f7f4-4dae-95bb-02a32bb2b8b1"),
                             FactorId = new Guid("9b7d2f14-9ec0-414c-806b-d5e607664031"),
                             FactorTypeId = new Guid("b03771e5-488a-449f-b886-19c581b63cde"),
@@ -747,7 +815,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b92839bc-85ca-4e77-a56b-2c520ab2b5b4"),
+                            Id = new Guid("05f60293-444f-44c0-9ed4-6d481f565f22"),
                             DifficultyLevelId = new Guid("0c5fd362-b14d-4186-bef9-979ed21b9575"),
                             FactorId = new Guid("15140cfd-eacc-41f3-aae5-718980da88b9"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -755,7 +823,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1a0934c7-cf96-47f2-b7d0-69d91d95569b"),
+                            Id = new Guid("c8003f13-5dad-401a-a001-bdf333f506ca"),
                             DifficultyLevelId = new Guid("fc6ea190-24a2-42d0-b2aa-783758efa82d"),
                             FactorId = new Guid("15140cfd-eacc-41f3-aae5-718980da88b9"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -763,7 +831,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("22c4de16-15b5-4ead-82ab-0ee96b9bf69d"),
+                            Id = new Guid("80ba2fb4-b9f1-4888-8469-8c4dbdc9ac33"),
                             DifficultyLevelId = new Guid("b29fa523-bd56-48be-9adc-cbd23f0af646"),
                             FactorId = new Guid("15140cfd-eacc-41f3-aae5-718980da88b9"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -771,7 +839,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9c8651bb-9852-4900-9b33-8d70bccd4f71"),
+                            Id = new Guid("cb749915-4840-4ec7-8973-6587fd5f6552"),
                             DifficultyLevelId = new Guid("1aa2ef63-41db-4f3d-aacd-e38c7e4639ac"),
                             FactorId = new Guid("15140cfd-eacc-41f3-aae5-718980da88b9"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -779,7 +847,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("85e0b09d-82a3-4dfe-af59-a7504619dc04"),
+                            Id = new Guid("d6d54404-f706-4535-af13-82bd6c0c3680"),
                             DifficultyLevelId = new Guid("f5ad4a31-a240-41bd-bffd-245103b88d0f"),
                             FactorId = new Guid("15140cfd-eacc-41f3-aae5-718980da88b9"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -787,7 +855,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1efa35ef-6c6a-4d5e-a19a-0a2310ed621a"),
+                            Id = new Guid("f73396af-6176-468d-abf3-d16555c63c3c"),
                             DifficultyLevelId = new Guid("c15c008f-f7f4-4dae-95bb-02a32bb2b8b1"),
                             FactorId = new Guid("15140cfd-eacc-41f3-aae5-718980da88b9"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -795,7 +863,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("011e89ff-b436-4027-a25a-867a0159ee5a"),
+                            Id = new Guid("80835d99-cec6-454c-b490-52e484f094cb"),
                             DifficultyLevelId = new Guid("0c5fd362-b14d-4186-bef9-979ed21b9575"),
                             FactorId = new Guid("b4a2b0b2-35c4-41d4-8ca7-1d2ebd1440e9"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -803,7 +871,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f82a6440-357e-47b7-92a0-97d09a1966da"),
+                            Id = new Guid("5e1378ea-d04f-47af-a161-b3aa5232c713"),
                             DifficultyLevelId = new Guid("fc6ea190-24a2-42d0-b2aa-783758efa82d"),
                             FactorId = new Guid("b4a2b0b2-35c4-41d4-8ca7-1d2ebd1440e9"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -811,7 +879,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("da02c0d4-4fc6-4cd8-9a6d-c94e8be95954"),
+                            Id = new Guid("cf453f03-5479-4396-ae8f-8d8f7bfa9283"),
                             DifficultyLevelId = new Guid("b29fa523-bd56-48be-9adc-cbd23f0af646"),
                             FactorId = new Guid("b4a2b0b2-35c4-41d4-8ca7-1d2ebd1440e9"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -819,7 +887,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c0252b34-9b51-4c71-8606-300c71c49fa5"),
+                            Id = new Guid("0f4e8272-fe20-4665-b1c7-40358219826d"),
                             DifficultyLevelId = new Guid("1aa2ef63-41db-4f3d-aacd-e38c7e4639ac"),
                             FactorId = new Guid("b4a2b0b2-35c4-41d4-8ca7-1d2ebd1440e9"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -827,7 +895,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("86d97478-ec05-4bde-8b1f-e6b95bc09a67"),
+                            Id = new Guid("218cc659-82f0-4843-94f0-702a5dfaeee2"),
                             DifficultyLevelId = new Guid("f5ad4a31-a240-41bd-bffd-245103b88d0f"),
                             FactorId = new Guid("b4a2b0b2-35c4-41d4-8ca7-1d2ebd1440e9"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -835,7 +903,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a1e5d124-36ea-48a2-b31a-5ab6834b6cf3"),
+                            Id = new Guid("26bb242d-fe62-4865-9b7e-74ecd8c85eb1"),
                             DifficultyLevelId = new Guid("c15c008f-f7f4-4dae-95bb-02a32bb2b8b1"),
                             FactorId = new Guid("b4a2b0b2-35c4-41d4-8ca7-1d2ebd1440e9"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -843,7 +911,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("66e20008-20e4-473f-bff3-39b867529bb1"),
+                            Id = new Guid("f1bdbe86-1a83-4d68-99d6-bc5a2abcdc9a"),
                             DifficultyLevelId = new Guid("0c5fd362-b14d-4186-bef9-979ed21b9575"),
                             FactorId = new Guid("186476d2-772b-4eb1-b140-b0c1a238ae11"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -851,7 +919,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f5a23ad8-1f6a-4509-b6eb-264f5a23a76a"),
+                            Id = new Guid("7f72fb34-c1ea-4df6-9777-09cc50f20737"),
                             DifficultyLevelId = new Guid("fc6ea190-24a2-42d0-b2aa-783758efa82d"),
                             FactorId = new Guid("186476d2-772b-4eb1-b140-b0c1a238ae11"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -859,7 +927,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("45a4a0f3-8666-44ec-aebe-e97c75365dad"),
+                            Id = new Guid("929ee2d0-b285-4c30-bf89-e371058ea6a8"),
                             DifficultyLevelId = new Guid("b29fa523-bd56-48be-9adc-cbd23f0af646"),
                             FactorId = new Guid("186476d2-772b-4eb1-b140-b0c1a238ae11"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -867,7 +935,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ab7f6072-2447-4951-a5dd-11041f880df3"),
+                            Id = new Guid("a1b726ed-b26e-4f23-8132-eee2438f2969"),
                             DifficultyLevelId = new Guid("1aa2ef63-41db-4f3d-aacd-e38c7e4639ac"),
                             FactorId = new Guid("186476d2-772b-4eb1-b140-b0c1a238ae11"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -875,7 +943,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d8e96327-76c7-49af-9199-fe82c37c5cbd"),
+                            Id = new Guid("d6e01529-603a-40c8-95e8-33548f52de0f"),
                             DifficultyLevelId = new Guid("f5ad4a31-a240-41bd-bffd-245103b88d0f"),
                             FactorId = new Guid("186476d2-772b-4eb1-b140-b0c1a238ae11"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -883,7 +951,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("61554039-7c2e-4641-94a1-5eaff5c53c33"),
+                            Id = new Guid("44666184-1e47-4bcd-bbe3-60bfbfec5c9e"),
                             DifficultyLevelId = new Guid("c15c008f-f7f4-4dae-95bb-02a32bb2b8b1"),
                             FactorId = new Guid("186476d2-772b-4eb1-b140-b0c1a238ae11"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -891,7 +959,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c880ff2f-c9db-44c4-b626-75b445f090b9"),
+                            Id = new Guid("c3dc44c9-1fbe-4630-bf9c-1f809a0519b9"),
                             DifficultyLevelId = new Guid("0c5fd362-b14d-4186-bef9-979ed21b9575"),
                             FactorId = new Guid("74b32655-e330-4e74-a1a2-e1e92023f676"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -899,7 +967,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("00ed3585-d320-4252-9d9f-326ef932aab1"),
+                            Id = new Guid("2fef6711-824d-4a7e-bc76-df7951b3d211"),
                             DifficultyLevelId = new Guid("fc6ea190-24a2-42d0-b2aa-783758efa82d"),
                             FactorId = new Guid("74b32655-e330-4e74-a1a2-e1e92023f676"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -907,7 +975,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d36c5e35-c471-4288-b821-13a7a65ddc77"),
+                            Id = new Guid("5602f52e-029d-41ca-84a4-240f70edf8c5"),
                             DifficultyLevelId = new Guid("b29fa523-bd56-48be-9adc-cbd23f0af646"),
                             FactorId = new Guid("74b32655-e330-4e74-a1a2-e1e92023f676"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -915,7 +983,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5811d3fb-c83d-4477-b1fd-11d4777032c2"),
+                            Id = new Guid("d8f6e657-47d8-45eb-8cfa-50ef7f3b9094"),
                             DifficultyLevelId = new Guid("1aa2ef63-41db-4f3d-aacd-e38c7e4639ac"),
                             FactorId = new Guid("74b32655-e330-4e74-a1a2-e1e92023f676"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -923,7 +991,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("87d5322d-59a3-4bdf-a807-70b02fea9a72"),
+                            Id = new Guid("e77e1650-444e-4363-a3f2-1cb04ccb7b83"),
                             DifficultyLevelId = new Guid("f5ad4a31-a240-41bd-bffd-245103b88d0f"),
                             FactorId = new Guid("74b32655-e330-4e74-a1a2-e1e92023f676"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -931,7 +999,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("dc7112c5-e23e-494d-be53-f22f2e6ebecf"),
+                            Id = new Guid("50e9950f-e449-425b-b2c4-00416bfd7002"),
                             DifficultyLevelId = new Guid("c15c008f-f7f4-4dae-95bb-02a32bb2b8b1"),
                             FactorId = new Guid("74b32655-e330-4e74-a1a2-e1e92023f676"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -939,7 +1007,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("579c23a8-ebd6-4b50-8c13-9d9376df4ef3"),
+                            Id = new Guid("dba6f127-5c75-4e38-8546-34e42089f6dd"),
                             DifficultyLevelId = new Guid("0c5fd362-b14d-4186-bef9-979ed21b9575"),
                             FactorId = new Guid("c69edb03-4fb6-4071-bcc5-f158808c69ee"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -947,7 +1015,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f917d1ad-68db-4a28-b05d-5d8edcc53a1c"),
+                            Id = new Guid("158ebafb-d831-408c-a7db-989c3674a5d7"),
                             DifficultyLevelId = new Guid("fc6ea190-24a2-42d0-b2aa-783758efa82d"),
                             FactorId = new Guid("c69edb03-4fb6-4071-bcc5-f158808c69ee"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -955,7 +1023,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("ac412ebc-2947-4e95-9836-4ee842224c4d"),
+                            Id = new Guid("101f9ac2-462a-4e73-bff3-d2de9bd39c26"),
                             DifficultyLevelId = new Guid("b29fa523-bd56-48be-9adc-cbd23f0af646"),
                             FactorId = new Guid("c69edb03-4fb6-4071-bcc5-f158808c69ee"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -963,7 +1031,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("530dfdea-5921-4428-8380-3b6731220a23"),
+                            Id = new Guid("a0229597-864b-49e7-ab48-e8bacd811ebf"),
                             DifficultyLevelId = new Guid("1aa2ef63-41db-4f3d-aacd-e38c7e4639ac"),
                             FactorId = new Guid("c69edb03-4fb6-4071-bcc5-f158808c69ee"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -971,7 +1039,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("cf2c5ac2-94d7-427c-af2b-0e8305d841bb"),
+                            Id = new Guid("b27a1cf4-8043-4a26-a149-4bbac0efa9d7"),
                             DifficultyLevelId = new Guid("f5ad4a31-a240-41bd-bffd-245103b88d0f"),
                             FactorId = new Guid("c69edb03-4fb6-4071-bcc5-f158808c69ee"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -979,7 +1047,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("39152f1c-6366-43ca-90cb-58d1e5f6b59a"),
+                            Id = new Guid("c339e10e-0121-49b7-93e6-2a9e29a99b9b"),
                             DifficultyLevelId = new Guid("c15c008f-f7f4-4dae-95bb-02a32bb2b8b1"),
                             FactorId = new Guid("c69edb03-4fb6-4071-bcc5-f158808c69ee"),
                             FactorTypeId = new Guid("eb8f98d6-1c46-4721-9ad6-c464b9029905"),
@@ -987,7 +1055,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("241b1b35-3847-4246-80b0-e300c9f6315f"),
+                            Id = new Guid("79e53275-6e20-41a9-ae04-1f7cec1ec9e1"),
                             DifficultyLevelId = new Guid("fc6ea190-24a2-42d0-b2aa-783758efa82d"),
                             FactorId = new Guid("e777b5bf-559d-4194-a711-89ca4ca4a212"),
                             FactorTypeId = new Guid("cdd64d87-bb9a-4c17-b809-05c4454e6998"),
@@ -995,7 +1063,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d2f9d59f-af3b-4d33-b936-ac8d83b9f0af"),
+                            Id = new Guid("ad714742-d8bf-4a86-839e-9fd98822ba87"),
                             DifficultyLevelId = new Guid("5540d80e-8fae-4afb-a475-b49c1a9c4c2e"),
                             FactorId = new Guid("e777b5bf-559d-4194-a711-89ca4ca4a212"),
                             FactorTypeId = new Guid("cdd64d87-bb9a-4c17-b809-05c4454e6998"),
@@ -1003,7 +1071,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c9d3422b-2b30-4a2c-880b-1bd9b4e2da7c"),
+                            Id = new Guid("98ef60ad-14da-422a-b24c-9f3eb6d58648"),
                             DifficultyLevelId = new Guid("1aa2ef63-41db-4f3d-aacd-e38c7e4639ac"),
                             FactorId = new Guid("e777b5bf-559d-4194-a711-89ca4ca4a212"),
                             FactorTypeId = new Guid("cdd64d87-bb9a-4c17-b809-05c4454e6998"),
@@ -1011,7 +1079,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("898a609b-41d4-4184-bdcd-17a06904dd63"),
+                            Id = new Guid("226f4f9f-8563-437d-859b-b0bdf72e74d1"),
                             DifficultyLevelId = new Guid("fc6ea190-24a2-42d0-b2aa-783758efa82d"),
                             FactorId = new Guid("d7c7beea-3351-482b-82e1-8df4573395b9"),
                             FactorTypeId = new Guid("cdd64d87-bb9a-4c17-b809-05c4454e6998"),
@@ -1019,7 +1087,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f2b33783-dddc-4338-8bd8-ba4a5519eaf0"),
+                            Id = new Guid("61df3738-c7c6-4dd5-95e3-aac57b78062a"),
                             DifficultyLevelId = new Guid("5540d80e-8fae-4afb-a475-b49c1a9c4c2e"),
                             FactorId = new Guid("d7c7beea-3351-482b-82e1-8df4573395b9"),
                             FactorTypeId = new Guid("cdd64d87-bb9a-4c17-b809-05c4454e6998"),
@@ -1027,7 +1095,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e115074a-9a45-4544-8ed8-03207d8f6f42"),
+                            Id = new Guid("bdeb4acc-667c-4ee9-a9db-8d20fd1d68eb"),
                             DifficultyLevelId = new Guid("1aa2ef63-41db-4f3d-aacd-e38c7e4639ac"),
                             FactorId = new Guid("d7c7beea-3351-482b-82e1-8df4573395b9"),
                             FactorTypeId = new Guid("cdd64d87-bb9a-4c17-b809-05c4454e6998"),
@@ -1035,7 +1103,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("baa096bf-ab14-49f7-a97d-ea243410beae"),
+                            Id = new Guid("ff79e6d5-606d-4d9f-a046-0157ff60de8c"),
                             DifficultyLevelId = new Guid("fc6ea190-24a2-42d0-b2aa-783758efa82d"),
                             FactorId = new Guid("73a3a716-f447-4057-99ca-1500d438ba58"),
                             FactorTypeId = new Guid("63715754-cdfb-4320-9c17-72648673cb4b"),
@@ -1043,7 +1111,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("55b4aa9e-ba88-4843-ab2d-f9cafc88f5d1"),
+                            Id = new Guid("d244f6c3-2695-4a18-9ecf-7aeb9e3ad1f3"),
                             DifficultyLevelId = new Guid("5540d80e-8fae-4afb-a475-b49c1a9c4c2e"),
                             FactorId = new Guid("73a3a716-f447-4057-99ca-1500d438ba58"),
                             FactorTypeId = new Guid("63715754-cdfb-4320-9c17-72648673cb4b"),
@@ -1051,7 +1119,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("71432403-3812-41fe-ba15-567b1e9cf13e"),
+                            Id = new Guid("47eab601-4c65-405a-91b5-21bcc1a5acec"),
                             DifficultyLevelId = new Guid("1aa2ef63-41db-4f3d-aacd-e38c7e4639ac"),
                             FactorId = new Guid("73a3a716-f447-4057-99ca-1500d438ba58"),
                             FactorTypeId = new Guid("63715754-cdfb-4320-9c17-72648673cb4b"),
@@ -1059,7 +1127,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b00d8a4f-a877-4851-a568-084be27e932d"),
+                            Id = new Guid("08386350-d2bb-48d8-894a-9f8f25fe00de"),
                             DifficultyLevelId = new Guid("fc6ea190-24a2-42d0-b2aa-783758efa82d"),
                             FactorId = new Guid("31f2f6d6-a5fa-4da3-adcf-0a5cc237eb95"),
                             FactorTypeId = new Guid("63715754-cdfb-4320-9c17-72648673cb4b"),
@@ -1067,7 +1135,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("96d67506-c906-4209-8914-abf3c70b5ed5"),
+                            Id = new Guid("089ffa0a-9691-4038-89f2-d0febb22058a"),
                             DifficultyLevelId = new Guid("5540d80e-8fae-4afb-a475-b49c1a9c4c2e"),
                             FactorId = new Guid("31f2f6d6-a5fa-4da3-adcf-0a5cc237eb95"),
                             FactorTypeId = new Guid("63715754-cdfb-4320-9c17-72648673cb4b"),
@@ -1075,7 +1143,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2da508e5-ea4a-48cf-b678-785d8f5282ea"),
+                            Id = new Guid("c9e269e2-9faf-4e99-8066-08ee3c8b01d7"),
                             DifficultyLevelId = new Guid("1aa2ef63-41db-4f3d-aacd-e38c7e4639ac"),
                             FactorId = new Guid("31f2f6d6-a5fa-4da3-adcf-0a5cc237eb95"),
                             FactorTypeId = new Guid("63715754-cdfb-4320-9c17-72648673cb4b"),
@@ -1083,7 +1151,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("03a491c3-e66d-411a-90de-25b611297f2c"),
+                            Id = new Guid("df789397-c69c-4305-b33c-c49af5f8fa3a"),
                             DifficultyLevelId = new Guid("fc6ea190-24a2-42d0-b2aa-783758efa82d"),
                             FactorId = new Guid("7a540a8b-0198-40d8-9185-2e02ba5eb1ab"),
                             FactorTypeId = new Guid("63715754-cdfb-4320-9c17-72648673cb4b"),
@@ -1091,7 +1159,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("cf4b205e-2b33-4a56-8cef-73f3135a8a91"),
+                            Id = new Guid("66744342-2820-4fbf-9f97-917f3099647b"),
                             DifficultyLevelId = new Guid("5540d80e-8fae-4afb-a475-b49c1a9c4c2e"),
                             FactorId = new Guid("7a540a8b-0198-40d8-9185-2e02ba5eb1ab"),
                             FactorTypeId = new Guid("63715754-cdfb-4320-9c17-72648673cb4b"),
@@ -1099,7 +1167,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         },
                         new
                         {
-                            Id = new Guid("25601fec-bb22-4d24-a254-fb4c7eeded1b"),
+                            Id = new Guid("cc0ca9a0-e14d-468a-8ca1-a58f23aaeda3"),
                             DifficultyLevelId = new Guid("1aa2ef63-41db-4f3d-aacd-e38c7e4639ac"),
                             FactorId = new Guid("7a540a8b-0198-40d8-9185-2e02ba5eb1ab"),
                             FactorTypeId = new Guid("63715754-cdfb-4320-9c17-72648673cb4b"),
@@ -1267,151 +1335,151 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c83b88ea-8f9f-4cbf-8571-8ab96cac7f40"),
+                            Id = new Guid("794b2ac4-3310-4264-a367-d1e665a55458"),
                             Name = "ABAP (SAP)",
                             SLOC = 28
                         },
                         new
                         {
-                            Id = new Guid("f99c3260-307d-4853-b54e-97d682b6b76a"),
+                            Id = new Guid("c26246c3-caad-4d34-a42a-f6517cf45ef6"),
                             Name = "ASP",
                             SLOC = 51
                         },
                         new
                         {
-                            Id = new Guid("6e09115c-3462-4a80-aa48-2fab7c2c2460"),
+                            Id = new Guid("e3810495-b6ab-42af-87a6-9ba5f7393cd5"),
                             Name = "Assembler",
                             SLOC = 119
                         },
                         new
                         {
-                            Id = new Guid("1e9241d5-be6a-4907-a494-8267098bfa79"),
+                            Id = new Guid("a879c89b-11e3-4ae1-8b2a-eae6a126557c"),
                             Name = "Brio +",
                             SLOC = 14
                         },
                         new
                         {
-                            Id = new Guid("20a2f1a9-2acd-49c3-99ec-c0861c3b505a"),
+                            Id = new Guid("491c0205-a64e-46d1-8be0-25fabe8b6ae6"),
                             Name = "C",
                             SLOC = 97
                         },
                         new
                         {
-                            Id = new Guid("14b43065-db4a-42f0-9829-db0a3fcb654e"),
+                            Id = new Guid("f3cd8a9f-dc66-46a4-b41b-f57c1d82a1ce"),
                             Name = "C++",
                             SLOC = 50
                         },
                         new
                         {
-                            Id = new Guid("e11e7c0d-cf96-42ac-98ae-0a0b97cb409c"),
+                            Id = new Guid("aef38b0a-456c-455b-acca-fe7600ec8de8"),
                             Name = "C#",
                             SLOC = 54
                         },
                         new
                         {
-                            Id = new Guid("9bd32031-7b66-4013-8d47-01fa8ae88cba"),
+                            Id = new Guid("4e943d03-e4be-4ed2-b492-421b6c7b1c92"),
                             Name = "COBOL",
                             SLOC = 61
                         },
                         new
                         {
-                            Id = new Guid("4fc6d47f-b3be-41e6-98dd-fe4ac07fd9ea"),
+                            Id = new Guid("32c19d74-6993-4d0e-8647-cdf75541e728"),
                             Name = "Cognos Impromptu Scripts +",
                             SLOC = 47
                         },
                         new
                         {
-                            Id = new Guid("d133b1e5-e6bc-4381-991c-508d69dd79a4"),
+                            Id = new Guid("00240fb2-4f29-431f-93b9-adfa31ceaaca"),
                             Name = "Cross System Products (CSP) +",
                             SLOC = 20
                         },
                         new
                         {
-                            Id = new Guid("b2a445af-e803-4662-92f3-75e59b39a2a9"),
+                            Id = new Guid("b8c17601-7672-4b36-b4d5-975573edcaba"),
                             Name = "Cool:Gen/IEF",
                             SLOC = 32
                         },
                         new
                         {
-                            Id = new Guid("f88bcd6b-a6fe-4894-a616-640d8b9bf221"),
+                            Id = new Guid("676bd39b-61fa-4718-af90-e2378851acdd"),
                             Name = "Datastage",
                             SLOC = 71
                         },
                         new
                         {
-                            Id = new Guid("2ddf1d2e-06cb-415f-8a77-1e470646980e"),
+                            Id = new Guid("10e69836-68a8-41cb-96c8-4ca6bc1190d1"),
                             Name = "Excel",
                             SLOC = 209
                         },
                         new
                         {
-                            Id = new Guid("8ed91646-4b2b-44cd-ae59-6b89a002f8c0"),
+                            Id = new Guid("736c315e-ec2b-4abf-8c4b-7f202939dced"),
                             Name = "Focus",
                             SLOC = 43
                         },
                         new
                         {
-                            Id = new Guid("47a0c764-c554-4db9-8b94-484af14f3cf7"),
+                            Id = new Guid("c77c165f-3c3a-4e56-848f-0afe15af2315"),
                             Name = "FoxPro",
                             SLOC = 36
                         },
                         new
                         {
-                            Id = new Guid("fafd2d6d-e5e1-4639-a266-73232a7a6db2"),
+                            Id = new Guid("22a1ad68-c278-4236-861b-0a256ca2a0b3"),
                             Name = "HTML",
                             SLOC = 34
                         },
                         new
                         {
-                            Id = new Guid("67280c7b-08bf-4a9b-9c1f-af5c36f6a0e0"),
+                            Id = new Guid("02f4ccdb-9fdb-4c65-87a8-3567d84a1781"),
                             Name = "J2EE",
                             SLOC = 46
                         },
                         new
                         {
-                            Id = new Guid("78e4eb50-3e6b-4417-953d-df5271f44295"),
+                            Id = new Guid("2229a77c-bdb4-4737-aaab-a5b456f74126"),
                             Name = "Java",
                             SLOC = 53
                         },
                         new
                         {
-                            Id = new Guid("9ef66b34-0332-4509-b480-e74b0c1447be"),
+                            Id = new Guid("ee1f313e-9603-4ebe-a3bd-e0da9c639a7d"),
                             Name = "JavaScript",
                             SLOC = 47
                         },
                         new
                         {
-                            Id = new Guid("bf186236-931a-4e09-9630-6896ecb9a8f6"),
+                            Id = new Guid("98254d9f-f5ea-46f5-9278-fc77c8ff2b5a"),
                             Name = "JCL",
                             SLOC = 62
                         },
                         new
                         {
-                            Id = new Guid("243ce039-e727-402f-b68f-9e1cc15f4d6a"),
+                            Id = new Guid("8a889366-5efc-4bd4-be67-1373938692eb"),
                             Name = "LINC II",
                             SLOC = 29
                         },
                         new
                         {
-                            Id = new Guid("fd846b36-960c-4901-a3b7-eff6e126f985"),
+                            Id = new Guid("9f9752c2-18db-4b97-9d61-752b20aabb0c"),
                             Name = "Lotus Notes",
                             SLOC = 23
                         },
                         new
                         {
-                            Id = new Guid("84e88afe-e621-440e-b7f3-2f7745cd30c2"),
+                            Id = new Guid("d1627cf2-b9ad-46ac-9e84-93438f4ed0d1"),
                             Name = "Natural",
                             SLOC = 40
                         },
                         new
                         {
-                            Id = new Guid("a8cfd087-2211-4fc8-9053-4e8e0999e0a7"),
+                            Id = new Guid("34cb9cbc-564c-4494-bfda-941473f35341"),
                             Name = ".NET",
                             SLOC = 57
                         },
                         new
                         {
-                            Id = new Guid("eebfc4b7-8374-404b-98f0-653b491b877e"),
+                            Id = new Guid("c16181c5-3493-4223-8267-9d4d71b50eed"),
                             Name = "Oracle",
                             SLOC = 37
                         });
@@ -1467,7 +1535,15 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationStatus.ApplicationStatus", "Status")
+                        .WithMany("Applications")
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Creator");
+
+                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToEvaluator.ApplicationToEvaluator", b =>
@@ -1489,7 +1565,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     b.Navigation("Evaluator");
                 });
 
-            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactors.ApplicationToFactors", b =>
+            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactor.ApplicationToFactor", b =>
                 {
                     b.HasOne("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application.Application", "Application")
                         .WithMany("Factors")
@@ -1564,7 +1640,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
 
             modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.EvaluatorToEvaluatedFactor.EvaluatorToEvaluatedFactor", b =>
                 {
-                    b.HasOne("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactors.ApplicationToFactors", "EvaluatedFactor")
+                    b.HasOne("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactor.ApplicationToFactor", "EvaluatedFactor")
                         .WithMany("EvaluatorToEvaluatedFactor")
                         .HasForeignKey("EvaluatedFactorId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1627,7 +1703,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactors.ApplicationToFactors", "SubjectAreaElement")
+                    b.HasOne("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactor.ApplicationToFactor", "SubjectAreaElement")
                         .WithMany("ProgramsParametrToSubjectAreaElements")
                         .HasForeignKey("SubjectAreaElementId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1647,7 +1723,12 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
                     b.Navigation("ProgramsParametrs");
                 });
 
-            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactors.ApplicationToFactors", b =>
+            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationStatus.ApplicationStatus", b =>
+                {
+                    b.Navigation("Applications");
+                });
+
+            modelBuilder.Entity("ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactor.ApplicationToFactor", b =>
                 {
                     b.Navigation("EvaluatorToEvaluatedFactor");
 

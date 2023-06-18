@@ -12,6 +12,11 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
         {
         }
 
+        public async Task<IEnumerable<ProgramLanguageDTO>> GetAllProgramLanguagesByApplicationId(Guid applicationId)
+        {
+            return _mapper.Map<List<ProgramLanguageDTO>>(await _repository.ExecuteStoredProcedure($"EXEC dbo.GetAllProgramLanguagesByApplicationId @applicationId = {applicationId}"));
+        }
+
         public async Task<IEnumerable<ProgramLanguageDTO>> GetProgramLanguagesAsync()
         {
             return await base.GetEntitysAsync();
