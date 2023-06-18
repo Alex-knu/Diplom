@@ -2,7 +2,7 @@
   <div class="p-field">
     <label for="description">Список експертів</label>
     <div class="p-field">
-      <p-multiSelect [options]="evaluators" [(ngModel)]="selectedEvaluators" [virtualScroll]="true" optionLabel="name"></p-multiSelect>
+      <p-multiSelect [options]="evaluators" [(ngModel)]="selectedEvaluators" [filter]="true" optionLabel="name"></p-multiSelect>
     </div>
   </div>
 
