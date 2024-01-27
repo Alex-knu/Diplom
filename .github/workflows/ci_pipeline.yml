@@ -43,7 +43,7 @@ jobs:
       - name: Install NPM Modules
         run: |
           cd ./ITProjectPriceCalculationManager.WebApp
-          npm install
+          npm install --force
 
       - name: Build Project
         run: |
