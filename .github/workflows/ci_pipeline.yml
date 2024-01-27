@@ -48,7 +48,7 @@ jobs:
       - name: Build Project
         run: |
           cd ./ITProjectPriceCalculationManager.WebApp
-          npm run build
+          ng build
 
   build_python:
     runs-on: ubuntu-latest
