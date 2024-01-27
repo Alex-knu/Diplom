@@ -33,19 +33,19 @@ services:
         aliases:
           - web_app
 
-  it_project_price_calculation_manager.price_predictor.api:
-    image: ${DOCKER_REGISTRY-}it_project_price_calculation_manager.price_predictor.api
-    restart: always
-    build: 
-      context: .
-      dockerfile: ITProjectPriceCalculationManager.PricePredictor.API/Dockerfile
-    ports:
-      - "5004:80"
-      - "5005:443"
-    networks:
-      service-net:
-        aliases:
-          - price_predictor.api
+  # it_project_price_calculation_manager.price_predictor.api:
+  #   image: ${DOCKER_REGISTRY-}it_project_price_calculation_manager.price_predictor.api
+  #   restart: always
+  #   build: 
+  #     context: .
+  #     dockerfile: ITProjectPriceCalculationManager.PricePredictor.API/Dockerfile
+  #   ports:
+  #     - "5004:80"
+  #     - "5005:443"
+  #   networks:
+  #     service-net:
+  #       aliases:
+  #         - price_predictor.api
 
   it_project_price_calculation_manager.it_projects_calculator.api:
     image: ${DOCKER_REGISTRY-}it_project_price_calculation_manager.it_projects_calculator.api
