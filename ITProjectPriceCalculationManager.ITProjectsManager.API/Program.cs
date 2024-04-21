@@ -3,7 +3,6 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Rep
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data.Repositories;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Stub;
 using ITProjectPriceCalculationManager.Extentions.Extentions;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
 
