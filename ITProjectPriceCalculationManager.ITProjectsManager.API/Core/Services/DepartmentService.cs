@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Department;

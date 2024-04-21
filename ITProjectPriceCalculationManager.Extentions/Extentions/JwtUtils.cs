@@ -1,5 +1,4 @@
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using System.Text;
 using ITProjectPriceCalculationManager.Extentions.Models;
 using ITProjectPriceCalculationManager.Extentions.Models.Exceptions;

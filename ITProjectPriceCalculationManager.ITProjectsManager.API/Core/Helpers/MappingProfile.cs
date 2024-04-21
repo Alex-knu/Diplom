@@ -10,7 +10,6 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Progr
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactor;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationForEvaluation;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramsParametr;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.FactorType;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationStatus;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Helpers
