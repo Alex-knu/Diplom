@@ -6,20 +6,12 @@
         <UserSecretsId>4f2604c5-7583-4dc2-b1b0-38c365d36ed5</UserSecretsId>
     </PropertyGroup>
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.9"/>
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.16"/>
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.16"/>
-        <PackageReference Include="Microsoft.CodeAnalysis" Version="4.5.0"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.5">
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-            <PrivateAssets>all</PrivateAssets>
-        </PackageReference>
-        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0"/>
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.3"/>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2"/>
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.16" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\ITProjectPriceCalculationManager.Extentions\ITProjectPriceCalculationManager.Extentions.csproj"/>
+        <ProjectReference Include="..\ITProjectPriceCalculationManager.Extentions\ITProjectPriceCalculationManager.Extentions.csproj" />
     </ItemGroup>
 </Project>
