@@ -1,15 +1,17 @@
-using Microsoft.EntityFrameworkCore;
+using ITProjectPriceCalculationManager.Extentions.Extentions;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data.Repositories;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
-using ITProjectPriceCalculationManager.Extentions.Extentions;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration.AddUserSecrets<Program>();
 
-builder.Services.AddDbContext<ITProjectPriceCalculationManagerDbContext>(x => x.UseSqlServer(builder.Configuration["ITProjectsManagerAPI:ConnectionString"])); //UseSqlServer
+builder.Services.AddDbContext<ITProjectPriceCalculationManagerDbContext>(x =>
+    x.UseSqlServer(builder.Configuration["ITProjectsManagerAPI:ConnectionString"])); //UseSqlServer
 
 JwtUtils.SecretKey = builder.Configuration["JWT:Secret"];
 // Add services to the container.
@@ -31,7 +33,7 @@ builder.Services.AddScoped(typeof(IApplicationToFactorsService), typeof(Applicat
 
 builder.Services
     .AddControllers()
-    .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+    .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -43,10 +45,7 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
 
     var context = services.GetRequiredService<ITProjectPriceCalculationManagerDbContext>();
-    if (context.Database.GetPendingMigrations().Any())
-    {
-        context.Database.Migrate();
-    }
+    if (context.Database.GetPendingMigrations().Any()) context.Database.Migrate();
 }
 
 // Configure the HTTP request pipeline.

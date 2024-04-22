@@ -1,9 +1,8 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 
-namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
+
+public interface IApplicationInfoForEvaluationService
 {
-    public interface IApplicationInfoForEvaluationService
-    {
-        Task<EvaluationDTO> GetForEvaluation(Guid applicationId);
-    }
+    Task<EvaluationDTO> GetForEvaluation(Guid applicationId);
 }

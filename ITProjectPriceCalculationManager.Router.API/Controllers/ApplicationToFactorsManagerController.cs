@@ -3,26 +3,26 @@ using ITProjectPriceCalculationManager.Router.API.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ITProjectPriceCalculationManager.Router.API.Controllers
+namespace ITProjectPriceCalculationManager.Router.API.Controllers;
+
+[Authorize]
+[ApiController]
+[Route("api/[controller]")]
+public class ApplicationToFactorsManagerController : ControllerBase
 {
-    [Authorize]
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ApplicationToFactorsManagerController : ControllerBase
+    private readonly IApplicationToFactorsService _applicationToFactorsService;
+    private readonly ILogger<ApplicationManagerController> _logger;
+
+    public ApplicationToFactorsManagerController(ILogger<ApplicationManagerController> logger,
+        IApplicationToFactorsService applicationToFactorsService)
     {
-        private readonly ILogger<ApplicationManagerController> _logger;
-        private readonly IApplicationToFactorsService _applicationToFactorsService;
+        _logger = logger;
+        _applicationToFactorsService = applicationToFactorsService;
+    }
 
-        public ApplicationToFactorsManagerController(ILogger<ApplicationManagerController> logger, IApplicationToFactorsService applicationToFactorsService)
-        {
-            _logger = logger;
-            _applicationToFactorsService = applicationToFactorsService;
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> CreateApplication(EvaluationApplicationDTO query)
-        {
-            return Ok(await _applicationToFactorsService.CreateApplicationToFactorsAsync(HttpContext, query));
-        }
+    [HttpPost]
+    public async Task<IActionResult> CreateApplication(EvaluationApplicationDTO query)
+    {
+        return Ok(await _applicationToFactorsService.CreateApplicationToFactorsAsync(HttpContext, query));
     }
 }

@@ -38,20 +38,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services
-    .AddHttpClient("AuthServer", client =>
-    {
-        client.BaseAddress = new Uri(routeConfiguration.AuthServer);
-    });
+    .AddHttpClient("AuthServer", client => { client.BaseAddress = new Uri(routeConfiguration.AuthServer); });
 builder.Services
-    .AddHttpClient("ITProjectsCalculator", client =>
-    {
-        client.BaseAddress = new Uri(routeConfiguration.ITProjectsCalculatorAPIRoute);
-    });
+    .AddHttpClient("ITProjectsCalculator",
+        client => { client.BaseAddress = new Uri(routeConfiguration.ITProjectsCalculatorAPIRoute); });
 builder.Services
-    .AddHttpClient("ITProjectsManager", client =>
-    {
-        client.BaseAddress = new Uri(routeConfiguration.ITProjectsManagerAPIRoute);
-    });
+    .AddHttpClient("ITProjectsManager",
+        client => { client.BaseAddress = new Uri(routeConfiguration.ITProjectsManagerAPIRoute); });
 
 builder.Services
     .AddAuthentication(options =>
@@ -64,7 +57,7 @@ builder.Services
     {
         options.SaveToken = true;
         options.RequireHttpsMetadata = false;
-        options.TokenValidationParameters = new TokenValidationParameters()
+        options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
             ValidateAudience = true,

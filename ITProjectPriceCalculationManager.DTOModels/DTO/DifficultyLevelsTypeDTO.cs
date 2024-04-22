@@ -1,9 +1,8 @@
-namespace ITProjectPriceCalculationManager.DTOModels.DTO
+namespace ITProjectPriceCalculationManager.DTOModels.DTO;
+
+public class DifficultyLevelsTypeDTO
 {
-    public class DifficultyLevelsTypeDTO
-    {
-        public Guid Id { get; set; }
-        public Guid RelationId { get; set; }
-        public string Name { get; set; }
-    }
+    public Guid Id { get; set; }
+    public Guid RelationId { get; set; }
+    public string Name { get; set; }
 }

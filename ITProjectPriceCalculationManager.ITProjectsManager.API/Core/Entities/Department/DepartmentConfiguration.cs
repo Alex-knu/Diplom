@@ -1,22 +1,21 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Department
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Department;
+
+internal class DepartmentConfiguration : IEntityTypeConfiguration<Department>
 {
-    internal class DepartmentConfiguration : IEntityTypeConfiguration<Department>
+    public void Configure(EntityTypeBuilder<Department> builder)
     {
-        public void Configure(EntityTypeBuilder<Department> builder)
-        {
-            builder
-                   .HasKey(department => department.Id);
+        builder
+            .HasKey(department => department.Id);
 
-            builder.Property(department => department.Name)
-                   .IsRequired();
+        builder.Property(department => department.Name)
+            .IsRequired();
 
-            builder
-              .HasMany(department => department.SubDepartments)
-              .WithOne(department => department.Parent)
-              .HasForeignKey(department => department.ParentId);
-        }
+        builder
+            .HasMany(department => department.SubDepartments)
+            .WithOne(department => department.Parent)
+            .HasForeignKey(department => department.ParentId);
     }
 }

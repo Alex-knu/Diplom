@@ -1,9 +1,8 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 
-namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
+
+public interface IDepartmentTreeService
 {
-    public interface IDepartmentTreeService
-    {
-        Task<IEnumerable<DepartmentDTO>> GetDepartmentsTreeAsync();
-    }
+    Task<IEnumerable<DepartmentDTO>> GetDepartmentsTreeAsync();
 }

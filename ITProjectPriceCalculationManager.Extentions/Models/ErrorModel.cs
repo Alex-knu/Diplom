@@ -1,7 +1,6 @@
-namespace ITProjectPriceCalculationManager.Extentions.Models
+namespace ITProjectPriceCalculationManager.Extentions.Models;
+
+public class ErrorModel
 {
-    public class ErrorModel
-    {
-        public string Error { get; set; }
-    }
+    public string Error { get; set; }
 }

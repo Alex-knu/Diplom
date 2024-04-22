@@ -1,8 +1,7 @@
-namespace ITProjectPriceCalculationManager.AuthServer.Core.DTO
+namespace ITProjectPriceCalculationManager.AuthServer.Core.DTO;
+
+public class TokenInfoDTO
 {
-    public class TokenInfoDTO
-    {
-        public string Token { get; set; }
-        public DateTime Expiration { get; set; }
-    }
+    public string Token { get; set; }
+    public DateTime Expiration { get; set; }
 }

@@ -1,8 +1,7 @@
-namespace ITProjectPriceCalculationManager.DTOModels.Enums
+namespace ITProjectPriceCalculationManager.DTOModels.Enums;
+
+public enum SubjectAreaType
 {
-    public enum SubjectAreaType
-    {
-        InternalLogicalObject,
-        ExternalInterfaceObject
-    }
+    InternalLogicalObject,
+    ExternalInterfaceObject
 }

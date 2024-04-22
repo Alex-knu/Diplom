@@ -1,13 +1,12 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 
-namespace ITProjectPriceCalculationManager.Router.API.Core.Interfaces
+namespace ITProjectPriceCalculationManager.Router.API.Core.Interfaces;
+
+public interface IEvaluatorService
 {
-    public interface IEvaluatorService
-    {
-        Task<IEnumerable<EvaluatorDTO>> GetEvaluatorsAsync(HttpContext httpContext);
-        Task<EvaluatorDTO> GetEvaluatorsByIdAsync(Guid id);
-        Task<EvaluatorDTO> CreateEvaluatorAsync(EvaluatorDTO evaluator);
-        Task<EvaluatorDTO> UpdateEvaluatorAsync(EvaluatorDTO evaluator);
-        Task<EvaluatorDTO> DeleteEvaluatorAsync(Guid id);
-    }
+    Task<IEnumerable<EvaluatorDTO>> GetEvaluatorsAsync(HttpContext httpContext);
+    Task<EvaluatorDTO> GetEvaluatorsByIdAsync(Guid id);
+    Task<EvaluatorDTO> CreateEvaluatorAsync(EvaluatorDTO evaluator);
+    Task<EvaluatorDTO> UpdateEvaluatorAsync(EvaluatorDTO evaluator);
+    Task<EvaluatorDTO> DeleteEvaluatorAsync(Guid id);
 }

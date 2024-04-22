@@ -2,47 +2,48 @@ using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.Extentions.Extentions;
 using ITProjectPriceCalculationManager.Router.API.Core.Interfaces;
 
-namespace ITProjectPriceCalculationManager.Router.API.Core.Services
+namespace ITProjectPriceCalculationManager.Router.API.Core.Services;
+
+internal class BaseApplicationService : IBaseApplicationService
 {
-    internal class BaseApplicationService : IBaseApplicationService
+    private readonly HttpClient _client;
+    private readonly IRouteService _routeService;
+
+    public BaseApplicationService(IHttpClientFactory httpClientFactory, IRouteService routeService)
     {
-        private readonly HttpClient _client;
-        private readonly IRouteService _routeService;
+        _client = httpClientFactory.CreateClient("ITProjectsManager");
+        _routeService = routeService;
+    }
 
-        public BaseApplicationService(IHttpClientFactory httpClientFactory, IRouteService routeService)
-        {
-            _client = httpClientFactory.CreateClient("ITProjectsManager");
-            _routeService = routeService;
-        }
+    public async Task<BaseApplicationDTO> CreateBaseApplicationAsync(HttpContext httpContext, BaseApplicationDTO query)
+    {
+        query.UserCreatorId = JwtUtils.GetUserInfo(httpContext).UserId;
+        return await _routeService.PostAsJsonAsync<BaseApplicationDTO, BaseApplicationDTO>(_client,
+            "baseapplicationapi", query);
+    }
 
-        public async Task<BaseApplicationDTO> CreateBaseApplicationAsync(HttpContext httpContext, BaseApplicationDTO query)
-        {
-            query.UserCreatorId = JwtUtils.GetUserInfo(httpContext).UserId;
-            return await _routeService.PostAsJsonAsync<BaseApplicationDTO, BaseApplicationDTO>(_client, "baseapplicationapi", query);
-        }
+    public async Task<BaseApplicationDTO> DeleteBaseApplicationAsync(Guid id)
+    {
+        return await _routeService.DeleteAsJsonAsync<BaseApplicationDTO, Guid>(_client, "baseapplicationapi", id);
+    }
 
-        public async Task<BaseApplicationDTO> DeleteBaseApplicationAsync(Guid id)
-        {
-            return await _routeService.DeleteAsJsonAsync<BaseApplicationDTO, Guid>(_client, "baseapplicationapi", id);
-        }
+    public async Task<IEnumerable<BaseApplicationDTO>> GetBaseApplicationsAsync(HttpContext httpContext)
+    {
+        var userInfo = JwtUtils.GetUserInfo(httpContext);
 
-        public async Task<IEnumerable<BaseApplicationDTO>> GetBaseApplicationsAsync(HttpContext httpContext)
-        {
-            var userInfo = JwtUtils.GetUserInfo(httpContext);
+        _client.DefaultRequestHeaders.Add("Authorization", httpContext.Request.Headers["Authorization"].ToString());
 
-            _client.DefaultRequestHeaders.Add("Authorization", httpContext.Request.Headers["Authorization"].ToString());
+        return await _routeService.GetAllAsync<List<BaseApplicationDTO>>(_client, "baseapplicationapi");
+    }
 
-            return await _routeService.GetAllAsync<List<BaseApplicationDTO>>(_client, "baseapplicationapi");
-        }
+    public async Task<BaseApplicationDTO> GetBaseApplicationsByIdAsync(Guid id)
+    {
+        return await _routeService.GetByIdAsync<BaseApplicationDTO, Guid>(_client, "baseapplicationapi", id);
+    }
 
-        public async Task<BaseApplicationDTO> GetBaseApplicationsByIdAsync(Guid id)
-        {
-            return await _routeService.GetByIdAsync<BaseApplicationDTO, Guid>(_client, "baseapplicationapi", id);
-        }
-
-        public async Task<BaseApplicationDTO> UpdateBaseApplicationAsync(BaseApplicationDTO query)
-        {
-            return await _routeService.PutAsJsonAsync<BaseApplicationDTO, BaseApplicationDTO>(_client, "baseapplicationapi", query);
-        }
+    public async Task<BaseApplicationDTO> UpdateBaseApplicationAsync(BaseApplicationDTO query)
+    {
+        return await _routeService.PutAsJsonAsync<BaseApplicationDTO, BaseApplicationDTO>(_client, "baseapplicationapi",
+            query);
     }
 }

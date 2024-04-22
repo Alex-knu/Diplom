@@ -1,8 +1,7 @@
-namespace ITProjectPriceCalculationManager.DTOModels.DTO
+namespace ITProjectPriceCalculationManager.DTOModels.DTO;
+
+public class FactorDTO
 {
-    public class FactorDTO
-    {
-        public string Name { get; set; }
-        public double Value { get; set; }
-    }
+    public string Name { get; set; }
+    public double Value { get; set; }
 }

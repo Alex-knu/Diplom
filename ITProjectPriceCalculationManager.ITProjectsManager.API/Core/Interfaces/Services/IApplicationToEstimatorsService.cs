@@ -1,9 +1,9 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 
-namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
+
+public interface IApplicationToEstimatorsService
 {
-    public interface IApplicationToEstimatorsService
-    {
-        Task<ApplicationToEstimatorsDTO> CreateApplicationToEstimatorsAsync(ApplicationToEstimatorsDTO applicationToEstimators);
-    }
+    Task<ApplicationToEstimatorsDTO> CreateApplicationToEstimatorsAsync(
+        ApplicationToEstimatorsDTO applicationToEstimators);
 }

@@ -1,13 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace ITProjectPriceCalculationManager.AuthServer.Core.Models
-{
-    public class LoginModel
-    {
-        [Required(ErrorMessage = "User Name is required")]
-        public string? Username { get; set; }
+namespace ITProjectPriceCalculationManager.AuthServer.Core.Models;
 
-        [Required(ErrorMessage = "Password is required")]
-        public string? Password { get; set; }
-    }
+public class LoginModel
+{
+    [Required(ErrorMessage = "User Name is required")]
+    public string? Username { get; set; }
+
+    [Required(ErrorMessage = "Password is required")]
+    public string? Password { get; set; }
 }

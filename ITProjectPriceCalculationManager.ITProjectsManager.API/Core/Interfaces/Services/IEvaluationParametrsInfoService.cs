@@ -1,9 +1,8 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 
-namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
+
+public interface IEvaluationParametrsInfoService
 {
-    public interface IEvaluationParametrsInfoService
-    {
-        Task<IEnumerable<EvaluationParametrsInfoDTO>> GetEvaluationAttributes();
-    }
+    Task<IEnumerable<EvaluationParametrsInfoDTO>> GetEvaluationAttributes();
 }

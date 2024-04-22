@@ -1,9 +1,8 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 
-namespace ITProjectPriceCalculationManager.Router.API.Core.Interfaces
+namespace ITProjectPriceCalculationManager.Router.API.Core.Interfaces;
+
+public interface IDifficultyLevelsTypeService
 {
-    public interface IDifficultyLevelsTypeService
-    {
-        Task<IEnumerable<DifficultyLevelsTypeDTO>> GetDifficultyLevelTypesForFactorType(Guid id);
-    }
+    Task<IEnumerable<DifficultyLevelsTypeDTO>> GetDifficultyLevelTypesForFactorType(Guid id);
 }
