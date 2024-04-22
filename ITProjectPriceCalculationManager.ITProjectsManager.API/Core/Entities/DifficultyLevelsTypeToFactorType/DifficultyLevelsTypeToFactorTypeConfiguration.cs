@@ -1,31 +1,31 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevelsTypeToFactorType
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevelsTypeToFactorType;
+
+internal class
+    DifficultyLevelsTypeToFactorTypeConfiguration : IEntityTypeConfiguration<DifficultyLevelsTypeToFactorType>
 {
-    internal class DifficultyLevelsTypeToFactorTypeConfiguration : IEntityTypeConfiguration<DifficultyLevelsTypeToFactorType>
+    public void Configure(EntityTypeBuilder<DifficultyLevelsTypeToFactorType> builder)
     {
-        public void Configure(EntityTypeBuilder<DifficultyLevelsTypeToFactorType> builder)
-        {
-            builder.HasKey(applicationToEvaluators => applicationToEvaluators.Id);
+        builder.HasKey(applicationToEvaluators => applicationToEvaluators.Id);
 
-            builder.Property(applicationToEvaluators => applicationToEvaluators.Value)
-                .IsRequired();
+        builder.Property(applicationToEvaluators => applicationToEvaluators.Value)
+            .IsRequired();
 
-            builder
-                .HasOne(profile => profile.DifficultyLevel)
-                .WithMany(estimator => estimator.DifficultyLevelsTypeToFactorTypes)
-                .HasForeignKey(profile => profile.DifficultyLevelId);
+        builder
+            .HasOne(profile => profile.DifficultyLevel)
+            .WithMany(estimator => estimator.DifficultyLevelsTypeToFactorTypes)
+            .HasForeignKey(profile => profile.DifficultyLevelId);
 
-            builder
-                .HasOne(profile => profile.Factor)
-                .WithMany(estimator => estimator.DifficultyLevelsTypeToFactorTypes)
-                .HasForeignKey(profile => profile.FactorId);
+        builder
+            .HasOne(profile => profile.Factor)
+            .WithMany(estimator => estimator.DifficultyLevelsTypeToFactorTypes)
+            .HasForeignKey(profile => profile.FactorId);
 
-            builder
-                .HasOne(profile => profile.FactorType)
-                .WithMany(estimator => estimator.DifficultyLevelsTypeToFactorTypes)
-                .HasForeignKey(profile => profile.FactorTypeId);
-        }
+        builder
+            .HasOne(profile => profile.FactorType)
+            .WithMany(estimator => estimator.DifficultyLevelsTypeToFactorTypes)
+            .HasForeignKey(profile => profile.FactorTypeId);
     }
 }

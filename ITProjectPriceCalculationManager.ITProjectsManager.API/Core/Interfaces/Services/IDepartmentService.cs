@@ -1,13 +1,12 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 
-namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
+
+public interface IDepartmentService
 {
-    public interface IDepartmentService
-    {
-        Task<IEnumerable<DepartmentDTO>> GetDepartmentsAsync();
-        Task<DepartmentDTO> GetDepartmentsByIdAsync(Guid id);
-        Task<DepartmentDTO> CreateDepartmentAsync(DepartmentDTO department);
-        Task<DepartmentDTO> UpdateDepartmentAsync(DepartmentDTO department);
-        Task<DepartmentDTO> DeleteDepartmentAsync(Guid id);
-    }
+    Task<IEnumerable<DepartmentDTO>> GetDepartmentsAsync();
+    Task<DepartmentDTO> GetDepartmentsByIdAsync(Guid id);
+    Task<DepartmentDTO> CreateDepartmentAsync(DepartmentDTO department);
+    Task<DepartmentDTO> UpdateDepartmentAsync(DepartmentDTO department);
+    Task<DepartmentDTO> DeleteDepartmentAsync(Guid id);
 }

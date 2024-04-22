@@ -1,10 +1,9 @@
-namespace ITProjectPriceCalculationManager.DTOModels.Enums
+namespace ITProjectPriceCalculationManager.DTOModels.Enums;
+
+public enum FactorType
 {
-    public enum FactorType
-    {
-        InfluenceFactors = 1,
-        ScaleFactors,
-        InformationObject,
-        Function
-    }
+    InfluenceFactors = 1,
+    ScaleFactors,
+    InformationObject,
+    Function
 }

@@ -8,111 +8,111 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Progr
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 
-namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
+
+internal class BaseApplicationService : BaseService<Application, Guid, BaseApplicationDTO>, IBaseApplicationService
 {
-    internal class BaseApplicationService : BaseService<Application, Guid, BaseApplicationDTO>, IBaseApplicationService
+    protected readonly IRepository<Evaluator, Guid> _estimatorRepository;
+    protected readonly IRepository<ProcedureApplication, Guid> _procedureApplicationRepository;
+    protected readonly IRepository<ProgramsParametr, Guid> _programsParametrRepository;
+
+    public BaseApplicationService(
+        IRepository<Evaluator, Guid> estimatorRepository,
+        IRepository<ProgramsParametr, Guid> programsParametrRepository,
+        IRepository<ProcedureApplication, Guid> procedureApplicationRepository,
+        IRepository<Application, Guid> repository,
+        IMapper mapper) : base(repository, mapper)
     {
-        protected readonly IRepository<Evaluator, Guid> _estimatorRepository;
-        protected readonly IRepository<ProgramsParametr, Guid> _programsParametrRepository;
-        protected readonly IRepository<ProcedureApplication, Guid> _procedureApplicationRepository;
+        _estimatorRepository = estimatorRepository;
+        _programsParametrRepository = programsParametrRepository;
+        _procedureApplicationRepository = procedureApplicationRepository;
+    }
 
-        public BaseApplicationService(
-            IRepository<Evaluator, Guid> estimatorRepository, 
-            IRepository<ProgramsParametr, Guid> programsParametrRepository, 
-            IRepository<ProcedureApplication, Guid> procedureApplicationRepository, 
-            IRepository<Application, Guid> repository, 
-            IMapper mapper) : base(repository, mapper)
+    public async Task<BaseApplicationDTO> CreateBaseApplicationAsync(BaseApplicationDTO baseApplication)
+    {
+        return await CreateEntityAsync(baseApplication);
+    }
+
+    public async Task<BaseApplicationDTO> DeleteBaseApplicationAsync(Guid id)
+    {
+        return await base.DeleteEntityAsync(id);
+    }
+
+    public async Task<IEnumerable<BaseApplicationDTO>> GetBaseApplicationsAsync(HttpContext httpContext)
+    {
+        return await ExecuteSqlProcedure(JwtUtils.GetUserInfo(httpContext));
+    }
+
+    public async Task<BaseApplicationDTO> GetBaseApplicationsByIdAsync(Guid id)
+    {
+        return await base.GetEntitysByIdAsync(id);
+    }
+
+    public async Task<BaseApplicationDTO> UpdateBaseApplicationAsync(BaseApplicationDTO baseApplication)
+    {
+        return await base.UpdateEntityAsync(baseApplication);
+    }
+
+    protected override async Task<BaseApplicationDTO> CreateEntityAsync(BaseApplicationDTO baseApplication)
+    {
+        try
         {
-            _estimatorRepository = estimatorRepository;
-            _programsParametrRepository = programsParametrRepository;
-            _procedureApplicationRepository = procedureApplicationRepository;
-        }
+            var domainCreator =
+                await _estimatorRepository.GetFirstBySpecAsync(
+                    new Evaluators.GetEvaluatorByUserId(baseApplication.UserCreatorId));
 
-        public async Task<BaseApplicationDTO> CreateBaseApplicationAsync(BaseApplicationDTO baseApplication)
-        {
-            return await CreateEntityAsync(baseApplication);
-        }
+            if (domainCreator == null) throw new BadHttpRequestException("Creator not found");
 
-        public async Task<BaseApplicationDTO> DeleteBaseApplicationAsync(Guid id)
-        {
-            return await base.DeleteEntityAsync(id);
-        }
+            var domainApplication = _mapper.Map<Application>(baseApplication);
 
-        public async Task<IEnumerable<BaseApplicationDTO>> GetBaseApplicationsAsync(HttpContext httpContext)
-        {
-            return await ExecuteSqlProcedure(JwtUtils.GetUserInfo(httpContext));
-        }
+            domainApplication.CreatorId = domainCreator.Id;
+            domainApplication.Status = null;
 
-        public async Task<BaseApplicationDTO> GetBaseApplicationsByIdAsync(Guid id)
-        {
-            return await base.GetEntitysByIdAsync(id);
-        }
+            var newDomainApplication = await _repository.AddAsync(domainApplication);
 
-        public async Task<BaseApplicationDTO> UpdateBaseApplicationAsync(BaseApplicationDTO baseApplication)
-        {
-            return await base.UpdateEntityAsync(baseApplication);
-        }
+            await _repository.SaveChangesAcync();
 
-        protected override async Task<BaseApplicationDTO> CreateEntityAsync(BaseApplicationDTO baseApplication)
-        {
-            try
-            {
-                var domainCreator = await _estimatorRepository.GetFirstBySpecAsync(new Evaluators.GetEvaluatorByUserId(baseApplication.UserCreatorId));
-
-                if (domainCreator == null)
+            foreach (var programLanguage in baseApplication.ProgramLanguages)
+                await _programsParametrRepository.AddAsync(new ProgramsParametr
                 {
-                    throw new BadHttpRequestException("Creator not found");
-                }
+                    ApplicationId = newDomainApplication.Id,
+                    ProgramLanguageId = programLanguage.Id
+                });
 
-                var domainApplication = _mapper.Map<Application>(baseApplication);
-                
-                domainApplication.CreatorId = domainCreator.Id;
-                domainApplication.Status = null;
-                
-                var newDomainApplication = await _repository.AddAsync(domainApplication);
+            await _programsParametrRepository.SaveChangesAcync();
 
-                await _repository.SaveChangesAcync();
-
-                foreach (var programLanguage in baseApplication.ProgramLanguages)
-                {
-                    await _programsParametrRepository.AddAsync(new ProgramsParametr()
-                    {
-                        ApplicationId = newDomainApplication.Id,
-                        ProgramLanguageId = programLanguage.Id
-                    });
-                }
-
-                await _programsParametrRepository.SaveChangesAcync();
-
-                return _mapper.Map<BaseApplicationDTO>(newDomainApplication);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return _mapper.Map<BaseApplicationDTO>(newDomainApplication);
         }
-
-        private async Task<IEnumerable<BaseApplicationDTO>> ExecuteSqlProcedure(UserInfo userInfo)
+        catch (Exception ex)
         {
-            List<ProcedureApplication> result = new List<ProcedureApplication>();
+            throw new Exception(ex.Message);
+        }
+    }
 
-            foreach (var role in userInfo.Roles)
+    private async Task<IEnumerable<BaseApplicationDTO>> ExecuteSqlProcedure(UserInfo userInfo)
+    {
+        var result = new List<ProcedureApplication>();
+
+        foreach (var role in userInfo.Roles)
+            switch (role)
             {
-                switch (role)
-                {
-                    case "User":
-                        result.AddRange(await _procedureApplicationRepository.ExecuteStoredProcedure($"EXEC dbo.GetApplicationsByCreator @userId = {userInfo.UserId}"));
-                        break;
-                    case "Evaluator":
-                        result.AddRange(await _procedureApplicationRepository.ExecuteStoredProcedure($"EXEC dbo.GetApplicationsByEvaluator @userId = {userInfo.UserId}"));
-                        break;
-                    case "Admin":
-                        result.AddRange(await _procedureApplicationRepository.ExecuteStoredProcedure($"EXEC dbo.GetApplicationsByAdmin"));
-                        break;
-                }
+                case "User":
+                    result.AddRange(
+                        await _procedureApplicationRepository.ExecuteStoredProcedure(
+                            $"EXEC dbo.GetApplicationsByCreator @userId = {userInfo.UserId}"));
+                    break;
+                case "Evaluator":
+                    result.AddRange(
+                        await _procedureApplicationRepository.ExecuteStoredProcedure(
+                            $"EXEC dbo.GetApplicationsByEvaluator @userId = {userInfo.UserId}"));
+                    break;
+                case "Admin":
+                    result.AddRange(
+                        await _procedureApplicationRepository.ExecuteStoredProcedure(
+                            $"EXEC dbo.GetApplicationsByAdmin"));
+                    break;
             }
 
-            return _mapper.Map<List<BaseApplicationDTO>>(result);
-        }
+        return _mapper.Map<List<BaseApplicationDTO>>(result);
     }
 }

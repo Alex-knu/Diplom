@@ -1,24 +1,23 @@
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class DepartmentTreeApiController : ControllerBase
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class DepartmentTreeApiController : ControllerBase
+    private readonly IDepartmentTreeService _DepartmentTreeService;
+
+    public DepartmentTreeApiController(IDepartmentTreeService departmentTreeService)
     {
-        private readonly IDepartmentTreeService _DepartmentTreeService;
+        _DepartmentTreeService = departmentTreeService;
+    }
 
-        public DepartmentTreeApiController(IDepartmentTreeService departmentTreeService)
-        {
-            _DepartmentTreeService = departmentTreeService;
-        }
-
-        [HttpGet]
-        [Route("collection")]
-        public async Task<IActionResult> GetAllDepartments()
-        {
-            return Ok(await _DepartmentTreeService.GetDepartmentsTreeAsync());
-        }
+    [HttpGet]
+    [Route("collection")]
+    public async Task<IActionResult> GetAllDepartments()
+    {
+        return Ok(await _DepartmentTreeService.GetDepartmentsTreeAsync());
     }
 }

@@ -1,7 +1,6 @@
-namespace ITProjectPriceCalculationManager.Router.API.Core.Models
+namespace ITProjectPriceCalculationManager.Router.API.Core.Models;
+
+public class CaculateRequestModel
 {
-    public class CaculateRequestModel
-    {
-        public Guid ApplicationId { get; set; }
-    }
+    public Guid ApplicationId { get; set; }
 }

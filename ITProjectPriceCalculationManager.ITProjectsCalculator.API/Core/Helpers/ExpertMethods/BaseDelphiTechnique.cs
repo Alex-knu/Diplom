@@ -2,34 +2,30 @@ using ITProjectPriceCalculationManager.DTOModels.Interfaces;
 using ITProjectPriceCalculationManager.Extentions.Models.Exceptions;
 using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Models;
 
-namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers.ExpertMethods
+namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers.ExpertMethods;
+
+internal abstract class BaseDelphiTechnique
 {
-    internal abstract class BaseDelphiTechnique
+    public CheckFactorsResult CheckFactors(IEnumerable<IFactor> factors, double? confidenceArea)
     {
-        public CheckFactorsResult CheckFactors(IEnumerable<IFactor> factors, double? confidenceArea){
-            CheckFactorsResult result = new CheckFactorsResult();
+        var result = new CheckFactorsResult();
 
-            double maxValue = factors.Max(f => f.Value);
-            double minValue = factors.Min(f => f.Value);
-            double quartile = (maxValue - minValue) / 4;
+        var maxValue = factors.Max(f => f.Value);
+        var minValue = factors.Min(f => f.Value);
+        var quartile = (maxValue - minValue) / 4;
 
-            if (CheckCondition(factors, confidenceArea))
-            {
-                throw new BadRequestException("The assessment is beyond the limits of confidence");
-            }
+        if (CheckCondition(factors, confidenceArea))
+            throw new BadRequestException("The assessment is beyond the limits of confidence");
 
-            result.FactorValue = GetSumOfValue(factors) / factors.Count();
+        result.FactorValue = GetSumOfValue(factors) / factors.Count();
 
-            if (factors.All(f => f.Count.HasValue))
-            {
-                result.Count = (int)Math.Round((GetSumOfCount(factors) / factors.Count()));
-            }
+        if (factors.All(f => f.Count.HasValue))
+            result.Count = (int)Math.Round(GetSumOfCount(factors) / factors.Count());
 
-            return result;
-        }
-        
-        protected abstract bool CheckCondition(IEnumerable<IFactor> factors, double? etalon);
-        protected abstract double GetSumOfValue(IEnumerable<IFactor> factors);
-        protected abstract double GetSumOfCount(IEnumerable<IFactor> factors);
+        return result;
     }
+
+    protected abstract bool CheckCondition(IEnumerable<IFactor> factors, double? etalon);
+    protected abstract double GetSumOfValue(IEnumerable<IFactor> factors);
+    protected abstract double GetSumOfCount(IEnumerable<IFactor> factors);
 }

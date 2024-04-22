@@ -1,9 +1,8 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 
-namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
+
+public interface IApplicationToFactorsService
 {
-    public interface IApplicationToFactorsService
-    {
-        Task<EvaluationApplicationDTO> CreateApplicationToFactorsAsync(EvaluationApplicationDTO applicationToFactors);
-    }
+    Task<EvaluationApplicationDTO> CreateApplicationToFactorsAsync(EvaluationApplicationDTO applicationToFactors);
 }

@@ -1,8 +1,7 @@
-namespace ITProjectPriceCalculationManager.DTOModels.DTO
+namespace ITProjectPriceCalculationManager.DTOModels.DTO;
+
+public class EvaluationResultDTO
 {
-    public class EvaluationResultDTO
-    {
-        public string Error { get; set; }
-        public double Result { get; set; }
-    }
+    public string Error { get; set; }
+    public double Result { get; set; }
 }

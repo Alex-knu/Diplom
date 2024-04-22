@@ -1,8 +1,7 @@
-namespace ITProjectPriceCalculationManager.AuthServer.Core.Models
+namespace ITProjectPriceCalculationManager.AuthServer.Core.Models;
+
+public class Response
 {
-    public class Response
-    {
-        public string? Status { get; set; }
-        public string? Message { get; set; }
-    }
+    public string? Status { get; set; }
+    public string? Message { get; set; }
 }

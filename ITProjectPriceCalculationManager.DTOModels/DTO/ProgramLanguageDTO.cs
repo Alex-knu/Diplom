@@ -1,11 +1,10 @@
-namespace ITProjectPriceCalculationManager.DTOModels.DTO
-{
-    public class ProgramLanguageDTO
-    {
-        public Guid Id { get; set; }
-        public int SLOC { get; set; }
-        public string Name { get; set; }
+namespace ITProjectPriceCalculationManager.DTOModels.DTO;
 
-        public List<ProgramsParametrDTO> ProgramsParametrs { get; set; }
-    }
+public class ProgramLanguageDTO
+{
+    public Guid Id { get; set; }
+    public int SLOC { get; set; }
+    public string Name { get; set; }
+
+    public List<ProgramsParametrDTO> ProgramsParametrs { get; set; }
 }
