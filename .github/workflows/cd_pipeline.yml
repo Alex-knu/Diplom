@@ -5,26 +5,126 @@ on:
       - main
 
 jobs:
-  build-and-push:
+  build-and-push-web-application:
     runs-on: ubuntu-latest
     steps:
-    - name: Check out the repo
-      uses: actions/checkout@v2
+      - name: Check out the repo
+        uses: actions/checkout@v2
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-    - name: Log in to GitHub Container Registry
-      uses: docker/login-action@v1
-      with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Build and push web application
-      uses: docker/build-push-action@v2
-      with:
-        context: .
-        file: ./ITProjectPriceCalculationManager.WebApp/Dockerfile
-        push: true
-        tags: ghcr.io/alex-knu/it_project_price_calculation_manager.web_app:latest
+      - name: Build and push web application
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./ITProjectPriceCalculationManager.WebApp/Dockerfile
+          push: true
+          tags: ghcr.io/alex-knu/diplom.web_app:latest
+
+
+  build-and-push-auth-server:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push auth server
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./ITProjectPriceCalculationManager.AuthServer/Dockerfile
+          push: true
+          tags: ghcr.io/alex-knu/diplom.auth_server:latest
+
+
+  build-and-push-calculator-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push calculator api
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./ITProjectPriceCalculationManager.ITProjectsCalculator.API/Dockerfile
+          push: true
+          tags: ghcr.io/alex-knu/diplom.it_projects_calculator.api:latest
+
+
+  build-and-push-it-projects-manager:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+        
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+        
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+        
+      - name: Build and push projects manager api
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./ITProjectPriceCalculationManager.ITProjectsManager.API/Dockerfile
+          push: true
+          tags: ghcr.io/alex-knu/diplom.it_projects_manager.api:latest
+
+
+  build-and-push-router:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+        
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+        
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+        
+      - name: Build and push router api
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./ITProjectPriceCalculationManager.Router.API/Dockerfile
+          push: true
+          tags: ghcr.io/alex-knu/diplom.router.api:latest
