@@ -27,4 +27,4 @@ jobs:
         context: .
         file: ./ITProjectPriceCalculationManager.WebApp/Dockerfile
         push: true
-        tags: ghcr.io/it_project_price_calculation_manager/web_app:latest
+        tags: ghcr.io/alex-knu/it_project_price_calculation_manager.web_app:latest
