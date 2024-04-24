@@ -118,11 +118,11 @@ services:
     image: ghcr.io/alex-knu/diplom.evaluator_manager.api:latest
     restart: always
     ports:
-      - "5010:80"
-      - "5011:443"
+      - "5012:80"
+      - "5013:443"
     networks:
-      security-database-net:
-      front-net:
+      evaluator-database-net:
+      service-net:
         aliases:
           - evaluator_manager.api
     depends_on:
@@ -182,7 +182,7 @@ services:
         max-size: 10m
         max-file: "3"
     ports:
-      - 5101:1433
+      - 5102:1433
     networks:
       security-database-net:
         aliases:
