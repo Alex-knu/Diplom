@@ -5,6 +5,8 @@ networks:
     driver: bridge
   security-database-net:
     driver: bridge
+  evaluator-database-net:
+    driver: bridge
   front-net:
     driver: bridge
   service-net:
@@ -16,6 +18,8 @@ volumes:
   it-projects-manager-data:
     external: false
   auth-server-data:
+    external: false
+  evaluator_manager-data:
     external: false
 
 services:
@@ -126,6 +130,26 @@ services:
     volumes:
       - $HOME/.microsoft/usersecrets/:/root/.microsoft/usersecrets/:ro
 
+
+  it_project_price_calculation_manager.evaluator_manager.api:
+    image: ${DOCKER_REGISTRY-}it_project_price_calculation_manager.evaluator_manager.api
+    restart: always
+    build: 
+      context: .
+      dockerfile: ITProjectPriceCalculationManager.EvaluatorManager.API/Dockerfile
+    ports:
+      - "5012:80"
+      - "5013:443"
+    networks:
+      evaluator-database-net:
+      service-net:
+        aliases:
+          - evaluator_manager.api
+    depends_on:
+      - it_project_price_calculation_manager.evaluator_manager.postgres
+    volumes:
+      - $HOME/.microsoft/usersecrets/:/root/.microsoft/usersecrets/:ro
+
   it_project_price_calculation_manager.postgres:
     image: mcr.microsoft.com/mssql/server:2022-latest
     restart: always
@@ -164,3 +188,23 @@ services:
           - it_project_price_calculation_manager.auth_server.postgres
     volumes:
       - auth-server-data:/var/opt/mssql
+
+  it_project_price_calculation_manager.evaluator_manager.postgres:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: always
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "P@ssw0rd007"
+      #MSSQL_PID: Exspress
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    ports:
+      - 5102:1433
+    networks:
+      security-database-net:
+        aliases:
+          - it_project_price_calculation_manager.evaluator_manager.postgres
+    volumes:
+      - evaluator_manager-data:/var/opt/mssql
