@@ -10,6 +10,7 @@ builder.Configuration
     .AddUserSecrets(Assembly.GetExecutingAssembly(), true);
 
 builder.Services.AddScoped(typeof(ICalculateService), typeof(CalculateService));
+builder.Services.AddScoped(typeof(IEvaluatorFuzzyCalculatorService), typeof(EvaluatorFuzzyCalculatorService));
 // Add services to the container.
 
 builder.Services.AddControllers();
