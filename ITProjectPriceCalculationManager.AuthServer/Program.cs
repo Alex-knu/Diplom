@@ -19,7 +19,7 @@ builder.Configuration
 
 var configuration = builder.Configuration.GetSection("AuthServer").Get<AuthServerSetting>();
 
-builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(configuration.ConnectionString));//UseSqlServer
+builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(configuration.ConnectionString)); //UseSqlServer
 
 builder.Services.AddScoped(typeof(IAuthenticateSevice), typeof(AuthenticateSevice));
 builder.Services.AddScoped(typeof(IUserSevice), typeof(UserSevice));
@@ -43,7 +43,7 @@ builder.Services
     {
         options.SaveToken = true;
         options.RequireHttpsMetadata = false;
-        options.TokenValidationParameters = new TokenValidationParameters()
+        options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
             ValidateAudience = true,
@@ -67,10 +67,7 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
 
     var context = services.GetRequiredService<ApplicationDbContext>();
-    if (context.Database.GetPendingMigrations().Any())
-    {
-        context.Database.Migrate();
-    }
+    if (context.Database.GetPendingMigrations().Any()) context.Database.Migrate();
 }
 
 app.UseStaticFiles();

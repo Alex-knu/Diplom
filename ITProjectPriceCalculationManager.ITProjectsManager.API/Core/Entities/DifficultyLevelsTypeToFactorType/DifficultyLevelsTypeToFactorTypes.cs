@@ -1,18 +1,17 @@
 using Ardalis.Specification;
 
-namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevelsTypeToFactorType
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevelsTypeToFactorType;
+
+internal class DifficultyLevelsTypeToFactorTypes
 {
-    internal class DifficultyLevelsTypeToFactorTypes
+    internal class DepartmentsTree : Specification<DifficultyLevelsTypeToFactorType>
     {
-        internal class DepartmentsTree : Specification<DifficultyLevelsTypeToFactorType>
+        public DepartmentsTree()
         {
-            public DepartmentsTree()
-            {
-                Query
-                    .Include(x => x.FactorType)
-                    .Include(x => x.Factor)
-                    .Include(x => x.DifficultyLevel);
-            }
+            Query
+                .Include(x => x.FactorType)
+                .Include(x => x.Factor)
+                .Include(x => x.DifficultyLevel);
         }
     }
 }

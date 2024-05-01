@@ -1,9 +1,8 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 
-namespace ITProjectPriceCalculationManager.Router.API.Core.Interfaces
+namespace ITProjectPriceCalculationManager.Router.API.Core.Interfaces;
+
+public interface ICalculatorService
 {
-    public interface ICalculatorService
-    {
-        Task<BaseApplicationDTO> CalculateApplicationPriceAsync(Guid applicationId);
-    }
+    Task<BaseApplicationDTO> CalculateApplicationPriceAsync(Guid applicationId);
 }

@@ -1,9 +1,8 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 
-namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfaces.Services
+namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfaces.Services;
+
+public interface ICalculateService
 {
-    public interface ICalculateService
-    {
-        Task<EvaluationResultDTO> Calculate(EvaluationDTO evaluation, double? price = null);
-    }
+    Task<EvaluationResultDTO> Calculate(EvaluationDTO evaluation, double? price = null);
 }

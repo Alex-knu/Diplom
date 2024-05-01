@@ -4,37 +4,37 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evalu
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 
-namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
+
+internal class EvaluatorService : BaseService<Evaluator, Guid, EvaluatorDTO>, IEvaluatorService
 {
-    internal class EvaluatorService : BaseService<Evaluator, Guid, EvaluatorDTO>, IEvaluatorService
+    public EvaluatorService(IRepository<Evaluator, Guid> repository, IMapper mapper) : base(repository, mapper)
     {
-        public EvaluatorService(IRepository<Evaluator, Guid> repository, IMapper mapper) : base(repository, mapper)
-        {
-        }
+    }
 
-        public async Task<EvaluatorDTO> CreateEvaluatorAsync(EvaluatorDTO evaluator)
-        {
-            return await base.CreateEntityAsync(evaluator);
-        }
+    public async Task<EvaluatorDTO> CreateEvaluatorAsync(EvaluatorDTO evaluator)
+    {
+        return await base.CreateEntityAsync(evaluator);
+    }
 
-        public async Task<EvaluatorDTO> DeleteEvaluatorAsync(Guid id)
-        {
-            return await base.DeleteEntityAsync(id);
-        }
+    public async Task<EvaluatorDTO> DeleteEvaluatorAsync(Guid id)
+    {
+        return await base.DeleteEntityAsync(id);
+    }
 
-        public async Task<IEnumerable<EvaluatorDTO>> GetEvaluatorsAsync(List<Guid> userIds)
-        {
-            return (await base.GetEntityListBySpecAsync(new Evaluators.GetEvaluatorsWithDependencies())).Where(evaluator => userIds.Contains(evaluator.UserId));
-        }
+    public async Task<IEnumerable<EvaluatorDTO>> GetEvaluatorsAsync(List<Guid> userIds)
+    {
+        return (await base.GetEntityListBySpecAsync(new Evaluators.GetEvaluatorsWithDependencies())).Where(evaluator =>
+            userIds.Contains(evaluator.UserId));
+    }
 
-        public async Task<EvaluatorDTO> GetEvaluatorsByIdAsync(Guid id)
-        {
-            return await base.GetEntitysByIdAsync(id);
-        }
+    public async Task<EvaluatorDTO> GetEvaluatorsByIdAsync(Guid id)
+    {
+        return await base.GetEntitysByIdAsync(id);
+    }
 
-        public async Task<EvaluatorDTO> UpdateEvaluatorAsync(EvaluatorDTO evaluator)
-        {
-            return await base.UpdateEntityAsync(evaluator);
-        }
+    public async Task<EvaluatorDTO> UpdateEvaluatorAsync(EvaluatorDTO evaluator)
+    {
+        return await base.UpdateEntityAsync(evaluator);
     }
 }

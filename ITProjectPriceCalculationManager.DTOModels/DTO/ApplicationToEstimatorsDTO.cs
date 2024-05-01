@@ -1,8 +1,7 @@
-namespace ITProjectPriceCalculationManager.DTOModels.DTO
+namespace ITProjectPriceCalculationManager.DTOModels.DTO;
+
+public class ApplicationToEstimatorsDTO
 {
-    public class ApplicationToEstimatorsDTO
-    {
-        public Guid ApplicationId { get; set; }
-        public List<EvaluatorDTO> Evaluators { get; set; }
-    }
+    public Guid ApplicationId { get; set; }
+    public List<EvaluatorDTO> Evaluators { get; set; }
 }

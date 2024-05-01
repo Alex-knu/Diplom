@@ -23,6 +23,9 @@ ITProjectPriceCalculationManager.ITProjectsCalculator.API/obj/*
 ITProjectPriceCalculationManager.ITProjectsManager.API/obj/*
 ITProjectPriceCalculationManager.ITProjectsManager.API/bin/*
 
+ITProjectPriceCalculationManager.EvaluatorManager.API/obj/*
+ITProjectPriceCalculationManager.EvaluatorManager.API/bin/*
+
 ITProjectPriceCalculationManager.Router.API/obj/*
 ITProjectPriceCalculationManager.Router.API/bin/*
 

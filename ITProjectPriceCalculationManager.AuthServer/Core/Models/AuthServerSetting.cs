@@ -1,8 +1,7 @@
-namespace ITProjectPriceCalculationManager.AuthServer.Core.Models
+namespace ITProjectPriceCalculationManager.AuthServer.Core.Models;
+
+public class AuthServerSetting
 {
-    public class AuthServerSetting
-    {
-        public string ConnectionString { get; set; }
-        public string[] OriginUrls { get; set; }
-    }
+    public string ConnectionString { get; set; }
+    public string[] OriginUrls { get; set; }
 }

@@ -1,16 +1,15 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfaces.Services;
 
-namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Stub
+namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Stub;
+
+public class StubCalculateService : ICalculateService
 {
-    public class StubCalculateService : ICalculateService
+    public Task<EvaluationResultDTO> Calculate(EvaluationDTO evaluation, double? price = null)
     {
-        public Task<EvaluationResultDTO> Calculate(EvaluationDTO evaluation, double? price = null)
+        return Task.FromResult(new EvaluationResultDTO
         {
-            return Task.FromResult(new EvaluationResultDTO()
-            {
-                Result = 200000
-            });
-        }
+            Result = 200000
+        });
     }
 }

@@ -4,40 +4,41 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Appli
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 
-namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
+
+internal class ApplicationToEstimatorsService : BaseService<ApplicationToEvaluator, Guid, ApplicationToEstimatorsDTO>,
+    IApplicationToEstimatorsService
 {
-    internal class ApplicationToEstimatorsService : BaseService<ApplicationToEvaluator, Guid, ApplicationToEstimatorsDTO>, IApplicationToEstimatorsService
+    public ApplicationToEstimatorsService(IRepository<ApplicationToEvaluator, Guid> repository, IMapper mapper) : base(
+        repository, mapper)
     {
-        public ApplicationToEstimatorsService(IRepository<ApplicationToEvaluator, Guid> repository, IMapper mapper) : base(repository, mapper)
-        {
-        }
+    }
 
-        public async Task<ApplicationToEstimatorsDTO> CreateApplicationToEstimatorsAsync(ApplicationToEstimatorsDTO applicationToEstimators)
-        {
-            return await CreateEntityAsync(applicationToEstimators);
-        }
+    public async Task<ApplicationToEstimatorsDTO> CreateApplicationToEstimatorsAsync(
+        ApplicationToEstimatorsDTO applicationToEstimators)
+    {
+        return await CreateEntityAsync(applicationToEstimators);
+    }
 
-        protected override async Task<ApplicationToEstimatorsDTO> CreateEntityAsync(ApplicationToEstimatorsDTO applicationToEstimators)
+    protected override async Task<ApplicationToEstimatorsDTO> CreateEntityAsync(
+        ApplicationToEstimatorsDTO applicationToEstimators)
+    {
+        try
         {
-            try
-            {
-                foreach (var evaluator in applicationToEstimators.Evaluators)
+            foreach (var evaluator in applicationToEstimators.Evaluators)
+                await _repository.AddAsync(new ApplicationToEvaluator
                 {
-                    await _repository.AddAsync(new ApplicationToEvaluator()
-                    {
-                        ApplicationId = applicationToEstimators.ApplicationId,
-                        EvaluatorId = evaluator.Id
-                    });
-                }
+                    ApplicationId = applicationToEstimators.ApplicationId,
+                    EvaluatorId = evaluator.Id
+                });
 
-                await _repository.SaveChangesAcync();
+            await _repository.SaveChangesAcync();
 
-                return applicationToEstimators;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return applicationToEstimators;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
         }
     }
 }

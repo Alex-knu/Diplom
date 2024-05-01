@@ -1,9 +1,8 @@
 using ITProjectPriceCalculationManager.AuthServer.Core.DTO;
 
-namespace ITProjectPriceCalculationManager.AuthServer.Core.Interfaces.Services
+namespace ITProjectPriceCalculationManager.AuthServer.Core.Interfaces.Services;
+
+public interface IRoleSevice
 {
-    public interface IRoleSevice
-    {
-        IEnumerable<RoleDTO> GetAllRoles();
-    }
+    IEnumerable<RoleDTO> GetAllRoles();
 }

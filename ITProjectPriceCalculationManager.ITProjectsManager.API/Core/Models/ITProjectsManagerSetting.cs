@@ -1,7 +1,6 @@
-namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Models
+namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Models;
+
+public class ITProjectsManagerSetting
 {
-    public class ITProjectsManagerSetting
-    {
-        public string ConnectionString { get; set; }
-    }
+    public string ConnectionString { get; set; }
 }

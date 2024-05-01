@@ -1,8 +1,8 @@
-namespace ITProjectPriceCalculationManager.Extentions.Models.Exceptions
+namespace ITProjectPriceCalculationManager.Extentions.Models.Exceptions;
+
+public class UnauthorizedAccessException : Exception
 {
-    public class UnauthorizedAccessException : Exception
+    public UnauthorizedAccessException(string message) : base(message)
     {
-        public UnauthorizedAccessException(string message) : base(message)
-        { }
     }
 }
