@@ -8,11 +8,17 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Service
 
 internal class EvaluatorFuzzyCalculatorService : IEvaluatorFuzzyCalculatorService
 {
-    public Task<double> Calculate(List<EvaluateParameterDTO> evaluateParameters)
+    public Task<double> Calculate(List<EvaluationCompetentValueDTO> evaluationCompetentValues, List<EvaluateParameterDTO> evaluateParameters)
     {
         var fuzzyInputs = new List<double>();
 
-        evaluateParameters.ForEach(param => fuzzyInputs.Add(SetMembershipFunctionStrategy(param.BelongingFunctionId, param.EvaluateParameterValue.A, param.EvaluateParameterValue.B, param.EvaluateParameterValue.C, param.EvaluateParameterValue.D).CalculateMembership(0)));
+        foreach(var evaluationCompetentValue in evaluationCompetentValues)
+        {
+            foreach(var evaluateParameter in evaluateParameters.Where(parameter => parameter.ParameterId == evaluationCompetentValue.EvaluationParameterId))
+            {
+                fuzzyInputs.Add(SetMembershipFunctionStrategy(evaluateParameter.BelongingFunctionId, evaluateParameter.EvaluateParameterValue.A, evaluateParameter.EvaluateParameterValue.B, evaluateParameter.EvaluateParameterValue.C, evaluateParameter.EvaluateParameterValue.D).CalculateMembership(evaluationCompetentValue.Value));
+            }
+        }
 
         return Task.FromResult(Defuzzify(ApplyRulesAndAggregation(fuzzyInputs)));
     }
