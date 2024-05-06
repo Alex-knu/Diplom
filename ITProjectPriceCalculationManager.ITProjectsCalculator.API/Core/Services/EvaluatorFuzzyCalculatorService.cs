@@ -1,5 +1,4 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
-using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers.CalculateMethods;
 using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers.MembershipFunction;
 using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfaces.MembershipFunction;
 using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfaces.Services;
@@ -21,16 +20,6 @@ internal class EvaluatorFuzzyCalculatorService : IEvaluatorFuzzyCalculatorServic
         }
 
         return Task.FromResult(Defuzzify(ApplyRulesAndAggregation(fuzzyInputs)));
-    }
-
-    public Task<EvaluationResultDTO> Calculate(EvaluationDTO evaluation, double? price = null)
-    {
-        return SetStrategy().Calculate(evaluation, price);
-    }
-
-    private CalculateMethod SetStrategy()
-    {
-        return new AlbrehtMethod();
     }
 
     private IMembershipFunction SetMembershipFunctionStrategy(Guid strategyId, params double[] parameters)
