@@ -11,5 +11,11 @@ internal class ParametersConfiguration : IEntityTypeConfiguration<Parameters>
 
         builder.Property(p => p.Name)
             .IsRequired();
+
+        builder
+            .HasOne(p => p.ParameterValue)
+            .WithOne(pv => pv.Parameter)
+            .HasForeignKey<ParameterValue.ParameterValue>(pv => pv.Id)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

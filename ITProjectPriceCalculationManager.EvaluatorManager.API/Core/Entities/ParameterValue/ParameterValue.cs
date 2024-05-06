@@ -1,8 +1,8 @@
 using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Interfaces;
 
-namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.EvaluateParameterValue;
+namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.ParameterValue;
 
-internal class EvaluateParameterValue : IBaseEntity<Guid>
+internal class ParameterValue : IBaseEntity<Guid>
 {
     public float A { get; set; }
     public float B { get; set; }
@@ -10,5 +10,5 @@ internal class EvaluateParameterValue : IBaseEntity<Guid>
     public float D { get; set; }
     public Guid Id { get; set; }
 
-    //public virtual ICollection<Application.Application> Applications{ get; set; } 
+    public Parameters.Parameters Parameter { get; set; }
 }

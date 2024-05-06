@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.EvaluateParameterValue;
+namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.ParameterValue;
 
-internal class EvaluateParameterValueConfiguration : IEntityTypeConfiguration<EvaluateParameterValue>
+internal class ParameterValueConfiguration : IEntityTypeConfiguration<ParameterValue>
 {
-    public void Configure(EntityTypeBuilder<EvaluateParameterValue> builder)
+    public void Configure(EntityTypeBuilder<ParameterValue> builder)
     {
         builder.HasKey(epv => epv.Id);
 
