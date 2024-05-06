@@ -7,5 +7,5 @@ internal class BelongingFunction : IBaseEntity<Guid>
     public string Name { get; set; }
     public Guid Id { get; set; }
 
-    //public virtual ICollection<Application.Application> Applications{ get; set; } 
+    public virtual ICollection<EvaluateParameter.EvaluateParameter> EvaluateParameters{ get; set; } 
 }

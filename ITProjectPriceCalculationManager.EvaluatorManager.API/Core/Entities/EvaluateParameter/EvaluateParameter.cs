@@ -10,5 +10,6 @@ internal class EvaluateParameter : IBaseEntity<Guid>
     public Guid ParameterId { get; set; }
     public Guid Id { get; set; }
 
-    //public virtual ICollection<Application.Application> Applications{ get; set; } 
+    public BelongingFunction.BelongingFunction BelongingFunction { get; set; }
+    public Parameters.Parameters Parameter { get; set; }
 }

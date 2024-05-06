@@ -20,7 +20,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped(typeof(IRepository<,>), typeof(BaseRepository<,>));
 builder.Services.AddScoped(typeof(IBelongingFunctionService), typeof(BelongingFunctionService));
 builder.Services.AddScoped(typeof(IEvaluateParameterService), typeof(EvaluateParameterService));
-builder.Services.AddScoped(typeof(IEvaluateParameterValueService), typeof(EvaluateParameterValueService));
+builder.Services.AddScoped(typeof(IParameterValueService), typeof(ParameterValueService));
 builder.Services.AddScoped(typeof(IParametersService), typeof(ParametersService));
 builder.Services.AddScoped(typeof(IRulesService), typeof(RulesService));
 //builder.Services.AddScoped(typeof(IApplicationService), typeof(StubApplicationService));

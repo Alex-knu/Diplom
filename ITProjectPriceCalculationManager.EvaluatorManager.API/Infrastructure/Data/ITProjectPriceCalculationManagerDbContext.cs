@@ -1,3 +1,7 @@
+using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.BelongingFunction;
+using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.EvaluateParameter;
+using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.Parameters;
+using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.ParameterValue;
 using ITProjectPriceCalculationManager.EvaluatorManager.API.Infrastructure.Data.SeedData;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,38 +19,17 @@ internal class ITProjectPriceCalculationEvaluatorManagerDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        // modelBuilder.ApplyConfiguration(new ApplicationConfiguration());
-        // modelBuilder.ApplyConfiguration(new ApplicationStatusConfiguration());
-        // modelBuilder.ApplyConfiguration(new ApplicationToEvaluatorConfiguration());
-        // modelBuilder.ApplyConfiguration(new ApplicationToFactorConfiguration());
-        // modelBuilder.ApplyConfiguration(new AttributeConfiguration());
-        // modelBuilder.ApplyConfiguration(new DifficultyLevelsTypeConfiguration());
-        // modelBuilder.ApplyConfiguration(new DifficultyLevelsTypeToFactorTypeConfiguration());
-        // modelBuilder.ApplyConfiguration(new EvaluatorConfiguration());
-        // modelBuilder.ApplyConfiguration(new EvaluatorToEvaluatedFactorConfiguration());
-        // modelBuilder.ApplyConfiguration(new FactorTypeConfiguration());
-        // modelBuilder.ApplyConfiguration(new ProgramsParametrConfiguration());
-        // modelBuilder.ApplyConfiguration(new ProgramLanguageConfiguration());
-        // modelBuilder.ApplyConfiguration(new ProgramsParametrToSubjectAreaElementConfiguration());
+        modelBuilder.ApplyConfiguration(new BelongingFunctionConfiguration());
+        modelBuilder.ApplyConfiguration(new EvaluateParameterConfiguration());
+        modelBuilder.ApplyConfiguration(new ParametersConfiguration());
+        modelBuilder.ApplyConfiguration(new ParameterValueConfiguration());
 
         modelBuilder.Seed();
     }
 
-    // public DbSet<Application> Applications { get; set; }
-    // public DbSet<ApplicationForEvaluation> ApplicationForEvaluations { get; set; }
-    // public DbSet<ApplicationToEvaluator> ApplicationToEvaluators { get; set; }
-    // public DbSet<ApplicationToFactor> ApplicationToFactors { get; set; }
-    // public DbSet<Attribute> Attributes { get; set; }
-    // public DbSet<DifficultyLevelsType> DifficultyLevelsTypes { get; set; }
-    // public DbSet<DifficultyLevelsTypeToFactorType> DifficultyLevelsTypeToFactorTypes { get; set; }
-    // public DbSet<Evaluator> Evaluators { get; set; }
-    // public DbSet<EvaluatorToEvaluatedFactor> EvaluatorToEvaluatedFactors { get; set; }
-    // public DbSet<FactorType> FactorTypes { get; set; }
-    // public DbSet<ProgramsParametr> ProgramsParametrs { get; set; }
-    // public DbSet<ProgramLanguage> ProgramLanguages { get; set; }
-    // public DbSet<ProgramsParametrToSubjectAreaElement> ProgramsParametrToSubjectAreaElements { get; set; }
-    // public DbSet<EvaluationAttribute> EvaluationAttributes { get; set; }
-    // public DbSet<DifficultyLevel> DifficultyLevels { get; set; }
-    // public DbSet<ApplicationStatus> ApplicationStatuses { get; set; }
-    // public DbSet<ProcedureApplication> ProcedureApplications { get; set; }
+
+    public DbSet<BelongingFunction> BelongingFunction { get; set; }
+    public DbSet<EvaluateParameter> EvaluateParameter { get; set; }
+    public DbSet<Parameters> Parameters { get; set; }
+    public DbSet<ParameterValue> ParameterValue { get; set; }
 }
