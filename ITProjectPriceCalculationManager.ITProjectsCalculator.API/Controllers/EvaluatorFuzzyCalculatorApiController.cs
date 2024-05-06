@@ -8,18 +8,18 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Controllers;
 [Route("api/[controller]")]
 public class EvaluatorFuzzyCalculatorApiController : ControllerBase
 {
-    private readonly ICalculateService _calculateService;
+    private readonly IEvaluatorFuzzyCalculatorService _evaluatorFuzzyCalculatorService;
     private readonly ILogger<EvaluatorFuzzyCalculatorApiController> _logger;
 
-    public EvaluatorFuzzyCalculatorApiController(ILogger<EvaluatorFuzzyCalculatorApiController> logger, ICalculateService calculatorService)
+    public EvaluatorFuzzyCalculatorApiController(ILogger<EvaluatorFuzzyCalculatorApiController> logger, IEvaluatorFuzzyCalculatorService evaluatorFuzzyCalculatorService)
     {
         _logger = logger;
-        _calculateService = calculatorService;
+        _evaluatorFuzzyCalculatorService = evaluatorFuzzyCalculatorService;
     }
 
     [HttpPost]
-    public async Task<IActionResult> CalulateAsync(EvaluationDTO evaluation)
+    public async Task<IActionResult> CalulateAsync(List<EvaluationCompetentValueDTO> evaluationCompetentValues, List<EvaluateParameterDTO> evaluateParameters)
     {
-        return Ok(await _calculateService.Calculate(evaluation));
+        return Ok(await _evaluatorFuzzyCalculatorService.Calculate(evaluationCompetentValues, evaluateParameters));
     }
 }
