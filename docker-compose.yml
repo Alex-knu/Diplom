@@ -117,6 +117,8 @@ services:
     build: 
       context: .
       dockerfile: ITProjectPriceCalculationManager.AuthServer/Dockerfile
+    env_file:
+      - ./Env/auth_server.env
     ports:
       - "5010:80"
       - "5011:443"

@@ -19,7 +19,7 @@ builder.Configuration
 
 var configuration = builder.Configuration.GetSection("AuthServer").Get<AuthServerSetting>();
 
-builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(configuration.ConnectionString)); //UseSqlServer
+builder.Services.AddDbContext<ApplicationDbContext>(x => x.UseSqlServer(builder.Configuration["ConnectionString"])); //UseSqlServer
 
 builder.Services.AddScoped(typeof(IAuthenticateSevice), typeof(AuthenticateSevice));
 builder.Services.AddScoped(typeof(IUserSevice), typeof(UserSevice));
@@ -72,8 +72,8 @@ using (var scope = app.Services.CreateScope())
 
 app.UseStaticFiles();
 app.UseCors(
-    builder => builder
-        .WithOrigins(configuration.OriginUrls)
+    b => b
+        .WithOrigins(builder.Configuration["OriginUrls"].Split(','))
         .SetIsOriginAllowedToAllowWildcardSubdomains()
         .AllowAnyMethod()
         .AllowAnyHeader()
