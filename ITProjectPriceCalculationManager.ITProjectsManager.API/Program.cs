@@ -11,9 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration.AddUserSecrets<Program>();
 
 builder.Services.AddDbContext<ITProjectPriceCalculationManagerDbContext>(x =>
-    x.UseSqlServer(builder.Configuration["ITProjectsManagerAPI:ConnectionString"])); //UseSqlServer
+    x.UseSqlServer(builder.Configuration["ConnectionString"])); //UseSqlServer
 
-JwtUtils.SecretKey = builder.Configuration["JWT:Secret"];
+JwtUtils.SecretKey = builder.Configuration["Secret"];
 // Add services to the container.
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
