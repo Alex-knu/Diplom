@@ -5,9 +5,9 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers
 internal class QuadraticMembershipFunction : IMembershipFunction
 {
     // Parameters
-    private double A; // Коефіцієнт a
-    private double B; // Коефіцієнт b
-    private double C; // Коефіцієнт c
+    private readonly double A; // Коефіцієнт a
+    private readonly double B; // Коефіцієнт b
+    private readonly double C; // Коефіцієнт c
 
     // Конструктор
     public QuadraticMembershipFunction(double a, double b, double c)

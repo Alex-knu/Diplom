@@ -5,8 +5,8 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers
 internal class ExponentialMembershipFunction : IMembershipFunction
 {
     // Parameters
-    private double A; // Коефіцієнт зростання (a)
-    private double B; // Зміщення (b)
+    private readonly double A; // Коефіцієнт зростання (a)
+    private readonly double B; // Зміщення (b)
 
     // Конструктор
     public ExponentialMembershipFunction(double a, double b)

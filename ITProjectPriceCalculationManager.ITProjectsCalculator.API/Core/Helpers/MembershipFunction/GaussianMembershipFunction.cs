@@ -4,8 +4,8 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers
 
 internal class GaussianMembershipFunction : IMembershipFunction
 {
-    private double Mean {get;set;}
-    private double Stddev {get;set;}
+    private readonly double Mean;
+    private readonly double Stddev;
 
     public GaussianMembershipFunction(double mean, double stddev)
     {

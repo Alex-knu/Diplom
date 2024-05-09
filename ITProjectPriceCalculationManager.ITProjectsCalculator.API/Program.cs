@@ -13,10 +13,6 @@ builder.Configuration
 
 builder.Services.AddScoped(typeof(ICalculateService), typeof(CalculateService));
 builder.Services.AddScoped(typeof(IEvaluatorFuzzyCalculatorService), typeof(EvaluatorFuzzyCalculatorService));
-builder.Services.AddScoped(typeof(IMembershipFunction), typeof(SigmoidMembershipFunction));
-builder.Services.AddScoped(typeof(IMembershipFunction), typeof(QuadraticMembershipFunction));
-builder.Services.AddScoped(typeof(IMembershipFunction), typeof(GaussianMembershipFunction));
-builder.Services.AddScoped(typeof(IMembershipFunction), typeof(ExponentialMembershipFunction));
 // Add services to the container.
 
 builder.Services.AddControllers();
