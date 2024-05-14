@@ -28,6 +28,7 @@ builder.Services.AddScoped(typeof(IProgramLanguageService), typeof(ProgramLangua
 builder.Services.AddScoped(typeof(IApplicationToEstimatorsService), typeof(ApplicationToEstimatorsService));
 builder.Services.AddScoped(typeof(IDifficultyLevelsTypeService), typeof(DifficultyLevelsTypeService));
 builder.Services.AddScoped(typeof(IEvaluationParametrsInfoService), typeof(EvaluationParametrsInfoService));
+builder.Services.AddScoped(typeof(IEvaluatorFuzzyCalculatorService), typeof(EvaluatorFuzzyCalculatorService));
 builder.Services.AddScoped(typeof(IApplicationToFactorsService), typeof(ApplicationToFactorsService));
 
 builder.Services.AddControllers();
@@ -43,6 +44,9 @@ builder.Services
 builder.Services
     .AddHttpClient("ITProjectsManager",
         client => { client.BaseAddress = new Uri(builder.Configuration["ITProjectsManagerAPIRoute"]); });
+builder.Services
+    .AddHttpClient("ITProjectsEvaluatorManager",
+        client => { client.BaseAddress = new Uri(builder.Configuration["ITProjectsEvaluatorManagerAPIRoute"]); });
 
 builder.Services
     .AddAuthentication(options =>
