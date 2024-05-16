@@ -30,6 +30,10 @@ builder.Services.AddScoped(typeof(IDifficultyLevelsTypeService), typeof(Difficul
 builder.Services.AddScoped(typeof(IEvaluationParametrsInfoService), typeof(EvaluationParametrsInfoService));
 builder.Services.AddScoped(typeof(IEvaluatorFuzzyCalculatorService), typeof(EvaluatorFuzzyCalculatorService));
 builder.Services.AddScoped(typeof(IApplicationToFactorsService), typeof(ApplicationToFactorsService));
+builder.Services.AddScoped(typeof(IBelongingFunctionService), typeof(BelongingFunctionService));
+builder.Services.AddScoped(typeof(IEvaluateParameterService), typeof(EvaluateParameterService));
+builder.Services.AddScoped(typeof(IParameterValueService), typeof(ParameterValueService));
+builder.Services.AddScoped(typeof(IParametersService), typeof(ParametersService));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
