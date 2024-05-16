@@ -4,8 +4,8 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers
 
 internal class SigmoidMembershipFunction : IMembershipFunction
 {
-    private double Midpoint { get; set; }
-    private double Slope{ get; set; }
+    private readonly double Midpoint;
+    private readonly double Slope;
 
     public SigmoidMembershipFunction(double midpoint, double slope)
     {
