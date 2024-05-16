@@ -18,9 +18,8 @@ public class EvaluatorFuzzyCalculatorApiController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CalulateAsync(List<EvaluationCompetentValueDTO> evaluationCompetentValues) //, List<EvaluateParameterDTO> evaluateParameters)
+    public async Task<IActionResult> CalulateAsync(EvaluatorFuzzyQueryDTO evaluatorFuzzyQuery)
     {
-        var evaluateParameters = new List<EvaluateParameterDTO>();
-        return Ok(await _evaluatorFuzzyCalculatorService.Calculate(evaluationCompetentValues, evaluateParameters));
+        return Ok(await _evaluatorFuzzyCalculatorService.Calculate(evaluatorFuzzyQuery));
     }
 }

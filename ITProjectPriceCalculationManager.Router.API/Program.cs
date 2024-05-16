@@ -14,9 +14,7 @@ builder.Configuration
     .AddUserSecrets(Assembly.GetExecutingAssembly(), true);
 // Add services to the container.
 
-var routeConfiguration = builder.Configuration.GetSection("RouteAPI").Get<RouteSetting>();
-var jwtConfiguration = builder.Configuration.GetSection("JWT").Get<JwtSetting>();
-JwtUtils.SecretKey = jwtConfiguration.Secret;
+JwtUtils.SecretKey = builder.Configuration["Secret"];
 
 builder.Services.AddScoped(typeof(IRouteService), typeof(RouteService));
 builder.Services.AddScoped(typeof(IApplicationService), typeof(ApplicationService));
@@ -30,6 +28,7 @@ builder.Services.AddScoped(typeof(IProgramLanguageService), typeof(ProgramLangua
 builder.Services.AddScoped(typeof(IApplicationToEstimatorsService), typeof(ApplicationToEstimatorsService));
 builder.Services.AddScoped(typeof(IDifficultyLevelsTypeService), typeof(DifficultyLevelsTypeService));
 builder.Services.AddScoped(typeof(IEvaluationParametrsInfoService), typeof(EvaluationParametrsInfoService));
+builder.Services.AddScoped(typeof(IEvaluatorFuzzyCalculatorService), typeof(EvaluatorFuzzyCalculatorService));
 builder.Services.AddScoped(typeof(IApplicationToFactorsService), typeof(ApplicationToFactorsService));
 
 builder.Services.AddControllers();
@@ -38,13 +37,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services
-    .AddHttpClient("AuthServer", client => { client.BaseAddress = new Uri(routeConfiguration.AuthServer); });
+    .AddHttpClient("AuthServer", client => { client.BaseAddress = new Uri(builder.Configuration["AuthServer"]); });
 builder.Services
     .AddHttpClient("ITProjectsCalculator",
-        client => { client.BaseAddress = new Uri(routeConfiguration.ITProjectsCalculatorAPIRoute); });
+        client => { client.BaseAddress = new Uri(builder.Configuration["ITProjectsCalculatorAPIRoute"]); });
 builder.Services
     .AddHttpClient("ITProjectsManager",
-        client => { client.BaseAddress = new Uri(routeConfiguration.ITProjectsManagerAPIRoute); });
+        client => { client.BaseAddress = new Uri(builder.Configuration["ITProjectsManagerAPIRoute"]); });
+builder.Services
+    .AddHttpClient("ITProjectsEvaluatorManager",
+        client => { client.BaseAddress = new Uri(builder.Configuration["ITProjectsEvaluatorManagerAPIRoute"]); });
 
 builder.Services
     .AddAuthentication(options =>
@@ -61,17 +63,17 @@ builder.Services
         {
             ValidateIssuer = true,
             ValidateAudience = true,
-            ValidAudience = jwtConfiguration.ValidAudience,
-            ValidIssuer = jwtConfiguration.ValidIssuer,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfiguration.Secret))
+            ValidAudience = builder.Configuration["ValidAudience"],
+            ValidIssuer = builder.Configuration["ValidIssuer"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Secret"]))
         };
     });
 
 var app = builder.Build();
 
 app.UseCors(
-    builder => builder
-        .WithOrigins(routeConfiguration.OriginUrls)
+    b => b
+        .WithOrigins(builder.Configuration["OriginUrls"].Split(','))
         .SetIsOriginAllowedToAllowWildcardSubdomains()
         .AllowAnyMethod()
         .AllowAnyHeader()

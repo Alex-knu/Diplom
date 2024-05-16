@@ -14,21 +14,21 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
             CREATE PROCEDURE dbo.GetApplicationsByCreator
                 @userId uniqueidentifier
             AS
-            SELECT a.*, '[AS]'.Name AS StatusName
+            SELECT a.*, ApS.Name AS StatusName
             FROM dbo.Applications a
                 INNER JOIN dbo.Evaluators e ON a.CreatorId = e.Id
-                INNER JOIN dbo.ApplicationStatuses '[AS]' ON '[AS]'.Id = a.StatusId
+                INNER JOIN dbo.ApplicationStatuses ApS ON ApS.Id = a.StatusId
             WHERE e.UserId = @userId
             ");
             migrationBuilder.Sql(@"
             CREATE PROCEDURE dbo.GetApplicationsByEvaluator
                 @userId uniqueidentifier
             AS
-            SELECT a.*, '[AS]'.Name AS StatusName
+            SELECT a.*, ApS.Name AS StatusName
             FROM dbo.Applications a
                 INNER JOIN dbo.ApplicationToEvaluators ate ON a.Id = ate.ApplicationId
                 INNER JOIN dbo.Evaluators e ON ate.EvaluatorId = e.Id
-            INNER JOIN dbo.ApplicationStatuses '[AS]' on '[AS]'.Id = a.StatusId
+            INNER JOIN dbo.ApplicationStatuses ApS on ApS.Id = a.StatusId
             WHERE e.UserId = @userId
             GO
             ");
@@ -88,21 +88,11 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Migrations
             GO
             ");
             migrationBuilder.Sql(@"
-            CREATE PROCEDURE dbo.GetAllProgramLanguagesByApplicationId 
-                @applicationId uniqueidentifier
-            AS
-                SELECT pp.Id, pl.Name, pl.SLOC
-                FROM ProgramLanguages pl
-                INNER JOIN ProgramsParametrs pp ON pl.Id = pp.ProgramLanguageId
-                WHERE pp.ApplicationId = @applicationId
-            GO
-            ");
-            migrationBuilder.Sql(@"
             CREATE PROCEDURE dbo.GetApplicationsByAdmin
             AS
-            SELECT a.*, '[AS]'.Name AS StatusName
+            SELECT a.*, ApS.Name AS StatusName
             FROM dbo.Applications a
-            INNER JOIN dbo.ApplicationStatuses '[AS]' on '[AS]'.Id = a.StatusId
+            INNER JOIN dbo.ApplicationStatuses ApS on ApS.Id = a.StatusId
             GO
             ");
         }

@@ -1,6 +1,6 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 
-namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfaces.Services;
+namespace ITProjectPriceCalculationManager.Router.API.Core.Interfaces;
 
 public interface IEvaluatorFuzzyCalculatorService
 {

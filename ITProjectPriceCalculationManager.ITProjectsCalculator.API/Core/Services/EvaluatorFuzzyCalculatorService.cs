@@ -7,13 +7,13 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Service
 
 internal class EvaluatorFuzzyCalculatorService : IEvaluatorFuzzyCalculatorService
 {
-    public Task<double> Calculate(List<EvaluationCompetentValueDTO> evaluationCompetentValues, List<EvaluateParameterDTO> evaluateParameters)
+    public Task<double> Calculate(EvaluatorFuzzyQueryDTO evaluatorFuzzyQuery)
     {
         var fuzzyInputs = new List<double>();
 
-        foreach(var evaluationCompetentValue in evaluationCompetentValues)
+        foreach(var evaluationCompetentValue in evaluatorFuzzyQuery.EvaluationCompetentValues)
         {
-            foreach(var evaluateParameter in evaluateParameters.Where(parameter => parameter.ParameterId == evaluationCompetentValue.EvaluationParameterId))
+            foreach(var evaluateParameter in evaluatorFuzzyQuery.EvaluateParameters.Where(parameter => parameter.ParameterId == evaluationCompetentValue.EvaluationParameterId))
             {
                 fuzzyInputs.Add(SetMembershipFunctionStrategy(evaluateParameter.BelongingFunctionId, evaluateParameter.EvaluateParameterValue.A, evaluateParameter.EvaluateParameterValue.B, evaluateParameter.EvaluateParameterValue.C, evaluateParameter.EvaluateParameterValue.D).CalculateMembership(evaluationCompetentValue.Value));
             }

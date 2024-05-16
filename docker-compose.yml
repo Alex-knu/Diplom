@@ -78,6 +78,9 @@ services:
     ports:
       - "5006:80"
       - "5007:443"
+    env_file:
+      - ./Env/it_projects_manager_api.env
+      - ./Env/jwt.env
     networks:
       it_projects_manager-database-net:
       service-net:
@@ -96,6 +99,9 @@ services:
     build: 
       context: .
       dockerfile: ITProjectPriceCalculationManager.Router.API/Dockerfile
+    env_file:
+      - ./Env/router_api.env
+      - ./Env/jwt.env
     ports:
       - "5008:80"
       - "5009:443"
@@ -117,6 +123,9 @@ services:
     build: 
       context: .
       dockerfile: ITProjectPriceCalculationManager.AuthServer/Dockerfile
+    env_file:
+      - ./Env/auth_server.env
+      - ./Env/jwt.env
     ports:
       - "5010:80"
       - "5011:443"
@@ -137,6 +146,9 @@ services:
     build: 
       context: .
       dockerfile: ITProjectPriceCalculationManager.EvaluatorManager.API/Dockerfile
+    env_file:
+      - ./Env/evaluator_manager_api.env
+      - ./Env/jwt.env
     ports:
       - "5012:80"
       - "5013:443"
@@ -203,7 +215,7 @@ services:
     ports:
       - 5102:1433
     networks:
-      security-database-net:
+      evaluator-database-net:
         aliases:
           - it_project_price_calculation_manager.evaluator_manager.postgres
     volumes:
