@@ -1,7 +1,5 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.Router.API.Core.Interfaces;
-using ITProjectPriceCalculationManager.Router.API.Core.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITProjectPriceCalculationManager.Router.API.Controllers;
@@ -21,9 +19,8 @@ public class EvaluatorFuzzyCalculatorManagerController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CalculateApplicationPrice(List<EvaluationCompetentValueDTO> evaluationCompetentValues)
+    public async Task<IActionResult> CalculateApplicationPrice(EvaluatorFuzzyQueryDTO evaluatorFuzzyQuery)
     {
-        List<EvaluateParameterDTO> evaluateParameters = new();
-        return Ok(await _calculatorService.Calculate(evaluationCompetentValues, evaluateParameters));
+        return Ok(await _calculatorService.Calculate(evaluatorFuzzyQuery));
     }
 }

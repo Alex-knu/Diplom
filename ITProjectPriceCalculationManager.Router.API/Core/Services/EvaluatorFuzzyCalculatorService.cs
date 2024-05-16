@@ -14,8 +14,8 @@ internal class EvaluatorFuzzyCalculatorService : IEvaluatorFuzzyCalculatorServic
         _routeService = routeService;
     }
 
-    public async Task<double> Calculate(List<EvaluationCompetentValueDTO> evaluationCompetentValues, List<EvaluateParameterDTO> evaluateParameters)
+    public async Task<double> Calculate(EvaluatorFuzzyQueryDTO evaluatorFuzzyQuery)
     {
-        return await _routeService.PostAsJsonAsync<List<EvaluationCompetentValueDTO>, double>(_calculatorClient, "evaluatorfuzzycalculatorapi", evaluationCompetentValues);
+        return await _routeService.PostAsJsonAsync<EvaluatorFuzzyQueryDTO, double>(_calculatorClient, "evaluatorfuzzycalculatorapi", evaluatorFuzzyQuery);
     }
 }

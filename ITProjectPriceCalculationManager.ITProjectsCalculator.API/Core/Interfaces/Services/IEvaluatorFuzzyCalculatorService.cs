@@ -4,5 +4,5 @@ namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfa
 
 public interface IEvaluatorFuzzyCalculatorService
 {
-    Task<double> Calculate(List<EvaluationCompetentValueDTO> evaluationCompetentValues, List<EvaluateParameterDTO> evaluateParameters);
+    Task<double> Calculate(EvaluatorFuzzyQueryDTO evaluatorFuzzyQuery);
 }
