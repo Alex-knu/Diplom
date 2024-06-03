@@ -6,18 +6,17 @@ import { Application } from 'src/app/shared/models/application.model';
 import { BaseApplication } from 'src/app/shared/models/baseApplication.model';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BaseApplicationService } from 'src/app/shared/services/api/baseApplication.service';
-import { ApplicationInfoComponent } from '../application-info/application-info.component';
-import { ApplicationEvaluationGroupComponent } from '../application-evaluation-group/application-evaluation-group.component';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ROLE_ADMIN, ROLE_EVALUATOR, ROLE_USER } from 'src/app/shared/constants';
 import { CalculateApplicationService } from 'src/app/shared/services/api/calculateApplication.service';
+import { ApplicationEvaluationParameterInfoComponent } from '../application-evaluate-paramete-info/application-evaluate-paramete-info.component';
 
 @Component({
-  selector: 'app-application-table',
-  templateUrl: './application-table.component.html',
-  styleUrls: ['./application-table.component.scss']
+  selector: 'application-evaluate-paramete-table',
+  templateUrl: './application-evaluate-paramete-table.component.html',
+  styleUrls: ['./application-evaluate-paramete-table.component.scss']
 })
-export class ApplicationTableComponent {
+export class ApplicationEvaluationParameterTableComponent {
   admin = ROLE_ADMIN;
   evaluator = ROLE_EVALUATOR;
   user = ROLE_USER;
@@ -59,7 +58,7 @@ export class ApplicationTableComponent {
   editApplication(application: BaseApplication) {
     this.application = application;
 
-    this.ref = this.dialogService.open(ApplicationInfoComponent, {
+    this.ref = this.dialogService.open(ApplicationEvaluationParameterInfoComponent, {
       header: 'Деталі заявки',
       data: application,
       contentStyle: { overflow: 'auto' },
@@ -101,7 +100,7 @@ export class ApplicationTableComponent {
   }
 
   openNew() {
-    this.ref = this.dialogService.open(ApplicationInfoComponent, {
+    this.ref = this.dialogService.open(ApplicationEvaluationParameterInfoComponent, {
       header: 'Деталі заявки',
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,
@@ -119,46 +118,5 @@ export class ApplicationTableComponent {
         this.messageService.add({ severity: 'info', summary: 'Список оновлено', detail: application.name });
       }
     });
-  }
-
-  addEstimatorGroup(applicationId: string) {
-    this.ref = this.dialogService.open(ApplicationEvaluationGroupComponent, {
-      header: 'Група експертів',
-      data: { id: applicationId },
-      width: '20%',
-      height: '35%',
-      contentStyle: { overflow: 'auto' },
-      baseZIndex: 10000,
-      maximizable: true
-    });
-  }
-
-  redirectToEvaluationForm(applicationId: string) {
-    this.router.navigate(['/application/application-evaluation'], { queryParams: { applicationId } });
-  }
-
-  redirectToEvaluationParameterForm(applicationId: string) {
-    this.router.navigate(['/application/application-evaluate-paramete-table'], { queryParams: { applicationId } });
-  }
-
-  isVisible(role: string): boolean {
-    return this.authService.checkRole(role);
-  }
-
-  calculate(applicationId: string) {
-    this.calculateApplicationService.single.create({applicationId: applicationId}).subscribe(
-    application => {
-
-      this.baseApplicationService.collection.getAll()
-          .subscribe(
-            (applications) => {
-              this.applications = applications;
-            });
-
-      this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Заявку обраховано' });
-    },
-    error => {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
-    })
   }
 }
