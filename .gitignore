@@ -32,3 +32,5 @@ ITProjectPriceCalculationManager.Router.API/bin/*
 compose-dev.yaml
 shutdown.sh
 .env
+
+*/appsettings.Development.json
