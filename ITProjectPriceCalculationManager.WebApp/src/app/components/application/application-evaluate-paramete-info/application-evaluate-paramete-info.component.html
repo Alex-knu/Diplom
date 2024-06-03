@@ -1,0 +1,69 @@
+<div class="card" *ngIf="application && programLanguages">
+  <div class="p-field">
+    <label for="name">Назва</label>
+    <div class="p-field">
+      <input type="text" pInputText id="name" [(ngModel)]="application.name" required autofocus />
+      <small class="p-invalid" *ngIf="submitted && !application.name">Name is required.</small>
+    </div>
+  </div>
+
+  <div class="p-field">
+    <label for="description">Опис</label>
+    <div class="p-field">
+      <textarea id="description" pInputTextarea [(ngModel)]="application.description" required rows="3"
+        cols="20"></textarea>
+    </div>
+  </div>
+
+  <div class="p-field">
+    <label for="description">Прибуток</label>
+    <div class="p-field">
+      <p-inputNumber inputId="profit" [(ngModel)]="application.profit"></p-inputNumber>
+    </div>
+  </div>
+
+  <div class="p-field">
+    <label for="description">Мови програмування</label>
+    <div class="p-field">
+      <p-multiSelect [options]="programLanguages" [(ngModel)]="application.programLanguages" [filter]="true" optionLabel="name"></p-multiSelect>
+    </div>
+  </div>
+
+  <div class="p-field">
+    <label for="description">Зона довіри</label>
+    <div class="p-field">
+      <p-inputNumber inputId="profit" [(ngModel)]="application.confidenceArea"></p-inputNumber>
+    </div>
+  </div>
+
+  <div class="p-field">
+    <label for="description">Накладні витрати</label>
+    <div class="p-field">
+      <p-inputNumber inputId="profit" [(ngModel)]="application.overhead"></p-inputNumber>
+    </div>
+  </div>
+
+  <div class="p-field">
+    <label for="description">Соціальне страхування</label>
+    <div class="p-field">
+      <p-inputNumber inputId="profit" [(ngModel)]="application.socialInsurance"></p-inputNumber>
+    </div>
+  </div>
+
+  <div class="p-field">
+    <label for="description">Середня вартість робочої сили</label>
+    <div class="p-field">
+      <p-inputNumber inputId="profit" [(ngModel)]="application.averageCostLabor"></p-inputNumber>
+    </div>
+  </div>
+
+  <div class="p-field">
+    <label for="description">Середньомісячна ставка робочі години</label>
+    <div class="p-field">
+      <p-inputNumber inputId="profit" [(ngModel)]="application.averageMonthlyRateWorkingHours"></p-inputNumber>
+    </div>
+  </div>
+
+  <button pButton pRipple label="Зберегти" icon="pi pi-check" class="p-button-text"
+    (click)="saveApplication()"></button>
+</div>

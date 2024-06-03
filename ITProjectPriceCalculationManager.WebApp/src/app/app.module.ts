@@ -22,6 +22,8 @@ import { UserTableComponent } from './components/users/user-table/user-table.com
 import { UserInfoComponent } from './components/users/user-info/user-info.component';
 import { EvaluatorTableComponent } from './components/evaluator/evaluator-table/evaluator-table.component';
 import { EvaluatorInfoComponent } from './components/evaluator/evaluator-info/evaluator-info.component';
+import { ApplicationEvaluationParameterTableComponent } from './components/application/application-evaluate-paramete-table/application-evaluate-paramete-table.component';
+import { ApplicationEvaluationParameterInfoComponent } from './components/application/application-evaluate-paramete-info/application-evaluate-paramete-info.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { EvaluatorInfoComponent } from './components/evaluator/evaluator-info/ev
     ApplicationTableComponent,
     ApplicationEvaluationComponent,
     ApplicationEvaluationGroupComponent,
+    ApplicationEvaluationParameterInfoComponent,
+    ApplicationEvaluationParameterTableComponent,
     DepartmentTreeComponent,
     DepartmentInfoComponent,
     ErrorComponent,
