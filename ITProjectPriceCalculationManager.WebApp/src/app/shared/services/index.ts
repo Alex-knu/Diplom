@@ -14,6 +14,10 @@ import { DepartmentTreeService } from "./api/departmentTree.service";
 import { UserService } from "./api/user.service";
 import { RoleService } from "./api/role.service";
 import { CalculateApplicationService } from "./api/calculateApplication.service";
+import { BelongingFunctionService } from "./api/belongingFunction.service";
+import { EvaluateParameterService } from "./api/evaluateParameter.service";
+import { ParameterService } from "./api/parameter.service";
+import { ParameterValueService } from "./api/parameterValue.service";
 
 export const services = [
   HttpService,
@@ -23,6 +27,10 @@ export const services = [
   ApplicationToEstimatorsService,
   ApplicationToFactorsService,
   BaseApplicationService,
+  BelongingFunctionService,
+  EvaluateParameterService,
+  ParameterService,
+  ParameterValueService,
   CalculateApplicationService,
   DepartmentService,
   DepartmentTreeService,
