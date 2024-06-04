@@ -1,15 +1,16 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { Application } from 'src/app/shared/models/application.model';
 import { BaseApplication } from 'src/app/shared/models/baseApplication.model';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BaseApplicationService } from 'src/app/shared/services/api/baseApplication.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { ROLE_ADMIN, ROLE_EVALUATOR, ROLE_USER } from 'src/app/shared/constants';
 import { CalculateApplicationService } from 'src/app/shared/services/api/calculateApplication.service';
 import { ApplicationEvaluationParameterInfoComponent } from '../application-evaluate-paramete-info/application-evaluate-paramete-info.component';
+import { ParameterService } from 'src/app/shared/services/api/parameter.service';
+import { Parameter } from 'src/app/shared/models/parameter.model';
 
 @Component({
   selector: 'application-evaluate-paramete-table',
@@ -17,11 +18,9 @@ import { ApplicationEvaluationParameterInfoComponent } from '../application-eval
   styleUrls: ['./application-evaluate-paramete-table.component.scss']
 })
 export class ApplicationEvaluationParameterTableComponent {
-  admin = ROLE_ADMIN;
-  evaluator = ROLE_EVALUATOR;
-  user = ROLE_USER;
-
   loading: boolean = false;
+  applicationId: string;
+  parameters: Parameter[];
   applications: BaseApplication[];
   application: BaseApplication;
   selectedApplications: BaseApplication[];
@@ -29,20 +28,27 @@ export class ApplicationEvaluationParameterTableComponent {
 
   constructor(
     private router: Router,
+    private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private calculateApplicationService: CalculateApplicationService,
+    private parameterService: ParameterService,
     private baseApplicationService: BaseApplicationService,
     private dialogService: DialogService,
     private authService: AuthService) { }
 
   ngOnInit() {
     this.loading = true;
+    this.activatedRoute.queryParams
+      .subscribe(params => {
+        this.applicationId = params['applicationId'];
+      });
+
     setTimeout(() => {
-      this.baseApplicationService.collection.getAll()
+      this.parameterService.collection.getListById(this.applicationId)
         .subscribe(
-          (applications) => {
-            this.applications = applications;
+          (parameters) => {
+            this.parameters= parameters;
           });
 
       this.loading = false;
