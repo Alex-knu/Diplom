@@ -1,7 +1,7 @@
 <div class="card">
   <p-toast></p-toast>
-  <p-table #dt [value]="applications" [rows]="10" [paginator]="true"
-    [globalFilterFields]="['name','country.name','representative.name','status']" [(selection)]="selectedApplications"
+  <p-table #dt [value]="parameters" [rows]="10" [paginator]="true"
+    [globalFilterFields]="['name']" [(selection)]="selectedApplications"
     [rowHover]="true" dataKey="id" currentPageReportTemplate="показати з {first} по {last} із {totalRecords}"
     [showCurrentPageReport]="true">
     <ng-template pTemplate="caption">
@@ -20,8 +20,6 @@
           <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
         </th>
         <th pSortableColumn="name">Назва<p-sortIcon field="name"></p-sortIcon></th>
-        <th pSortableColumn="price">Ціна<p-sortIcon field="price"></p-sortIcon></th>
-        <th pSortableColumn="inventoryStatus">Статус<p-sortIcon field="inventoryStatus"></p-sortIcon></th>
         <th></th>
       </tr>
     </ng-template>
@@ -31,7 +29,6 @@
         <td>
           <p-tableCheckbox [value]="application"></p-tableCheckbox>
         </td>
-        <td>{{application.name}}</td>
         <td>{{application.price}}</td>
         <td>
           <span
