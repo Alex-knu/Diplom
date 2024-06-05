@@ -12,6 +12,9 @@ internal class ParametersConfiguration : IEntityTypeConfiguration<Parameters>
         builder.Property(p => p.Name)
             .IsRequired();
 
+        builder.Property(ep => ep.ApplicationId)
+            .IsRequired();
+
         builder
             .HasOne(p => p.ParameterValue)
             .WithOne(pv => pv.Parameter)

@@ -4,6 +4,7 @@ namespace ITProjectPriceCalculationManager.Router.API.Core.Interfaces;
 
 public interface IParametersService
 {
+    Task<IEnumerable<ParametersDTO>> GetParameterByApplicationIdAsync(Guid applicationId);
     Task<IEnumerable<ParametersDTO>> GetParametersAsync();
     Task<ParametersDTO> GetParametersByIdAsync(Guid id);
     Task<ParametersDTO> CreateParametersAsync(ParametersDTO dto);

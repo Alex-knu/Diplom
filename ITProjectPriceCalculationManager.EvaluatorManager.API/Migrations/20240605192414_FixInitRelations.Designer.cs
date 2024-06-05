@@ -4,6 +4,7 @@ using ITProjectPriceCalculationManager.EvaluatorManager.API.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Migrations
 {
     [DbContext(typeof(ITProjectPriceCalculationEvaluatorManagerDbContext))]
-    partial class ITProjectPriceCalculationEvaluatorManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240605192414_FixInitRelations")]
+    partial class FixInitRelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

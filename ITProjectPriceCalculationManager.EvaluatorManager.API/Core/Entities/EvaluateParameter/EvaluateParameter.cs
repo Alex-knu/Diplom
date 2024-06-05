@@ -5,7 +5,6 @@ namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.Ev
 internal class EvaluateParameter : IBaseEntity<Guid>
 {
     public string Name { get; set; }
-    public Guid ApplicationId { get; set; }
     public Guid BelongingFunctionId { get; set; }
     public Guid ParameterId { get; set; }
     public Guid Id { get; set; }

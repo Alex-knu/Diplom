@@ -41,4 +41,11 @@ internal class ParametersService : BaseService<Parameters, Guid, ParametersDTO>,
     {
         return await base.UpdateEntityAsync(Parameters);
     }
+
+    public async Task<IEnumerable<ParametersDTO>> GetParametersByApplicationIdAsync(Guid applicationId)
+    {
+        var domainEntity = await _repository.GetAllAsync();
+
+        return _mapper.Map<IEnumerable<ParametersDTO>>(domainEntity.Where(param => param.ApplicationId == applicationId));
+    }
 }
