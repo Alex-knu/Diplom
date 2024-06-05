@@ -4,6 +4,7 @@ namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Interfaces.
 
 public interface IParametersService
 {
+    Task<IEnumerable<ParametersDTO>> GetParametersByApplicationIdAsync(Guid applicationId);
     Task<IEnumerable<ParametersDTO>> GetParametersAsync();
     Task<ParametersDTO> GetParametersByIdAsync(Guid id);
     Task<ParametersDTO> CreateParametersAsync(ParametersDTO dto);

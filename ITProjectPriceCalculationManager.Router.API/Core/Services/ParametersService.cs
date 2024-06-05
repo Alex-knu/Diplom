@@ -34,6 +34,11 @@ internal class ParametersService : IParametersService
         return await _routeService.GetAllAsync<List<ParametersDTO>>(_evaluatorClient, "parametersapi");
     }
 
+    public async Task<IEnumerable<ParametersDTO>> GetParameterByApplicationIdAsync(Guid applicationId)
+    {
+        return await _routeService.GetListByIdAsync<List<ParametersDTO>, Guid>(_evaluatorClient, "parametersapi", applicationId);
+    }
+
     public async Task<ParametersDTO> UpdateParametersAsync(ParametersDTO parameter)
     {
         return await _routeService.PutAsJsonAsync<ParametersDTO, ParametersDTO>(_evaluatorClient, "parametersapi", parameter);

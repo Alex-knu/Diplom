@@ -12,9 +12,6 @@ internal class EvaluateParameterConfiguration : IEntityTypeConfiguration<Evaluat
         builder.Property(ep => ep.Name)
             .IsRequired();
 
-        builder.Property(ep => ep.ApplicationId)
-            .IsRequired();
-
         builder.Property(ep => ep.BelongingFunctionId)
             .IsRequired();
 

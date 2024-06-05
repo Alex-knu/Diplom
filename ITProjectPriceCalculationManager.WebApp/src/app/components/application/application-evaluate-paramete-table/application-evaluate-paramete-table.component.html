@@ -24,21 +24,17 @@
       </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-application>
+    <ng-template pTemplate="body" let-parameter>
       <tr>
         <td>
-          <p-tableCheckbox [value]="application"></p-tableCheckbox>
+          <p-tableCheckbox [value]="parameter"></p-tableCheckbox>
         </td>
-        <td>{{application.price}}</td>
-        <td>
-          <span
-            [class]="'application-badge status-' + application.statusName.toLowerCase()">{{application.statusName}}</span>
-        </td>
+        <td>{{parameter.name}}</td>
         <td>
           <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
-            (click)="editApplication(application)"></button>
+            (click)="editParameter(parameter)"></button>
           <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
-            (click)="deleteApplication(application)"></button>
+            (click)="deleteParameter(parameter)"></button>
       </tr>
     </ng-template>
 

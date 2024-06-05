@@ -16,8 +16,15 @@ public class ParametersApiController : ControllerBase
     }
 
     [HttpGet]
+    [Route("collection/{applicationId}")]
+    public async Task<IActionResult> GetAllRulessByApplicationId([FromRoute] Guid applicationId)
+    {
+        return Ok(await _ParametersService.GetParametersByApplicationIdAsync(applicationId));
+    }
+
+    [HttpGet]
     [Route("collection")]
-    public async Task<IActionResult> GetAllParameterss()
+    public async Task<IActionResult> GetAllParameters()
     {
         return Ok(await _ParametersService.GetParametersAsync());
     }
@@ -41,7 +48,7 @@ public class ParametersApiController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteParameters(Guid id)
+    public async Task<IActionResult> DeleteParameters([FromBody] Guid id)
     {
         return Ok(await _ParametersService.DeleteParametersAsync(id));
     }

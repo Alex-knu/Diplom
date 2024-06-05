@@ -2,7 +2,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService, ConfirmationService } from 'primeng/api';
-import { Application } from 'src/app/shared/models/application.model';
 import { BaseApplication } from 'src/app/shared/models/baseApplication.model';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BaseApplicationService } from 'src/app/shared/services/api/baseApplication.service';
@@ -22,7 +21,7 @@ export class ApplicationEvaluationParameterTableComponent {
   applicationId: string;
   parameters: Parameter[];
   applications: BaseApplication[];
-  application: BaseApplication;
+  parameter: Parameter;
   selectedApplications: BaseApplication[];
   ref: DynamicDialogRef;
 
@@ -61,41 +60,42 @@ export class ApplicationEvaluationParameterTableComponent {
     }
   }
 
-  editApplication(application: BaseApplication) {
-    this.application = application;
-
+  editParameter(parameter: Parameter) {
     this.ref = this.dialogService.open(ApplicationEvaluationParameterInfoComponent, {
-      header: 'Деталі заявки',
-      data: application,
+      header: 'Деталі параметра',
+      data: {
+        parameter: parameter, 
+        applicationId: this.applicationId
+      },
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,
       maximizable: true
     });
 
-    this.ref.onClose.subscribe((application: BaseApplication) => {
-      if (application && application.id) {
-        this.baseApplicationService.collection.getAll()
-          .subscribe(
-            (applications) => {
-              this.applications = applications;
-            });
+    this.ref.onClose.subscribe((parameter: Parameter) => {
+      if (parameter && parameter.id) {
+        this.parameterService.collection.getListById(this.applicationId)
+        .subscribe(
+          (parameters) => {
+            this.parameters= parameters;
+          });
 
-        this.messageService.add({ severity: 'info', summary: 'Список оновлено', detail: application.name });
+        this.messageService.add({ severity: 'info', summary: 'Список оновлено', detail: parameter.name });
       }
     });
   }
 
-  deleteApplication(application: Application) {
+  deleteParameter(parameter: Parameter) {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete ' + application.name + '?',
+      message: 'Are you sure you want to delete ' + parameter.name + '?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        if (application.id) {
-          this.baseApplicationService.single.deleteById(application.id).subscribe(
-            application => {
-              this.applications = this.applications.filter(val => val.id !== application.id);
-              this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Заявку видалено' });
+        if (parameter.id) {
+          this.parameterService.single.deleteById(parameter.id).subscribe(
+            parameter => {
+              this.parameters = this.parameters.filter(val => val.id !== parameter.id);
+              this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Параметер видалено' });
             },
             error => {
               this.messageService.add({ severity: 'error', summary: 'Error', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
@@ -107,21 +107,24 @@ export class ApplicationEvaluationParameterTableComponent {
 
   openNew() {
     this.ref = this.dialogService.open(ApplicationEvaluationParameterInfoComponent, {
-      header: 'Деталі заявки',
+      header: 'Деталі параметру',
+      data: {
+        applicationId: this.applicationId
+      },
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,
       maximizable: true
     });
 
-    this.ref.onClose.subscribe((application: BaseApplication) => {
-      if (application && application.id) {
-        this.baseApplicationService.collection.getAll()
-          .subscribe(
-            (applications) => {
-              this.applications = applications;
-            });
+    this.ref.onClose.subscribe((parameter: Parameter) => {
+      if (parameter && parameter.id) {
+        this.parameterService.collection.getListById(this.applicationId)
+        .subscribe(
+          (parameters) => {
+            this.parameters= parameters;
+          });
 
-        this.messageService.add({ severity: 'info', summary: 'Список оновлено', detail: application.name });
+        this.messageService.add({ severity: 'info', summary: 'Список оновлено', detail: parameter.name });
       }
     });
   }

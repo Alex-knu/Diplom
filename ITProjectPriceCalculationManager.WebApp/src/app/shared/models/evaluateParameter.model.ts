@@ -9,7 +9,6 @@ export class EvaluateParameter extends BaseModel {
   }
 
   name: string;
-  applicationId: string;
   belongingFunctionId: string;
   parameterId: string;
 
