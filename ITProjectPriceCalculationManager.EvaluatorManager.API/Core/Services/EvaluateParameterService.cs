@@ -27,6 +27,13 @@ internal class EvaluateParameterService : BaseService<EvaluateParameter, Guid, E
         throw new NotImplementedException();
     }
 
+    public async Task<IEnumerable<EvaluateParameterDTO>> GetEvaluateParametersByParameterIdAsync(Guid parameterId)
+    {
+        var domainEntity = await _repository.GetAllAsync();
+
+        return _mapper.Map<IEnumerable<EvaluateParameterDTO>>(domainEntity.Where(param => param.ParameterId == parameterId));
+    }
+
     public async Task<IEnumerable<EvaluateParameterDTO>> GetEvaluateParameterAsync()
     {
         return await base.GetEntitysAsync();

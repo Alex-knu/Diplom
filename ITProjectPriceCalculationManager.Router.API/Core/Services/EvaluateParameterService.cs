@@ -24,6 +24,11 @@ internal class EvaluateParameterService : IEvaluateParameterService
         return await _routeService.DeleteAsJsonAsync<EvaluateParameterDTO, Guid>(_evaluatorClient, "evaluateparameterapi", id);
     }
 
+    public async Task<IEnumerable<EvaluateParameterDTO>> GetEvaluateParametersByParameterIdAsync(Guid parameterId)
+    {
+        return await _routeService.GetListByIdAsync<List<EvaluateParameterDTO>, Guid>(_evaluatorClient, "evaluateparameterapi", parameterId);
+    }
+
     public async Task<IEnumerable<EvaluateParameterDTO>> GetEvaluateParameterAsync()
     {
         return await _routeService.GetAllAsync<List<EvaluateParameterDTO>>(_evaluatorClient, "evaluateparameterapi");

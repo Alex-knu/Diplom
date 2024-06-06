@@ -1,6 +1,6 @@
 import { BaseModel } from "./base.model";
 import { BelongingFunction } from "./belongingFunction.model";
-import { Parameter } from "./parameter.model";
+import {ParameterValue} from "./parameterValue.model";
 
 export class EvaluateParameter extends BaseModel {
 
@@ -12,6 +12,6 @@ export class EvaluateParameter extends BaseModel {
   belongingFunctionId: string;
   parameterId: string;
 
+  parameterValue: ParameterValue | null;
   belongingFunction: BelongingFunction | null;
-  parameter: Parameter | null;
 }
