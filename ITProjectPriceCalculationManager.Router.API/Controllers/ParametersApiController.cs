@@ -17,7 +17,7 @@ public class ParametersApiController : ControllerBase
 
     [HttpGet]
     [Route("collection/{applicationId}")]
-    public async Task<IActionResult> GetAllRulessByApplicationId([FromRoute] Guid applicationId)
+    public async Task<IActionResult> GetParameterByApplicationId([FromRoute] Guid applicationId)
     {
         return Ok(await _ParametersService.GetParameterByApplicationIdAsync(applicationId));
     }

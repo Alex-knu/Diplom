@@ -16,18 +16,16 @@
 
     <ng-template pTemplate="header">
       <tr>
-        <th style="width: 3rem">
-          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-        </th>
+        <th style="width: 5rem"></th>
         <th pSortableColumn="name">Назва<p-sortIcon field="name"></p-sortIcon></th>
         <th></th>
       </tr>
     </ng-template>
 
-    <ng-template pTemplate="body" let-parameter>
+    <ng-template pTemplate="body" let-parameter let-expanded="expanded">
       <tr>
         <td>
-          <p-tableCheckbox [value]="parameter"></p-tableCheckbox>
+          <p-button type="button" pRipple [pRowToggler]="parameter" (click)="getEvaluationParameters(parameter)" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
         </td>
         <td>{{parameter.name}}</td>
         <td>
@@ -37,6 +35,33 @@
             (click)="deleteParameter(parameter)"></button>
       </tr>
     </ng-template>
+    <ng-template pTemplate="rowexpansion" let-parameter>
+    <tr>
+      <td colspan="7">
+        <div class="p-3">
+          <p-table [value]="parameter.evaluationParameters" dataKey="id">
+            <ng-template pTemplate="header">
+              <tr>
+                <th pSortableColumn="name">Назва <p-sortIcon field="name" /></th>
+                <th pSortableColumn="belongingFunction">Функція належності <p-sortIcon field="belongingFunction" /></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-evaluationParameter>
+              <tr>
+                <td>{{ evaluationParameter.name }}</td>
+                <td>{{ evaluationParameter.belongingFunction?.name }}</td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="6">There are no order for this product yet.</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
 
   </p-table>
 </div>

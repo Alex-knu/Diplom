@@ -14,6 +14,13 @@ public class EvaluateParameterApiController : ControllerBase
     {
         _EvaluateParameterService = EvaluateParameterService;
     }
+    
+    [HttpGet]
+    [Route("collection/{parameterId}")]
+    public async Task<IActionResult> GetEvaluateParametersByParameterId([FromRoute] Guid parameterId)
+    {
+        return Ok(await _EvaluateParameterService.GetEvaluateParametersByParameterIdAsync(parameterId));
+    }
 
     [HttpGet]
     [Route("collection")]

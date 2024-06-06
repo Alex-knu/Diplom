@@ -7,5 +7,6 @@ public class EvaluateParameterDTO
     public Guid ParameterId { get; set; }
     public Guid Id { get; set; }
 
+    public BelongingFunctionDTO BelongingFunction { get; set; }
     public ParameterValueDTO EvaluateParameterValue { get; set; }
 }

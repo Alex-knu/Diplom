@@ -1,15 +1,14 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { BaseApplication } from 'src/app/shared/models/baseApplication.model';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { BaseApplicationService } from 'src/app/shared/services/api/baseApplication.service';
-import { AuthService } from 'src/app/shared/services/auth.service';
-import { CalculateApplicationService } from 'src/app/shared/services/api/calculateApplication.service';
 import { ApplicationEvaluationParameterInfoComponent } from '../application-evaluate-paramete-info/application-evaluate-paramete-info.component';
 import { ParameterService } from 'src/app/shared/services/api/parameter.service';
 import { Parameter } from 'src/app/shared/models/parameter.model';
+import {ParameterValueService} from "../../../shared/services/api/parameterValue.service";
+import {EvaluateParameterService} from "../../../shared/services/api/evaluateParameter.service";
 
 @Component({
   selector: 'application-evaluate-paramete-table',
@@ -26,15 +25,12 @@ export class ApplicationEvaluationParameterTableComponent {
   ref: DynamicDialogRef;
 
   constructor(
-    private router: Router,
     private activatedRoute: ActivatedRoute,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private calculateApplicationService: CalculateApplicationService,
     private parameterService: ParameterService,
-    private baseApplicationService: BaseApplicationService,
-    private dialogService: DialogService,
-    private authService: AuthService) { }
+    private evaluateParameterService: EvaluateParameterService,
+    private dialogService: DialogService) { }
 
   ngOnInit() {
     this.loading = true;
@@ -64,7 +60,7 @@ export class ApplicationEvaluationParameterTableComponent {
     this.ref = this.dialogService.open(ApplicationEvaluationParameterInfoComponent, {
       header: 'Деталі параметра',
       data: {
-        parameter: parameter, 
+        parameter: parameter,
         applicationId: this.applicationId
       },
       contentStyle: { overflow: 'auto' },
@@ -127,5 +123,15 @@ export class ApplicationEvaluationParameterTableComponent {
         this.messageService.add({ severity: 'info', summary: 'Список оновлено', detail: parameter.name });
       }
     });
+  }
+
+  getEvaluationParameters(parameter: Parameter) {
+    if (parameter.id) {
+      this.evaluateParameterService.collection.getListById(parameter.id)
+        .subscribe(
+          (evaluationParameters) => {
+            this.parameter.evaluationParameters = evaluationParameters;
+          });
+    }
   }
 }

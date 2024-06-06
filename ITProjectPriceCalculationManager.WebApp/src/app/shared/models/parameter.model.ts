@@ -1,5 +1,5 @@
 import { BaseModel } from "./base.model";
-import { ParameterValue } from "./parameterValue.model";
+import {EvaluateParameter} from "./evaluateParameter.model";
 
 export class Parameter extends BaseModel {
 
@@ -9,5 +9,5 @@ export class Parameter extends BaseModel {
 
   name: string;
   applicationId: string;
-  parameterValue: ParameterValue | null;
+  evaluationParameters: EvaluateParameter[];
 }
