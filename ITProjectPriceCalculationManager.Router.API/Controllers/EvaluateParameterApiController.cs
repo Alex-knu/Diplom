@@ -48,7 +48,8 @@ public class EvaluateParameterApiController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteEvaluateParameter(Guid id)
+    [Route("{id}")]
+    public async Task<IActionResult> DeleteEvaluateParameter([FromRoute] Guid id)
     {
         return Ok(await _EvaluateParameterService.DeleteEvaluateParameterAsync(id));
     }

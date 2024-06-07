@@ -41,7 +41,7 @@ public class ParameterValueApiController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteParameterValue(Guid id)
+    public async Task<IActionResult> DeleteParameterValue([FromBody] Guid id)
     {
         return Ok(await _ParameterValueService.DeleteParameterValueAsync(id));
     }

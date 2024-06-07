@@ -7,8 +7,10 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ApplicationEvaluationParameterInfoComponent } from '../application-evaluate-paramete-info/application-evaluate-paramete-info.component';
 import { ParameterService } from 'src/app/shared/services/api/parameter.service';
 import { Parameter } from 'src/app/shared/models/parameter.model';
-import {ParameterValueService} from "../../../shared/services/api/parameterValue.service";
 import {EvaluateParameterService} from "../../../shared/services/api/evaluateParameter.service";
+import { ApplicationEvaluationParameterDetalesComponent } from "../application-evaluation-paramete-info/application-evaluation-parameter-info.component";
+import { belongingFunctions } from "../../../shared/constants";
+import {EvaluateParameter} from "../../../shared/models/evaluateParameter.model";
 
 @Component({
   selector: 'application-evaluate-paramete-table',
@@ -127,11 +129,83 @@ export class ApplicationEvaluationParameterTableComponent {
 
   getEvaluationParameters(parameter: Parameter) {
     if (parameter.id) {
+      this.loading = true;
       this.evaluateParameterService.collection.getListById(parameter.id)
+        .subscribe(
+          (evaluationParameters) => {
+            parameter.evaluationParameters = evaluationParameters;
+          });
+
+      this.loading = false;
+    }
+  }
+
+  addParameterInfo(parameterId: string) {
+    this.ref = this.dialogService.open(ApplicationEvaluationParameterDetalesComponent, {
+      header: 'Деталі параметру',
+      data: {
+        parameterId: parameterId
+      },
+      contentStyle: {overflow: 'auto'},
+      baseZIndex: 10000,
+      maximizable: true
+    });
+
+    if (parameterId) {
+      this.evaluateParameterService.collection.getListById(parameterId)
         .subscribe(
           (evaluationParameters) => {
             this.parameter.evaluationParameters = evaluationParameters;
           });
     }
+  }
+
+  editParameterInfo(evaluateParameter: EvaluateParameter) {
+    this.ref = this.dialogService.open(ApplicationEvaluationParameterDetalesComponent, {
+      header: 'Деталі параметра',
+      data: {
+        evaluateParameter: evaluateParameter
+      },
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000,
+      maximizable: true
+    });
+
+    this.ref.onClose.subscribe((evaluateParameter: EvaluateParameter) => {
+      if (evaluateParameter && evaluateParameter.id) {
+        this.evaluateParameterService.collection.getListById(this.applicationId)
+          .subscribe(
+            (parameters) => {
+              this.parameters= parameters;
+            });
+
+        this.messageService.add({ severity: 'info', summary: 'Список оновлено', detail: evaluateParameter.name });
+      }
+    });
+  }
+
+  deleteParameterInfo(parameter: Parameter, evaluateParameter: EvaluateParameter) {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete ' + evaluateParameter.name + '?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        if (evaluateParameter.id) {
+          this.evaluateParameterService.single.deleteById(evaluateParameter.id).subscribe(
+            evaluateParameter => {
+              parameter.evaluationParameters = parameter.evaluationParameters
+                .filter(val => val.id !== evaluateParameter.id);
+              this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Параметер видалено' });
+            },
+            error => {
+              this.messageService.add({ severity: 'error', summary: 'Error', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
+            })
+        }
+      }
+    });
+  }
+
+  getBelongingFunctionsNameById(belongingFunctionId: string) {
+    return belongingFunctions.find(bf => bf.id == belongingFunctionId)?.name;
   }
 }
