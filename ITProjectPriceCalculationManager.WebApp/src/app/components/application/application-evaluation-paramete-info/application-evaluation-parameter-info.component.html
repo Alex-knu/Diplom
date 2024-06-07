@@ -1,0 +1,52 @@
+<div class="card">
+  <div class="p-field">
+    <label for="name">Назва</label>
+    <div class="p-field">
+      <input type="text" pInputText id="name" [(ngModel)]="evaluateParameter.name" required autofocus />
+      <small class="p-invalid" *ngIf="submitted && !evaluateParameter.name">Name is required.</small>
+    </div>
+  </div>
+
+  <div class="p-field">
+    <label for="name">Функція приналежності</label>
+    <div class="p-field">
+      <p-dropdown [options]="belongingFunctions" [(ngModel)]="evaluateParameter.belongingFunctionId" [filter]="true" optionLabel="name"
+      optionValue="id"></p-dropdown>
+    </div>
+  </div>
+
+  <div class="p-field">
+    <label for="name">A</label>
+    <div class="p-field">
+      <p-inputNumber inputId="a" [(ngModel)]="evaluateParameter.parameterValue.a"></p-inputNumber>
+    </div>
+  </div>
+
+
+  <div class="p-field">
+    <label for="name">B</label>
+    <div class="p-field">
+      <p-inputNumber inputId="b" [(ngModel)]="evaluateParameter.parameterValue.b"></p-inputNumber>
+    </div>
+  </div>
+
+
+  <div class="p-field">
+    <label for="name">C</label>
+    <div class="p-field">
+      <p-inputNumber inputId="c" [(ngModel)]="evaluateParameter.parameterValue.c"></p-inputNumber>
+    </div>
+  </div>
+
+
+  <div class="p-field">
+    <label for="name">D</label>
+    <div class="p-field">
+      <p-inputNumber inputId="d" [(ngModel)]="evaluateParameter.parameterValue.d"></p-inputNumber>
+    </div>
+  </div>
+
+
+  <button pButton pRipple label="Зберегти" icon="pi pi-check" class="p-button-text"
+          (click)="saveEvaluateParameter()"></button>
+</div>

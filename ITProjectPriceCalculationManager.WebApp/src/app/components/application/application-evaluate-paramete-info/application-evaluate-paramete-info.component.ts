@@ -7,6 +7,7 @@ import { UUID } from 'angular2-uuid';
 import { ProgramLanguage } from 'src/app/shared/models/programLanguage.model';
 import { Parameter } from 'src/app/shared/models/parameter.model';
 import { ParameterService } from 'src/app/shared/services/api/parameter.service';
+import {belongingFunctions} from "../../../shared/constants";
 
 @Component({
   selector: 'application-evaluate-paramete-info',
@@ -65,4 +66,6 @@ export class ApplicationEvaluationParameterInfoComponent implements OnInit {
         })
     }
   }
+
+  protected readonly belongingFunctions = belongingFunctions;
 }

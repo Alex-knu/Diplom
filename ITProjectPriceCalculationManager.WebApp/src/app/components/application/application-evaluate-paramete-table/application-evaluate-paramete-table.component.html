@@ -33,6 +33,8 @@
             (click)="editParameter(parameter)"></button>
           <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
             (click)="deleteParameter(parameter)"></button>
+          <button pButton pRipple icon="pi pi-sliders-v" class="p-button-rounded p-button-secondary p-mr-2"
+                  (click)="addParameterInfo(parameter.id)"></button>
       </tr>
     </ng-template>
     <ng-template pTemplate="rowexpansion" let-parameter>
@@ -44,12 +46,19 @@
               <tr>
                 <th pSortableColumn="name">Назва <p-sortIcon field="name" /></th>
                 <th pSortableColumn="belongingFunction">Функція належності <p-sortIcon field="belongingFunction" /></th>
+                <th></th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-evaluationParameter>
               <tr>
                 <td>{{ evaluationParameter.name }}</td>
-                <td>{{ evaluationParameter.belongingFunction?.name }}</td>
+                <td>{{ getBelongingFunctionsNameById(evaluationParameter.belongingFunctionId) }}</td>
+                <td>
+                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
+                          (click)="editParameterInfo(evaluationParameter)"></button>
+                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                          (click)="deleteParameterInfo(parameter, evaluationParameter)"></button>
+                </td>
               </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage">
