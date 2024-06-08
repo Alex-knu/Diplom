@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ApplicationEvaluationParameterDetalesComponent } from './application-evaluation-parameter-info.component';
+import { ApplicationEvaluationParameterDetailsComponent } from './application-evaluation-parameter-info.component';
 
 @NgModule({
   imports: [RouterModule.forChild([
-    { path: '', component: ApplicationEvaluationParameterDetalesComponent }
+    { path: '', component: ApplicationEvaluationParameterDetailsComponent }
   ])],
   exports: [RouterModule]
 })

@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ApplicationEvaluationParameterDetalesComponent } from './application-evaluation-parameter-info.component';
+import { ApplicationEvaluationParameterDetailsComponent } from './application-evaluation-parameter-info.component';
 
-describe('ApplicationEvaluationParameterDetalesComponent', () => {
-  let component: ApplicationEvaluationParameterDetalesComponent;
-  let fixture: ComponentFixture<ApplicationEvaluationParameterDetalesComponent>;
+describe('ApplicationEvaluationParameterDetailsComponent', () => {
+  let component: ApplicationEvaluationParameterDetailsComponent;
+  let fixture: ComponentFixture<ApplicationEvaluationParameterDetailsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ApplicationEvaluationParameterDetalesComponent]
+      declarations: [ApplicationEvaluationParameterDetailsComponent]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ApplicationEvaluationParameterDetalesComponent);
+    fixture = TestBed.createComponent(ApplicationEvaluationParameterDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
