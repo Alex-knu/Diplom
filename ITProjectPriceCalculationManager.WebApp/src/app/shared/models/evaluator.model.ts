@@ -12,6 +12,7 @@ export class Evaluator extends BaseModel {
   lastName: string;
   phone: string;
   email: string;
+  competencyLevel: number;
 
   department: Department | null;
 }

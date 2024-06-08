@@ -28,7 +28,7 @@
     <ng-template pTemplate="body" let-application let-expanded="expanded">
       <tr>
         <td>
-          <p-button type="button" pRipple [pRowToggler]="application" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
+          <p-button type="button" pRipple [pRowToggler]="application" (click)="getEvaluationGroup(application)" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
         </td>
         <td>{{application.name}}</td>
         <td>{{application.price}}</td>
@@ -56,19 +56,25 @@
       <tr>
         <td colspan="7">
           <div class="p-3">
-            <p-table [value]="application.evaluationParameters" dataKey="id">
+            <p-table [value]="application.evaluationGroup" dataKey="id">
               <ng-template pTemplate="header">
                 <tr>
-                  <th pSortableColumn="name">Назва <p-sortIcon field="name" /></th>
-                  <th pSortableColumn="belongingFunction">Функція належності <p-sortIcon field="belongingFunction" /></th>
+                  <th pSortableColumn="name">Ім'я<p-sortIcon field="name" /></th>
+                  <th pSortableColumn="name">Прізвище<p-sortIcon field="name" /></th>
+                  <th pSortableColumn="belongingFunction">Оцінка<p-sortIcon field="belongingFunction" /></th>
                   <th></th>
                 </tr>
               </ng-template>
-              <ng-template pTemplate="body" let-evaluationParameter>
+              <ng-template pTemplate="body" let-evaluator>
                 <tr>
-                  <td>{{ evaluationParameter.name }}</td>
-                  <td>{{ evaluationParameter.name }}</td>
+                  <td>{{ evaluator.firstName }}</td>
+                  <td>{{ evaluator.lastName }}</td>
+                  <td>{{ evaluator.competencyLevel }}</td>
                   <td>
+                    <button pButton pRipple icon="pi pi-id-card" class="p-button-rounded p-button-help p-mr-2"
+                            (click)="setEvaluatorParameters(application.id)" *ngIf="isVisible(admin)"></button>
+                    <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                            (click)="deleteApplication(application)" *ngIf="isVisible(user)"></button>
                   </td>
                 </tr>
               </ng-template>

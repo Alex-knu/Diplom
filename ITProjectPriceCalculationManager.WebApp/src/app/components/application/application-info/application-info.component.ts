@@ -13,11 +13,10 @@ import { ProgramLanguageService } from 'src/app/shared/services/api/programLangu
   templateUrl: './application-info.component.html',
   styleUrls: ['./application-info.component.scss']
 })
-
 export class ApplicationInfoComponent implements OnInit {
-  submitted: boolean;
+  submitted = false;
   application: BaseApplication;
-  programLanguages: ProgramLanguage[];
+  programLanguages: ProgramLanguage[] = [];
 
   constructor(
     private messageService: MessageService,
@@ -25,51 +24,62 @@ export class ApplicationInfoComponent implements OnInit {
     private programLanguageService: ProgramLanguageService,
     public dialogService: DialogService,
     public ref: DynamicDialogRef,
-    public config: DynamicDialogConfig) { }
-
-  ngOnInit(): void {
-    this.submitted = false;
-
-    this.programLanguageService.collection.getAll()
-      .subscribe(
-        (programLanguages) => {
-          this.programLanguages = programLanguages;
-        });
-
-    if (this.config.data != null) {
-      this.application = this.config.data;
-    }
-    else {
-      this.application = new BaseApplication();
-    }
+    public config: DynamicDialogConfig
+  ) {
   }
 
-  saveApplication() {
+  ngOnInit(): void {
+    this.initializeProgramLanguages();
+    this.initializeApplication();
+  }
+
+  private initializeProgramLanguages(): void {
+    this.programLanguageService.collection.getAll().subscribe(
+      (programLanguages: ProgramLanguage[]) => this.programLanguages = programLanguages,
+      (error: HttpErrorResponse) => this.handleError(error)
+    );
+  }
+
+  private initializeApplication(): void {
+    this.application = this.config.data ? this.config.data : new BaseApplication();
+  }
+
+  saveApplication(): void {
     this.submitted = true;
 
     if (this.application.id) {
-      this.baseApplicationService.single.update(this.application).subscribe(
-        application => {
-          this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Заявку оновлено' });
-          this.ref.close(application);
-        },
-        error => {
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
-        })
+      this.updateApplication();
+    } else {
+      this.createApplication();
     }
-    else {
-      this.application.id = UUID.UUID();
-      this.application.price = 0;
-      this.application.statusId = "4706D234-E64D-4AB2-BED0-6086E10C3325";
-      this.baseApplicationService.single.create(this.application).subscribe(
-        application => {
-          this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Заявку створено' });
-          this.ref.close(application);
-        },
-        error => {
-          this.application.id = null;
-          this.messageService.add({ severity: 'error', summary: 'Error', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
-        })
-    }
+  }
+
+  private updateApplication(): void {
+    this.baseApplicationService.single.update(this.application).subscribe(
+      (application: BaseApplication) => this.showMessage('success', 'Successful', 'Заявку оновлено'),
+      (error: HttpErrorResponse) => this.handleError(error)
+    );
+  }
+
+  private createApplication(): void {
+    this.application.id = UUID.UUID();
+    this.application.price = 0;
+    this.application.statusId = "4706D234-E64D-4AB2-BED0-6086E10C3325";
+
+    this.baseApplicationService.single.create(this.application).subscribe(
+      (application: BaseApplication) => this.showMessage('success', 'Successful', 'Заявку створено'),
+      (error: HttpErrorResponse) => {
+        this.application.id = null;
+        this.handleError(error);
+      }
+    );
+  }
+
+  private showMessage(severity: string, summary: string, detail: string): void {
+    this.messageService.add({ severity, summary, detail });
+  }
+
+  private handleError(error: HttpErrorResponse): void {
+    this.showMessage('error', 'Error', String(error.error).split('\n')[0]);
   }
 }

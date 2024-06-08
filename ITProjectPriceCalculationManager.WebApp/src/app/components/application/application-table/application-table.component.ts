@@ -1,8 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService, ConfirmationService } from 'primeng/api';
-import { Application } from 'src/app/shared/models/application.model';
 import { BaseApplication } from 'src/app/shared/models/baseApplication.model';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BaseApplicationService } from 'src/app/shared/services/api/baseApplication.service';
@@ -11,24 +10,27 @@ import { ApplicationEvaluationGroupComponent } from '../application-evaluation-g
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { ROLE_ADMIN, ROLE_EVALUATOR, ROLE_USER } from 'src/app/shared/constants';
 import { CalculateApplicationService } from 'src/app/shared/services/api/calculateApplication.service';
+import { ApplicationToEstimatorsService } from 'src/app/shared/services/api/applicationToEstimators.service';
+import {EstimatorParametersComponent} from "../estimator-parameters/estimator-parameters.component";
 
 @Component({
   selector: 'app-application-table',
   templateUrl: './application-table.component.html',
   styleUrls: ['./application-table.component.scss']
 })
-export class ApplicationTableComponent {
-  admin = ROLE_ADMIN;
-  evaluator = ROLE_EVALUATOR;
-  user = ROLE_USER;
+export class ApplicationTableComponent implements OnInit, OnDestroy {
+  readonly admin = ROLE_ADMIN;
+  readonly evaluator = ROLE_EVALUATOR;
+  readonly user = ROLE_USER;
 
-  loading: boolean = false;
+  loading = false;
   applications: BaseApplication[];
   application: BaseApplication;
   selectedApplications: BaseApplication[];
   ref: DynamicDialogRef;
 
   constructor(
+    private applicationToEstimatorsService: ApplicationToEstimatorsService,
     private router: Router,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
@@ -38,22 +40,24 @@ export class ApplicationTableComponent {
     private authService: AuthService) { }
 
   ngOnInit() {
-    this.loading = true;
-    setTimeout(() => {
-      this.baseApplicationService.collection.getAll()
-        .subscribe(
-          (applications) => {
-            this.applications = applications;
-          });
-
-      this.loading = false;
-    });
+    this.loadApplications();
   }
 
   ngOnDestroy() {
     if (this.ref) {
       this.ref.close();
     }
+  }
+
+  private loadApplications() {
+    this.loading = true;
+    this.baseApplicationService.collection.getAll().subscribe(
+      applications => {
+        this.applications = applications;
+        this.loading = false;
+      },
+      () => this.loading = false
+    );
   }
 
   editApplication(application: BaseApplication) {
@@ -67,34 +71,30 @@ export class ApplicationTableComponent {
       maximizable: true
     });
 
-    this.ref.onClose.subscribe((application: BaseApplication) => {
-      if (application && application.id) {
-        this.baseApplicationService.collection.getAll()
-          .subscribe(
-            (applications) => {
-              this.applications = applications;
-            });
-
-        this.messageService.add({ severity: 'info', summary: 'Список оновлено', detail: application.name });
+    this.ref.onClose.subscribe((updatedApplication: BaseApplication) => {
+      if (updatedApplication?.id) {
+        this.loadApplications();
+        this.messageService.add({ severity: 'info', summary: 'Список оновлено', detail: updatedApplication.name });
       }
     });
   }
 
-  deleteApplication(application: Application) {
+  deleteApplication(application: BaseApplication) {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete ' + application.name + '?',
+      message: `Are you sure you want to delete ${application.name}?`,
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         if (application.id) {
           this.baseApplicationService.single.deleteById(application.id).subscribe(
-            application => {
+            () => {
               this.applications = this.applications.filter(val => val.id !== application.id);
               this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Заявку видалено' });
             },
-            error => {
-              this.messageService.add({ severity: 'error', summary: 'Error', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
-            })
+            (error: HttpErrorResponse) => {
+              this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.split('\n')[0] });
+            }
+          );
         }
       }
     });
@@ -108,15 +108,10 @@ export class ApplicationTableComponent {
       maximizable: true
     });
 
-    this.ref.onClose.subscribe((application: BaseApplication) => {
-      if (application && application.id) {
-        this.baseApplicationService.collection.getAll()
-          .subscribe(
-            (applications) => {
-              this.applications = applications;
-            });
-
-        this.messageService.add({ severity: 'info', summary: 'Список оновлено', detail: application.name });
+    this.ref.onClose.subscribe((newApplication: BaseApplication) => {
+      if (newApplication?.id) {
+        this.loadApplications();
+        this.messageService.add({ severity: 'info', summary: 'Список оновлено', detail: newApplication.name });
       }
     });
   }
@@ -146,19 +141,37 @@ export class ApplicationTableComponent {
   }
 
   calculate(applicationId: string) {
-    this.calculateApplicationService.single.create({applicationId: applicationId}).subscribe(
-    application => {
-
-      this.baseApplicationService.collection.getAll()
-          .subscribe(
-            (applications) => {
-              this.applications = applications;
-            });
-
-      this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Заявку обраховано' });
-    },
-    error => {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: String((error as HttpErrorResponse).error).split('\n')[0] });
-    })
+    this.calculateApplicationService.single.create({ applicationId }).subscribe(
+      () => {
+        this.loadApplications();
+        this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Заявку обраховано' });
+      },
+      (error: HttpErrorResponse) => {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: error.error.split('\n')[0] });
+      }
+    );
   }
+
+  getEvaluationGroup(application: BaseApplication) {
+    if (application.id) {
+      this.loading = true;
+      this.applicationToEstimatorsService.collection.getListById(application.id).subscribe(
+        evaluationGroup => {
+          application.evaluationGroup = evaluationGroup;
+          this.loading = false;
+        },
+        () => this.loading = false
+      );
+    }
+  }
+
+  setEvaluatorParameters(applicationId: string) {
+      this.ref = this.dialogService.open(EstimatorParametersComponent, {
+        header: 'Деталі заявки',
+        data: { id: applicationId },
+        contentStyle: { overflow: 'auto' },
+        baseZIndex: 10000,
+        maximizable: true
+      });
+    }
 }

@@ -1,6 +1,7 @@
 using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToEvaluator;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evaluator;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 
@@ -9,9 +10,28 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
 internal class ApplicationToEstimatorsService : BaseService<ApplicationToEvaluator, Guid, ApplicationToEstimatorsDTO>,
     IApplicationToEstimatorsService
 {
-    public ApplicationToEstimatorsService(IRepository<ApplicationToEvaluator, Guid> repository, IMapper mapper) : base(
+    private readonly IRepository<Evaluator, Guid> _evaluatorRepository;
+    
+    public ApplicationToEstimatorsService(IRepository<Evaluator, Guid> evaluatorRepository, IRepository<ApplicationToEvaluator, Guid> repository, IMapper mapper) : base(
         repository, mapper)
     {
+        _evaluatorRepository = evaluatorRepository;
+    }
+
+    public async Task<IEnumerable<EvaluatorDTO>> GetEstimatorGroupByApplicationId(Guid applicationId)
+    {
+        return (from applicationToEstimators in await _repository.GetAllAsync()
+                join evaluator in await _evaluatorRepository.GetAllAsync() on applicationToEstimators.EvaluatorId equals evaluator.Id
+                where applicationToEstimators.ApplicationId == applicationId
+                select new EvaluatorDTO()
+                {
+                    Id = evaluator.Id,
+                    UserId = evaluator.UserId,
+                    DepartmentId = evaluator.DepartmentId,
+                    FirstName = evaluator.FirstName,
+                    LastName = evaluator.LastName,
+                    CompetencyLevel = applicationToEstimators.CompetencyLevel
+                });
     }
 
     public async Task<ApplicationToEstimatorsDTO> CreateApplicationToEstimatorsAsync(
