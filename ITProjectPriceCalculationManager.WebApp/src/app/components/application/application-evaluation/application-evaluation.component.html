@@ -5,13 +5,12 @@
   </div>
 
   <div class="flex">
-    <p-table #dt [value]="influenceEvaluationParametrsInfo" [rowHover]="true" dataKey="id"
+    <p-table #dt [value]="influenceEvaluationParametrsInfo" styleClass="p-datatable-gridlines" [rowHover]="true" dataKey="id"
       [showCurrentPageReport]="true" [tableStyle]="{'min-width': '90rem'}">
       <ng-template pTemplate="header">
         <tr>
           <th pSortableColumn="name">Назва<p-sortIcon field="name"></p-sortIcon></th>
           <th pSortableColumn="price">Оцінка<p-sortIcon field="price"></p-sortIcon></th>
-          <th></th>
         </tr>
       </ng-template>
 
@@ -34,13 +33,12 @@
   </div>
 
   <div class="flex">
-    <p-table #dt [value]="scaleEvaluationParametrsInfo" [rowHover]="true" dataKey="id" [showCurrentPageReport]="true"
+    <p-table #dt [value]="scaleEvaluationParametrsInfo" styleClass="p-datatable-gridlines" [rowHover]="true" dataKey="id" [showCurrentPageReport]="true"
       [tableStyle]="{'min-width': '90rem'}">
       <ng-template pTemplate="header">
         <tr>
           <th pSortableColumn="name">Назва<p-sortIcon field="name"></p-sortIcon></th>
           <th pSortableColumn="price">Оцінка<p-sortIcon field="price"></p-sortIcon></th>
-          <th></th>
         </tr>
       </ng-template>
 
@@ -65,7 +63,7 @@
 
     <div>
       <div class="card">
-        <p-table [value]="programsParametr.informationObjectEvaluationParametrsInfo" [rowHover]="true" dataKey="id"
+        <p-table [value]="programsParametr.informationObjectEvaluationParametrsInfo" styleClass="p-datatable-gridlines" [rowHover]="true" dataKey="id"
           [showCurrentPageReport]="true" [tableStyle]="{'min-width': '90rem'}">
 
           <ng-template pTemplate="header">
@@ -92,7 +90,7 @@
       </div>
 
       <div class="card">
-        <p-table [value]="programsParametr.functionEvaluationParametrsInfo" [rowHover]="true" dataKey="id"
+        <p-table [value]="programsParametr.functionEvaluationParametrsInfo" styleClass="p-datatable-gridlines" [rowHover]="true" dataKey="id"
           [showCurrentPageReport]="true" [tableStyle]="{'min-width': '90rem'}">
           <ng-template pTemplate="header">
             <tr>
