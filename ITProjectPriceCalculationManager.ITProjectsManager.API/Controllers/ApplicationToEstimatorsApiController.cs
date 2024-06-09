@@ -27,4 +27,10 @@ public class ApplicationToEstimatorsApiController : ControllerBase
     {
         return Ok(await _ApplicationToEstimatorsService.CreateApplicationToEstimatorsAsync(query));
     }
+
+    [HttpPut]
+    public async Task<IActionResult> UpdateApplicationToEstimators(ApplicationToEstimatorsDTO query)
+    {
+        return Ok(await _ApplicationToEstimatorsService.UpdateApplicationToEstimatorsAsync(query));
+    }
 }

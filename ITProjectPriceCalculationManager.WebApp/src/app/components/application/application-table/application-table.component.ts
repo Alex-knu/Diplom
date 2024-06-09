@@ -165,10 +165,13 @@ export class ApplicationTableComponent implements OnInit, OnDestroy {
     }
   }
 
-  setEvaluatorParameters(applicationId: string) {
+  setEvaluatorParameters(applicationId: string, evaluatorId: string) {
       this.ref = this.dialogService.open(EstimatorParametersComponent, {
         header: 'Деталі заявки',
-        data: { id: applicationId },
+        data: {
+          applicationId: applicationId,
+          evaluatorId: evaluatorId
+        },
         contentStyle: { overflow: 'auto' },
         baseZIndex: 10000,
         maximizable: true

@@ -12,7 +12,7 @@ internal class ApplicationToEvaluatorConfiguration : IEntityTypeConfiguration<Ap
 
         builder.Property(applicationToEvaluators => applicationToEvaluators.SelfEvaluation);
         
-        builder.Property(applicationToEvaluators => applicationToEvaluators.CompetencyLevel);
+        builder.Property(applicationToEvaluators => applicationToEvaluators.ConfidenceArea);
 
         builder
             .HasOne(applicationToEvaluators => applicationToEvaluators.Application)

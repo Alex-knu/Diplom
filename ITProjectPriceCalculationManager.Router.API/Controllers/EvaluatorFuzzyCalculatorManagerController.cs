@@ -19,7 +19,7 @@ public class EvaluatorFuzzyCalculatorManagerController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CalculateApplicationPrice(EvaluatorFuzzyQueryDTO evaluatorFuzzyQuery)
+    public async Task<IActionResult> CalculateApplicationPrice(CalculateConfidenceAreaDTO evaluatorFuzzyQuery)
     {
         return Ok(await _calculatorService.Calculate(evaluatorFuzzyQuery));
     }

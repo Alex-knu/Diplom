@@ -72,7 +72,7 @@
                   <td>{{ evaluator.competencyLevel }}</td>
                   <td>
                     <button pButton pRipple icon="pi pi-id-card" class="p-button-rounded p-button-help p-mr-2"
-                            (click)="setEvaluatorParameters(application.id)" *ngIf="isVisible(admin)"></button>
+                            (click)="setEvaluatorParameters(application.id, evaluator.id)" *ngIf="isVisible(admin)"></button>
                     <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
                             (click)="deleteApplication(application)" *ngIf="isVisible(user)"></button>
                   </td>
