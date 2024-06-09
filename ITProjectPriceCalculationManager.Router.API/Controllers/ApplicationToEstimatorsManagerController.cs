@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ITProjectPriceCalculationManager.Router.API.Controllers;
 
-[Authorize]
+//[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class ApplicationToEstimatorsManagerController : ControllerBase
@@ -18,6 +18,13 @@ public class ApplicationToEstimatorsManagerController : ControllerBase
     {
         _logger = logger;
         _applicationToEstimatorsService = applicationToEstimatorsService;
+    }
+    
+    [HttpGet]
+    [Route("collection/{applicationId}")]
+    public async Task<IActionResult> GetEstimatorGroupByApplicationId([FromRoute] Guid applicationId)
+    {
+        return Ok(await _applicationToEstimatorsService.GetEstimatorGroupByApplicationId(applicationId));
     }
 
     [HttpPost]

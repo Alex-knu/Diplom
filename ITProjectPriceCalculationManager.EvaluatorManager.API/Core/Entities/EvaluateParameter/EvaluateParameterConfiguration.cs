@@ -19,7 +19,7 @@ internal class EvaluateParameterConfiguration : IEntityTypeConfiguration<Evaluat
             .IsRequired();
         
         builder
-            .HasOne(p => p.ParameterValue)
+            .HasOne(p => p.EvaluateParameterValue)
             .WithOne(pv => pv.EvaluateParameter)
             .HasForeignKey<ParameterValue.ParameterValue>(pv => pv.Id)
             .OnDelete(DeleteBehavior.Cascade);

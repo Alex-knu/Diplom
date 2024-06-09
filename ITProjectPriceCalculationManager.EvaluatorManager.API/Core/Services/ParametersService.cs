@@ -1,6 +1,8 @@
 using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.EvaluateParameter;
 using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.Parameters;
+using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.ParameterValue;
 using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Interfaces.Repositories;
 using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Interfaces.Services;
 
@@ -8,8 +10,13 @@ namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Services;
 
 internal class ParametersService : BaseService<Parameters, Guid, ParametersDTO>, IParametersService
 {
-    public ParametersService(IRepository<Parameters, Guid> repository, IMapper mapper) : base(repository, mapper)
+    private readonly IRepository<EvaluateParameter, Guid> _evaluateParameterRepository;
+    private readonly IRepository<ParameterValue, Guid> _parameterValueRepository;
+    
+    public ParametersService(IRepository<EvaluateParameter, Guid> evaluateParameterRepository, IRepository<ParameterValue, Guid> parameterValueRepository, IRepository<Parameters, Guid> repository, IMapper mapper) : base(repository, mapper)
     {
+        _evaluateParameterRepository = evaluateParameterRepository;
+        _parameterValueRepository = parameterValueRepository;
     }
 
     public async Task<ParametersDTO> CreateParametersAsync(ParametersDTO Parameters)
@@ -44,8 +51,20 @@ internal class ParametersService : BaseService<Parameters, Guid, ParametersDTO>,
 
     public async Task<IEnumerable<ParametersDTO>> GetParametersByApplicationIdAsync(Guid applicationId)
     {
-        var domainEntity = await _repository.GetAllAsync();
+        var domainEntities =  (await _repository.GetAllAsync()).Where(param => param.ApplicationId == applicationId);
 
-        return _mapper.Map<IEnumerable<ParametersDTO>>(domainEntity.Where(param => param.ApplicationId == applicationId));
+        foreach (var domainEntity in domainEntities)
+        {
+            domainEntity.EvaluateParameters = (await _evaluateParameterRepository.GetAllAsync())
+                .Where(ep => ep.ParameterId == domainEntity.Id).ToList();
+        }
+
+        foreach (var evaluateParameter in domainEntities.SelectMany(e => e.EvaluateParameters))
+        {
+            evaluateParameter.EvaluateParameterValue = (await _parameterValueRepository.GetAllAsync())
+                .Where(pv => pv.Id == evaluateParameter.Id).SingleOrDefault();
+        }
+        
+        return _mapper.Map<IEnumerable<ParametersDTO>>(domainEntities);
     }
 }

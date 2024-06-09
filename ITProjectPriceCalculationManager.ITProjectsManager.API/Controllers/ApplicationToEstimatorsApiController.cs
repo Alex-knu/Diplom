@@ -14,10 +14,23 @@ public class ApplicationToEstimatorsApiController : ControllerBase
     {
         _ApplicationToEstimatorsService = applicationToEstimatorsService;
     }
+    
+    [HttpGet]
+    [Route("collection/{applicationId}")]
+    public async Task<IActionResult> GetEstimatorGroupByApplicationId([FromRoute] Guid applicationId)
+    {
+        return Ok(await _ApplicationToEstimatorsService.GetEstimatorGroupByApplicationId(applicationId));
+    }
 
     [HttpPost]
     public async Task<IActionResult> CreateApplicationToEstimators(ApplicationToEstimatorsDTO query)
     {
         return Ok(await _ApplicationToEstimatorsService.CreateApplicationToEstimatorsAsync(query));
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> UpdateApplicationToEstimators(ApplicationToEstimatorsDTO query)
+    {
+        return Ok(await _ApplicationToEstimatorsService.UpdateApplicationToEstimatorsAsync(query));
     }
 }

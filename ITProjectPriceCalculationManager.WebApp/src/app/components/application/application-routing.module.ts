@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
       { path: 'application-evaluate-paramete-info', loadChildren: () => import('./application-evaluate-paramete-info/application-evaluate-paramete-info-routing.module').then(m => m.ApplicationEvaluationParameterInfoRoutingModule) },
       { path: 'application-evaluate-paramete-table', loadChildren: () => import('./application-evaluate-paramete-table/application-evaluate-paramete-table-routing.module').then(m => m.ApplicationEvaluationParameterTableRoutingModule) },
       { path: 'application-evaluation-parameter-table', loadChildren: () => import('./application-evaluation-paramete-info/application-evaluation-parameter-info.module').then(m => m.ApplicationEvaluationParameterDetalesRoutingModule) },
+      { path: 'estimator-parameters', loadChildren: () => import('./estimator-parameters/estimator-parameters-routing.module').then(m => m.EstimatorParametersRoutingModule) },
       { path: '**', redirectTo: '/notfound' }
     ])],
   exports: [RouterModule]

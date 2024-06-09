@@ -18,6 +18,7 @@ import { BelongingFunctionService } from "./api/belongingFunction.service";
 import { EvaluateParameterService } from "./api/evaluateParameter.service";
 import { ParameterService } from "./api/parameter.service";
 import { ParameterValueService } from "./api/parameterValue.service";
+import {EvaluatorFuzzyCalculatorManagerService} from "./api/evaluatorFuzzyCalculatorManager.service";
 
 export const services = [
   HttpService,
@@ -38,6 +39,7 @@ export const services = [
   ProgramLanguageService,
   DifficultyLevelsTypeService,
   EvaluationParametrsInfoService,
+  EvaluatorFuzzyCalculatorManagerService,
   UserService,
   RoleService
 ]

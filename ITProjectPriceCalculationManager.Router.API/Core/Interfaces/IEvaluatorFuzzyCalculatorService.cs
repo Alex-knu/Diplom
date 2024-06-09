@@ -4,5 +4,5 @@ namespace ITProjectPriceCalculationManager.Router.API.Core.Interfaces;
 
 public interface IEvaluatorFuzzyCalculatorService
 {
-    Task<double> Calculate(EvaluatorFuzzyQueryDTO evaluatorFuzzyQuery);
+    Task<ApplicationToEstimatorsDTO> Calculate(CalculateConfidenceAreaDTO evaluatorFuzzyQuery);
 }

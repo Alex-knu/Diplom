@@ -9,6 +9,7 @@ public class EvaluatorDTO
     public string LastName { get; set; }
     public string Phone { get; set; }
     public string Email { get; set; }
+    public double? CompetencyLevel { get; set; }
 
     public DepartmentDTO? Department { get; set; }
 }

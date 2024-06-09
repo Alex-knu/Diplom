@@ -4,6 +4,7 @@ using ITProjectPriceCalculationManager.DTOModels.Enums;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationForEvaluation;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationStatus;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToEvaluator;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactor;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Department;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevels;
@@ -29,6 +30,7 @@ public class MappingProfile : Profile
         CreateMap<ApplicationToFactorsDTO, ApplicationToFactor>().ReverseMap();
         CreateMap<DifficultyLevelsTypeDTO, DifficultyLevel>().ReverseMap();
         CreateMap<ApplicationForEvaluation, EvaluationDTO>();
+        CreateMap<ApplicationToEstimatorsDTO, ApplicationToEvaluator>().ReverseMap();
         CreateMap<Application, BaseApplicationDTO>();
         CreateMap<BaseApplicationDTO, Application>()
             .ForMember(a => a.Status, map => map.MapFrom((src, dest, memb) =>

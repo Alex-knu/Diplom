@@ -12,6 +12,6 @@ export class EvaluateParameter extends BaseModel {
   belongingFunctionId: string;
   parameterId: string;
 
-  parameterValue: ParameterValue;
+  evaluateParameterValue: ParameterValue;
   belongingFunction: BelongingFunction | null;
 }

@@ -1,7 +1,5 @@
 using System.Reflection;
 using ITProjectPriceCalculationManager.Extentions.Extentions;
-using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers.MembershipFunction;
-using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfaces.MembershipFunction;
 using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfaces.Services;
 using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Services;
 

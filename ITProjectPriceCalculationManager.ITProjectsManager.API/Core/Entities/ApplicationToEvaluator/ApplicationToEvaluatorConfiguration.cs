@@ -11,6 +11,8 @@ internal class ApplicationToEvaluatorConfiguration : IEntityTypeConfiguration<Ap
             .HasKey(applicationToEvaluators => applicationToEvaluators.Id);
 
         builder.Property(applicationToEvaluators => applicationToEvaluators.SelfEvaluation);
+        
+        builder.Property(applicationToEvaluators => applicationToEvaluators.ConfidenceArea);
 
         builder
             .HasOne(applicationToEvaluators => applicationToEvaluators.Application)

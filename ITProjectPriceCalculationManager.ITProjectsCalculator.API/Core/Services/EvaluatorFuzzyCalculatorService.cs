@@ -35,23 +35,14 @@ internal class EvaluatorFuzzyCalculatorService : IEvaluatorFuzzyCalculatorServic
 
         return output;
     }
-
-    // Fuzzy Logic Defuzzification using Centroid Method
+    
     public static double Defuzzify(double aggregatedValue)
     {
-        // Define fuzzy sets and their respective ranges
         double lowComfortRangeStart = 0.0;
         double lowComfortRangeEnd = 30.0;
         double highComfortRangeStart = 70.0;
         double highComfortRangeEnd = 100.0;
 
-        // Calculate centroids
-        double lowCentroid = (lowComfortRangeEnd + lowComfortRangeStart) / 2.0;
-        double highCentroid = (highComfortRangeEnd + highComfortRangeStart) / 2.0;
-
-        // Weighted average
-        double defuzzifiedValue = (aggregatedValue * highCentroid + (1 - aggregatedValue) * lowCentroid) / 2.0;
-
-        return defuzzifiedValue;
+        return Math.Ceiling((aggregatedValue * (highComfortRangeEnd + highComfortRangeStart) / 2.0 + (1 - aggregatedValue) * (lowComfortRangeEnd + lowComfortRangeStart) / 2.0) / 2.0);
     }
 }

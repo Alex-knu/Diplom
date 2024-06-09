@@ -25,6 +25,7 @@ import { EvaluatorInfoComponent } from './components/evaluator/evaluator-info/ev
 import { ApplicationEvaluationParameterTableComponent } from './components/application/application-evaluate-paramete-table/application-evaluate-paramete-table.component';
 import { ApplicationEvaluationParameterInfoComponent } from './components/application/application-evaluate-paramete-info/application-evaluate-paramete-info.component';
 import { ApplicationEvaluationParameterDetailsComponent } from "./components/application/application-evaluation-paramete-info/application-evaluation-parameter-info.component";
+import { EstimatorParametersComponent } from "./components/application/estimator-parameters/estimator-parameters.component";
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ApplicationEvaluationParameterDetailsComponent } from "./components/app
     ApplicationEvaluationParameterDetailsComponent,
     ApplicationEvaluationParameterInfoComponent,
     ApplicationEvaluationParameterTableComponent,
+    EstimatorParametersComponent,
     DepartmentTreeComponent,
     DepartmentInfoComponent,
     ErrorComponent,

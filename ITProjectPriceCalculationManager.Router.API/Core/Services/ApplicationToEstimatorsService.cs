@@ -14,6 +14,12 @@ internal class ApplicationToEstimatorsService : IApplicationToEstimatorsService
         _routeService = routeService;
     }
 
+    public async Task<IEnumerable<EvaluatorDTO>> GetEstimatorGroupByApplicationId(Guid applicationId)
+    {
+        return await _routeService.GetListByIdAsync<IEnumerable<EvaluatorDTO>, Guid>(_client,
+            "applicationtoestimatorsapi", applicationId);
+    }
+
     public async Task<ApplicationToEstimatorsDTO> CreateApplicationToEstimatorsAsync(ApplicationToEstimatorsDTO query)
     {
         var application =

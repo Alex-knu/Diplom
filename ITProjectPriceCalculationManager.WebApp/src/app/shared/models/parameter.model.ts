@@ -9,5 +9,6 @@ export class Parameter extends BaseModel {
 
   name: string;
   applicationId: string;
+  value: number;
   evaluationParameters: EvaluateParameter[];
 }

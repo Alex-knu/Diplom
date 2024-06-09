@@ -32,8 +32,8 @@ export class ApplicationEvaluationParameterDetailsComponent implements OnInit {
 
   private initializeEvaluateParameter(): void {
     this.evaluateParameter = this.config.data.evaluateParameter || new EvaluateParameter();
-    if (!this.evaluateParameter.parameterValue) {
-      this.evaluateParameter.parameterValue = new ParameterValue();
+    if (!this.evaluateParameter.evaluateParameterValue) {
+      this.evaluateParameter.evaluateParameterValue = new ParameterValue();
     }
   }
 
@@ -60,7 +60,7 @@ export class ApplicationEvaluationParameterDetailsComponent implements OnInit {
   private createEvaluateParameter(): void {
     this.evaluateParameter.id = UUID.UUID();
     this.evaluateParameter.parameterId = this.config.data.parameterId;
-    this.evaluateParameter.parameterValue.id = this.evaluateParameter.id;
+    this.evaluateParameter.evaluateParameterValue.id = this.evaluateParameter.id;
 
     this.evaluateParameterService.single.create(this.evaluateParameter).subscribe(
       parameter => {

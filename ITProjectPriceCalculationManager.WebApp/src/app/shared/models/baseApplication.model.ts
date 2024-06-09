@@ -1,5 +1,6 @@
 import { BaseModel } from "./base.model";
 import { ProgramLanguage } from "./programLanguage.model";
+import {Evaluator} from "./evaluator.model";
 
 export class BaseApplication extends BaseModel {
 
@@ -20,4 +21,5 @@ export class BaseApplication extends BaseModel {
   averageCostLabor: number;
   averageMonthlyRateWorkingHours: number;
   programLanguages: ProgramLanguage[];
+  evaluationGroup: Evaluator[] | null
 }
