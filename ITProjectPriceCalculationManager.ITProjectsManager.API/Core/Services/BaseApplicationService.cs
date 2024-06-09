@@ -113,6 +113,6 @@ internal class BaseApplicationService : BaseService<Application, Guid, BaseAppli
                     break;
             }
 
-        return _mapper.Map<List<BaseApplicationDTO>>(result);
+        return _mapper.Map<List<BaseApplicationDTO>>(result.DistinctBy(application => application.Id));
     }
 }
