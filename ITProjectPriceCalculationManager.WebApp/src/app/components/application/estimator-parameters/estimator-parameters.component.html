@@ -1,22 +1,19 @@
 <div class="card">
-  <p-table [value]="programLanguages" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem' }">
-    <ng-template pTemplate="caption"> Header </ng-template>
+  <p-table [value]="parameters" styleClass="p-datatable-gridlines" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="caption">Анкета компетентності</ng-template>
     <ng-template pTemplate="header">
       <tr>
-        <th>Code</th>
-        <th>Name</th>
-        <th>Category</th>
-        <th>Quantity</th>
+        <th>Назва</th>
+        <th>Значення</th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-product>
+    <ng-template pTemplate="body" let-parameter>
       <tr>
-        <td>{{ product.code }}</td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.category }}</td>
-        <td>{{ product.quantity }}</td>
+        <td>{{ parameter.name }}</td>
+        <td><p-inputNumber inputId="c" [(ngModel)]="parameter.value"></p-inputNumber></td>
       </tr>
     </ng-template>
-    <ng-template pTemplate="summary"> Footer </ng-template>
   </p-table>
+  <button pButton pRipple label="Зберегти" icon="pi pi-check" class="p-button-text"
+          (click)="calculateConfidenceArea()"></button>
 </div>
