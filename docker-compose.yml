@@ -66,8 +66,7 @@ services:
           - it_projects_calculator.api
     depends_on:
       - it_project_price_calculation_manager.postgres
-    volumes:
-      - $HOME/.microsoft/usersecrets/:/root/.microsoft/usersecrets/:ro
+    
 
   it_project_price_calculation_manager.it_projects_manager.api:
     image: ${DOCKER_REGISTRY-}it_project_price_calculation_manager.it_projects_manager.api
@@ -90,8 +89,7 @@ services:
       - "ConnectionStrings:ITProjectPriceCalculationManagerDbContext=Server=it_project_price_calculation_manager.postgres;Port=5432;Database=ITProjectPriceCalculationManager;Username=postgres;Password=postgres"
     depends_on:
       - it_project_price_calculation_manager.postgres
-    volumes:
-      - $HOME/.microsoft/usersecrets/:/root/.microsoft/usersecrets/:ro
+    
 
   it_project_price_calculation_manager.router.api:
     image: ${DOCKER_REGISTRY-}it_project_price_calculation_manager.router.api
@@ -114,8 +112,7 @@ services:
           - router.api
     depends_on:
       - it_project_price_calculation_manager.postgres
-    volumes:
-      - $HOME/.microsoft/usersecrets/:/root/.microsoft/usersecrets/:ro
+    
 
   it_project_price_calculation_manager.auth_server:
     image: ${DOCKER_REGISTRY-}it_project_price_calculation_manager.auth_server
@@ -136,8 +133,7 @@ services:
           - auth_server
     depends_on:
       - it_project_price_calculation_manager.auth_server.postgres
-    volumes:
-      - $HOME/.microsoft/usersecrets/:/root/.microsoft/usersecrets/:ro
+    
 
 
   it_project_price_calculation_manager.evaluator_manager.api:
@@ -159,8 +155,7 @@ services:
           - evaluator_manager.api
     depends_on:
       - it_project_price_calculation_manager.evaluator_manager.postgres
-    volumes:
-      - $HOME/.microsoft/usersecrets/:/root/.microsoft/usersecrets/:ro
+    
 
   it_project_price_calculation_manager.postgres:
     image: mcr.microsoft.com/mssql/server:2022-latest
