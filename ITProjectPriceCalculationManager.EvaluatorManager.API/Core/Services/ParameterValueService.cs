@@ -22,9 +22,9 @@ internal class ParameterValueService : BaseService<ParameterValue, Guid, Paramet
         return await base.DeleteEntityAsync(id);
     }
 
-    public Task<ParameterValueDTO> GetParameterValueByIdAsync(Guid id)
+    public async Task<ParameterValueDTO> GetParameterValueByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
+        return await base.GetEntitysByIdAsync(id);
     }
 
     public async Task<IEnumerable<ParameterValueDTO>> GetParameterValueAsync()

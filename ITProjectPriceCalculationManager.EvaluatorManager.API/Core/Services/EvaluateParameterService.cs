@@ -18,7 +18,8 @@ internal class EvaluateParameterService : BaseService<EvaluateParameter, Guid, E
     public async Task<EvaluateParameterDTO> CreateEvaluateParameterAsync(EvaluateParameterDTO EvaluateParameter)
     {
         var entity = await base.CreateEntityAsync(EvaluateParameter);
-        entity.EvaluateParameterValue = await _parameterValueService.CreateParameterValueAsync(EvaluateParameter.EvaluateParameterValue);
+        entity.EvaluateParameterValue = await _parameterValueService
+            .GetParameterValueByIdAsync(EvaluateParameter.EvaluateParameterValue.Id);
         return entity;
     }
 
