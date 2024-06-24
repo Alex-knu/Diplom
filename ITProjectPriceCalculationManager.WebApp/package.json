@@ -30,7 +30,7 @@
     "oidc-client": "^1.11.5",
     "primeflex": "^3.2.1",
     "primeicons": "6.0.1",
-    "primeng": "15.1.1",
+    "primeng": "^17.18.1",
     "quill": "^2.0.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
