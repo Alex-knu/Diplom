@@ -1,9 +1,9 @@
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY ["ITProjectPriceCalculationManager.EvaluatorManager.API/", "ITProjectPriceCalculationManager.EvaluatorManager.API/"]
 COPY ["ITProjectPriceCalculationManager.DTOModels/ITProjectPriceCalculationManager.DTOModels.csproj", "ITProjectPriceCalculationManager.DTOModels/"]
@@ -19,4 +19,5 @@ RUN dotnet publish "ITProjectPriceCalculationManager.EvaluatorManager.API.csproj
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+ENV ASPNETCORE_URLS=http://*:80
 ENTRYPOINT ["dotnet", "ITProjectPriceCalculationManager.EvaluatorManager.API.dll"]
