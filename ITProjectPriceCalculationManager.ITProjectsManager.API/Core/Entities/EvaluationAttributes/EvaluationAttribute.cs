@@ -5,9 +5,9 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.E
 
 internal class EvaluationAttribute : IBaseEntity<Guid>
 {
+    public Guid Id { get; set; }
     public Guid FactorId { get; set; }
     public Guid FactorTypeId { get; set; }
-    public string Name { get; set; }
-    public List<DifficultyLevel> DifficultyLevels { get; set; }
-    public Guid Id { get; set; }
+    public required string Name { get; set; }
+    public required List<DifficultyLevel> DifficultyLevels { get; set; }
 }

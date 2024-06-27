@@ -9,7 +9,8 @@ public class StubCalculateService : ICalculateService
     {
         return Task.FromResult(new EvaluationResultDTO
         {
-            Result = 200000
+            Result = 200000,
+            Error = string.Empty
         });
     }
 }

@@ -6,7 +6,7 @@ internal abstract class CalculateMethod
 {
     public virtual Task<EvaluationResultDTO> Calculate(EvaluationDTO evaluation, double? price)
     {
-        var result = new EvaluationResultDTO();
+        var result = new EvaluationResultDTO() { Error = string.Empty };
 
         if (price.HasValue)
             result.Result =

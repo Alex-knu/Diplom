@@ -4,12 +4,9 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
 
 internal class Attribute : IBaseEntity<Guid>
 {
-    public string Name { get; set; }
-
-    public virtual ICollection<Profile.Profile> Profiles { get; set; }
-
-    public virtual ICollection<DifficultyLevelsTypeToFactorType.DifficultyLevelsTypeToFactorType>
-        DifficultyLevelsTypeToFactorTypes { get; set; }
-
     public Guid Id { get; set; }
+    public required string Name { get; set; }
+
+    public virtual ICollection<Profile.Profile>? Profiles { get; set; }
+    public virtual ICollection<DifficultyLevelsTypeToFactorType.DifficultyLevelsTypeToFactorType>? DifficultyLevelsTypeToFactorTypes { get; set; }
 }

@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToEvaluator;
@@ -11,7 +12,7 @@ internal class ApplicationToEstimatorsService : BaseService<ApplicationToEvaluat
     IApplicationToEstimatorsService
 {
     private readonly IRepository<Evaluator, Guid> _evaluatorRepository;
-    
+
     public ApplicationToEstimatorsService(IRepository<Evaluator, Guid> evaluatorRepository, IRepository<ApplicationToEvaluator, Guid> repository, IMapper mapper) : base(
         repository, mapper)
     {
@@ -20,22 +21,23 @@ internal class ApplicationToEstimatorsService : BaseService<ApplicationToEvaluat
 
     public async Task<IEnumerable<EvaluatorDTO>> GetEstimatorGroupByApplicationId(Guid applicationId)
     {
-        return (from applicationToEstimators in await _repository.GetAllAsync()
-                join evaluator in await _evaluatorRepository.GetAllAsync() on applicationToEstimators.EvaluatorId equals evaluator.Id
-                where applicationToEstimators.ApplicationId == applicationId
-                select new EvaluatorDTO()
-                {
-                    Id = evaluator.Id,
-                    UserId = evaluator.UserId,
-                    DepartmentId = evaluator.DepartmentId,
-                    FirstName = evaluator.FirstName,
-                    LastName = evaluator.LastName,
-                    CompetencyLevel = applicationToEstimators.ConfidenceArea
-                });
+        return from applicationToEstimators in await _repository.GetAllAsync()
+               join evaluator in await _evaluatorRepository.GetAllAsync() on applicationToEstimators.EvaluatorId equals evaluator.Id
+               where applicationToEstimators.ApplicationId == applicationId
+               select new EvaluatorDTO()
+               {
+                   Id = evaluator.Id,
+                   UserId = evaluator.UserId,
+                   DepartmentId = evaluator.DepartmentId,
+                   FirstName = evaluator.FirstName,
+                   LastName = evaluator.LastName,
+                   Phone = evaluator.Phone,
+                   Email = evaluator.Email,
+                   CompetencyLevel = applicationToEstimators.ConfidenceArea
+               };
     }
 
-    public async Task<ApplicationToEstimatorsDTO> CreateApplicationToEstimatorsAsync(
-        ApplicationToEstimatorsDTO applicationToEstimators)
+    public async Task<ApplicationToEstimatorsDTO> CreateApplicationToEstimatorsAsync(ApplicationToEstimatorsDTO applicationToEstimators)
     {
         return await CreateEntityAsync(applicationToEstimators);
     }
@@ -43,29 +45,33 @@ internal class ApplicationToEstimatorsService : BaseService<ApplicationToEvaluat
     public async Task<ApplicationToEstimatorsDTO> UpdateApplicationToEstimatorsAsync(ApplicationToEstimatorsDTO applicationToEstimators)
     {
         var domainModel = (await _repository.GetAllAsync())
-            .FirstOrDefault(ate => ate.ApplicationId == applicationToEstimators.ApplicationId
-                                   && ate.EvaluatorId == applicationToEstimators.EvaluatorId);
+            .FirstOrDefault(ate => ate.ApplicationId == applicationToEstimators.ApplicationId && ate.EvaluatorId == applicationToEstimators.EvaluatorId);
+
         if (domainModel != null)
         {
             domainModel.ConfidenceArea = applicationToEstimators.ConfidenceArea;
             return await UpdateEntityAsync(domainModel);
         }
 
-        return null;
+        return new ApplicationToEstimatorsDTO();
     }
 
-    protected override async Task<ApplicationToEstimatorsDTO> CreateEntityAsync(
-        ApplicationToEstimatorsDTO applicationToEstimators)
+    protected override async Task<ApplicationToEstimatorsDTO> CreateEntityAsync(ApplicationToEstimatorsDTO applicationToEstimators)
     {
         try
         {
-            foreach (var evaluator in applicationToEstimators.Evaluators)
-                await _repository.AddAsync(new ApplicationToEvaluator
+            if (applicationToEstimators.Evaluators != null)
+            {
+                foreach (var evaluator in applicationToEstimators.Evaluators)
                 {
-                    ApplicationId = applicationToEstimators.ApplicationId,
-                    EvaluatorId = evaluator.Id
-                });
-
+                    await _repository.AddAsync(new ApplicationToEvaluator
+                    {
+                        ApplicationId = applicationToEstimators.ApplicationId,
+                        EvaluatorId = evaluator.Id
+                    });
+                }
+            }
+            
             await _repository.SaveChangesAcync();
 
             return applicationToEstimators;
@@ -75,7 +81,7 @@ internal class ApplicationToEstimatorsService : BaseService<ApplicationToEvaluat
             throw new Exception(ex.Message);
         }
     }
-    
+
     async Task<ApplicationToEstimatorsDTO> UpdateEntityAsync(ApplicationToEvaluator entity)
     {
         try

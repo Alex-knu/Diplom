@@ -4,8 +4,8 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.D
 
 internal class DifficultyLevel : IBaseEntity<Guid>
 {
+    public Guid Id { get; set; }
     public Guid EvaluationAttributeId { get; set; }
     public Guid RelationId { get; set; }
-    public string Name { get; set; }
-    public Guid Id { get; set; }
+    public required string Name { get; set; }
 }
