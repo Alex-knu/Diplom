@@ -2,5 +2,5 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
 
 internal class ProcedureApplication : BaseApplication
 {
-    public string StatusName { get; set; }
+    public required string StatusName { get; set; }
 }

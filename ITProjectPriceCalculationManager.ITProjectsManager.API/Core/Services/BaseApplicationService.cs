@@ -61,7 +61,10 @@ internal class BaseApplicationService : BaseService<Application, Guid, BaseAppli
                 await _estimatorRepository.GetFirstBySpecAsync(
                     new Evaluators.GetEvaluatorByUserId(baseApplication.UserCreatorId));
 
-            if (domainCreator == null) throw new BadHttpRequestException("Creator not found");
+            if (domainCreator == null)
+            {
+                throw new BadHttpRequestException("Creator not found");
+            }
 
             var domainApplication = _mapper.Map<Application>(baseApplication);
 
@@ -72,12 +75,17 @@ internal class BaseApplicationService : BaseService<Application, Guid, BaseAppli
 
             await _repository.SaveChangesAcync();
 
-            foreach (var programLanguage in baseApplication.ProgramLanguages)
-                await _programsParametrRepository.AddAsync(new ProgramsParametr
+            if (baseApplication.ProgramLanguages != null)
+            {
+                foreach (var programLanguage in baseApplication.ProgramLanguages)
                 {
-                    ApplicationId = newDomainApplication.Id,
-                    ProgramLanguageId = programLanguage.Id
-                });
+                    await _programsParametrRepository.AddAsync(new ProgramsParametr
+                    {
+                        ApplicationId = newDomainApplication.Id,
+                        ProgramLanguageId = programLanguage.Id
+                    });
+                }
+            }
 
             await _programsParametrRepository.SaveChangesAcync();
 

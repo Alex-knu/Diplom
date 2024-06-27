@@ -4,6 +4,7 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
 
 internal class BaseApplication : IBaseEntity<Guid>
 {
+    public Guid Id { get; set; }
     public Guid CreatorId { get; set; }
     public Guid StatusId { get; set; }
     public double Price { get; set; }
@@ -13,10 +14,9 @@ internal class BaseApplication : IBaseEntity<Guid>
     public double AverageCostLabor { get; set; }
     public double AverageMonthlyRateWorkingHours { get; set; }
     public double? ConfidenceArea { get; set; }
-    public string Name { get; set; }
-    public string Description { get; set; }
+    public required string Name { get; set; }
+    public required string Description { get; set; }
 
     public ApplicationStatus.ApplicationStatus? Status { get; set; }
-    public Evaluator.Evaluator Creator { get; set; }
-    public Guid Id { get; set; }
+    public Evaluator.Evaluator? Creator { get; set; }
 }

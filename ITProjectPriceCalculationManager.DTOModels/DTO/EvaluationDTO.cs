@@ -9,6 +9,7 @@ public class EvaluationDTO
     public double Overhead { get; set; }
     public double Profit { get; set; }
     public double SocialInsurance { get; set; }
-    public List<EvaluationFactorDTO> EvaluationFactors { get; set; }
-    public List<ProgramsParametrEvaluationFactorDTO> ProgramsParametrEvaluationFactor { get; set; }
+    
+    public required List<EvaluationFactorDTO> EvaluationFactors { get; set; }
+    public required List<ProgramsParametrEvaluationFactorDTO> ProgramsParametrEvaluationFactor { get; set; }
 }

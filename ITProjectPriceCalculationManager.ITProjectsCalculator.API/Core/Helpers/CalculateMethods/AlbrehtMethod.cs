@@ -1,6 +1,7 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.DTOModels.Enums;
 using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers.ExpertMethods;
+using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Models;
 
 namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers.CalculateMethods;
 
@@ -9,7 +10,7 @@ internal class AlbrehtMethod : CalculateMethod
     public override async Task<EvaluationResultDTO> Calculate(EvaluationDTO evaluation, double? price)
     {
         double ksloc = 0;
-        var result = new EvaluationResultDTO();
+        var result = new EvaluationResultDTO() { Error = string.Empty };
         var tehnique = SetStrategy(evaluation);
 
         try
@@ -37,9 +38,9 @@ internal class AlbrehtMethod : CalculateMethod
 
         foreach (var subjectAreaElement in subjectAreaElements)
         {
-            var result = tehnique.CheckFactors(subjectAreaElement.ToList(), confidenceArea);
+            CheckFactorsResult result = tehnique.CheckFactors(subjectAreaElement.ToList(), confidenceArea);
 
-            sum = sum + result.FactorValue * result.Count.Value;
+            sum = sum + result.FactorValue * result.Count;
         }
 
         return sum;

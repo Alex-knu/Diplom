@@ -4,9 +4,9 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.P
 
 internal class ProgramLanguage : IBaseEntity<Guid>
 {
-    public int SLOC { get; set; }
-    public string Name { get; set; }
-
-    public ICollection<ProgramsParametr.ProgramsParametr> ProgramsParametrs { get; set; }
     public Guid Id { get; set; }
+    public int SLOC { get; set; }
+    public required string Name { get; set; }
+
+    public ICollection<ProgramsParametr.ProgramsParametr>? ProgramsParametrs { get; set; }
 }

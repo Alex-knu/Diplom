@@ -4,10 +4,10 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.E
 
 internal class EvaluatorToEvaluatedFactor : IBaseEntity<Guid>
 {
+    public Guid Id { get; set; }
     public Guid EvaluatorId { get; set; }
     public Guid EvaluatedFactorId { get; set; }
 
-    public Evaluator.Evaluator Evaluator { get; set; }
-    public ApplicationToFactor.ApplicationToFactor EvaluatedFactor { get; set; }
-    public Guid Id { get; set; }
+    public Evaluator.Evaluator? Evaluator { get; set; }
+    public ApplicationToFactor.ApplicationToFactor? EvaluatedFactor { get; set; }
 }

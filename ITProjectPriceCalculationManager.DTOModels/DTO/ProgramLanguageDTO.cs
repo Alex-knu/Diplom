@@ -4,7 +4,7 @@ public class ProgramLanguageDTO
 {
     public Guid Id { get; set; }
     public int SLOC { get; set; }
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
-    public List<ProgramsParametrDTO> ProgramsParametrs { get; set; }
+    public required List<ProgramsParametrDTO> ProgramsParametrs { get; set; }
 }
