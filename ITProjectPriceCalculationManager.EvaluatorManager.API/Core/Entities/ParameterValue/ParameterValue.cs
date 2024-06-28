@@ -10,5 +10,5 @@ internal class ParameterValue : IBaseEntity<Guid>
     public float C { get; set; }
     public float D { get; set; }
 
-    public EvaluateParameter.EvaluateParameter EvaluateParameter { get; set; }
+    public EvaluateParameter.EvaluateParameter? EvaluateParameter { get; set; }
 }

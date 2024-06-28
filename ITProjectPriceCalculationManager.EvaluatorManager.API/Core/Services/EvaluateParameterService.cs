@@ -9,7 +9,7 @@ namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Services;
 internal class EvaluateParameterService : BaseService<EvaluateParameter, Guid, EvaluateParameterDTO>, IEvaluateParameterService
 {
     private readonly IParameterValueService _parameterValueService;
-    
+
     public EvaluateParameterService(IParameterValueService parameterValueService, IRepository<EvaluateParameter, Guid> repository, IMapper mapper) : base(repository, mapper)
     {
         _parameterValueService = parameterValueService;
@@ -18,8 +18,13 @@ internal class EvaluateParameterService : BaseService<EvaluateParameter, Guid, E
     public async Task<EvaluateParameterDTO> CreateEvaluateParameterAsync(EvaluateParameterDTO EvaluateParameter)
     {
         var entity = await base.CreateEntityAsync(EvaluateParameter);
-        entity.EvaluateParameterValue = await _parameterValueService
-            .GetParameterValueByIdAsync(EvaluateParameter.EvaluateParameterValue.Id);
+
+        if (EvaluateParameter.EvaluateParameterValue != null)
+        {
+            entity.EvaluateParameterValue = await _parameterValueService
+                .GetParameterValueByIdAsync(EvaluateParameter.EvaluateParameterValue.Id);
+        }
+
         return entity;
     }
 

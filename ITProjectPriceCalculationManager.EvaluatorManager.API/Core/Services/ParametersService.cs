@@ -59,10 +59,10 @@ internal class ParametersService : BaseService<Parameters, Guid, ParametersDTO>,
                 .Where(ep => ep.ParameterId == domainEntity.Id).ToList();
         }
 
-        foreach (var evaluateParameter in domainEntities.SelectMany(e => e.EvaluateParameters))
+        foreach (var evaluateParameter in domainEntities.SelectMany(e => e.EvaluateParameters ?? Enumerable.Empty<EvaluateParameter>()))
         {
             evaluateParameter.EvaluateParameterValue = (await _parameterValueRepository.GetAllAsync())
-                .Where(pv => pv.Id == evaluateParameter.Id).SingleOrDefault();
+                .Where(pv => pv.Id == evaluateParameter.Id).Single();
         }
         
         return _mapper.Map<IEnumerable<ParametersDTO>>(domainEntities);

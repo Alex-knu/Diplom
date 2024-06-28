@@ -8,5 +8,5 @@ internal class Parameters : IBaseEntity<Guid>
     public Guid ApplicationId { get; set; }
     public required string Name { get; set; }
     
-    public virtual ICollection<EvaluateParameter.EvaluateParameter> EvaluateParameters { get; set; }
+    public virtual ICollection<EvaluateParameter.EvaluateParameter>? EvaluateParameters { get; set; }
 }
