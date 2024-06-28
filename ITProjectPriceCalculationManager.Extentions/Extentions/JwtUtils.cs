@@ -33,9 +33,11 @@ public static class JwtUtils
             var claimsPrincipal = tokenHandler.ValidateToken(token, validationParameters, out var securityToken);
 
             if (securityToken is not JwtSecurityToken jwtSecurityToken ||
-                !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,
-                    StringComparison.InvariantCultureIgnoreCase)) throw new SecurityTokenException("Invalid token");
-
+                !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+            {
+                throw new SecurityTokenException("Invalid token");
+            }
+            
             return new UserInfo
             {
                 UserId = new Guid(claimsPrincipal.FindFirst("UserIdentifier")?.Value),
@@ -43,7 +45,7 @@ public static class JwtUtils
                 Roles = claimsPrincipal.FindAll("Roles").Select(c => c.Value).ToList()
             };
         }
-        catch (Exception ex)
+        catch
         {
             throw new BadRequestException("Invalid token");
         }

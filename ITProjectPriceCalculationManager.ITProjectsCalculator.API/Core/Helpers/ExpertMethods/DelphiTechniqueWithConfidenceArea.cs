@@ -20,6 +20,6 @@ internal class DelphiTechniqueWithConfidenceArea : BaseDelphiTechnique
 
     protected override double GetSumOfCount(IEnumerable<IFactor> factors)
     {
-        return factors.Sum(f => f.SelfEvaluation * f.Count.Value);
+        return factors.Sum(f => f.SelfEvaluation * f.Count ?? 0);
     }
 }
