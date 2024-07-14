@@ -22,13 +22,12 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push web application
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           file: ./ITProjectPriceCalculationManager.WebApp/Dockerfile
           push: true
           tags: ghcr.io/alex-knu/diplom.web_app:latest
-
 
   build-and-push-auth-server:
     runs-on: ubuntu-latest
@@ -47,13 +46,12 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push auth server
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           file: ./ITProjectPriceCalculationManager.AuthServer/Dockerfile
           push: true
           tags: ghcr.io/alex-knu/diplom.auth_server:latest
-
 
   build-and-push-calculator-api:
     runs-on: ubuntu-latest
@@ -72,13 +70,12 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push calculator api
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           file: ./ITProjectPriceCalculationManager.ITProjectsCalculator.API/Dockerfile
           push: true
           tags: ghcr.io/alex-knu/diplom.it_projects_calculator.api:latest
-
 
   build-and-push-it-projects-manager:
     runs-on: ubuntu-latest
@@ -97,13 +94,12 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Build and push projects manager api
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           file: ./ITProjectPriceCalculationManager.ITProjectsManager.API/Dockerfile
           push: true
           tags: ghcr.io/alex-knu/diplom.it_projects_manager.api:latest
-
 
   build-and-push-router:
     runs-on: ubuntu-latest
@@ -122,13 +118,12 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Build and push router api
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           file: ./ITProjectPriceCalculationManager.Router.API/Dockerfile
           push: true
           tags: ghcr.io/alex-knu/diplom.router.api:latest
-
 
   build-and-push-evaluator-manager:
     runs-on: ubuntu-latest
@@ -147,7 +142,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Build and push evaluator manager api
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           file: ./ITProjectPriceCalculationManager.EvaluatorManager.API/Dockerfile
