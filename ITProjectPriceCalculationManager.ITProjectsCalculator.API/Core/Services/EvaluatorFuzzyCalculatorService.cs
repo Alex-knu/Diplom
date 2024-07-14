@@ -11,11 +11,19 @@ internal class EvaluatorFuzzyCalculatorService : IEvaluatorFuzzyCalculatorServic
     {
         var fuzzyInputs = new List<double>();
 
-        foreach(var evaluationCompetentValue in evaluatorFuzzyQuery.EvaluationCompetentValues)
+        foreach (var evaluationCompetentValue in evaluatorFuzzyQuery.EvaluationCompetentValues)
         {
-            foreach(var evaluateParameter in evaluatorFuzzyQuery.EvaluateParameters.Where(parameter => parameter.ParameterId == evaluationCompetentValue.EvaluationParameterId))
+            foreach (var evaluateParameter in evaluatorFuzzyQuery.EvaluateParameters.Where(parameter => parameter.ParameterId == evaluationCompetentValue.EvaluationParameterId))
             {
-                fuzzyInputs.Add(SetMembershipFunctionStrategy(evaluateParameter.BelongingFunctionId, evaluateParameter.EvaluateParameterValue.A, evaluateParameter.EvaluateParameterValue.B, evaluateParameter.EvaluateParameterValue.C, evaluateParameter.EvaluateParameterValue.D).CalculateMembership(evaluationCompetentValue.Value));
+                if (evaluateParameter.EvaluateParameterValue != null)
+                {
+                    fuzzyInputs.Add(SetMembershipFunctionStrategy(
+                        evaluateParameter.BelongingFunctionId, 
+                        evaluateParameter.EvaluateParameterValue.A, 
+                        evaluateParameter.EvaluateParameterValue.B, 
+                        evaluateParameter.EvaluateParameterValue.C, 
+                        evaluateParameter.EvaluateParameterValue.D).CalculateMembership(evaluationCompetentValue.Value));
+                }
             }
         }
 
@@ -35,7 +43,7 @@ internal class EvaluatorFuzzyCalculatorService : IEvaluatorFuzzyCalculatorServic
 
         return output;
     }
-    
+
     public static double Defuzzify(double aggregatedValue)
     {
         double lowComfortRangeStart = 0.0;

@@ -21,7 +21,7 @@ public class RoleSevice : IRoleSevice
             select new RoleDTO
             {
                 Id = new Guid(role.Id),
-                Name = role.Name
+                Name = role.Name ?? string.Empty
             }).ToList();
     }
 }

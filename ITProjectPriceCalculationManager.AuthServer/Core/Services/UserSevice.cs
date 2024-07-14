@@ -25,28 +25,28 @@ public class UserSevice : IUserSevice
     public IEnumerable<UserDTO> GetAllUsers()
     {
         return (from user in _dbContext.Users
-            select new UserDTO
-            {
-                Id = new Guid(user.Id),
-                Name = user.UserName,
-                Roles = (from userRole in _dbContext.UserRoles
-                    join role in _dbContext.Roles on userRole.RoleId equals role.Id
-                    where userRole.UserId == user.Id
-                    select new RoleDTO
-                    {
-                        Id = new Guid(role.Id),
-                        Name = role.Name
-                    }).ToList()
-            }).ToList();
+                select new UserDTO
+                {
+                    Id = new Guid(user.Id),
+                    Name = user.UserName ?? string.Empty,
+                    Roles = (from userRole in _dbContext.UserRoles
+                             join role in _dbContext.Roles on userRole.RoleId equals role.Id
+                             where userRole.UserId == user.Id
+                             select new RoleDTO
+                             {
+                                 Id = new Guid(role.Id),
+                                 Name = role.Name ?? string.Empty
+                             }).ToList()
+                }).ToList();
     }
 
     public IEnumerable<string> GetAllUserIdsByRole(string roleName)
     {
         return (from user in _dbContext.Users
-            join userRole in _dbContext.UserRoles on user.Id equals userRole.UserId
-            join role in _dbContext.Roles on userRole.RoleId equals role.Id
-            where role.Name == roleName
-            select user.Id).ToList();
+                join userRole in _dbContext.UserRoles on user.Id equals userRole.UserId
+                join role in _dbContext.Roles on userRole.RoleId equals role.Id
+                where role.Name == roleName
+                select user.Id).ToList();
     }
 
     public async Task<UserDTO> UpdateUserRoles(UserDTO query)

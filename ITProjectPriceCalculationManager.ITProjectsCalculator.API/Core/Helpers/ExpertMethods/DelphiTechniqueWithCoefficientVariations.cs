@@ -19,6 +19,6 @@ internal class DelphiTechniqueWithCoefficientVariations : BaseDelphiTechnique
 
     protected override double GetSumOfCount(IEnumerable<IFactor> factors)
     {
-        return factors.Sum(f => f.Count.Value);
+        return factors.Sum(f => f.Count ?? 0);
     }
 }

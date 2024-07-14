@@ -9,8 +9,7 @@ using ITProjectPriceCalculationManager.Extentions.Models.Exceptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using KeyNotFoundException = ITProjectPriceCalculationManager.Extentions.Models.Exceptions.KeyNotFoundException;
-using UnauthorizedAccessException =
-    ITProjectPriceCalculationManager.Extentions.Models.Exceptions.UnauthorizedAccessException;
+using UnauthorizedAccessException = ITProjectPriceCalculationManager.Extentions.Models.Exceptions.UnauthorizedAccessException;
 
 namespace ITProjectPriceCalculationManager.AuthServer.Core.Services;
 
@@ -33,14 +32,16 @@ public class AuthenticateSevice : IAuthenticateSevice
         var user = await _userManager.FindByNameAsync(model.Username);
 
         if (user == null || !await _userManager.CheckPasswordAsync(user, model.Password))
+        {
             throw new UnauthorizedAccessException("Wrong user credentials!");
+        }
 
         var userRoles = await _userManager.GetRolesAsync(user);
 
         var authClaims = new List<Claim>
         {
             new("UserIdentifier", user.Id),
-            new("UserName", user.UserName),
+            new("UserName", model.Username),
             new("Jti", Guid.NewGuid().ToString())
         };
 
@@ -71,24 +72,40 @@ public class AuthenticateSevice : IAuthenticateSevice
         };
 
         if (!await _roleManager.RoleExistsAsync(UserRoles.User))
+        {
             await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+        }
 
         var result = await _userManager.CreateAsync(user, model.Password);
 
         if (!result.Succeeded)
+        {
             throw new BadRequestException("User creation failed! Please check user details and try again.");
+        }
 
         if (await _roleManager.RoleExistsAsync(UserRoles.User))
+        {
             await _userManager.AddToRolesAsync(user, new List<string> { UserRoles.User });
+        }
 
-        return (await _userManager.FindByNameAsync(model.Username)).Id;
+        var savedUser = await _userManager.FindByNameAsync(model.Username);
+
+        if (savedUser == null)
+        {
+            throw new BadRequestException("User creation failed! Please check user details and try again.");
+        }
+
+        return savedUser.Id;
     }
 
     public async Task RegisterAdmin(RegisterModel model)
     {
         var userExists = await _userManager.FindByNameAsync(model.Username);
 
-        if (userExists != null) throw new BadRequestException("User already exists!");
+        if (userExists != null)
+        {
+            throw new BadRequestException("User already exists!");
+        }
 
         IdentityUser user = new()
         {
@@ -100,21 +117,29 @@ public class AuthenticateSevice : IAuthenticateSevice
         var result = await _userManager.CreateAsync(user, model.Password);
 
         if (!result.Succeeded)
+        {
             throw new BadRequestException("User creation failed! Please check user details and try again.");
+        }
 
         if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
+        {
             await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+        }
 
         if (!await _roleManager.RoleExistsAsync(UserRoles.User))
+        {
             await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+        }
 
         if (await _roleManager.RoleExistsAsync(UserRoles.Admin))
+        {
             await _userManager.AddToRolesAsync(user, new List<string> { UserRoles.Admin, UserRoles.User });
+        }
     }
 
     private JwtSecurityToken GetToken(List<Claim> authClaims)
     {
-        var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Secret"]));
+        var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Secret"] ?? string.Empty));
 
         var token = new JwtSecurityToken(
             _configuration["ValidIssuer"],

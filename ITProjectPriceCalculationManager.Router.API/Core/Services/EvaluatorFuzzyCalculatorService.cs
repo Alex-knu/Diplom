@@ -29,7 +29,7 @@ internal class EvaluatorFuzzyCalculatorService : IEvaluatorFuzzyCalculatorServic
             {
                 EvaluationCompetentValues = evaluatorFuzzyQuery.EvaluationCompetentValues,
                 EvaluateParameters = (await _routeService.GetListByIdAsync<List<ParametersDTO>, Guid>(_evaluatorClient, "parametersapi",
-                    evaluatorFuzzyQuery.ApplicationId)).SelectMany(parameter => parameter?.EvaluateParameters).ToList()
+                    evaluatorFuzzyQuery.ApplicationId)).SelectMany(parameter => parameter.EvaluateParameters ?? Enumerable.Empty<EvaluateParameterDTO>()).ToList()
             })
         });
     }

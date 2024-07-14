@@ -11,7 +11,7 @@ internal class EvaluateParameter : IBaseEntity<Guid>
     public Guid ParameterValueId { get; set; }
     
 
-    public Parameters.Parameters Parameter { get; set;  }
-    public ParameterValue.ParameterValue EvaluateParameterValue { get; set; }
-    public BelongingFunction.BelongingFunction BelongingFunction { get; set; }
+    public Parameters.Parameters? Parameter { get; set;  }
+    public ParameterValue.ParameterValue? EvaluateParameterValue { get; set; }
+    public BelongingFunction.BelongingFunction? BelongingFunction { get; set; }
 }
