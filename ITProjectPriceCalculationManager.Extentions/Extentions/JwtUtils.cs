@@ -1,4 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 using ITProjectPriceCalculationManager.Extentions.Models;
 using ITProjectPriceCalculationManager.Extentions.Models.Exceptions;
@@ -9,14 +10,22 @@ namespace ITProjectPriceCalculationManager.Extentions.Extentions;
 
 public static class JwtUtils
 {
-    public static string SecretKey { get; set; }
+    public static string? SecretKey { get; set; }
 
     public static UserInfo GetUserInfo(HttpContext httpContext)
     {
+        if (string.IsNullOrEmpty(SecretKey))
+        {
+            throw new BadRequestException("Configs not contains keys");
+        }
+
         var tokenHandler = new JwtSecurityTokenHandler();
         var tokenHeader = httpContext.Request.Headers["Authorization"];
 
-        if (!tokenHeader.ToString().StartsWith("Bearer ")) throw new BadRequestException("Invalid token");
+        if (!tokenHeader.ToString().StartsWith("Bearer "))
+        {
+            throw new BadRequestException("Invalid token");
+        }
 
         var token = tokenHeader.ToString().Substring(7);
         var validationParameters = new TokenValidationParameters
@@ -37,11 +46,11 @@ public static class JwtUtils
             {
                 throw new SecurityTokenException("Invalid token");
             }
-            
+
             return new UserInfo
             {
-                UserId = new Guid(claimsPrincipal.FindFirst("UserIdentifier")?.Value),
-                UserName = claimsPrincipal.FindFirst("UserName")?.Value,
+                UserId = new Guid(claimsPrincipal.FindFirstValue("UserIdentifier") ?? string.Empty),
+                UserName = claimsPrincipal.FindFirstValue("UserName") ?? string.Empty,
                 Roles = claimsPrincipal.FindAll("Roles").Select(c => c.Value).ToList()
             };
         }

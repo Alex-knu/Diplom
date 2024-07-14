@@ -49,7 +49,7 @@ builder.Services
             ValidateAudience = true,
             ValidAudience = builder.Configuration["ValidAudience"],
             ValidIssuer = builder.Configuration["ValidIssuer"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Secret"]))
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Secret"] ?? string.Empty))
         };
     });
 
@@ -73,7 +73,7 @@ using (var scope = app.Services.CreateScope())
 app.UseStaticFiles();
 app.UseCors(
     b => b
-        .WithOrigins(builder.Configuration["OriginUrls"].Split(','))
+        .WithOrigins((builder.Configuration["OriginUrls"] ?? string.Empty).Split(','))
         .SetIsOriginAllowedToAllowWildcardSubdomains()
         .AllowAnyMethod()
         .AllowAnyHeader()
