@@ -8,6 +8,11 @@ jobs:
   build-and-push-web-application:
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
       - name: Check out the repo
         uses: actions/checkout@v4
 
@@ -32,6 +37,11 @@ jobs:
   build-and-push-auth-server:
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
       - name: Check out the repo
         uses: actions/checkout@v4
 
@@ -56,6 +66,11 @@ jobs:
   build-and-push-calculator-api:
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
       - name: Check out the repo
         uses: actions/checkout@v4
 
@@ -80,6 +95,11 @@ jobs:
   build-and-push-it-projects-manager:
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
       - name: Check out the repo
         uses: actions/checkout@v4
         
@@ -104,6 +124,11 @@ jobs:
   build-and-push-router:
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
       - name: Check out the repo
         uses: actions/checkout@v4
         
@@ -128,6 +153,11 @@ jobs:
   build-and-push-evaluator-manager:
     runs-on: ubuntu-latest
     steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          
       - name: Check out the repo
         uses: actions/checkout@v4
         
