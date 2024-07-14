@@ -13,7 +13,7 @@ builder.Configuration
     .AddUserSecrets(Assembly.GetExecutingAssembly(), true);
 // Add services to the container.
 
-JwtUtils.SecretKey = builder.Configuration["Secret"];
+JwtUtils.SecretKey = builder.Configuration["Secret"] ?? string.Empty;
 
 builder.Services.AddScoped(typeof(IRouteService), typeof(RouteService));
 builder.Services.AddScoped(typeof(IApplicationService), typeof(ApplicationService));
@@ -40,16 +40,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services
-    .AddHttpClient("AuthServer", client => { client.BaseAddress = new Uri(builder.Configuration["AuthServer"]); });
+    .AddHttpClient("AuthServer", client => { client.BaseAddress = new Uri(builder.Configuration["AuthServer"] ?? string.Empty); });
 builder.Services
     .AddHttpClient("ITProjectsCalculator",
-        client => { client.BaseAddress = new Uri(builder.Configuration["ITProjectsCalculatorAPIRoute"]); });
+        client => { client.BaseAddress = new Uri(builder.Configuration["ITProjectsCalculatorAPIRoute"] ?? string.Empty); });
 builder.Services
     .AddHttpClient("ITProjectsManager",
-        client => { client.BaseAddress = new Uri(builder.Configuration["ITProjectsManagerAPIRoute"]); });
+        client => { client.BaseAddress = new Uri(builder.Configuration["ITProjectsManagerAPIRoute"] ?? string.Empty); });
 builder.Services
     .AddHttpClient("ITProjectsEvaluatorManager",
-        client => { client.BaseAddress = new Uri(builder.Configuration["ITProjectsEvaluatorManagerAPIRoute"]); });
+        client => { client.BaseAddress = new Uri(builder.Configuration["ITProjectsEvaluatorManagerAPIRoute"] ?? string.Empty); });
 
 builder.Services
     .AddAuthentication(options =>
@@ -68,7 +68,7 @@ builder.Services
             ValidateAudience = true,
             ValidAudience = builder.Configuration["ValidAudience"],
             ValidIssuer = builder.Configuration["ValidIssuer"],
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Secret"]))
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Secret"]  ?? string.Empty))
         };
     });
 
@@ -76,7 +76,7 @@ var app = builder.Build();
 
 app.UseCors(
     b => b
-        .WithOrigins(builder.Configuration["OriginUrls"].Split(','))
+        .WithOrigins((builder.Configuration["OriginUrls"] ?? string.Empty).Split(','))
         .SetIsOriginAllowedToAllowWildcardSubdomains()
         .AllowAnyMethod()
         .AllowAnyHeader()
