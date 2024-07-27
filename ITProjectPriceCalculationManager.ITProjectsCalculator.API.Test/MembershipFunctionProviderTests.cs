@@ -1,6 +1,6 @@
 using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers.MembershipFunction;
 
-namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Tets;
+namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Test;
 
 [TestFixture]
     public class MembershipFunctionProviderTests

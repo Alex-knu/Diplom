@@ -6,7 +6,7 @@ using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Interfaces.Serv
 
 namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Services;
 
-internal class BelongingFunctionService : BaseService<BelongingFunction, Guid, BelongingFunctionDTO>, IBelongingFunctionService
+public class BelongingFunctionService : BaseService<BelongingFunction, Guid, BelongingFunctionDTO>, IBelongingFunctionService
 {
     public BelongingFunctionService(IRepository<BelongingFunction, Guid> repository, IMapper mapper) : base(repository, mapper)
     {
@@ -20,11 +20,6 @@ internal class BelongingFunctionService : BaseService<BelongingFunction, Guid, B
     public async Task<BelongingFunctionDTO> DeleteBelongingFunctionAsync(Guid id)
     {
         return await base.DeleteEntityAsync(id);
-    }
-
-    public Task<BelongingFunctionDTO> GetBelongingFunctionByIdAsync(Guid id)
-    {
-        throw new NotImplementedException();
     }
 
     public async Task<IEnumerable<BelongingFunctionDTO>> GetBelongingFunctionAsync()

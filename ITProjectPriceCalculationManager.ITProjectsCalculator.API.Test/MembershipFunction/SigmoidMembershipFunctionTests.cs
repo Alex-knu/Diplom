@@ -1,6 +1,6 @@
 using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers.MembershipFunction;
 
-namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Tets.MembershipFunction;
+namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Test.MembershipFunction;
 
 [TestFixture]
 public class SigmoidMembershipFunctionTests

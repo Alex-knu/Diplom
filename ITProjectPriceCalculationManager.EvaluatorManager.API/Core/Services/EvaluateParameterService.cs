@@ -6,7 +6,7 @@ using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Interfaces.Serv
 
 namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Services;
 
-internal class EvaluateParameterService : BaseService<EvaluateParameter, Guid, EvaluateParameterDTO>, IEvaluateParameterService
+public class EvaluateParameterService : BaseService<EvaluateParameter, Guid, EvaluateParameterDTO>, IEvaluateParameterService
 {
     private readonly IParameterValueService _parameterValueService;
 

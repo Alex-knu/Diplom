@@ -3,7 +3,7 @@ using Ardalis.Specification;
 
 namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Interfaces.Repositories;
 
-internal interface IRepository<TEntity, TKey> where TEntity : class, IBaseEntity<TKey>
+public interface IRepository<TEntity, TKey> where TEntity : class, IBaseEntity<TKey>
 {
     Task<TEntity> AddAsync(TEntity entity);
     Task<IEnumerable<TEntity>> GetAllAsync();
