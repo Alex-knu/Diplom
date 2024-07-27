@@ -2,7 +2,7 @@ using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfaces.
 
 namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers.MembershipFunction;
 
-internal class QuadraticMembershipFunction : IMembershipFunction
+public class QuadraticMembershipFunction : IMembershipFunction
 {
     // Parameters
     private readonly double A; // Коефіцієнт a

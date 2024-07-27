@@ -20,6 +20,9 @@ ITProjectPriceCalculationManager.Extentions/obj/*
 ITProjectPriceCalculationManager.ITProjectsCalculator.API/bin/*
 ITProjectPriceCalculationManager.ITProjectsCalculator.API/obj/*
 
+ITProjectPriceCalculationManager.ITProjectsCalculator.API.Tets/obj/*
+ITProjectPriceCalculationManager.ITProjectsCalculator.API.Tets/bin/*
+
 ITProjectPriceCalculationManager.ITProjectsManager.API/obj/*
 ITProjectPriceCalculationManager.ITProjectsManager.API/bin/*
 

@@ -3,7 +3,7 @@ using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Models;
 
 namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers.MembershipFunction;
 
-internal class MembershipFunctionStrategy
+public class MembershipFunctionStrategy
 {
     public IMembershipFunction GetMembershipFunction(Guid strategyId, params double[] parameters)
     {

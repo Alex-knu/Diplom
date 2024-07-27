@@ -2,7 +2,7 @@ using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfaces.
 
 namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers.MembershipFunction;
 
-internal class GaussianMembershipFunction : IMembershipFunction
+public class GaussianMembershipFunction : IMembershipFunction
 {
     private readonly double Mean;
     private readonly double Stddev;
