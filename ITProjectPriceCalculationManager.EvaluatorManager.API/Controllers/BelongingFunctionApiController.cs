@@ -22,12 +22,6 @@ public class BelongingFunctionApiController : ControllerBase
         return Ok(await _BelongingFunctionService.GetBelongingFunctionAsync());
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetBelongingFunctionById(Guid id)
-    {
-        return Ok(await _BelongingFunctionService.GetBelongingFunctionByIdAsync(id));
-    }
-
     [HttpPost]
     public async Task<IActionResult> CreateBelongingFunction(BelongingFunctionDTO query)
     {

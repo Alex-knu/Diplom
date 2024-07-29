@@ -6,7 +6,7 @@ using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Interfaces.Serv
 
 namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Services;
 
-internal class ParameterValueService : BaseService<ParameterValue, Guid, ParameterValueDTO>, IParameterValueService
+public class ParameterValueService : BaseService<ParameterValue, Guid, ParameterValueDTO>, IParameterValueService
 {
     public ParameterValueService(IRepository<ParameterValue, Guid> repository, IMapper mapper) : base(repository, mapper)
     {

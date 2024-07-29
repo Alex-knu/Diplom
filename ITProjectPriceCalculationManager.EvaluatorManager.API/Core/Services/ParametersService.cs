@@ -8,7 +8,7 @@ using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Interfaces.Serv
 
 namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Services;
 
-internal class ParametersService : BaseService<Parameters, Guid, ParametersDTO>, IParametersService
+public class ParametersService : BaseService<Parameters, Guid, ParametersDTO>, IParametersService
 {
     private readonly IRepository<EvaluateParameter, Guid> _evaluateParameterRepository;
     private readonly IRepository<ParameterValue, Guid> _parameterValueRepository;

@@ -2,7 +2,7 @@ using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Interfaces;
 
 namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.EvaluateParameter;
 
-internal class EvaluateParameter : IBaseEntity<Guid>
+public class EvaluateParameter : IBaseEntity<Guid>
 {
     public Guid Id { get; set; }
     public required string Name { get; set; }

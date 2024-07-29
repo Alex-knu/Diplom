@@ -5,7 +5,7 @@ using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Interfaces.Repo
 
 namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Services;
 
-internal abstract class BaseService<TEntity, TKey, TResult> where TEntity : class, IBaseEntity<TKey>
+public abstract class BaseService<TEntity, TKey, TResult> where TEntity : class, IBaseEntity<TKey>
 {
     protected readonly IMapper _mapper;
     protected readonly IRepository<TEntity, TKey> _repository;

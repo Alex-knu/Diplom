@@ -20,11 +20,17 @@ ITProjectPriceCalculationManager.Extentions/obj/*
 ITProjectPriceCalculationManager.ITProjectsCalculator.API/bin/*
 ITProjectPriceCalculationManager.ITProjectsCalculator.API/obj/*
 
+ITProjectPriceCalculationManager.ITProjectsCalculator.API.Test/obj/*
+ITProjectPriceCalculationManager.ITProjectsCalculator.API.Test/bin/*
+
 ITProjectPriceCalculationManager.ITProjectsManager.API/obj/*
 ITProjectPriceCalculationManager.ITProjectsManager.API/bin/*
 
 ITProjectPriceCalculationManager.EvaluatorManager.API/obj/*
 ITProjectPriceCalculationManager.EvaluatorManager.API/bin/*
+
+ITProjectPriceCalculationManager.EvaluatorManager.API.Test/bin/*
+ITProjectPriceCalculationManager.EvaluatorManager.API.Test/obj/*
 
 ITProjectPriceCalculationManager.Router.API/obj/*
 ITProjectPriceCalculationManager.Router.API/bin/*

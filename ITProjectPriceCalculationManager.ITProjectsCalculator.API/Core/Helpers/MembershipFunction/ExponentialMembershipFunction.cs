@@ -2,7 +2,7 @@ using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfaces.
 
 namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers.MembershipFunction;
 
-internal class ExponentialMembershipFunction : IMembershipFunction
+public class ExponentialMembershipFunction : IMembershipFunction
 {
     // Parameters
     private readonly double A; // Коефіцієнт зростання (a)

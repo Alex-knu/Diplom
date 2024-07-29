@@ -2,7 +2,7 @@ using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Interfaces.
 
 namespace ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers.MembershipFunction;
 
-internal class SigmoidMembershipFunction : IMembershipFunction
+public class SigmoidMembershipFunction : IMembershipFunction
 {
     private readonly double Midpoint;
     private readonly double Slope;
