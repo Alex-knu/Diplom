@@ -8,7 +8,7 @@ using ITProjectPriceCalculationManager.Infrastructure.Services;
 
 namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Services;
 
-internal class BelongingFunctionService : BaseService<BelongingFunction, Guid, BelongingFunctionDTO, ITProjectPriceCalculationEvaluatorManagerDbContext>, IBelongingFunctionService
+public class BelongingFunctionService : BaseService<BelongingFunction, Guid, BelongingFunctionDTO, ITProjectPriceCalculationEvaluatorManagerDbContext>, IBelongingFunctionService
 {
     public BelongingFunctionService(IRepository<BelongingFunction, Guid, ITProjectPriceCalculationEvaluatorManagerDbContext> repository, IMapper mapper) : base(repository, mapper)
     {

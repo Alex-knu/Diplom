@@ -7,7 +7,7 @@ namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Test.Services;
 public class EvaluateParameterServiceTests
 {
     private Mock<IParameterValueService> _parameterValueServiceMock;
-    private Mock<IRepository<EvaluateParameter, Guid>> _repositoryMock;
+    private Mock<IRepository<EvaluateParameter, Guid, ITProjectPriceCalculationEvaluatorManagerDbContext>> _repositoryMock;
     private Mock<IMapper> _mapperMock;
     private EvaluateParameterService _service;
     private EvaluateParameterDTO _dto;
@@ -18,7 +18,7 @@ public class EvaluateParameterServiceTests
     public void Setup()
     {
         _parameterValueServiceMock = new Mock<IParameterValueService>();
-        _repositoryMock = new Mock<IRepository<EvaluateParameter, Guid>>();
+        _repositoryMock = new Mock<IRepository<EvaluateParameter, Guid, ITProjectPriceCalculationEvaluatorManagerDbContext>>();
         _mapperMock = new Mock<IMapper>();
         _service = new EvaluateParameterService(
             _parameterValueServiceMock.Object,
