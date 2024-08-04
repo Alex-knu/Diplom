@@ -4,24 +4,24 @@ using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Appli
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evaluator;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.EvaluatorToEvaluatedFactor;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramsParametrToSubjectAreaElement;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
+using ITProjectPriceCalculationManager.Infrastructure.Interfaces;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data;
+using ITProjectPriceCalculationManager.Infrastructure.Services;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
 
-internal class ApplicationToFactorsService : BaseService<ApplicationToFactor, Guid, EvaluationApplicationDTO>,
+internal class ApplicationToFactorsService : BaseService<ApplicationToFactor, Guid, EvaluationApplicationDTO, ITProjectPriceCalculationManagerDbContext>,
     IApplicationToFactorsService
 {
-    protected readonly IRepository<Evaluator, Guid> _estimatorRepository;
-    protected readonly IRepository<EvaluatorToEvaluatedFactor, Guid> _evaluatorToEvaluatedFactorRepository;
-
-    protected readonly IRepository<ProgramsParametrToSubjectAreaElement, Guid>
-        _programsParametrToSubjectAreaElementRepository;
+    protected readonly IRepository<Evaluator, Guid, ITProjectPriceCalculationManagerDbContext> _estimatorRepository;
+    protected readonly IRepository<EvaluatorToEvaluatedFactor, Guid, ITProjectPriceCalculationManagerDbContext> _evaluatorToEvaluatedFactorRepository;
+    protected readonly IRepository<ProgramsParametrToSubjectAreaElement, Guid, ITProjectPriceCalculationManagerDbContext> _programsParametrToSubjectAreaElementRepository;
 
     public ApplicationToFactorsService(
-        IRepository<EvaluatorToEvaluatedFactor, Guid> evaluatorToEvaluatedFactorRepository,
-        IRepository<ProgramsParametrToSubjectAreaElement, Guid> programsParametrToSubjectAreaElementRepository,
-        IRepository<Evaluator, Guid> estimatorRepository, IRepository<ApplicationToFactor, Guid> repository,
+        IRepository<EvaluatorToEvaluatedFactor, Guid, ITProjectPriceCalculationManagerDbContext> evaluatorToEvaluatedFactorRepository,
+        IRepository<ProgramsParametrToSubjectAreaElement, Guid, ITProjectPriceCalculationManagerDbContext> programsParametrToSubjectAreaElementRepository,
+        IRepository<Evaluator, Guid, ITProjectPriceCalculationManagerDbContext> estimatorRepository, IRepository<ApplicationToFactor, Guid, ITProjectPriceCalculationManagerDbContext> repository,
         IMapper mapper) : base(repository, mapper)
     {
         _evaluatorToEvaluatedFactorRepository = evaluatorToEvaluatedFactorRepository;

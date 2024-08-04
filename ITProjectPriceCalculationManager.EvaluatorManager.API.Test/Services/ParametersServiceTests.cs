@@ -7,9 +7,9 @@ namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Test.Services;
 [TestFixture]
 public class ParametersServiceTests
 {
-    private Mock<IRepository<Parameters, Guid>> _repositoryMock;
-    private Mock<IRepository<EvaluateParameter, Guid>> _evaluateParameterRepositoryMock;
-    private Mock<IRepository<ParameterValue, Guid>> _parameterValueRepositoryMock;
+    private Mock<IRepository<Parameters, Guid, ITProjectPriceCalculationEvaluatorManagerDbContext>> _repositoryMock;
+    private Mock<IRepository<EvaluateParameter, Guid, ITProjectPriceCalculationEvaluatorManagerDbContext>> _evaluateParameterRepositoryMock;
+    private Mock<IRepository<ParameterValue, Guid, ITProjectPriceCalculationEvaluatorManagerDbContext>> _parameterValueRepositoryMock;
     private Mock<IMapper> _mapperMock;
     private ParametersService _service;
     private ParametersDTO _dto;
@@ -19,10 +19,10 @@ public class ParametersServiceTests
     [SetUp]
     public void Setup()
     {
-        _repositoryMock = new Mock<IRepository<Parameters, Guid>>();
+        _repositoryMock = new Mock<IRepository<Parameters, Guid, ITProjectPriceCalculationEvaluatorManagerDbContext>>();
         _repositoryMock.Setup(r => r.SaveChangesAcync()).ReturnsAsync(1);
-        _evaluateParameterRepositoryMock = new Mock<IRepository<EvaluateParameter, Guid>>();
-        _parameterValueRepositoryMock = new Mock<IRepository<ParameterValue, Guid>>();
+        _evaluateParameterRepositoryMock = new Mock<IRepository<EvaluateParameter, Guid, ITProjectPriceCalculationEvaluatorManagerDbContext>>();
+        _parameterValueRepositoryMock = new Mock<IRepository<ParameterValue, Guid, ITProjectPriceCalculationEvaluatorManagerDbContext>>();
         _mapperMock = new Mock<IMapper>();
         _service = new ParametersService(
             _evaluateParameterRepositoryMock.Object,

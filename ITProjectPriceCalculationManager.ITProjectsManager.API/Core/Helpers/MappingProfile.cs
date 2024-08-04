@@ -3,7 +3,6 @@ using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.DTOModels.Enums;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationForEvaluation;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationStatus;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToEvaluator;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactor;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Department;

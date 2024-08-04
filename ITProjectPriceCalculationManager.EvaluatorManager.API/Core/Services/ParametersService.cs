@@ -3,17 +3,22 @@ using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.EvaluateParameter;
 using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.Parameters;
 using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.ParameterValue;
-using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Interfaces.Repositories;
 using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Interfaces.Services;
+using ITProjectPriceCalculationManager.EvaluatorManager.API.Infrastructure.Data;
+using ITProjectPriceCalculationManager.Infrastructure.Interfaces;
+using ITProjectPriceCalculationManager.Infrastructure.Services;
 
 namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Services;
 
-public class ParametersService : BaseService<Parameters, Guid, ParametersDTO>, IParametersService
+public class ParametersService : BaseService<Parameters, Guid, ParametersDTO, ITProjectPriceCalculationEvaluatorManagerDbContext>, IParametersService
 {
-    private readonly IRepository<EvaluateParameter, Guid> _evaluateParameterRepository;
-    private readonly IRepository<ParameterValue, Guid> _parameterValueRepository;
+    private readonly IRepository<EvaluateParameter, Guid, ITProjectPriceCalculationEvaluatorManagerDbContext> _evaluateParameterRepository;
+    private readonly IRepository<ParameterValue, Guid, ITProjectPriceCalculationEvaluatorManagerDbContext> _parameterValueRepository;
     
-    public ParametersService(IRepository<EvaluateParameter, Guid> evaluateParameterRepository, IRepository<ParameterValue, Guid> parameterValueRepository, IRepository<Parameters, Guid> repository, IMapper mapper) : base(repository, mapper)
+    public ParametersService(
+        IRepository<EvaluateParameter, Guid, ITProjectPriceCalculationEvaluatorManagerDbContext> evaluateParameterRepository, 
+        IRepository<ParameterValue, Guid, ITProjectPriceCalculationEvaluatorManagerDbContext> parameterValueRepository, 
+        IRepository<Parameters, Guid, ITProjectPriceCalculationEvaluatorManagerDbContext> repository, IMapper mapper) : base(repository, mapper)
     {
         _evaluateParameterRepository = evaluateParameterRepository;
         _parameterValueRepository = parameterValueRepository;

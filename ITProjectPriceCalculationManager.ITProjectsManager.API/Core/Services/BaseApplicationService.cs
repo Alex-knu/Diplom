@@ -2,25 +2,27 @@ using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.Extentions.Extentions;
 using ITProjectPriceCalculationManager.Extentions.Models;
+using ITProjectPriceCalculationManager.Infrastructure.Interfaces;
+using ITProjectPriceCalculationManager.Infrastructure.Services;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evaluator;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramsParametr;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
 
-internal class BaseApplicationService : BaseService<Application, Guid, BaseApplicationDTO>, IBaseApplicationService
+internal class BaseApplicationService : BaseService<Application, Guid, BaseApplicationDTO, ITProjectPriceCalculationManagerDbContext>, IBaseApplicationService
 {
-    protected readonly IRepository<Evaluator, Guid> _estimatorRepository;
-    protected readonly IRepository<ProcedureApplication, Guid> _procedureApplicationRepository;
-    protected readonly IRepository<ProgramsParametr, Guid> _programsParametrRepository;
+    protected readonly IRepository<Evaluator, Guid, ITProjectPriceCalculationManagerDbContext> _estimatorRepository;
+    protected readonly IRepository<ProcedureApplication, Guid, ITProjectPriceCalculationManagerDbContext> _procedureApplicationRepository;
+    protected readonly IRepository<ProgramsParametr, Guid, ITProjectPriceCalculationManagerDbContext> _programsParametrRepository;
 
     public BaseApplicationService(
-        IRepository<Evaluator, Guid> estimatorRepository,
-        IRepository<ProgramsParametr, Guid> programsParametrRepository,
-        IRepository<ProcedureApplication, Guid> procedureApplicationRepository,
-        IRepository<Application, Guid> repository,
+        IRepository<Evaluator, Guid, ITProjectPriceCalculationManagerDbContext> estimatorRepository,
+        IRepository<ProgramsParametr, Guid, ITProjectPriceCalculationManagerDbContext> programsParametrRepository,
+        IRepository<ProcedureApplication, Guid, ITProjectPriceCalculationManagerDbContext> procedureApplicationRepository,
+        IRepository<Application, Guid, ITProjectPriceCalculationManagerDbContext> repository,
         IMapper mapper) : base(repository, mapper)
     {
         _estimatorRepository = estimatorRepository;

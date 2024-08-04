@@ -17,6 +17,9 @@ ITProjectPriceCalculationManager.DTOModels/obj/*
 ITProjectPriceCalculationManager.Extentions/bin/*
 ITProjectPriceCalculationManager.Extentions/obj/*
 
+ITProjectPriceCalculationManager.Infrastructure/bin/*
+ITProjectPriceCalculationManager.Infrastructure/obj/*
+
 ITProjectPriceCalculationManager.ITProjectsCalculator.API/bin/*
 ITProjectPriceCalculationManager.ITProjectsCalculator.API/obj/*
 

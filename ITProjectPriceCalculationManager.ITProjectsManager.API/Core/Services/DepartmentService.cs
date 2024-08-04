@@ -1,14 +1,16 @@
 using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Department;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
+using ITProjectPriceCalculationManager.Infrastructure.Interfaces;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data;
+using ITProjectPriceCalculationManager.Infrastructure.Services;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
 
-internal class DepartmentService : BaseService<Department, Guid, DepartmentDTO>, IDepartmentService
+internal class DepartmentService : BaseService<Department, Guid, DepartmentDTO, ITProjectPriceCalculationManagerDbContext>, IDepartmentService
 {
-    public DepartmentService(IRepository<Department, Guid> repository, IMapper mapper) : base(repository, mapper)
+    public DepartmentService(IRepository<Department, Guid, ITProjectPriceCalculationManagerDbContext> repository, IMapper mapper) : base(repository, mapper)
     {
     }
 

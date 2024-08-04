@@ -5,7 +5,7 @@ namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Test.Services;
 [TestFixture]
 public class BelongingFunctionServiceTests
 {
-    private Mock<IRepository<BelongingFunction, Guid>> _repositoryMock;
+    private Mock<IRepository<BelongingFunction, Guid, ITProjectPriceCalculationEvaluatorManagerDbContext>> _repositoryMock;
     private Mock<IMapper> _mapperMock;
     private BelongingFunctionService _service;
     private BelongingFunctionDTO _dto;
@@ -15,7 +15,7 @@ public class BelongingFunctionServiceTests
     [SetUp]
     public void Setup()
     {
-        _repositoryMock = new Mock<IRepository<BelongingFunction, Guid>>();
+        _repositoryMock = new Mock<IRepository<BelongingFunction, Guid, ITProjectPriceCalculationEvaluatorManagerDbContext>>();
         _mapperMock = new Mock<IMapper>();  
         _service = new BelongingFunctionService(_repositoryMock.Object, _mapperMock.Object);
         SetupCommonTestData();

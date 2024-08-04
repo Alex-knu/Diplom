@@ -1,4 +1,4 @@
-using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Interfaces;
+using ITProjectPriceCalculationManager.Infrastructure.Interfaces;
 
 namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.BelongingFunction;
 

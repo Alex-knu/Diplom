@@ -1,15 +1,16 @@
 using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramLanguage;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
+using ITProjectPriceCalculationManager.Infrastructure.Interfaces;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data;
+using ITProjectPriceCalculationManager.Infrastructure.Services;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
 
-internal class ProgramLanguageService : BaseService<ProgramLanguage, Guid, ProgramLanguageDTO>, IProgramLanguageService
+internal class ProgramLanguageService : BaseService<ProgramLanguage, Guid, ProgramLanguageDTO, ITProjectPriceCalculationManagerDbContext>, IProgramLanguageService
 {
-    public ProgramLanguageService(IRepository<ProgramLanguage, Guid> repository, IMapper mapper) : base(repository,
-        mapper)
+    public ProgramLanguageService(IRepository<ProgramLanguage, Guid, ITProjectPriceCalculationManagerDbContext> repository, IMapper mapper) : base(repository, mapper)
     {
     }
 

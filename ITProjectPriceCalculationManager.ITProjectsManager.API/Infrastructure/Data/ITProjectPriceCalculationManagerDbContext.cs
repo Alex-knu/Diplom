@@ -22,10 +22,8 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.
 
 internal class ITProjectPriceCalculationManagerDbContext : DbContext
 {
-    public ITProjectPriceCalculationManagerDbContext(
-        DbContextOptions<ITProjectPriceCalculationManagerDbContext> options) : base(options)
+    public ITProjectPriceCalculationManagerDbContext(DbContextOptions<ITProjectPriceCalculationManagerDbContext> options) : base(options)
     {
-        //Database.EnsureCreated();
     }
 
     public DbSet<Application> Applications { get; set; }

@@ -1,9 +1,9 @@
-using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Interfaces.Repositories;
 using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Interfaces.Services;
 using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Services;
 using ITProjectPriceCalculationManager.EvaluatorManager.API.Infrastructure.Data;
-using ITProjectPriceCalculationManager.EvaluatorManager.API.Infrastructure.Data.Repositories;
 using ITProjectPriceCalculationManager.Extentions.Extentions;
+using ITProjectPriceCalculationManager.Infrastructure.Interfaces;
+using ITProjectPriceCalculationManager.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
@@ -17,7 +17,7 @@ JwtUtils.SecretKey = builder.Configuration["JWT:Secret"] ?? string.Empty;
 // Add services to the container.
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-builder.Services.AddScoped(typeof(IRepository<,>), typeof(BaseRepository<,>));
+builder.Services.AddScoped(typeof(IRepository<,,>), typeof(BaseRepository<,,>));
 builder.Services.AddScoped(typeof(IBelongingFunctionService), typeof(BelongingFunctionService));
 builder.Services.AddScoped(typeof(IEvaluateParameterService), typeof(EvaluateParameterService));
 builder.Services.AddScoped(typeof(IParameterValueService), typeof(ParameterValueService));

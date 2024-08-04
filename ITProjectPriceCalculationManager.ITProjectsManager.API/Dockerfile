@@ -8,6 +8,7 @@ WORKDIR /src
 COPY ["ITProjectPriceCalculationManager.ITProjectsManager.API/", "ITProjectPriceCalculationManager.ITProjectsManager.API/"]
 COPY ["ITProjectPriceCalculationManager.DTOModels/ITProjectPriceCalculationManager.DTOModels.csproj", "ITProjectPriceCalculationManager.DTOModels/"]
 COPY ["ITProjectPriceCalculationManager.Extentions/ITProjectPriceCalculationManager.Extentions.csproj", "ITProjectPriceCalculationManager.Extentions/"]
+COPY ["ITProjectPriceCalculationManager.Infrastructure/ITProjectPriceCalculationManager.Infrastructure.csproj", "ITProjectPriceCalculationManager.Infrastructure/"]
 RUN dotnet restore "ITProjectPriceCalculationManager.ITProjectsManager.API/ITProjectPriceCalculationManager.ITProjectsManager.API.csproj"
 COPY . .
 WORKDIR "/src/ITProjectPriceCalculationManager.ITProjectsManager.API"

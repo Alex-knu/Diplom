@@ -3,8 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramsParametrToSubjectAreaElement;
 
-internal class
-    ProgramsParametrToSubjectAreaElementConfiguration : IEntityTypeConfiguration<ProgramsParametrToSubjectAreaElement>
+internal class ProgramsParametrToSubjectAreaElementConfiguration : IEntityTypeConfiguration<ProgramsParametrToSubjectAreaElement>
 {
     public void Configure(EntityTypeBuilder<ProgramsParametrToSubjectAreaElement> builder)
     {

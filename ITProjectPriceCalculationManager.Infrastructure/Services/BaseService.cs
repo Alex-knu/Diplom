@@ -1,16 +1,19 @@
 using Ardalis.Specification;
 using AutoMapper;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
+using ITProjectPriceCalculationManager.Infrastructure.Interfaces;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
-namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
+namespace ITProjectPriceCalculationManager.Infrastructure.Services;
 
-internal abstract class BaseService<TEntity, TKey, TResult> where TEntity : class, IBaseEntity<TKey>
+public abstract class BaseService<TEntity, TKey, TResult, TDbContext>
+    where TEntity : class, IBaseEntity<TKey>
+    where TDbContext : DbContext
 {
     protected readonly IMapper _mapper;
-    protected readonly IRepository<TEntity, TKey> _repository;
+    protected readonly IRepository<TEntity, TKey, TDbContext> _repository;
 
-    public BaseService(IRepository<TEntity, TKey> repository, IMapper mapper)
+    public BaseService(IRepository<TEntity, TKey, TDbContext> repository, IMapper mapper)
     {
         _repository = repository;
         _mapper = mapper;
@@ -36,7 +39,10 @@ internal abstract class BaseService<TEntity, TKey, TResult> where TEntity : clas
     {
         var domainEntity = await _repository.GetByKeyAsync(id);
 
-        if (domainEntity == null) throw new BadHttpRequestException("Entity not found");
+        if (domainEntity == null)
+        {
+            throw new BadHttpRequestException("Entity not found");
+        }
 
         var deleteDomainEntity = await _repository.DeleteAsync(domainEntity);
         await _repository.SaveChangesAcync();

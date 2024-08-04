@@ -1,14 +1,16 @@
 using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evaluator;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
+using ITProjectPriceCalculationManager.Infrastructure.Interfaces;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data;
+using ITProjectPriceCalculationManager.Infrastructure.Services;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
 
-internal class EvaluatorService : BaseService<Evaluator, Guid, EvaluatorDTO>, IEvaluatorService
+internal class EvaluatorService : BaseService<Evaluator, Guid, EvaluatorDTO, ITProjectPriceCalculationManagerDbContext>, IEvaluatorService
 {
-    public EvaluatorService(IRepository<Evaluator, Guid> repository, IMapper mapper) : base(repository, mapper)
+    public EvaluatorService(IRepository<Evaluator, Guid, ITProjectPriceCalculationManagerDbContext> repository, IMapper mapper) : base(repository, mapper)
     {
     }
 

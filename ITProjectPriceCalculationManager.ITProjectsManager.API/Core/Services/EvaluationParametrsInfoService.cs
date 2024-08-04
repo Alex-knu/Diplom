@@ -2,7 +2,7 @@ using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevels;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.EvaluationAttributes;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
+using ITProjectPriceCalculationManager.Infrastructure.Interfaces;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data;
 
@@ -10,16 +10,13 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
 
 internal class EvaluationParametrsInfoService : IEvaluationParametrsInfoService
 {
-    private readonly ITProjectPriceCalculationManagerDbContext _dbContext;
-    protected readonly IRepository<DifficultyLevel, Guid> _difficultyLevelRepository;
-    protected readonly IRepository<EvaluationAttribute, Guid> _evaluationAttributeRepository;
+    protected readonly IRepository<DifficultyLevel, Guid, ITProjectPriceCalculationManagerDbContext> _difficultyLevelRepository;
+    protected readonly IRepository<EvaluationAttribute, Guid, ITProjectPriceCalculationManagerDbContext> _evaluationAttributeRepository;
     protected readonly IMapper _mapper;
 
-    public EvaluationParametrsInfoService(ITProjectPriceCalculationManagerDbContext dbContext,
-        IRepository<EvaluationAttribute, Guid> evaluationAttributeRepository,
-        IRepository<DifficultyLevel, Guid> difficultyLevelRepository, IMapper mapper)
+    public EvaluationParametrsInfoService(IRepository<EvaluationAttribute, Guid, ITProjectPriceCalculationManagerDbContext> evaluationAttributeRepository,
+        IRepository<DifficultyLevel, Guid, ITProjectPriceCalculationManagerDbContext> difficultyLevelRepository, IMapper mapper)
     {
-        _dbContext = dbContext;
         _mapper = mapper;
         _evaluationAttributeRepository = evaluationAttributeRepository;
         _difficultyLevelRepository = difficultyLevelRepository;

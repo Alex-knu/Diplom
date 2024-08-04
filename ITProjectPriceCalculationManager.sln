@@ -1,4 +1,4 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -19,6 +19,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITProjectPriceCalculationManager.ITProjectsCalculator.API.Test", "ITProjectPriceCalculationManager.ITProjectsCalculator.API.Test\ITProjectPriceCalculationManager.ITProjectsCalculator.API.Test.csproj", "{2D983216-87DD-4081-8BB6-D4E4D80F2961}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITProjectPriceCalculationManager.EvaluatorManager.API.Test", "ITProjectPriceCalculationManager.EvaluatorManager.API.Test\ITProjectPriceCalculationManager.EvaluatorManager.API.Test.csproj", "{4C74C4AA-260C-4EE6-8264-3D16140F7D8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITProjectPriceCalculationManager.Infrastructure", "ITProjectPriceCalculationManager.Infrastructure\ITProjectPriceCalculationManager.Infrastructure.csproj", "{F8983D2B-F14D-402C-9F4E-B306C1620F23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,5 +79,9 @@ Global
 		{4C74C4AA-260C-4EE6-8264-3D16140F7D8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C74C4AA-260C-4EE6-8264-3D16140F7D8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C74C4AA-260C-4EE6-8264-3D16140F7D8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8983D2B-F14D-402C-9F4E-B306C1620F23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8983D2B-F14D-402C-9F4E-B306C1620F23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8983D2B-F14D-402C-9F4E-B306C1620F23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8983D2B-F14D-402C-9F4E-B306C1620F23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

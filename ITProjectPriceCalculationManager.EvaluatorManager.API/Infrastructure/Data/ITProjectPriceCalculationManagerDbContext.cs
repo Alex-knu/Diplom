@@ -7,12 +7,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Infrastructure.Data;
 
-internal class ITProjectPriceCalculationEvaluatorManagerDbContext : DbContext
+public class ITProjectPriceCalculationEvaluatorManagerDbContext : DbContext
 {
-    public ITProjectPriceCalculationEvaluatorManagerDbContext(
-        DbContextOptions<ITProjectPriceCalculationEvaluatorManagerDbContext> options) : base(options)
+    public ITProjectPriceCalculationEvaluatorManagerDbContext(DbContextOptions<ITProjectPriceCalculationEvaluatorManagerDbContext> options) : base(options)
     {
-        //Database.EnsureCreated();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

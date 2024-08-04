@@ -24,6 +24,7 @@
     <ItemGroup>
         <ProjectReference Include="..\ITProjectPriceCalculationManager.DTOModels\ITProjectPriceCalculationManager.DTOModels.csproj" />
         <ProjectReference Include="..\ITProjectPriceCalculationManager.Extentions\ITProjectPriceCalculationManager.Extentions.csproj" />
+        <ProjectReference Include="..\ITProjectPriceCalculationManager.Infrastructure\ITProjectPriceCalculationManager.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

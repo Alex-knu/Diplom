@@ -1,18 +1,19 @@
 using System.Linq.Expressions;
 using Ardalis.Specification;
 using Ardalis.Specification.EntityFrameworkCore;
-using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Interfaces;
-using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Interfaces.Repositories;
+using ITProjectPriceCalculationManager.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Infrastructure.Data.Repositories;
+namespace ITProjectPriceCalculationManager.Infrastructure.Repositories;
 
-internal class BaseRepository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, IBaseEntity<TKey>
+public class BaseRepository<TEntity, TKey, TDbContext> : IRepository<TEntity, TKey,TDbContext>
+    where TEntity : class, IBaseEntity<TKey>
+    where TDbContext : DbContext
 {
-    protected readonly ITProjectPriceCalculationEvaluatorManagerDbContext _dbContext;
+    protected readonly TDbContext _dbContext;
     protected readonly DbSet<TEntity> _dbSet;
 
-    public BaseRepository(ITProjectPriceCalculationEvaluatorManagerDbContext dbContext)
+    public BaseRepository(TDbContext dbContext)
     {
         _dbContext = dbContext;
         _dbSet = _dbContext.Set<TEntity>();
