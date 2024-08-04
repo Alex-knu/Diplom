@@ -1,19 +1,20 @@
-using System.ComponentModel.DataAnnotations;
 using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToEvaluator;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evaluator;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
+using ITProjectPriceCalculationManager.Infrastructure.Interfaces;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
+using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data;
+using ITProjectPriceCalculationManager.Infrastructure.Services;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
 
-internal class ApplicationToEstimatorsService : BaseService<ApplicationToEvaluator, Guid, ApplicationToEstimatorsDTO>,
+internal class ApplicationToEstimatorsService : BaseService<ApplicationToEvaluator, Guid, ApplicationToEstimatorsDTO, ITProjectPriceCalculationManagerDbContext>,
     IApplicationToEstimatorsService
 {
-    private readonly IRepository<Evaluator, Guid> _evaluatorRepository;
+    private readonly IRepository<Evaluator, Guid, ITProjectPriceCalculationManagerDbContext> _evaluatorRepository;
 
-    public ApplicationToEstimatorsService(IRepository<Evaluator, Guid> evaluatorRepository, IRepository<ApplicationToEvaluator, Guid> repository, IMapper mapper) : base(
+    public ApplicationToEstimatorsService(IRepository<Evaluator, Guid, ITProjectPriceCalculationManagerDbContext> evaluatorRepository, IRepository<ApplicationToEvaluator, Guid, ITProjectPriceCalculationManagerDbContext> repository, IMapper mapper) : base(
         repository, mapper)
     {
         _evaluatorRepository = evaluatorRepository;

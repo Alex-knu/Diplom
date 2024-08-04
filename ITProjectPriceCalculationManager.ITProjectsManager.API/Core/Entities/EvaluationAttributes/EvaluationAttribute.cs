@@ -1,5 +1,5 @@
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevels;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces;
+using ITProjectPriceCalculationManager.Infrastructure.Interfaces;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.EvaluationAttributes;
 

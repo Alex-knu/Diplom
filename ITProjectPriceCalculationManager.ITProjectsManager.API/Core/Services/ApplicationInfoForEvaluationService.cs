@@ -1,11 +1,11 @@
 using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.DTOModels.Enums;
+using ITProjectPriceCalculationManager.Infrastructure.Interfaces;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationForEvaluation;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToFactor;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevels;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramsParametr;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Repositories;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data;
 
@@ -13,19 +13,19 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
 
 internal class ApplicationInfoForEvaluationService : IApplicationInfoForEvaluationService
 {
-    protected readonly IRepository<ApplicationForEvaluation, Guid> _applicationForEvaluationRepository;
-    protected readonly IRepository<ApplicationToFactor, Guid> _applicationToFactorRepository;
+    protected readonly IRepository<ApplicationForEvaluation, Guid, ITProjectPriceCalculationManagerDbContext> _applicationForEvaluationRepository;
+    protected readonly IRepository<ApplicationToFactor, Guid, ITProjectPriceCalculationManagerDbContext> _applicationToFactorRepository;
     private readonly ITProjectPriceCalculationManagerDbContext _dbContext;
-    protected readonly IRepository<DifficultyLevel, Guid> _difficultyLevelRepository;
+    protected readonly IRepository<DifficultyLevel, Guid, ITProjectPriceCalculationManagerDbContext> _difficultyLevelRepository;
     protected readonly IMapper _mapper;
-    protected readonly IRepository<ProgramsParametr, Guid> _programsParametrRepository;
+    protected readonly IRepository<ProgramsParametr, Guid, ITProjectPriceCalculationManagerDbContext> _programsParametrRepository;
 
     public ApplicationInfoForEvaluationService(
         ITProjectPriceCalculationManagerDbContext dbContext,
-        IRepository<ApplicationForEvaluation, Guid> applicationForEvaluationRepository,
-        IRepository<ApplicationToFactor, Guid> applicationToFactorRepository,
-        IRepository<DifficultyLevel, Guid> difficultyLevelRepository,
-        IRepository<ProgramsParametr, Guid> programsParametrRepository,
+        IRepository<ApplicationForEvaluation, Guid, ITProjectPriceCalculationManagerDbContext> applicationForEvaluationRepository,
+        IRepository<ApplicationToFactor, Guid, ITProjectPriceCalculationManagerDbContext> applicationToFactorRepository,
+        IRepository<DifficultyLevel, Guid, ITProjectPriceCalculationManagerDbContext> difficultyLevelRepository,
+        IRepository<ProgramsParametr, Guid, ITProjectPriceCalculationManagerDbContext> programsParametrRepository,
         IMapper mapper)
     {
         _dbContext = dbContext;

@@ -3,8 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.DifficultyLevelsTypeToFactorType;
 
-internal class
-    DifficultyLevelsTypeToFactorTypeConfiguration : IEntityTypeConfiguration<DifficultyLevelsTypeToFactorType>
+internal class DifficultyLevelsTypeToFactorTypeConfiguration : IEntityTypeConfiguration<DifficultyLevelsTypeToFactorType>
 {
     public void Configure(EntityTypeBuilder<DifficultyLevelsTypeToFactorType> builder)
     {
