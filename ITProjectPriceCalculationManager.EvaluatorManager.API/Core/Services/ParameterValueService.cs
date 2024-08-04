@@ -1,14 +1,16 @@
 using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.ParameterValue;
-using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Interfaces.Repositories;
 using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Interfaces.Services;
+using ITProjectPriceCalculationManager.EvaluatorManager.API.Infrastructure.Data;
+using ITProjectPriceCalculationManager.Infrastructure.Interfaces;
+using ITProjectPriceCalculationManager.Infrastructure.Services;
 
 namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Services;
 
-public class ParameterValueService : BaseService<ParameterValue, Guid, ParameterValueDTO>, IParameterValueService
+internal class ParameterValueService : BaseService<ParameterValue, Guid, ParameterValueDTO, ITProjectPriceCalculationEvaluatorManagerDbContext>, IParameterValueService
 {
-    public ParameterValueService(IRepository<ParameterValue, Guid> repository, IMapper mapper) : base(repository, mapper)
+    public ParameterValueService(IRepository<ParameterValue, Guid, ITProjectPriceCalculationEvaluatorManagerDbContext> repository, IMapper mapper) : base(repository, mapper)
     {
     }
 

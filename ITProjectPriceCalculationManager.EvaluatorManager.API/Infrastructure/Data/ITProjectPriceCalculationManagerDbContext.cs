@@ -9,10 +9,8 @@ namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Infrastructure.D
 
 internal class ITProjectPriceCalculationEvaluatorManagerDbContext : DbContext
 {
-    public ITProjectPriceCalculationEvaluatorManagerDbContext(
-        DbContextOptions<ITProjectPriceCalculationEvaluatorManagerDbContext> options) : base(options)
+    public ITProjectPriceCalculationEvaluatorManagerDbContext(DbContextOptions<ITProjectPriceCalculationEvaluatorManagerDbContext> options) : base(options)
     {
-        //Database.EnsureCreated();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -12,8 +12,8 @@
         <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.6" />
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.6">
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-          <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
@@ -23,6 +23,7 @@
     <ItemGroup>
         <ProjectReference Include="..\ITProjectPriceCalculationManager.DTOModels\ITProjectPriceCalculationManager.DTOModels.csproj" />
         <ProjectReference Include="..\ITProjectPriceCalculationManager.Extentions\ITProjectPriceCalculationManager.Extentions.csproj" />
+        <ProjectReference Include="..\ITProjectPriceCalculationManager.Infrastructure\ITProjectPriceCalculationManager.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>
