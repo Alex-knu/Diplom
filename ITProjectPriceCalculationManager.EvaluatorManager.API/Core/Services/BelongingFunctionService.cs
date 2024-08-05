@@ -29,11 +29,6 @@ public class BelongingFunctionService : BaseService<BelongingFunction, Guid, Bel
         return await base.GetEntitysAsync();
     }
 
-    public async Task<BelongingFunctionDTO> GetBelongingFunctionsByIdAsync(Guid id)
-    {
-        return await base.GetEntitysByIdAsync(id);
-    }
-
     public async Task<BelongingFunctionDTO> UpdateBelongingFunctionAsync(BelongingFunctionDTO BelongingFunction)
     {
         return await base.UpdateEntityAsync(BelongingFunction);

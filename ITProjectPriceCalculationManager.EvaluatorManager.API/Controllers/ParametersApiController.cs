@@ -29,12 +29,6 @@ public class ParametersApiController : ControllerBase
         return Ok(await _ParametersService.GetParametersAsync());
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetParametersById(Guid id)
-    {
-        return Ok(await _ParametersService.GetParametersByIdAsync(id));
-    }
-
     [HttpPost]
     public async Task<IActionResult> CreateParameters(ParametersDTO query)
     {

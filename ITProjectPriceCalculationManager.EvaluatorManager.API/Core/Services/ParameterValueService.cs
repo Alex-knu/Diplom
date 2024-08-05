@@ -34,11 +34,6 @@ public class ParameterValueService : BaseService<ParameterValue, Guid, Parameter
         return await base.GetEntitysAsync();
     }
 
-    public async Task<ParameterValueDTO> GetParameterValuesByIdAsync(Guid id)
-    {
-        return await base.GetEntitysByIdAsync(id);
-    }
-
     public async Task<ParameterValueDTO> UpdateParameterValueAsync(ParameterValueDTO ParameterValue)
     {
         return await base.UpdateEntityAsync(ParameterValue);
