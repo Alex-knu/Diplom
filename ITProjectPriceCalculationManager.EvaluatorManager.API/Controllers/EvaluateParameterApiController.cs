@@ -29,12 +29,6 @@ public class EvaluateParameterApiController : ControllerBase
         return Ok(await _EvaluateParameterService.GetEvaluateParameterAsync());
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetEvaluateParameterById(Guid id)
-    {
-        return Ok(await _EvaluateParameterService.GetEvaluateParameterByIdAsync(id));
-    }
-
     [HttpPost]
     public async Task<IActionResult> CreateEvaluateParameter(EvaluateParameterDTO query)
     {

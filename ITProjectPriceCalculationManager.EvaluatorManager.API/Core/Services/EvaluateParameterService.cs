@@ -35,11 +35,6 @@ public class EvaluateParameterService : BaseService<EvaluateParameter, Guid, Eva
         return await base.DeleteEntityAsync(id);
     }
 
-    public Task<EvaluateParameterDTO> GetEvaluateParameterByIdAsync(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<IEnumerable<EvaluateParameterDTO>> GetEvaluateParametersByParameterIdAsync(Guid parameterId)
     {
         var domainEntity = await _repository.GetAllAsync();

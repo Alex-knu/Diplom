@@ -33,12 +33,7 @@ public class ParametersService : BaseService<Parameters, Guid, ParametersDTO, IT
     {
         return await base.DeleteEntityAsync(id);
     }
-
-    public Task<ParametersDTO> GetParametersByIdAsync(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
+    
     public async Task<IEnumerable<ParametersDTO>> GetParametersAsync()
     {
         return await base.GetEntitysAsync();
