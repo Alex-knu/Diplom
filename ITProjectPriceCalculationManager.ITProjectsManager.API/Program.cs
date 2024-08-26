@@ -23,12 +23,8 @@ builder.Services.AddScoped(typeof(IApplicationInfoForEvaluationService), typeof(
 builder.Services.AddScoped(typeof(IBaseApplicationService), typeof(BaseApplicationService));
 builder.Services.AddScoped(typeof(IDepartmentService), typeof(DepartmentService));
 builder.Services.AddScoped(typeof(IDepartmentTreeService), typeof(DepartmentTreeService));
-builder.Services.AddScoped(typeof(IEvaluationService), typeof(EvaluationService));
 builder.Services.AddScoped(typeof(IEvaluatorService), typeof(EvaluatorService));
-builder.Services.AddScoped(typeof(IProgramLanguageService), typeof(ProgramLanguageService));
 builder.Services.AddScoped(typeof(IApplicationToEstimatorsService), typeof(ApplicationToEstimatorsService));
-builder.Services.AddScoped(typeof(IEvaluationParametrsInfoService), typeof(EvaluationParametrsInfoService));
-builder.Services.AddScoped(typeof(IApplicationToFactorsService), typeof(ApplicationToFactorsService));
 //builder.Services.AddScoped(typeof(IApplicationService), typeof(StubApplicationService));
 
 builder.Services

@@ -6,7 +6,6 @@ using ITProjectPriceCalculationManager.Infrastructure.Interfaces;
 using ITProjectPriceCalculationManager.Infrastructure.Services;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evaluator;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramsParametr;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data;
 
@@ -16,17 +15,14 @@ internal class BaseApplicationService : BaseService<Application, Guid, BaseAppli
 {
     protected readonly IRepository<Evaluator, Guid, ITProjectPriceCalculationManagerDbContext> _estimatorRepository;
     protected readonly IRepository<ProcedureApplication, Guid, ITProjectPriceCalculationManagerDbContext> _procedureApplicationRepository;
-    protected readonly IRepository<ProgramsParametr, Guid, ITProjectPriceCalculationManagerDbContext> _programsParametrRepository;
 
     public BaseApplicationService(
         IRepository<Evaluator, Guid, ITProjectPriceCalculationManagerDbContext> estimatorRepository,
-        IRepository<ProgramsParametr, Guid, ITProjectPriceCalculationManagerDbContext> programsParametrRepository,
         IRepository<ProcedureApplication, Guid, ITProjectPriceCalculationManagerDbContext> procedureApplicationRepository,
         IRepository<Application, Guid, ITProjectPriceCalculationManagerDbContext> repository,
         IMapper mapper) : base(repository, mapper)
     {
         _estimatorRepository = estimatorRepository;
-        _programsParametrRepository = programsParametrRepository;
         _procedureApplicationRepository = procedureApplicationRepository;
     }
 
@@ -76,20 +72,6 @@ internal class BaseApplicationService : BaseService<Application, Guid, BaseAppli
             var newDomainApplication = await _repository.AddAsync(domainApplication);
 
             await _repository.SaveChangesAcync();
-
-            if (baseApplication.ProgramLanguages != null)
-            {
-                foreach (var programLanguage in baseApplication.ProgramLanguages)
-                {
-                    await _programsParametrRepository.AddAsync(new ProgramsParametr
-                    {
-                        ApplicationId = newDomainApplication.Id,
-                        ProgramLanguageId = programLanguage.Id
-                    });
-                }
-            }
-
-            await _programsParametrRepository.SaveChangesAcync();
 
             return _mapper.Map<BaseApplicationDTO>(newDomainApplication);
         }

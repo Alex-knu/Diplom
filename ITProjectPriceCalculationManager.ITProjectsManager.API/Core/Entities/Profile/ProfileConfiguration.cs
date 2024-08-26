@@ -17,10 +17,5 @@ internal class ProfileConfiguration : IEntityTypeConfiguration<Profile>
             .HasOne(profile => profile.Evaluator)
             .WithMany(estimator => estimator.Profiles)
             .HasForeignKey(profile => profile.EvaluatorId);
-
-        builder
-            .HasOne(profile => profile.Attribute)
-            .WithMany(attribute => attribute.Profiles)
-            .HasForeignKey(profile => profile.AttributeId);
     }
 }

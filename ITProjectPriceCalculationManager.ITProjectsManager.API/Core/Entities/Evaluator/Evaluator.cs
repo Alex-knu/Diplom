@@ -13,8 +13,8 @@ internal class Evaluator : IBaseEntity<Guid>
     public Guid? DepartmentId { get; set; }
 
     public Department.Department? Department { get; set; }
+    public virtual EvaluateParametersToAgents.EvaluateParametersToAgents? EvaluateParametersToAgent { get; set; }
     public required ICollection<ApplicationToEvaluator.ApplicationToEvaluator> ApplicationToEvaluators { get; set; }
     public required ICollection<Profile.Profile> Profiles { get; set; }
     public required ICollection<Application.Application> Applications { get; set; }
-    public required ICollection<EvaluatorToEvaluatedFactor.EvaluatorToEvaluatedFactor> EvaluatorToEvaluatedFactor { get; set; }
 }

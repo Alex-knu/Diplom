@@ -36,11 +36,6 @@ internal class ApplicationConfiguration : IEntityTypeConfiguration<Application>
         builder.Property(application => application.ConfidenceArea);
 
         builder
-            .HasMany(application => application.ProgramsParametrs)
-            .WithOne(programParametr => programParametr.Application)
-            .HasForeignKey(programsParametr => programsParametr.ApplicationId);
-
-        builder
             .HasOne(application => application.Creator)
             .WithMany(estimator => estimator.Applications)
             .HasForeignKey(programsParametr => programsParametr.CreatorId);
