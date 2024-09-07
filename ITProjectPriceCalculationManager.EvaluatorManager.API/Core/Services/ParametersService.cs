@@ -1,5 +1,5 @@
 using AutoMapper;
-using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.DTOModels.DTO.FuzzyLogic;
 using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.EvaluateParameter;
 using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.Parameters;
 using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.ParameterValue;
