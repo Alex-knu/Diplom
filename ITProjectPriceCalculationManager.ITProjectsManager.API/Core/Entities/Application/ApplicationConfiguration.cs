@@ -44,6 +44,7 @@ internal class ApplicationConfiguration : IEntityTypeConfiguration<Application>
         builder
             .HasOne(application => application.Status)
             .WithMany(statuses => statuses.Applications)
-            .HasForeignKey(application => application.StatusId);
+            .HasForeignKey(application => application.StatusId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

@@ -1,7 +1,6 @@
 using AutoMapper;
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationForEvaluation;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToEvaluator;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Department;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evaluator;
@@ -15,7 +14,6 @@ public class MappingProfile : Profile
         CreateMap<ApplicationDTO, Application>().ReverseMap();
         CreateMap<EvaluatorDTO, Evaluator>().ReverseMap();
         CreateMap<DepartmentDTO, Department>().ReverseMap();
-        CreateMap<ApplicationForEvaluation, EvaluationDTO>();
         CreateMap<ApplicationToEstimatorsDTO, ApplicationToEvaluator>().ReverseMap();
         CreateMap<Application, BaseApplicationDTO>();
         CreateMap<BaseApplicationDTO, Application>();

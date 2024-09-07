@@ -16,11 +16,12 @@ internal class EvaluateParametersToAgentsConfiguration : IEntityTypeConfiguratio
             .HasOne(epta => epta.Agent)
             .WithOne(e => e.EvaluateParametersToAgent)
             .HasForeignKey<EvaluateParametersToAgents>(epta => epta.AgentId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.NoAction);
 
         builder
             .HasOne(epta => epta.Parameter)
             .WithOne(p => p.EvaluateParametersToAgent)
-            .HasForeignKey<EvaluateParametersToAgents>(epta => epta.ParameterId);
+            .HasForeignKey<EvaluateParametersToAgents>(epta => epta.ParameterId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

@@ -17,11 +17,13 @@ internal class ApplicationToEvaluatorConfiguration : IEntityTypeConfiguration<Ap
         builder
             .HasOne(applicationToEvaluators => applicationToEvaluators.Application)
             .WithMany(application => application.ApplicationToEvaluators)
-            .HasForeignKey(applicationToEvaluators => applicationToEvaluators.ApplicationId);
+            .HasForeignKey(applicationToEvaluators => applicationToEvaluators.ApplicationId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         builder
             .HasOne(applicationToEvaluators => applicationToEvaluators.Evaluator)
             .WithMany(estimator => estimator.ApplicationToEvaluators)
-            .HasForeignKey(applicationToEvaluators => applicationToEvaluators.EvaluatorId);
+            .HasForeignKey(applicationToEvaluators => applicationToEvaluators.EvaluatorId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }
