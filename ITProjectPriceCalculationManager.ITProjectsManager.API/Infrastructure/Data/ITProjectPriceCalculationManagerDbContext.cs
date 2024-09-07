@@ -1,5 +1,4 @@
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationForEvaluation;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationStatus;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToEvaluator;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.BelongingFunction;
@@ -23,7 +22,6 @@ internal class ITProjectPriceCalculationManagerDbContext : DbContext
     }
 
     public DbSet<Application> Applications { get; set; }
-    public DbSet<ApplicationForEvaluation> ApplicationForEvaluations { get; set; }
     public DbSet<ApplicationStatus> ApplicationStatuses { get; set; }
     public DbSet<ApplicationToEvaluator> ApplicationToEvaluators { get; set; }
     public DbSet<BelongingFunction> BelongingFunctions { get; set; }
