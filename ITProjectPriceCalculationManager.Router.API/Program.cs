@@ -2,7 +2,11 @@ using System.Reflection;
 using System.Text;
 using ITProjectPriceCalculationManager.Extentions.Extentions;
 using ITProjectPriceCalculationManager.Router.API.Core.Interfaces;
+using ITProjectPriceCalculationManager.Router.API.Core.Interfaces.EvaluatorManager;
+using ITProjectPriceCalculationManager.Router.API.Core.Interfaces.ITProjectsManager;
 using ITProjectPriceCalculationManager.Router.API.Core.Services;
+using ITProjectPriceCalculationManager.Router.API.Core.Services.EvaluatorManager;
+using ITProjectPriceCalculationManager.Router.API.Core.Services.ITProjectsManager;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -23,12 +27,8 @@ builder.Services.AddScoped(typeof(IDepartmentService), typeof(DepartmentService)
 builder.Services.AddScoped(typeof(IDepartmentTreeService), typeof(DepartmentTreeService));
 builder.Services.AddScoped(typeof(IEvaluationService), typeof(EvaluationService));
 builder.Services.AddScoped(typeof(IEvaluatorService), typeof(EvaluatorService));
-builder.Services.AddScoped(typeof(IProgramLanguageService), typeof(ProgramLanguageService));
 builder.Services.AddScoped(typeof(IApplicationToEstimatorsService), typeof(ApplicationToEstimatorsService));
-builder.Services.AddScoped(typeof(IDifficultyLevelsTypeService), typeof(DifficultyLevelsTypeService));
-builder.Services.AddScoped(typeof(IEvaluationParametrsInfoService), typeof(EvaluationParametrsInfoService));
 builder.Services.AddScoped(typeof(IEvaluatorFuzzyCalculatorService), typeof(EvaluatorFuzzyCalculatorService));
-builder.Services.AddScoped(typeof(IApplicationToFactorsService), typeof(ApplicationToFactorsService));
 builder.Services.AddScoped(typeof(IBelongingFunctionService), typeof(BelongingFunctionService));
 builder.Services.AddScoped(typeof(IEvaluateParameterService), typeof(EvaluateParameterService));
 builder.Services.AddScoped(typeof(IParameterValueService), typeof(ParameterValueService));

@@ -1,7 +1,8 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.Router.API.Core.Interfaces;
+using ITProjectPriceCalculationManager.Router.API.Core.Interfaces.ITProjectsManager;
 
-namespace ITProjectPriceCalculationManager.Router.API.Core.Services;
+namespace ITProjectPriceCalculationManager.Router.API.Core.Services.ITProjectsManager;
 
 internal class DepartmentService : IDepartmentService
 {
