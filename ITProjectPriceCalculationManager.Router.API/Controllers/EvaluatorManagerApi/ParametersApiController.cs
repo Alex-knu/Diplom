@@ -1,9 +1,8 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
-using ITProjectPriceCalculationManager.Router.API.Core.Interfaces;
 using ITProjectPriceCalculationManager.Router.API.Core.Interfaces.EvaluatorManager;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ITProjectPriceCalculationManager.Router.API.Controllers;
+namespace ITProjectPriceCalculationManager.Router.API.Controllers.EvaluatorManagerApi;
 
 [ApiController]
 [Route("api/[controller]")]
