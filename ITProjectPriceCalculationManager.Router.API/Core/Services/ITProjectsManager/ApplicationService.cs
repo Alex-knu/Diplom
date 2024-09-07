@@ -15,28 +15,28 @@ internal class ApplicationService : IApplicationService
         _routeService = routeService;
     }
 
-    public async Task<ApplicationDTO> CreateApplicationAsync(ApplicationDTO query)
+    public async Task<BaseApplicationDTO> CreateApplicationAsync(BaseApplicationDTO query)
     {
-        return await _routeService.PostAsJsonAsync<ApplicationDTO, ApplicationDTO>(_client, "applicationapi", query);
+        return await _routeService.PostAsJsonAsync<BaseApplicationDTO, BaseApplicationDTO>(_client, "applicationapi", query);
     }
 
-    public async Task<ApplicationDTO> DeleteApplicationAsync(Guid id)
+    public async Task<BaseApplicationDTO> DeleteApplicationAsync(Guid id)
     {
-        return await _routeService.DeleteAsJsonAsync<ApplicationDTO, Guid>(_client, "applicationapi", id);
+        return await _routeService.DeleteAsJsonAsync<BaseApplicationDTO, Guid>(_client, "applicationapi", id);
     }
 
-    public async Task<IEnumerable<ApplicationDTO>> GetApplicationsAsync()
+    public async Task<IEnumerable<BaseApplicationDTO>> GetApplicationsAsync()
     {
-        return await _routeService.GetAllAsync<List<ApplicationDTO>>(_client, "applicationapi");
+        return await _routeService.GetAllAsync<List<BaseApplicationDTO>>(_client, "applicationapi");
     }
 
-    public async Task<ApplicationDTO> GetApplicationsByIdAsync(Guid id)
+    public async Task<BaseApplicationDTO> GetApplicationsByIdAsync(Guid id)
     {
-        return await _routeService.GetByIdAsync<ApplicationDTO, Guid>(_client, "applicationapi", id);
+        return await _routeService.GetByIdAsync<BaseApplicationDTO, Guid>(_client, "applicationapi", id);
     }
 
-    public async Task<ApplicationDTO> UpdateApplicationAsync(ApplicationDTO query)
+    public async Task<BaseApplicationDTO> UpdateApplicationAsync(BaseApplicationDTO query)
     {
-        return await _routeService.PutAsJsonAsync<ApplicationDTO, ApplicationDTO>(_client, "applicationapi", query);
+        return await _routeService.PutAsJsonAsync<BaseApplicationDTO, BaseApplicationDTO>(_client, "applicationapi", query);
     }
 }

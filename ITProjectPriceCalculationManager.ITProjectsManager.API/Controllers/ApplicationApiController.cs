@@ -29,13 +29,13 @@ public class ApplicationApiController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateApplication(ApplicationDTO query)
+    public async Task<IActionResult> CreateApplication(BaseApplicationDTO query)
     {
         return Ok(await _ApplicationService.CreateApplicationAsync(query));
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateApplication(ApplicationDTO query)
+    public async Task<IActionResult> UpdateApplication(BaseApplicationDTO query)
     {
         return Ok(await _ApplicationService.UpdateApplicationAsync(query));
     }

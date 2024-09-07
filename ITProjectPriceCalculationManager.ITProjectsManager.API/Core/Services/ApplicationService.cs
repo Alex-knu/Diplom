@@ -8,33 +8,33 @@ using ITProjectPriceCalculationManager.Infrastructure.Services;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
 
-internal class ApplicationService : BaseService<Application, Guid, ApplicationDTO, ITProjectPriceCalculationManagerDbContext>, IApplicationService
+internal class ApplicationService : BaseService<Application, Guid, BaseApplicationDTO, ITProjectPriceCalculationManagerDbContext>, IApplicationService
 {
     public ApplicationService(IRepository<Application, Guid, ITProjectPriceCalculationManagerDbContext> repository, IMapper mapper) : base(repository, mapper)
     {
     }
 
-    public async Task<ApplicationDTO> CreateApplicationAsync(ApplicationDTO application)
+    public async Task<BaseApplicationDTO> CreateApplicationAsync(BaseApplicationDTO application)
     {
         return await base.CreateEntityAsync(application);
     }
 
-    public async Task<ApplicationDTO> DeleteApplicationAsync(Guid id)
+    public async Task<BaseApplicationDTO> DeleteApplicationAsync(Guid id)
     {
         return await base.DeleteEntityAsync(id);
     }
 
-    public async Task<IEnumerable<ApplicationDTO>> GetApplicationsAsync()
+    public async Task<IEnumerable<BaseApplicationDTO>> GetApplicationsAsync()
     {
         return await base.GetEntitysAsync();
     }
 
-    public async Task<ApplicationDTO> GetApplicationsByIdAsync(Guid id)
+    public async Task<BaseApplicationDTO> GetApplicationsByIdAsync(Guid id)
     {
         return await base.GetEntitysByIdAsync(id);
     }
 
-    public async Task<ApplicationDTO> UpdateApplicationAsync(ApplicationDTO application)
+    public async Task<BaseApplicationDTO> UpdateApplicationAsync(BaseApplicationDTO application)
     {
         return await base.UpdateEntityAsync(application);
     }

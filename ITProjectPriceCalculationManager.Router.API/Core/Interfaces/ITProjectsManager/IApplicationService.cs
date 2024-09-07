@@ -4,9 +4,9 @@ namespace ITProjectPriceCalculationManager.Router.API.Core.Interfaces.ITProjects
 
 public interface IApplicationService
 {
-    Task<IEnumerable<ApplicationDTO>> GetApplicationsAsync();
-    Task<ApplicationDTO> GetApplicationsByIdAsync(Guid id);
-    Task<ApplicationDTO> CreateApplicationAsync(ApplicationDTO query);
-    Task<ApplicationDTO> UpdateApplicationAsync(ApplicationDTO query);
-    Task<ApplicationDTO> DeleteApplicationAsync(Guid id);
+    Task<IEnumerable<BaseApplicationDTO>> GetApplicationsAsync();
+    Task<BaseApplicationDTO> GetApplicationsByIdAsync(Guid id);
+    Task<BaseApplicationDTO> CreateApplicationAsync(BaseApplicationDTO query);
+    Task<BaseApplicationDTO> UpdateApplicationAsync(BaseApplicationDTO query);
+    Task<BaseApplicationDTO> DeleteApplicationAsync(Guid id);
 }

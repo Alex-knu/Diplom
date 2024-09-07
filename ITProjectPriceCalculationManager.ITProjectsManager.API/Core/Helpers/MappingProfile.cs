@@ -11,7 +11,7 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         CreateMap<BaseApplicationDTO, Application>().ReverseMap();
-        CreateMap<ApplicationDTO, Application>().ReverseMap();
+        CreateMap<BaseApplicationDTO, Application>().ReverseMap();
         CreateMap<EvaluatorDTO, Evaluator>().ReverseMap();
         CreateMap<DepartmentDTO, Department>().ReverseMap();
         CreateMap<ApplicationToEstimatorsDTO, ApplicationToEvaluator>().ReverseMap();

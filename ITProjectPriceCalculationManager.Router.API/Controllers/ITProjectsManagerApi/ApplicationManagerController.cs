@@ -35,13 +35,13 @@ public class ApplicationManagerController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateApplication(ApplicationDTO query)
+    public async Task<IActionResult> CreateApplication(BaseApplicationDTO query)
     {
         return Ok(await _applicationService.CreateApplicationAsync(query));
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateApplication(ApplicationDTO query)
+    public async Task<IActionResult> UpdateApplication(BaseApplicationDTO query)
     {
         return Ok(await _applicationService.UpdateApplicationAsync(query));
     }
