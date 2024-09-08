@@ -1,4 +1,4 @@
-using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.DTOModels.DTO.ITProjectsManager;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Stub;

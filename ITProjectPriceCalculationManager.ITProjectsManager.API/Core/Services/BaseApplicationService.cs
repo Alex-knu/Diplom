@@ -1,5 +1,5 @@
 using AutoMapper;
-using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.DTOModels.DTO.ITProjectsManager;
 using ITProjectPriceCalculationManager.Extentions.Extentions;
 using ITProjectPriceCalculationManager.Extentions.Models;
 using ITProjectPriceCalculationManager.Infrastructure.Interfaces;

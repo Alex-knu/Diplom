@@ -1,4 +1,4 @@
-namespace ITProjectPriceCalculationManager.DTOModels.DTO;
+namespace ITProjectPriceCalculationManager.DTOModels.DTO.ITProjectsManager;
 
 public class ApplicationToEstimatorsDTO
 {

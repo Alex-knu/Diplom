@@ -1,5 +1,5 @@
 using AutoMapper;
-using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.DTOModels.DTO.ITProjectsManager;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ApplicationToEvaluator;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Department;

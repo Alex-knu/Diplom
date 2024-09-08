@@ -1,4 +1,4 @@
-using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.DTOModels.DTO.ITProjectsManager;
 
 namespace ITProjectPriceCalculationManager.Router.API.Core.Interfaces.ITProjectsManager;
 

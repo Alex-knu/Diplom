@@ -1,10 +1,10 @@
 using AutoMapper;
-using ITProjectPriceCalculationManager.DTOModels.DTO;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evaluator;
 using ITProjectPriceCalculationManager.Infrastructure.Interfaces;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data;
 using ITProjectPriceCalculationManager.Infrastructure.Services;
+using ITProjectPriceCalculationManager.DTOModels.DTO.ITProjectsManager;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
 
