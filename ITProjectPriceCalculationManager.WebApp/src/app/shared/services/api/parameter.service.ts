@@ -10,6 +10,6 @@ export class ParameterService extends BaseService<any> {
   constructor(
     httpService: HttpService,
     configService: ClientConfigurationService) {
-    super(httpService, 'ParametersApi', configService, Parameter, ServiceType.route);
+    super(httpService, 'ParametersApi', configService, Parameter, ServiceType.route, ServiceType.evaluatormanagerapi);
   }
 }

@@ -10,6 +10,6 @@ export class UserService extends BaseService<any> {
   constructor(
     httpService: HttpService,
     configService: ClientConfigurationService) {
-    super(httpService, 'User', configService, UserInfoModel, ServiceType.authServerUrl);
+    super(httpService, 'User', configService, UserInfoModel, ServiceType.authServerUrl, null);
   }
 }

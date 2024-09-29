@@ -10,6 +10,6 @@ export class BaseApplicationService extends BaseService<any> {
   constructor(
     httpService: HttpService,
     configService: ClientConfigurationService) {
-    super(httpService, 'BaseApplicationManager', configService, BaseApplication, ServiceType.route);
+    super(httpService, 'BaseApplicationManager', configService, BaseApplication, ServiceType.route, ServiceType.itprojectsmanagerapi);
   }
 }

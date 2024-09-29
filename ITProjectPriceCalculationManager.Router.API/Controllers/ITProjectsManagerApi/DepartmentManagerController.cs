@@ -3,11 +3,11 @@ using ITProjectPriceCalculationManager.Router.API.Core.Interfaces.ITProjectsMana
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ITProjectPriceCalculationManager.Router.API.Controllers.ITProjectsManager;
+namespace ITProjectPriceCalculationManager.Router.API.Controllers.ITProjectsManagerApi;
 
 [Authorize]
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/itprojectsmanager/[controller]")]
 public class DepartmentManagerController : ControllerBase
 {
     private readonly IDepartmentService _departmentService;

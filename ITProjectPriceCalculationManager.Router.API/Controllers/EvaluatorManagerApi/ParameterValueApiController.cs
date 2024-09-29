@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ITProjectPriceCalculationManager.Router.API.Controllers.EvaluatorManagerApi;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/evaluatormanager/[controller]")]
 public class ParameterValueApiController : ControllerBase
 {
     private readonly IParameterValueService _ParameterValueService;

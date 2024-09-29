@@ -10,6 +10,6 @@ export class ApplicationToFactorsService extends BaseService<any> {
   constructor(
     httpService: HttpService,
     configService: ClientConfigurationService) {
-    super(httpService, 'ApplicationToFactorsManager', configService, EvaluationApplication, ServiceType.route);
+    super(httpService, 'ApplicationToFactorsManager', configService, EvaluationApplication, ServiceType.route, ServiceType.itprojectsmanagerapi);
   }
 }

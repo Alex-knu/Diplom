@@ -10,6 +10,6 @@ export class BelongingFunctionService extends BaseService<any> {
   constructor(
     httpService: HttpService,
     configService: ClientConfigurationService) {
-    super(httpService, 'BelongingFunctionApi', configService, BelongingFunction, ServiceType.route);
+    super(httpService, 'BelongingFunctionApi', configService, BelongingFunction, ServiceType.route, ServiceType.evaluatormanagerapi);
   }
 }

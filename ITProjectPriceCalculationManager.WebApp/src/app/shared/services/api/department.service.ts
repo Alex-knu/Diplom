@@ -10,6 +10,6 @@ export class DepartmentService extends BaseService<any> {
   constructor(
     httpService: HttpService,
     configService: ClientConfigurationService) {
-    super(httpService, 'DepartmentManager', configService, Department, ServiceType.route);
+    super(httpService, 'DepartmentManager', configService, Department, ServiceType.route, ServiceType.itprojectsmanagerapi);
   }
 }

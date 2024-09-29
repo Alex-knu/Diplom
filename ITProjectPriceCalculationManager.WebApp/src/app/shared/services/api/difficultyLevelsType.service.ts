@@ -10,6 +10,6 @@ export class DifficultyLevelsTypeService extends BaseService<any> {
   constructor(
     httpService: HttpService,
     configService: ClientConfigurationService) {
-    super(httpService, 'DifficultyLevelsTypeManager', configService, DifficultyLevelsType, ServiceType.route);
+    super(httpService, 'DifficultyLevelsTypeManager', configService, DifficultyLevelsType, ServiceType.route, ServiceType.itprojectsmanagerapi);
   }
 }

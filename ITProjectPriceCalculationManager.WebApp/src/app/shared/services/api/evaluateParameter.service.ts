@@ -10,6 +10,6 @@ export class EvaluateParameterService extends BaseService<any> {
   constructor(
     httpService: HttpService,
     configService: ClientConfigurationService) {
-    super(httpService, 'EvaluateParameterApi', configService, EvaluateParameter, ServiceType.route);
+    super(httpService, 'EvaluateParameterApi', configService, EvaluateParameter, ServiceType.route, ServiceType.evaluatormanagerapi);
   }
 }

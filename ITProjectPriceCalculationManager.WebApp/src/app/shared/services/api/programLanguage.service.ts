@@ -10,6 +10,6 @@ export class ProgramLanguageService extends BaseService<any> {
   constructor(
     httpService: HttpService,
     configService: ClientConfigurationService) {
-    super(httpService, 'ProgramLanguageManager', configService, ProgramLanguage, ServiceType.route);
+    super(httpService, 'ProgramLanguageManager', configService, ProgramLanguage, ServiceType.route, ServiceType.itprojectsmanagerapi);
   }
 }

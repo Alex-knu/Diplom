@@ -10,6 +10,6 @@ export class RoleService extends BaseService<any> {
   constructor(
     httpService: HttpService,
     configService: ClientConfigurationService) {
-    super(httpService, 'Role', configService, RoleModel, ServiceType.authServerUrl);
+    super(httpService, 'Role', configService, RoleModel, ServiceType.authServerUrl, null);
   }
 }

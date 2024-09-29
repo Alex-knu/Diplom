@@ -10,6 +10,6 @@ export class CalculateApplicationService extends BaseService<any> {
   constructor(
     httpService: HttpService,
     configService: ClientConfigurationService) {
-    super(httpService, 'CalculatorManager', configService, Application, ServiceType.route);
+    super(httpService, 'CalculatorManager', configService, Application, ServiceType.route, null);
   }
 }

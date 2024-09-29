@@ -10,6 +10,6 @@ export class EvaluatorFuzzyCalculatorManagerService extends BaseService<any> {
   constructor(
     httpService: HttpService,
     configService: ClientConfigurationService) {
-    super(httpService, 'EvaluatorFuzzyCalculatorManager', configService, CalculateConfidenceArea, ServiceType.route);
+    super(httpService, 'EvaluatorFuzzyCalculatorManager', configService, CalculateConfidenceArea, ServiceType.route, null);
   }
 }

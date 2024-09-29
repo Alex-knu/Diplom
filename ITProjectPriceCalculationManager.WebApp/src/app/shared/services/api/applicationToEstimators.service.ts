@@ -10,6 +10,6 @@ export class ApplicationToEstimatorsService extends BaseService<any> {
   constructor(
     httpService: HttpService,
     configService: ClientConfigurationService) {
-    super(httpService, 'ApplicationToEstimatorsManager', configService, ApplicationToEstimators, ServiceType.route);
+    super(httpService, 'ApplicationToEstimatorsManager', configService, ApplicationToEstimators, ServiceType.route, ServiceType.itprojectsmanagerapi);
   }
 }
