@@ -1,4 +1,4 @@
-import { BaseModel } from "./base.model";
+import { BaseModel } from "../base.model";
 import { BelongingFunction } from "./belongingFunction.model";
 import {ParameterValue} from "./parameterValue.model";
 

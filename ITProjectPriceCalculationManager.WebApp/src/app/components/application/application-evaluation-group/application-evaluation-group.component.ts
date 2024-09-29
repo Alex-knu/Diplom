@@ -2,8 +2,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { ApplicationToEstimators } from 'src/app/shared/models/applicationToEstimators.model';
-import { Evaluator } from 'src/app/shared/models/evaluator.model';
+import { ApplicationToEstimators } from 'src/app/shared/models/itProjectsManager/applicationToEstimators.model';
+import { Evaluator } from 'src/app/shared/models/itProjectsManager/evaluator.model';
 import { ApplicationToEstimatorsService } from 'src/app/shared/services/api/applicationToEstimators.service';
 import { EvaluatorService } from 'src/app/shared/services/api/estimator.service';
 

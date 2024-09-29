@@ -1,4 +1,4 @@
-import { BaseModel } from "./base.model";
+import { BaseModel } from "../base.model";
 import { ProgramLanguage } from "./programLanguage.model";
 import {Evaluator} from "./evaluator.model";
 

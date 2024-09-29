@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
-import { Evaluator } from 'src/app/shared/models/evaluator.model';
+import { Evaluator } from 'src/app/shared/models/itProjectsManager/evaluator.model';
 import { EvaluatorService } from 'src/app/shared/services/api/estimator.service';
 import { EvaluatorInfoComponent } from '../evaluator-info/evaluator-info.component';
 import { HttpErrorResponse } from '@angular/common/http';

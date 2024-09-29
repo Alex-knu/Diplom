@@ -1,4 +1,4 @@
-import {BelongingFunction} from "./models/belongingFunction.model";
+import {BelongingFunction} from "./models/fuzzyLogic/belongingFunction.model";
 
 export const ROLE_USER = 'User';
 export const ROLE_EVALUATOR = 'Evaluator';

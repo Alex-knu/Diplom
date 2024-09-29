@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
-import { UserInfoModel } from 'src/app/shared/models/userInfo.model';
+import { UserInfoModel } from 'src/app/shared/models/security/userInfo.model';
 import { UserService } from 'src/app/shared/services/api/user.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserInfoComponent } from '../user-info/user-info.component';

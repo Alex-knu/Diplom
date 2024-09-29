@@ -3,7 +3,7 @@ import { HttpService } from "../core/http.service";
 import { BaseService } from "../core/base.service";
 import { ClientConfigurationService } from "../core/client-configuration.service";
 import { ServiceType } from "../core/serviceType";
-import { Parameter } from "../../models/parameter.model";
+import { Parameter } from "../../models/fuzzyLogic/parameter.model";
 
 @Injectable()
 export class ParameterService extends BaseService<any> {

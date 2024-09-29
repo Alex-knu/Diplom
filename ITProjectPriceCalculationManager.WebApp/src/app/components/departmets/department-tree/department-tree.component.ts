@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TreeNode } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Department } from 'src/app/shared/models/department.model';
+import { Department } from 'src/app/shared/models/itProjectsManager/department.model';
 import { DepartmentTreeService } from 'src/app/shared/services/api/departmentTree.service';
 import { DepartmentInfoComponent } from '../department-info/department-info.component';
 

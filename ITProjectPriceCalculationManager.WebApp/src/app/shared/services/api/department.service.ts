@@ -3,7 +3,7 @@ import { HttpService } from "../core/http.service";
 import { BaseService } from "../core/base.service";
 import { ClientConfigurationService } from "../core/client-configuration.service";
 import { ServiceType } from "../core/serviceType";
-import { Department } from "../../models/department.model";
+import { Department } from "../../models/itProjectsManager/department.model";
 
 @Injectable()
 export class DepartmentService extends BaseService<any> {

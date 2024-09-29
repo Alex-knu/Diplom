@@ -1,4 +1,4 @@
-import { BaseModel } from "./base.model";
+import { BaseModel } from "../base.model";
 import {EvaluateParameter} from "./evaluateParameter.model";
 
 export class Parameter extends BaseModel {

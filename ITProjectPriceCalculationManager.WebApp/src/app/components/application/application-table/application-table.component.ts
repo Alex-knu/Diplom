@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService, ConfirmationService } from 'primeng/api';
-import { BaseApplication } from 'src/app/shared/models/baseApplication.model';
+import { BaseApplication } from 'src/app/shared/models/itProjectsManager/baseApplication.model';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BaseApplicationService } from 'src/app/shared/services/api/baseApplication.service';
 import { ApplicationInfoComponent } from '../application-info/application-info.component';

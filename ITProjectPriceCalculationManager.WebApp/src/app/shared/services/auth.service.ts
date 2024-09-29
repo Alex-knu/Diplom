@@ -3,7 +3,7 @@ import { Observable, catchError, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { TokenService } from './core/token.service';
-import { LoginInfo } from '../models/loginInfo.model';
+import { LoginInfo } from '../models/security/loginInfo.model';
 
 @Injectable({
   providedIn: 'root'

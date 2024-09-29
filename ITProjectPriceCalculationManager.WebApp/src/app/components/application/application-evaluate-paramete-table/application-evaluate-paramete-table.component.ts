@@ -2,14 +2,14 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService, ConfirmationService } from 'primeng/api';
-import { BaseApplication } from 'src/app/shared/models/baseApplication.model';
+import { BaseApplication } from 'src/app/shared/models/itProjectsManager/baseApplication.model';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ApplicationEvaluationParameterInfoComponent } from '../application-evaluate-paramete-info/application-evaluate-paramete-info.component';
 import { ParameterService } from 'src/app/shared/services/api/parameter.service';
-import { Parameter } from 'src/app/shared/models/parameter.model';
+import { Parameter } from 'src/app/shared/models/fuzzyLogic/parameter.model';
 import { EvaluateParameterService } from "../../../shared/services/api/evaluateParameter.service";
 import { belongingFunctions } from "../../../shared/constants";
-import { EvaluateParameter } from "../../../shared/models/evaluateParameter.model";
+import { EvaluateParameter } from "../../../shared/models/fuzzyLogic/evaluateParameter.model";
 import {
   ApplicationEvaluationParameterDetailsComponent
 } from "../application-evaluation-paramete-info/application-evaluation-parameter-info.component";

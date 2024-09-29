@@ -2,8 +2,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { Department } from 'src/app/shared/models/department.model';
-import { Evaluator } from 'src/app/shared/models/evaluator.model';
+import { Department } from 'src/app/shared/models/itProjectsManager/department.model';
+import { Evaluator } from 'src/app/shared/models/itProjectsManager/evaluator.model';
 import { DepartmentService } from 'src/app/shared/services/api/department.service';
 import { EvaluatorService } from 'src/app/shared/services/api/estimator.service';
 

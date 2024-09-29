@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { UUID } from 'angular2-uuid';
-import { Parameter } from 'src/app/shared/models/parameter.model';
+import { Parameter } from 'src/app/shared/models/fuzzyLogic/parameter.model';
 import { ParameterService } from 'src/app/shared/services/api/parameter.service';
 import { belongingFunctions } from "../../../shared/constants";
 

@@ -3,7 +3,7 @@ import { HttpService } from "../core/http.service";
 import { BaseService } from "../core/base.service";
 import { ClientConfigurationService } from "../core/client-configuration.service";
 import { ServiceType } from "../core/serviceType";
-import { EvaluationParametrsInfo } from "../../models/evaluationParametrsInfo.model";
+import { EvaluationParametrsInfo } from "../../models/itProjectsManager/evaluationParametrsInfo.model";
 
 @Injectable()
 export class EvaluationParametrsInfoService extends BaseService<any> {
