@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { UserModel } from '../../models/user.model';
+import { UserModel } from '../../models/security/user.model';
 
 @Injectable({
   providedIn: 'root'

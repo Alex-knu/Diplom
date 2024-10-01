@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { UUID } from 'angular2-uuid';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { BaseApplication } from 'src/app/shared/models/baseApplication.model';
-import { ProgramLanguage } from 'src/app/shared/models/programLanguage.model';
+import { BaseApplication } from 'src/app/shared/models/itProjectsManager/baseApplication.model';
+import { ProgramLanguage } from 'src/app/shared/models/itProjectsManager/programLanguage.model';
 import { BaseApplicationService } from 'src/app/shared/services/api/baseApplication.service';
 import { ProgramLanguageService } from 'src/app/shared/services/api/programLanguage.service';
 

@@ -19,16 +19,15 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped(typeof(IRepository<,,>), typeof(BaseRepository<,,>));
 builder.Services.AddScoped(typeof(IApplicationService), typeof(ApplicationService));
-builder.Services.AddScoped(typeof(IApplicationInfoForEvaluationService), typeof(ApplicationInfoForEvaluationService));
+builder.Services.AddScoped(typeof(IApplicationToEstimatorsService), typeof(ApplicationToEstimatorsService));
 builder.Services.AddScoped(typeof(IBaseApplicationService), typeof(BaseApplicationService));
+builder.Services.AddScoped(typeof(IBelongingFunctionService), typeof(BelongingFunctionService));
 builder.Services.AddScoped(typeof(IDepartmentService), typeof(DepartmentService));
 builder.Services.AddScoped(typeof(IDepartmentTreeService), typeof(DepartmentTreeService));
-builder.Services.AddScoped(typeof(IEvaluationService), typeof(EvaluationService));
+builder.Services.AddScoped(typeof(IEvaluateParameterService), typeof(EvaluateParameterService));
 builder.Services.AddScoped(typeof(IEvaluatorService), typeof(EvaluatorService));
-builder.Services.AddScoped(typeof(IProgramLanguageService), typeof(ProgramLanguageService));
-builder.Services.AddScoped(typeof(IApplicationToEstimatorsService), typeof(ApplicationToEstimatorsService));
-builder.Services.AddScoped(typeof(IEvaluationParametrsInfoService), typeof(EvaluationParametrsInfoService));
-builder.Services.AddScoped(typeof(IApplicationToFactorsService), typeof(ApplicationToFactorsService));
+builder.Services.AddScoped(typeof(IParametersService), typeof(ParametersService));
+builder.Services.AddScoped(typeof(IParameterValueService), typeof(ParameterValueService));
 //builder.Services.AddScoped(typeof(IApplicationService), typeof(StubApplicationService));
 
 builder.Services

@@ -1,97 +1,103 @@
-using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.DTOModels.DTO.ITProjectsManager;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Stub;
 
 public class StubApplicationService : IApplicationService
 {
-    public Task<ApplicationDTO> CreateApplicationAsync(ApplicationDTO dto)
+    public Task<BaseApplicationDTO> CreateApplicationAsync(BaseApplicationDTO dto)
     {
-        return Task.FromResult(
-            new ApplicationDTO
-            {
-                Id = Guid.NewGuid(),
-                Name = "Test",
-                StatusName = "New",
-                Price = 200,
-                Profit = 100,
-                Overhead = 50,
-                SocialInsurance = 20,
-                AverageCostLabor = 10,
-                Description = "",
-                ScaleFactors = new List<FactorDTO>(),
-                InfluenceFactors = new List<FactorDTO>(),
-                AverageMonthlyRateWorkingHours = 5,
-                EvaluationFactors = new List<EvaluationFactorDTO>(),
-                ProgramsParametrs = new List<ProgramsParametrDTO>(),
-                ProgramsParametrEvaluationFactorDTO = new List<ProgramsParametrEvaluationFactorDTO>()
-            });
+
+        throw new NotImplementedException();
+        // return Task.FromResult(
+        //     new BaseApplicationDTO
+        //     {
+        //         Id = Guid.NewGuid(),
+        //         Name = "Test",
+        //         StatusName = "New",
+        //         Price = 200,
+        //         Profit = 100,
+        //         Overhead = 50,
+        //         SocialInsurance = 20,
+        //         AverageCostLabor = 10,
+        //         Description = "",
+        //         ScaleFactors = new List<FactorDTO>(),
+        //         InfluenceFactors = new List<FactorDTO>(),
+        //         AverageMonthlyRateWorkingHours = 5,
+        //         EvaluationFactors = new List<EvaluationFactorDTO>(),
+        //         ProgramsParametrs = new List<ProgramsParametrDTO>(),
+        //         ProgramsParametrEvaluationFactorDTO = new List<ProgramsParametrEvaluationFactorDTO>()
+        //     });
     }
 
-    public Task<ApplicationDTO> DeleteApplicationAsync(Guid id)
+    public Task<BaseApplicationDTO> DeleteApplicationAsync(Guid id)
     {
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<ApplicationDTO>> GetApplicationsAsync()
+    public Task<IEnumerable<BaseApplicationDTO>> GetApplicationsAsync()
     {
-        return Task.FromResult<IEnumerable<ApplicationDTO>>(new List<ApplicationDTO>
-        {
-            new()
-            {
-                Id = Guid.NewGuid(),
-                Name = "Test",
-                StatusName = "New",
-                Price = 200,
-                Profit = 100,
-                Overhead = 50,
-                SocialInsurance = 20,
-                AverageCostLabor = 10,
-                Description = "",
-                ScaleFactors = new List<FactorDTO>(),
-                InfluenceFactors = new List<FactorDTO>(),
-                AverageMonthlyRateWorkingHours = 5,
-                EvaluationFactors = new List<EvaluationFactorDTO>(),
-                ProgramsParametrs = new List<ProgramsParametrDTO>(),
-                ProgramsParametrEvaluationFactorDTO = new List<ProgramsParametrEvaluationFactorDTO>()
-            }
-        });
+
+        throw new NotImplementedException();
+        // return Task.FromResult<IEnumerable<BaseApplicationDTO>>(new List<BaseApplicationDTO>
+        // {
+        //     new()
+        //     {
+        //         Id = Guid.NewGuid(),
+        //         Name = "Test",
+        //         StatusName = "New",
+        //         Price = 200,
+        //         Profit = 100,
+        //         Overhead = 50,
+        //         SocialInsurance = 20,
+        //         AverageCostLabor = 10,
+        //         Description = "",
+        //         ScaleFactors = new List<FactorDTO>(),
+        //         InfluenceFactors = new List<FactorDTO>(),
+        //         AverageMonthlyRateWorkingHours = 5,
+        //         EvaluationFactors = new List<EvaluationFactorDTO>(),
+        //         ProgramsParametrs = new List<ProgramsParametrDTO>(),
+        //         ProgramsParametrEvaluationFactorDTO = new List<ProgramsParametrEvaluationFactorDTO>()
+        //     }
+        // });
     }
 
-    public Task<ApplicationDTO> GetApplicationsByIdAsync(Guid id)
+    public Task<BaseApplicationDTO> GetApplicationsByIdAsync(Guid id)
     {
-        return Task.FromResult(
-            new ApplicationDTO
-            {
-                Id = Guid.NewGuid(),
-                Name = "Test",
-                StatusName = "New",
-                Price = 200,
-                Profit = 100,
-                Overhead = 50,
-                SocialInsurance = 20,
-                AverageCostLabor = 10,
-                Description = "",
-                ScaleFactors = new List<FactorDTO>(),
-                InfluenceFactors = new List<FactorDTO>(),
-                AverageMonthlyRateWorkingHours = 5,
-                EvaluationFactors = new List<EvaluationFactorDTO>(),
-                ProgramsParametrs = new List<ProgramsParametrDTO>(),
-                ProgramsParametrEvaluationFactorDTO = new List<ProgramsParametrEvaluationFactorDTO>()
-            });
+
+        throw new NotImplementedException();
+        // return Task.FromResult(
+        //     new BaseApplicationDTO
+        //     {
+        //         Id = Guid.NewGuid(),
+        //         Name = "Test",
+        //         StatusName = "New",
+        //         Price = 200,
+        //         Profit = 100,
+        //         Overhead = 50,
+        //         SocialInsurance = 20,
+        //         AverageCostLabor = 10,
+        //         Description = "",
+        //         ScaleFactors = new List<FactorDTO>(),
+        //         InfluenceFactors = new List<FactorDTO>(),
+        //         AverageMonthlyRateWorkingHours = 5,
+        //         EvaluationFactors = new List<EvaluationFactorDTO>(),
+        //         ProgramsParametrs = new List<ProgramsParametrDTO>(),
+        //         ProgramsParametrEvaluationFactorDTO = new List<ProgramsParametrEvaluationFactorDTO>()
+        //     });
     }
 
-    public Task<ApplicationDTO> UpdateApplicationAsync(ApplicationDTO query)
+    public Task<BaseApplicationDTO> UpdateApplicationAsync(BaseApplicationDTO query)
     {
         throw new NotImplementedException();
     }
 
-    public Task<ApplicationDTO> CreateBaseApplicationAsync(BaseApplicationDTO baseApplication)
+    public Task<BaseApplicationDTO> CreateBaseApplicationAsync(BaseApplicationDTO baseApplication)
     {
         throw new NotImplementedException();
     }
 
-    public Task<ApplicationDTO> GetApplicationAsync(Guid id)
+    public Task<BaseApplicationDTO> GetApplicationAsync(Guid id)
     {
         throw new NotImplementedException();
     }

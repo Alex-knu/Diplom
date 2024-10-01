@@ -1,12 +1,12 @@
-using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.DTOModels.DTO.ITProjectsManager;
 
 namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 
 public interface IApplicationService
 {
-    Task<IEnumerable<ApplicationDTO>> GetApplicationsAsync();
-    Task<ApplicationDTO> GetApplicationsByIdAsync(Guid id);
-    Task<ApplicationDTO> CreateApplicationAsync(ApplicationDTO dto);
-    Task<ApplicationDTO> UpdateApplicationAsync(ApplicationDTO query);
-    Task<ApplicationDTO> DeleteApplicationAsync(Guid id);
+    Task<IEnumerable<BaseApplicationDTO>> GetApplicationsAsync();
+    Task<BaseApplicationDTO> GetApplicationsByIdAsync(Guid id);
+    Task<BaseApplicationDTO> CreateApplicationAsync(BaseApplicationDTO dto);
+    Task<BaseApplicationDTO> UpdateApplicationAsync(BaseApplicationDTO query);
+    Task<BaseApplicationDTO> DeleteApplicationAsync(Guid id);
 }

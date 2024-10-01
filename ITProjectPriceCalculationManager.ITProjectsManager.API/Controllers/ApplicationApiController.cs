@@ -1,4 +1,4 @@
-using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.DTOModels.DTO.ITProjectsManager;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,19 +29,19 @@ public class ApplicationApiController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateApplication(ApplicationDTO query)
+    public async Task<IActionResult> CreateApplication(BaseApplicationDTO query)
     {
         return Ok(await _ApplicationService.CreateApplicationAsync(query));
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateApplication(ApplicationDTO query)
+    public async Task<IActionResult> UpdateApplication(BaseApplicationDTO query)
     {
         return Ok(await _ApplicationService.UpdateApplicationAsync(query));
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteApplication(Guid id)
+    public async Task<IActionResult> DeleteApplication([FromBody] Guid id)
     {
         return Ok(await _ApplicationService.DeleteApplicationAsync(id));
     }

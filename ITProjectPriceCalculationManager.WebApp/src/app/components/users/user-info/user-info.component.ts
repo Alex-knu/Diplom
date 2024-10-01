@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { RoleModel } from 'src/app/shared/models/role.model';
-import { UserInfoModel } from 'src/app/shared/models/userInfo.model';
+import { RoleModel } from 'src/app/shared/models/security/role.model';
+import { UserInfoModel } from 'src/app/shared/models/security/userInfo.model';
 import { RoleService } from 'src/app/shared/services/api/role.service';
 import { UserService } from 'src/app/shared/services/api/user.service';
 import { HttpErrorResponse } from '@angular/common/http';

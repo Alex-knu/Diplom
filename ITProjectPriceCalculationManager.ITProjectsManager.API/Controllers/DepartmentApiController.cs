@@ -1,4 +1,4 @@
-using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.DTOModels.DTO.ITProjectsManager;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,7 +42,7 @@ public class DepartmentApiController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteDepartment(Guid id)
+    public async Task<IActionResult> DeleteDepartment([FromBody] Guid id)
     {
         return Ok(await _DepartmentService.DeleteDepartmentAsync(id));
     }

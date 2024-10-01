@@ -1,5 +1,5 @@
 using AutoMapper;
-using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.DTOModels.DTO.FuzzyLogic;
 using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.BelongingFunction;
 using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Interfaces.Services;
 using ITProjectPriceCalculationManager.EvaluatorManager.API.Infrastructure.Data;

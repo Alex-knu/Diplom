@@ -3,10 +3,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
-import { UserModel } from 'src/app/shared/models/user.model';
+import { UserModel } from 'src/app/shared/models/security/user.model';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { TokenService } from 'src/app/shared/services/core/token.service';
-import { UserLoginModel } from 'src/app/shared/models/userLogin.model';
+import { UserLoginModel } from 'src/app/shared/models/security/userLogin.model';
 import { Router } from '@angular/router';
 
 @Component({

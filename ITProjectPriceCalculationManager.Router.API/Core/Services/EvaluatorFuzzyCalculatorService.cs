@@ -1,4 +1,6 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.DTOModels.DTO.FuzzyLogic;
+using ITProjectPriceCalculationManager.DTOModels.DTO.ITProjectsManager;
 using ITProjectPriceCalculationManager.Router.API.Core.Interfaces;
 
 namespace ITProjectPriceCalculationManager.Router.API.Core.Services;

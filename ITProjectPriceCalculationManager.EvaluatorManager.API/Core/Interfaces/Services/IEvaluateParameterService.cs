@@ -1,4 +1,4 @@
-using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.DTOModels.DTO.FuzzyLogic;
 
 namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Interfaces.Services;
 

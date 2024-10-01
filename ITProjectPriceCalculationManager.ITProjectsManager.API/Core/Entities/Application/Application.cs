@@ -2,7 +2,6 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.A
 
 internal class Application : BaseApplication
 {
+    public virtual ICollection<Parameter.Parameter>? ApplicationToParameters { get; set; }
     public virtual ICollection<ApplicationToEvaluator.ApplicationToEvaluator>? ApplicationToEvaluators { get; set; }
-    public virtual ICollection<ApplicationToFactor.ApplicationToFactor>? Factors { get; set; }
-    public virtual ICollection<ProgramsParametr.ProgramsParametr>? ProgramsParametrs { get; set; }
 }

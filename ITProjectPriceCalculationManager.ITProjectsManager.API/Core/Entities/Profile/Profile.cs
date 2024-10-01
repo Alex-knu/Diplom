@@ -8,7 +8,6 @@ internal class Profile : IBaseEntity<Guid>
     public Guid AttributeId { get; set; }
     public Guid EvaluatorId { get; set; }
     public required string Value { get; set; }
-
-    public Attribute.Attribute? Attribute { get; set; }
+    
     public Evaluator.Evaluator? Evaluator { get; set; }
 }

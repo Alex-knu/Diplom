@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { UUID } from 'angular2-uuid';
 import { MessageService } from 'primeng/api';
 import { DialogService, DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { Department } from 'src/app/shared/models/department.model';
+import { Department } from 'src/app/shared/models/itProjectsManager/department.model';
 import { DepartmentService } from 'src/app/shared/services/api/department.service';
 
 @Component({

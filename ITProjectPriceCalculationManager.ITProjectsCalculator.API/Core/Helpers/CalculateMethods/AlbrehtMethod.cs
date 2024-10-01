@@ -1,4 +1,5 @@
 using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.DTOModels.DTO.ITProjectsManager;
 using ITProjectPriceCalculationManager.DTOModels.Enums;
 using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Helpers.ExpertMethods;
 using ITProjectPriceCalculationManager.ITProjectsCalculator.API.Core.Models;

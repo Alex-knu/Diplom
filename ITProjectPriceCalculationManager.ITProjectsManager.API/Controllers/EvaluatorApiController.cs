@@ -1,4 +1,4 @@
-using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.DTOModels.DTO.ITProjectsManager;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,7 +41,7 @@ public class EvaluatorApiController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteEvaluator(Guid id)
+    public async Task<IActionResult> DeleteEvaluator([FromBody] Guid id)
     {
         return Ok(await _EvaluatorService.DeleteEvaluatorAsync(id));
     }

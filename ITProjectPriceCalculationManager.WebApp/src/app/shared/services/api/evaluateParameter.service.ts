@@ -3,13 +3,13 @@ import { HttpService } from "../core/http.service";
 import { BaseService } from "../core/base.service";
 import { ClientConfigurationService } from "../core/client-configuration.service";
 import { ServiceType } from "../core/serviceType";
-import { EvaluateParameter } from "../../models/evaluateParameter.model";
+import { EvaluateParameter } from "../../models/fuzzyLogic/evaluateParameter.model";
 
 @Injectable()
 export class EvaluateParameterService extends BaseService<any> {
   constructor(
     httpService: HttpService,
     configService: ClientConfigurationService) {
-    super(httpService, 'EvaluateParameterApi', configService, EvaluateParameter, ServiceType.route);
+    super(httpService, 'EvaluateParameterApi', configService, EvaluateParameter, ServiceType.route, ServiceType.evaluatormanagerapi);
   }
 }

@@ -1,3 +1,4 @@
+using ITProjectPriceCalculationManager.DTOModels.DTO.FuzzyLogic;
 using ITProjectPriceCalculationManager.EvaluatorManager.API.Core.Entities.BelongingFunction;
 
 namespace ITProjectPriceCalculationManager.EvaluatorManager.API.Test.Services;

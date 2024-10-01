@@ -1,12 +1,11 @@
 using AutoMapper;
-using ITProjectPriceCalculationManager.DTOModels.DTO;
+using ITProjectPriceCalculationManager.DTOModels.DTO.ITProjectsManager;
 using ITProjectPriceCalculationManager.Extentions.Extentions;
 using ITProjectPriceCalculationManager.Extentions.Models;
 using ITProjectPriceCalculationManager.Infrastructure.Interfaces;
 using ITProjectPriceCalculationManager.Infrastructure.Services;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Application;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.Evaluator;
-using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Entities.ProgramsParametr;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Interfaces.Services;
 using ITProjectPriceCalculationManager.ITProjectsManager.API.Infrastructure.Data;
 
@@ -15,19 +14,16 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
 internal class BaseApplicationService : BaseService<Application, Guid, BaseApplicationDTO, ITProjectPriceCalculationManagerDbContext>, IBaseApplicationService
 {
     protected readonly IRepository<Evaluator, Guid, ITProjectPriceCalculationManagerDbContext> _estimatorRepository;
-    protected readonly IRepository<ProcedureApplication, Guid, ITProjectPriceCalculationManagerDbContext> _procedureApplicationRepository;
-    protected readonly IRepository<ProgramsParametr, Guid, ITProjectPriceCalculationManagerDbContext> _programsParametrRepository;
+    protected readonly IRepository<ApplicationView, Guid, ITProjectPriceCalculationManagerDbContext> _applicationViewRepository;
 
     public BaseApplicationService(
         IRepository<Evaluator, Guid, ITProjectPriceCalculationManagerDbContext> estimatorRepository,
-        IRepository<ProgramsParametr, Guid, ITProjectPriceCalculationManagerDbContext> programsParametrRepository,
-        IRepository<ProcedureApplication, Guid, ITProjectPriceCalculationManagerDbContext> procedureApplicationRepository,
+        IRepository<ApplicationView, Guid, ITProjectPriceCalculationManagerDbContext> applicationViewRepository,
         IRepository<Application, Guid, ITProjectPriceCalculationManagerDbContext> repository,
         IMapper mapper) : base(repository, mapper)
     {
         _estimatorRepository = estimatorRepository;
-        _programsParametrRepository = programsParametrRepository;
-        _procedureApplicationRepository = procedureApplicationRepository;
+        _applicationViewRepository = applicationViewRepository;
     }
 
     public async Task<BaseApplicationDTO> CreateBaseApplicationAsync(BaseApplicationDTO baseApplication)
@@ -77,20 +73,6 @@ internal class BaseApplicationService : BaseService<Application, Guid, BaseAppli
 
             await _repository.SaveChangesAcync();
 
-            if (baseApplication.ProgramLanguages != null)
-            {
-                foreach (var programLanguage in baseApplication.ProgramLanguages)
-                {
-                    await _programsParametrRepository.AddAsync(new ProgramsParametr
-                    {
-                        ApplicationId = newDomainApplication.Id,
-                        ProgramLanguageId = programLanguage.Id
-                    });
-                }
-            }
-
-            await _programsParametrRepository.SaveChangesAcync();
-
             return _mapper.Map<BaseApplicationDTO>(newDomainApplication);
         }
         catch (Exception ex)
@@ -101,28 +83,18 @@ internal class BaseApplicationService : BaseService<Application, Guid, BaseAppli
 
     private async Task<IEnumerable<BaseApplicationDTO>> ExecuteSqlProcedure(UserInfo userInfo)
     {
-        var result = new List<ProcedureApplication>();
+        var result = new List<ApplicationView>();
 
-        foreach (var role in userInfo.Roles)
-            switch (role)
-            {
-                case "User":
-                    result.AddRange(
-                        await _procedureApplicationRepository.ExecuteStoredProcedure(
-                            $"EXEC dbo.GetApplicationsByCreator @userId = {userInfo.UserId}"));
-                    break;
-                case "Evaluator":
-                    result.AddRange(
-                        await _procedureApplicationRepository.ExecuteStoredProcedure(
-                            $"EXEC dbo.GetApplicationsByEvaluator @userId = {userInfo.UserId}"));
-                    break;
-                case "Admin":
-                    result.AddRange(
-                        await _procedureApplicationRepository.ExecuteStoredProcedure(
-                            $"EXEC dbo.GetApplicationsByAdmin"));
-                    break;
-            }
+        if (userInfo.Roles.Contains("User") || userInfo.Roles.Contains("Evaluator"))
+        {
+            result.AddRange((await _applicationViewRepository.GetAllAsync())
+            .Where(a => a.CreatorUserId == userInfo.UserId || a.EvaluatorUserId == userInfo.UserId));
+        }
 
-        return _mapper.Map<List<BaseApplicationDTO>>(result.DistinctBy(application => application.Id));
+        if (userInfo.Roles.Contains("Admin"))
+        {
+            result.AddRange(await _applicationViewRepository.GetAllAsync());
+        }
+        return _mapper.Map<IEnumerable<BaseApplicationDTO>>(result.DistinctBy(application => application.Id));
     }
 }

@@ -2,16 +2,16 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FactorType } from 'src/app/shared/enums/factorType.enum';
 import { EvaluationParametrsInfoService } from 'src/app/shared/services/api/evaluationParametrsInfo.service';
-import { EvaluationParametrsInfo } from 'src/app/shared/models/evaluationParametrsInfo.model';
+import { EvaluationParametrsInfo } from 'src/app/shared/models/itProjectsManager/evaluationParametrsInfo.model';
 import { ApplicationToFactorsService } from 'src/app/shared/services/api/applicationToFactors.service';
-import { ApplicationToFactors } from 'src/app/shared/models/applicationToFactors.model';
+import { ApplicationToFactors } from 'src/app/shared/models/itProjectsManager/applicationToFactors.model';
 import { MessageService } from 'primeng/api';
 import { HttpErrorResponse } from '@angular/common/http';
-import { EvaluationApplication } from 'src/app/shared/models/evaluationApplication.model';
+import { EvaluationApplication } from 'src/app/shared/models/itProjectsManager/evaluationApplication.model';
 import { UUID } from 'angular2-uuid';
 import { ProgramLanguageService } from 'src/app/shared/services/api/programLanguage.service';
-import { ProgramsParametr } from 'src/app/shared/models/programsParametr.model';
-import { ProgramsEvaluationInfo } from 'src/app/shared/models/programsEvaluationInfo.model';
+import { ProgramsParametr } from 'src/app/shared/models/itProjectsManager/programsParametr.model';
+import { ProgramsEvaluationInfo } from 'src/app/shared/models/itProjectsManager/programsEvaluationInfo.model';
 
 @Component({
   selector: 'app-application-evaluation',
