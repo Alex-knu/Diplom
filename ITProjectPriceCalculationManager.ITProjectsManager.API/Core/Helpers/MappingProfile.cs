@@ -17,12 +17,6 @@ public class MappingProfile : Profile
         CreateMap<ApplicationToEstimatorsDTO, ApplicationToEvaluator>().ReverseMap();
         CreateMap<Application, BaseApplicationDTO>();
         CreateMap<BaseApplicationDTO, Application>();
-        CreateMap<ProcedureApplication, BaseApplicationDTO>()
-            .ForMember(a => a.StatusName,
-                map => map.MapFrom((src, dest, memb) =>
-                {
-                    return !string.IsNullOrEmpty(src.StatusName) ? src.StatusName :
-                        src.Status != null ? src.Status.Name : string.Empty;
-                }));
+        CreateMap<ApplicationView, BaseApplicationDTO>();
     }
 }

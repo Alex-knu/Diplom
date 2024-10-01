@@ -42,7 +42,7 @@ public class DepartmentApiController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteDepartment(Guid id)
+    public async Task<IActionResult> DeleteDepartment([FromBody] Guid id)
     {
         return Ok(await _DepartmentService.DeleteDepartmentAsync(id));
     }

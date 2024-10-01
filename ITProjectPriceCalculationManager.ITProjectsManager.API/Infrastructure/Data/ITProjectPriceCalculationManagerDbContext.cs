@@ -23,6 +23,7 @@ internal class ITProjectPriceCalculationManagerDbContext : DbContext
 
     public DbSet<Application> Applications { get; set; }
     public DbSet<ApplicationStatus> ApplicationStatuses { get; set; }
+    public DbSet<ApplicationView> ApplicationsView { get; set; }
     public DbSet<ApplicationToEvaluator> ApplicationToEvaluators { get; set; }
     public DbSet<BelongingFunction> BelongingFunctions { get; set; }
     public DbSet<Department> Departments { get; set; }
@@ -31,7 +32,6 @@ internal class ITProjectPriceCalculationManagerDbContext : DbContext
     public DbSet<Evaluator> Evaluators { get; set; }
     public DbSet<Parameter> Parameters { get; set; }
     public DbSet<ParameterValue> ParameterValues { get; set; }
-    public DbSet<ProcedureApplication> ProcedureApplications { get; set; }
     public DbSet<Profile> Profiles { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -49,6 +49,10 @@ internal class ITProjectPriceCalculationManagerDbContext : DbContext
         modelBuilder.ApplyConfiguration(new ParameterConfiguration());
         modelBuilder.ApplyConfiguration(new ParameterValueConfiguration());
         modelBuilder.ApplyConfiguration(new ProfileConfiguration());
+
+        modelBuilder.Entity<ApplicationView>()
+                .HasNoKey()
+                .ToView("ApplicationsTableView");
 
         modelBuilder.Seed();
     }

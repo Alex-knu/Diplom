@@ -14,16 +14,16 @@ namespace ITProjectPriceCalculationManager.ITProjectsManager.API.Core.Services;
 internal class BaseApplicationService : BaseService<Application, Guid, BaseApplicationDTO, ITProjectPriceCalculationManagerDbContext>, IBaseApplicationService
 {
     protected readonly IRepository<Evaluator, Guid, ITProjectPriceCalculationManagerDbContext> _estimatorRepository;
-    protected readonly IRepository<ProcedureApplication, Guid, ITProjectPriceCalculationManagerDbContext> _procedureApplicationRepository;
+    protected readonly IRepository<ApplicationView, Guid, ITProjectPriceCalculationManagerDbContext> _applicationViewRepository;
 
     public BaseApplicationService(
         IRepository<Evaluator, Guid, ITProjectPriceCalculationManagerDbContext> estimatorRepository,
-        IRepository<ProcedureApplication, Guid, ITProjectPriceCalculationManagerDbContext> procedureApplicationRepository,
+        IRepository<ApplicationView, Guid, ITProjectPriceCalculationManagerDbContext> applicationViewRepository,
         IRepository<Application, Guid, ITProjectPriceCalculationManagerDbContext> repository,
         IMapper mapper) : base(repository, mapper)
     {
         _estimatorRepository = estimatorRepository;
-        _procedureApplicationRepository = procedureApplicationRepository;
+        _applicationViewRepository = applicationViewRepository;
     }
 
     public async Task<BaseApplicationDTO> CreateBaseApplicationAsync(BaseApplicationDTO baseApplication)
@@ -83,28 +83,18 @@ internal class BaseApplicationService : BaseService<Application, Guid, BaseAppli
 
     private async Task<IEnumerable<BaseApplicationDTO>> ExecuteSqlProcedure(UserInfo userInfo)
     {
-        var result = new List<ProcedureApplication>();
+        var result = new List<ApplicationView>();
 
-        foreach (var role in userInfo.Roles)
-            switch (role)
-            {
-                case "User":
-                    result.AddRange(
-                        await _procedureApplicationRepository.ExecuteStoredProcedure(
-                            $"EXEC dbo.GetApplicationsByCreator @userId = {userInfo.UserId}"));
-                    break;
-                case "Evaluator":
-                    result.AddRange(
-                        await _procedureApplicationRepository.ExecuteStoredProcedure(
-                            $"EXEC dbo.GetApplicationsByEvaluator @userId = {userInfo.UserId}"));
-                    break;
-                case "Admin":
-                    result.AddRange(
-                        await _procedureApplicationRepository.ExecuteStoredProcedure(
-                            $"EXEC dbo.GetApplicationsByAdmin"));
-                    break;
-            }
+        if (userInfo.Roles.Contains("User") || userInfo.Roles.Contains("Evaluator"))
+        {
+            result.AddRange((await _applicationViewRepository.GetAllAsync())
+            .Where(a => a.CreatorUserId == userInfo.UserId || a.EvaluatorUserId == userInfo.UserId));
+        }
 
-        return _mapper.Map<List<BaseApplicationDTO>>(result.DistinctBy(application => application.Id));
+        if (userInfo.Roles.Contains("Admin"))
+        {
+            result.AddRange(await _applicationViewRepository.GetAllAsync());
+        }
+        return _mapper.Map<IEnumerable<BaseApplicationDTO>>(result.DistinctBy(application => application.Id));
     }
 }

@@ -42,7 +42,7 @@ public class BaseApplicationApiController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteApplication(Guid id)
+    public async Task<IActionResult> DeleteApplication([FromBody] Guid id)
     {
         return Ok(await _baseApplicationService.DeleteBaseApplicationAsync(id));
     }

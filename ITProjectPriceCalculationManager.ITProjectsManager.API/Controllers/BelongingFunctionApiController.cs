@@ -35,7 +35,7 @@ public class BelongingFunctionApiController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteBelongingFunction(Guid id)
+    public async Task<IActionResult> DeleteBelongingFunction([FromBody] Guid id)
     {
         return Ok(await _BelongingFunctionService.DeleteBelongingFunctionAsync(id));
     }

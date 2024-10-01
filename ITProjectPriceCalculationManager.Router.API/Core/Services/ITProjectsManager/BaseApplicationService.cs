@@ -30,11 +30,9 @@ internal class BaseApplicationService : IBaseApplicationService
 
     public async Task<IEnumerable<BaseApplicationDTO>> GetBaseApplicationsAsync(HttpContext httpContext)
     {
-        var userInfo = JwtUtils.GetUserInfo(httpContext);
-
         _client.DefaultRequestHeaders.Add("Authorization", httpContext.Request.Headers["Authorization"].ToString());
 
-        return await _routeService.GetAllAsync<List<BaseApplicationDTO>>(_client, "baseapplicationapi");
+        return await _routeService.GetAllAsync<IEnumerable<BaseApplicationDTO>>(_client, "baseapplicationapi");
     }
 
     public async Task<BaseApplicationDTO> GetBaseApplicationsByIdAsync(Guid id)
